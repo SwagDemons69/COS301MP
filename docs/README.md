@@ -61,3 +61,18 @@ Once the emulators are up, please go to http://localhost:5001 to see the Emulato
 
 - When creating your Firebase authentication, hosting, storage, functions. Make sure to use the same location throughout. (MAKE SURE TO SET "Default GCP resource location" in Project Settings in Firebase Console. If you do not do this, the app will not work)
 - The app is built to be a PWA. (See: So if you deploy it to prod, you can install the app on iOS by adding to home screen or using Android by installing through Chrome)
+
+
+## Our Notes
+During the firebase configuration, various tools were integrated, if all goes well you should get everything by pulling and installing firebase command tools.
+
+Furthermore, 
+- Codebase was installed in the apps directory, it's created files were
+    - The directory src
+    - .eslintrc.js
+    - .gitignore  
+    - package-lock.json
+    - package.json
+    - tsconfig.dev.json
+    - tsconfig.json 
+-

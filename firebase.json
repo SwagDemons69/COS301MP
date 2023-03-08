@@ -14,9 +14,20 @@
         "node_modules",
         ".git",
         "firebase-debug.log",
+        "firebase-debug.*.log",
+        "package-lock.json"
+      ],
+      "runtime": "nodejs16"
+    },
+    {
+      "source": "apps",
+      "codebase": "codebase",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
         "firebase-debug.*.log"
       ],
-      "runtime": "nodejs16",
       "predeploy": [
         "npm --prefix \"$RESOURCE_DIR\" run lint",
         "npm --prefix \"$RESOURCE_DIR\" run build"
@@ -24,7 +35,7 @@
     }
   ],
   "hosting": {
-    "public": "/apps/app",
+    "public": "deploy",
     "ignore": [
       "firebase.json",
       "**/.*",
@@ -34,14 +45,6 @@
       {
         "source": "**",
         "destination": "/index.html"
-      },
-      {
-        "source": "/createLike           ---> THESE ARE JUST EXAMPLES",
-        "function": "createLike"
-      },
-      {
-        "source": "/createExample           ---> THESE ARE JUST EXAMPLES",
-        "function": "createExample"
       }
     ]
   },

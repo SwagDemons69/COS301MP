@@ -17,4 +17,4 @@ jobs:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_COS301MP }}'
           channelId: live
-          projectId: cos301mp
+          projectId: "cos301mp"
