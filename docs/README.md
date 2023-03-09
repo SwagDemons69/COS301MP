@@ -4,31 +4,27 @@
 
 The following items are required to run this project:
 
-- Node 16: Used for the app, api and cli (Tip: use NVM)
-- Java: used by the Firebase emulators (Make sure that JAVA_HOME is set. Tip: use JENV)
-- You need to create a firebase project (See: https://console.firebase.google.com - You will need to config for your firebase project in the .env files, .firestorerc)
-- Firebase CLI (See: https://firebase.google.com/docs/cli)
+- Docker
+
 
 ## Get Started
 
-1. Fork the repo
 
-Go to: https://github.com/COS-301/miniproject-2023/fork
-
-2. Clone your fork
+1. Clone the repo
 
 ```sh
-git clone git@github.com:<ACCOUNT>/<PROJECT NAME>.git <PROJECT LOCAL NAME>
+git clone https://github.com/SwagDemons69
 ```
+## Might be needed:
 
-3. Install dependencies
+1. Install dependencies
 
 ```sh
 cd path/to/project
 yarn
 ```
 
-4. Add Firebase configurations
+2. Add Firebase configurations
 
 See files:
 
@@ -38,7 +34,7 @@ See files:
 
 and find and replace "<REPLACE_ME>"
 
-5. Run the stack:
+3. Run the stack:
 
 Run these commands in separate terminals:
 
@@ -48,7 +44,7 @@ yarn start:emulators
 yarn start:app:dev
 ```
 
-6. CLI:
+4. CLI:
 
 If you want to run the cli for admin, scripts, migrations etc.
 
