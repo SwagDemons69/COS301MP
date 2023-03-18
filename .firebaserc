@@ -1,7 +1,7 @@
 {
   "projects": {
-    "default": "cos301mp",
-    "production": "cos301mp",
-    "development": "cos301mp"
+    "default": "twenty4-f9f8e",
+    "production": "twenty4-f9f8e",
+    "development": "twenty4-f9f8e"
   }
 }

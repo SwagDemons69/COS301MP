@@ -35,16 +35,20 @@
     }
   ],
   "hosting": {
-    "public": "deploy",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
+    "public": "/apps/app",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {
         "source": "**",
         "destination": "/index.html"
+      },
+      {
+        "source": "/createLike           ---> THESE ARE JUST EXAMPLES",
+        "function": "createLike"
+      },
+      {
+        "source": "/createExample           ---> THESE ARE JUST EXAMPLES",
+        "function": "createExample"
       }
     ]
   },
