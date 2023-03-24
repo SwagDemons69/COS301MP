@@ -57,4 +57,3 @@ pubsub-debug.log
 # env
 .env
 .env.prod
-.prod.prod

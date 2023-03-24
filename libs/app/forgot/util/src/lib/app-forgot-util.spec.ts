@@ -1,4 +1,4 @@
-import { appForgotUtil } from './forgot-util';
+import { appForgotUtil } from './app-forgot-util';
 
 describe('appForgotUtil', () => {
   it('should work', () => {
