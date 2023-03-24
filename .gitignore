@@ -53,3 +53,8 @@ pubsub-debug.log
 
 # Keys
 .keys/*.json
+
+#Sensitive Information
+
+.env
+.env.prod
