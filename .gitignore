@@ -58,3 +58,8 @@ pubsub-debug.log
 
 .env
 .env.prod
+
+
+#Service account detials
+
+keys.js

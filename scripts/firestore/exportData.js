@@ -22,7 +22,7 @@ db.settings({
 const generateProfiles = async () => {
           // Create sample data
           const profiles = [
-              { id : '6', Name: 'Alice4', Surname: 'A4', Age: 72 }
+              { id : '69', Name: 'Alice69', Surname: 'A4', Age: 72 }
             ];
 
           for (const profile of profiles) {
