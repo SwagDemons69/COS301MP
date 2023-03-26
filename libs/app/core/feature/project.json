@@ -36,5 +36,10 @@
       }
     }
   },
-  "tags": []
+  "tags": [],
+  "dependencies": {
+    "shared": "0.0.0"
+  }
+  
+  
 }
