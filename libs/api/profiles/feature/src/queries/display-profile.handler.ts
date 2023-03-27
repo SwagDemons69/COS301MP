@@ -1,26 +1,24 @@
 // import { ProfilesRepository } from '@mp/api/profiles/data-access';
 // import {
-//     IUpdateContactDetailsResponse,
-//     UpdateContactDetailsCommand
+//     DisplayProfileResponse,
+//     DisplayProfileQuery
 // } from '@mp/api/profiles/util';
-// import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
-// import { Profile } from '../models';
+// import { QueryHandler, IQueryHandler, IQueryPublisher } from '@nestjs/cqrs';
+// //import { user_profile } from '../models';
 
-// @CommandHandler(UpdateContactDetailsCommand)
-// export class UpdateContactDetailsHandler
-//   implements
-//     ICommandHandler<UpdateContactDetailsCommand, IUpdateContactDetailsResponse>
+// @QueryHandler(DisplayProfileQuery)
+// export class DisplayProfileQueryHandler implements IQueryHandler<DisplayProfileQuery, DisplayProfileResponse>
 // {
 //   constructor(
-//     private readonly publisher: EventPublisher,
+//     private readonly publisher: IQueryPublisher,
 //     private readonly repository: ProfilesRepository
 //   ) {}
 
-//   async execute(command: UpdateContactDetailsCommand) {
-//     console.log(`${UpdateContactDetailsHandler.name}`);
+//  async execute(query: DisplayProfileQuery) {
+//     console.log(`${DisplayProfileQueryHandler.name}`);
 
-//     const request = command.request;
-//     const profileDoc = await this.repository.findOne(request.profile);
+//     const request = query.request;
+//     const profileDoc = await this.repository.findOne(request.profiles);
 //     const profileData = profileDoc.data();
 
 //     if (!profileData) throw new Error('Profile not found');
@@ -36,5 +34,5 @@
 
 //     const response: IUpdateContactDetailsResponse = { profile };
 //     return response;
-//   }
+//  }
 // }
