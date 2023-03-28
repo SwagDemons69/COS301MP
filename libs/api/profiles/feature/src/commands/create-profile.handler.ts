@@ -23,25 +23,23 @@ export class CreateProfileHandler
 
     const data: user_profile = {
       user_id: userId,
-      time_of_expiry: 420,
-      non_public: "false",
-      user_name: displayName,
-      name_and_surname: displayName,
-      user_profile_photo: photoURL,
-      user_bio: "",
-      passwordHash: "",
+      timeOfExpiry: 420,
+      notPublic: "false",
+      username: displayName,
+      name: displayName,
+      profilePicturePath: photoURL,
+      bio: "",
+      email: email,
+      password: "",
       province: "",
-      following_count: 0,
-      follower_count: 0,
-      followers: [], //Array of UserId
-      following: [], //Array of UserId
-      blocked_users: [],
-      post_count: 0,
-      posts: [],  //Array of PostId
-      likes_for_day: 0,
-      dislikes_for_day: 0,
-      comments_for_day: 0,
-      notifications: []
+      likesLeft: 10,
+      dislikesLeft: 10,
+      commentLikesLeft: 10,
+      followers: [], //Array of user_id
+      following: [], //Array of user_id
+      blocked: [],    //Array of user_id
+      posts: [],  //Array of post_id
+      notifications: [] //Array of notification_id
     }
 
 

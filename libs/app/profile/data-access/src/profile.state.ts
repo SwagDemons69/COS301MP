@@ -25,25 +25,23 @@ export interface ProfileStateModel {
   defaults: {
     profile: {
       user_id: "",
-      time_of_expiry: 0,
-      non_public: "",
-      user_name: "",
-      name_and_surname: "",
-      user_profile_photo: "",
-      user_bio: "",
-      passwordHash: "",
+      timeOfExpiry: 0,
+      notPublic: "",
+      username: "",
+      name: "",
+      profilePicturePath: "",
+      bio: "",
+      email: "",
+      password: "",
       province: "",
-      following_count: 0,
-      follower_count: 0,
-      followers: [], //Array of UserId
-      following: [], //Array of UserId
-      blocked_users: [],
-      post_count: 0,
-      posts: [],  //Array of PostId
-      likes_for_day: 0,
-      dislikes_for_day: 0,
-      comments_for_day: 0,
-      notifications: []
+      likesLeft: 0,
+      dislikesLeft: 0,
+      commentLikesLeft: 0,
+      followers: [], //Array of user_id
+      following: [], //Array of user_id
+      blocked: [],    //Array of user_id
+      posts: [],  //Array of post_id
+      notifications: [] //Array of notification_id
     }
   }
 })
