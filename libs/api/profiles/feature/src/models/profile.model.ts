@@ -1,24 +1,28 @@
-import { user_profile, ProfileCreatedEvent } from '@mp/api/profiles/util';
+import { ProfileCreatedEvent, user_profile } from '@mp/api/profiles/util';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class Profile extends AggregateRoot implements user_profile {
   constructor(
-    public user_id : string,
-    public non_public : string,
-    public user_name : string | null | undefined,
-    public name_and_surname : string | null | undefined,
-    public user_profile_photo : string | null | undefined,
-    public user_bio : string | null | undefined,
-    public following_count : number | null | undefined,
-    public follower_count : number | null | undefined,
-    public followers : string[] | null | undefined, //Array of UserId
-    public following : string[] | null | undefined, //Array of UserId
-    public blocked_users : string[] | null | undefined,
-    public post_count : number | null | undefined,
-    public posts : string[] | null | undefined,  //Array of PostId
-    public likes_for_day : number | null | undefined,
-    public dislikes_for_day : number | null | undefined,
-    public comments_for_day : number | null | undefined
+    public user_id: string,
+    public time_of_expiry: number,
+    public non_public: string,
+    public user_name: string | null | undefined,
+    public name_and_surname: string | null | undefined,
+    public user_profile_photo: string | null | undefined,
+    public user_bio: string | null | undefined,
+    public passwordHash: string,
+    public province: string | null | undefined,
+    public following_count: number | null | undefined,
+    public follower_count: number | null | undefined,
+    public followers: string[] | null | undefined, //Array of UserId
+    public following: string[] | null | undefined, //Array of UserId
+    public blocked_users: string[] | null | undefined,
+    public post_count: number | null | undefined,
+    public posts: string[] | null | undefined,  //Array of PostId
+    public likes_for_day: number | null | undefined,
+    public dislikes_for_day: number | null | undefined,
+    public comments_for_day: number | null | undefined,
+    public notifications: string[] | null | undefined
   ) {
     super();
   }
@@ -26,11 +30,14 @@ export class Profile extends AggregateRoot implements user_profile {
   static fromData(profile: user_profile): Profile {
     const instance = new Profile(
       profile.user_id,
+      profile.time_of_expiry,
       profile.non_public,
       profile.user_name,
       profile.name_and_surname,
       profile.user_profile_photo,
       profile.user_bio,
+      profile.passwordHash,
+      profile.province,
       profile.follower_count,
       profile.follower_count,
       profile.followers,
@@ -40,7 +47,8 @@ export class Profile extends AggregateRoot implements user_profile {
       profile.posts,
       profile.likes_for_day,
       profile.dislikes_for_day,
-      profile.comments_for_day
+      profile.comments_for_day,
+      profile.notifications
     );
     return instance;
   }
@@ -229,22 +237,26 @@ export class Profile extends AggregateRoot implements user_profile {
 
   toJSON(): user_profile {
     return {
-      user_id : this.user_id,
-      non_public : this.non_public,
-      user_name : this.user_name,
-      name_and_surname : this.name_and_surname,
-      user_profile_photo : this.user_profile_photo,
-      user_bio : this.user_bio,
-      following_count : this.following_count,
-      follower_count : this.follower_count,
-      followers : this.followers,
-      following : this.following,
-      blocked_users : this.blocked_users,
-      post_count : this.post_count,
-      posts : this.posts,
-      likes_for_day : this.likes_for_day,
-      dislikes_for_day : this.dislikes_for_day,
-      comments_for_day : this.comments_for_day
+      user_id: this.user_id,
+      time_of_expiry: this.time_of_expiry,
+      non_public: this.non_public,
+      user_name: this.user_name,
+      name_and_surname: this.name_and_surname,
+      user_profile_photo: this.user_profile_photo,
+      user_bio: this.user_bio,
+      passwordHash: this.passwordHash,
+      province: this.province,
+      following_count: this.following_count,
+      follower_count: this.follower_count,
+      followers: this.followers,
+      following: this.following,
+      blocked_users: this.blocked_users,
+      post_count: this.post_count,
+      posts: this.posts,
+      likes_for_day: this.likes_for_day,
+      dislikes_for_day: this.dislikes_for_day,
+      comments_for_day: this.comments_for_day,
+      notifications: this.notifications
     };
   }
 }
