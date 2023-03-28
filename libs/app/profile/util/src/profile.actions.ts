@@ -1,4 +1,4 @@
-import { IProfile } from '@mp/api/profiles/util';
+import { user_profile } from '@mp/api/profiles/util';
 
 export class Logout {
   static readonly type = '[Profile] Logout';
@@ -10,7 +10,7 @@ export class SubscribeToProfile {
 
 export class SetProfile {
   static readonly type = '[Profile] SetProfile';
-  constructor(public readonly profile: IProfile | null) {}
+  constructor(public readonly profile: user_profile | null) { }
 }
 
 export class UpdateAccountDetails {
