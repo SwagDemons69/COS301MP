@@ -1,7 +1,7 @@
 {
   "projects": {
-    "default": "<REPLACE_ME>",
-    "production": "<REPLACE_ME>",
-    "development": "<REPLACE_ME>"
+    "default": "cos301mp",
+    "production": "cos301mp",
+    "development": "cos301mp"
   }
 }

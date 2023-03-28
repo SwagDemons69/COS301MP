@@ -13,8 +13,21 @@
 		"ghcr.io/devcontainers-contrib/features/wget-apt-get:1": {},
 		"ghcr.io/jckimble/devcontainer-features/ngrok:3": {}
 	},
+		// "ghcr.io/devcontainers-contrib/features/npm-package:1": {}
 
-	"containerEnv": {},
+	"containerEnv": {
+		// We might not need this
+		// "NX_ENVIRONMENT": "production",
+		// "NX_FIREBASE_USE_EMULATORS": "true",
+		// "NX_FIREBASE_API_KEY": "AIzaSyBuFcVrjnQPeKrB_UbAE-LXE1nZgRAxu3w",
+		// "NX_FIREBASE_AUTH_DOMAIN": "cos301mp.firebaseapp.com",
+		// "NX_FIREBASE_DATABASE_URL": "https://cos301mp-default-rtdb.europe-west1.firebasedatabase.app",
+		// "NX_FIREBASE_PROJECT_ID": "cos301mp",
+		// "NX_FIREBASE_STORAGE_BUCKET": "cos301mp.appspot.com",
+		// "NX_FIREBASE_MESSAGING_SENDER_ID":  "871301114355",
+		// "NX_FIREBASE_APP_ID": "1:871301114355:web:d0fd3b71a8c386a11a8a86",
+		// "NX_FIREBASE_MEASUREMENT_ID":  "G-P3B71MT2D7"
+	},
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
@@ -23,7 +36,14 @@
 	"forwardPorts": [ 3000 ],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": [ "yarn install" ],
+	"postCreateCommand": [
+		"npm install",
+		"npm install -g firebase-tools",
+	 	"yarn install"
+		// "yarn start:api:dev",
+		// "yarn start:emulators",
+		// "yarn start:app:dev"
+	],
 
 	// Configure tool-specific properties.
 	"customizations": {
