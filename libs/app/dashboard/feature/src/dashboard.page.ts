@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IProfile } from '@mp/api/profiles/util';
+import { user_profile } from '@mp/api/profiles/util';
 import { ProfileState } from '@mp/app/profile/data-access';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 })
 
 export class DashboardPage {
-  @Select(ProfileState.profile) profile$!: Observable<IProfile | null>;
+  @Select(ProfileState.profile) profile$!: Observable<user_profile | null>;
 
   // A bunch of dummy recommended posts
   recommended = [
@@ -40,23 +40,22 @@ export class DashboardPage {
   kronos = ""
 
   kronosTimer = setInterval(() => {
-    const counter = this.deathTime - Date.now()/1000;
+    const counter = this.deathTime - Date.now() / 1000;
     this.kronos = this.displayKronos(counter);
   }, 1000)
 
   // Convert a unix timestamp to a kronos string
-  displayKronos(timeDelta : number) {
-    if (timeDelta < 0)
-    {
+  displayKronos(timeDelta: number) {
+    if (timeDelta < 0) {
       return "DEAD xP";
     }
 
     const [years, days, hours, minutes, seconds] = [
-      Math.floor( timeDelta / (60*60*24*365)),
-      Math.floor((timeDelta % (60*60*24*365)) / 86400).toString().padStart(3, '0'),
-      Math.floor((timeDelta % (60*60*24)) / 3600).toString().padStart(2, '0'),
-      Math.floor((timeDelta % (60*60)) / 60).toString().padStart(2, '0'),
-      Math.floor( timeDelta % (60)).toString().padStart(2, '0'),
+      Math.floor(timeDelta / (60 * 60 * 24 * 365)),
+      Math.floor((timeDelta % (60 * 60 * 24 * 365)) / 86400).toString().padStart(3, '0'),
+      Math.floor((timeDelta % (60 * 60 * 24)) / 3600).toString().padStart(2, '0'),
+      Math.floor((timeDelta % (60 * 60)) / 60).toString().padStart(2, '0'),
+      Math.floor(timeDelta % (60)).toString().padStart(2, '0'),
     ];
 
     // YY:DD:HH:MM:SS

@@ -10,8 +10,8 @@ import {
   SetProfile,
   SubscribeToProfile
 } from '@mp/app/profile/util';
+import { Inject } from '@nestjs/common';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
-import produce from 'immer';
 import { tap } from 'rxjs';
 import { ProfilesApi } from './profiles.api';
 
@@ -41,16 +41,19 @@ export interface ProfileStateModel {
       following: [], //Array of user_id
       blocked: [],    //Array of user_id
       posts: [],  //Array of post_id
-      notifications: [] //Array of notification_id
+      notifications: [], //Array of notification_id
     }
   }
 })
 @Injectable()
 export class ProfileState {
+  //follower : number;
   constructor(
     private readonly profileApi: ProfilesApi,
-    private readonly store: Store
+    private readonly store: Store,
   ) { }
+
+
 
   @Selector()
   static profile(state: ProfileStateModel) {
@@ -72,14 +75,47 @@ export class ProfileState {
       .pipe(tap((profile: user_profile) => ctx.dispatch(new SetProfile(profile))));
   }
 
-  @Action(SetProfile)
-  setProfile(ctx: StateContext<ProfileStateModel>, { profile }: SetProfile) {
-    return ctx.setState(
-      produce((draft) => {
-        draft.profile = profile;
-      })
-    );
-  }
+  // @Action(SetProfile)
+  // setProfile(ctx: StateContext<ProfileStateModel>, { profile }: SetProfile) {
+  //   if (profile?.followers) {
+  //     this.follower = profile?.followers?.length;
+  //   }
+  //   else {
+  //     this.follower = 69;
+  //   }
+  //   return ctx.setState(
+  //     produce((draft) => {
+  //       draft.profile = profile;
+  //     })
+  //   );
+
+  // }
+
+
+  // @Action(LoadProfile)
+  // getFollowCount(): number {
+  //   const user = this.store.selectSnapshot(AuthState.user);
+  //   let profile2;
+  //   if (user) {
+  //     profile2 = this.profileApi.profile$(user?.uid);
+  //   }
+  //   let count = 2;
+  //   profile2?.forEach((el) => {
+  //     if (el.followers) {
+  //       count = el.followers.length;
+  //     }
+  //   })
+  //   return count;
+  // }
+
+
+
+
+  // function getFollowingCount() {
+  //   return profile?.following?.length;
+  // }
+
+
 
   // @Action(UpdateAccountDetails)
   // async updateAccountDetails(ctx: StateContext<ProfileStateModel>) {

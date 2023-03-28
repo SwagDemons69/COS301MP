@@ -1,4 +1,3 @@
-import { IProfile } from '@mp/api/profiles/util';
 import { user_profile } from '@mp/api/profiles/util';
 import { Injectable } from '@nestjs/common';
 import * as admin from 'firebase-admin';
@@ -28,15 +27,15 @@ export class ProfilesRepository {
       .create(profile);
   }
 
-  async updateProfile(profile: IProfile) {
-    // Remove password field if present
-    delete profile.accountDetails?.password;
-    return await admin
-      .firestore()
-      .collection('profiles')
-      .doc(profile.userId)
-      .set(profile, { merge: true });
-  }
+  // async updateProfile(profile: user_profile) {
+  //   // Remove password field if present
+  //   delete profile.accountDetails?.password;
+  //   return await admin
+  //     .firestore()
+  //     .collection('profiles')
+  //     .doc(profile.userId)
+  //     .set(profile, { merge: true });
+  // }
 
   // async checkForUser(profile_user_id : string){
   //   const handle = await admin.firestore().collection('profiles').get();
