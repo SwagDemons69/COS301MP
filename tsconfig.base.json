@@ -11,101 +11,216 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "esnext",
-    "lib": ["es2017", "dom"],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@mp/api/auth/data-access": ["libs/api/auth/data-access/src/index.ts"],
-      "@mp/api/auth/feature": ["libs/api/auth/feature/src/index.ts"],
-      "@mp/api/auth/util": ["libs/api/auth/util/src/index.ts"],
-      "@mp/api/core/feature": ["libs/api/core/feature/src/index.ts"],
+      "@mp/api/home/data-access": [
+        "libs/api/home/data-access/src/index.ts"
+      ],
+      "@mp/api/home/feature": [
+        "libs/api/home/feature/src/index.ts"
+      ],
+      "@mp/api/home/util": [
+        "libs/api/home/util/src/index.ts"
+      ],
+      "@mp/api/auth/data-access": [
+        "libs/api/auth/data-access/src/index.ts"
+      ],
+      "@mp/api/auth/feature": [
+        "libs/api/auth/feature/src/index.ts"
+      ],
+      "@mp/api/auth/util": [
+        "libs/api/auth/util/src/index.ts"
+      ],
+      "@mp/api/core/feature": [
+        "libs/api/core/feature/src/index.ts"
+      ],
       "@mp/api/eventstore/data-access": [
         "libs/api/eventstore/data-access/src/index.ts"
       ],
       "@mp/api/eventstore/feature": [
         "libs/api/eventstore/feature/src/index.ts"
       ],
-      "@mp/api/eventstore/util": ["libs/api/eventstore/util/src/index.ts"],
+      "@mp/api/eventstore/util": [
+        "libs/api/eventstore/util/src/index.ts"
+      ],
       "@mp/api/history/data-access": [
         "libs/api/history/data-access/src/index.ts"
       ],
-      "@mp/api/history/feature": ["libs/api/history/feature/src/index.ts"],
-      "@mp/api/history/util": ["libs/api/history/util/src/index.ts"],
+      "@mp/api/history/feature": [
+        "libs/api/history/feature/src/index.ts"
+      ],
+      "@mp/api/history/util": [
+        "libs/api/history/util/src/index.ts"
+      ],
       "@mp/api/profiles/data-access": [
         "libs/api/profiles/data-access/src/index.ts"
       ],
-      "@mp/api/profiles/feature": ["libs/api/profiles/feature/src/index.ts"],
-      "@mp/api/profiles/util": ["libs/api/profiles/util/src/index.ts"],
-      "@mp/api/users/data-access": ["libs/api/users/data-access/src/index.ts"],
-      "@mp/api/users/feature": ["libs/api/users/feature/src/index.ts"],
-      "@mp/api/users/util": ["libs/api/users/util/src/index.ts"],
-      "@mp/app/auth/data-access": ["libs/app/auth/data-access/src/index.ts"],
-      "@mp/app/auth/feature": ["libs/app/auth/feature/src/index.ts"],
-      "@mp/app/auth/util": ["libs/app/auth/util/src/index.ts"],
-      "@mp/app/copyright/ui": ["libs/app/copyright/ui/src/index.ts"],
-      "@mp/app/core/feature": ["libs/app/core/feature/src/index.ts"],
+      "@mp/api/profiles/feature": [
+        "libs/api/profiles/feature/src/index.ts"
+      ],
+      "@mp/api/profiles/util": [
+        "libs/api/profiles/util/src/index.ts"
+      ],
+      "@mp/api/users/data-access": [
+        "libs/api/users/data-access/src/index.ts"
+      ],
+      "@mp/api/users/feature": [
+        "libs/api/users/feature/src/index.ts"
+      ],
+      "@mp/api/users/util": [
+        "libs/api/users/util/src/index.ts"
+      ],
+      "@mp/app/auth/data-access": [
+        "libs/app/auth/data-access/src/index.ts"
+      ],
+      "@mp/app/auth/feature": [
+        "libs/app/auth/feature/src/index.ts"
+      ],
+      "@mp/app/auth/util": [
+        "libs/app/auth/util/src/index.ts"
+      ],
+      "@mp/app/copyright/ui": [
+        "libs/app/copyright/ui/src/index.ts"
+      ],
+      "@mp/app/core/feature": [
+        "libs/app/core/feature/src/index.ts"
+      ],
       "@mp/app/dashboard/data-access": [
         "libs/app/dashboard/data-access/src/index.ts"
       ],
-      "@mp/app/dashboard/feature": ["libs/app/dashboard/feature/src/index.ts"],
-      "@mp/app/dashboard/util": ["libs/app/dashboard/util/src/index.ts"],
+      "@mp/app/dashboard/feature": [
+        "libs/app/dashboard/feature/src/index.ts"
+      ],
+      "@mp/app/dashboard/util": [
+        "libs/app/dashboard/util/src/index.ts"
+      ],
       "@mp/app/errors/data-access": [
         "libs/app/errors/data-access/src/index.ts"
       ],
-      "@mp/app/errors/feature": ["libs/app/errors/feature/src/index.ts"],
-      "@mp/app/errors/util": ["libs/app/errors/util/src/index.ts"],
+      "@mp/app/errors/feature": [
+        "libs/app/errors/feature/src/index.ts"
+      ],
+      "@mp/app/errors/util": [
+        "libs/app/errors/util/src/index.ts"
+      ],
       "@mp/app/forgot/data-access": [
         "libs/app/forgot/data-access/src/index.ts"
       ],
-      "@mp/app/forgot/feature": ["libs/app/forgot/feature/src/index.ts"],
-      "@mp/app/forgot/util": ["libs/app/forgot/util/src/index.ts"],
-      "@mp/app/home/feature": ["libs/app/home/feature/src/index.ts"],
-      "@mp/app/login/data-access": ["libs/app/login/data-access/src/index.ts"],
-      "@mp/app/login/feature": ["libs/app/login/feature/src/index.ts"],
-      "@mp/app/login/util": ["libs/app/login/util/src/index.ts"],
-      "@mp/app/messages/feature": ["libs/app/messages/feature/src/index.ts"],
-      "@np.app/post/feauture": ["libs/app/post/feature/src/index.ts"],
-
-      "@mp/app/messages/ui": ["libs/app/messages/ui/src/index.ts"],
-
-      "@mp/app/privacy/feature": ["libs/app/privacy/feature/src/index.ts"],
+      "@mp/app/forgot/feature": [
+        "libs/app/forgot/feature/src/index.ts"
+      ],
+      "@mp/app/forgot/util": [
+        "libs/app/forgot/util/src/index.ts"
+      ],
+      "@mp/app/home/feature": [
+        "libs/app/home/feature/src/index.ts"
+      ],
+      "@mp/app/login/data-access": [
+        "libs/app/login/data-access/src/index.ts"
+      ],
+      "@mp/app/login/feature": [
+        "libs/app/login/feature/src/index.ts"
+      ],
+      "@mp/app/login/util": [
+        "libs/app/login/util/src/index.ts"
+      ],
+      "@mp/app/messages/feature": [
+        "libs/app/messages/feature/src/index.ts"
+      ],
+      "@np.app/post/feauture": [
+        "libs/app/post/feature/src/index.ts"
+      ],
+      "@mp/app/messages/ui": [
+        "libs/app/messages/ui/src/index.ts"
+      ],
+      "@mp/app/privacy/feature": [
+        "libs/app/privacy/feature/src/index.ts"
+      ],
       "@mp/app/profile/data-access": [
         "libs/app/profile/data-access/src/index.ts"
       ],
-      "@mp/app/profile/feature": ["libs/app/profile/feature/src/index.ts"],
-      "@mp/app/profile/ui": ["libs/app/profile/ui/src/index.ts"],
-      "@mp/app/profile/util": ["libs/app/profile/util/src/index.ts"],
+      "@mp/app/profile/feature": [
+        "libs/app/profile/feature/src/index.ts"
+      ],
+      "@mp/app/profile/ui": [
+        "libs/app/profile/ui/src/index.ts"
+      ],
+      "@mp/app/profile/util": [
+        "libs/app/profile/util/src/index.ts"
+      ],
       "@mp/app/register/data-access": [
         "libs/app/register/data-access/src/index.ts"
       ],
-      "@mp/app/register/feature": ["libs/app/register/feature/src/index.ts"],
-      "@mp/app/register/util": ["libs/app/register/util/src/index.ts"],
-      "@mp/app/reset/data-access": ["libs/app/reset/data-access/src/index.ts"],
-      "@mp/app/reset/feature": ["libs/app/reset/feature/src/index.ts"],
-      "@mp/app/reset/util": ["libs/app/reset/util/src/index.ts"],
-      "@mp/app/tos/feature": ["libs/app/tos/feature/src/index.ts"],
+      "@mp/app/register/feature": [
+        "libs/app/register/feature/src/index.ts"
+      ],
+      "@mp/app/register/util": [
+        "libs/app/register/util/src/index.ts"
+      ],
+      "@mp/app/reset/data-access": [
+        "libs/app/reset/data-access/src/index.ts"
+      ],
+      "@mp/app/reset/feature": [
+        "libs/app/reset/feature/src/index.ts"
+      ],
+      "@mp/app/reset/util": [
+        "libs/app/reset/util/src/index.ts"
+      ],
+      "@mp/app/tos/feature": [
+        "libs/app/tos/feature/src/index.ts"
+      ],
       "@mp/app/updates/data-access": [
         "libs/app/updates/data-access/src/index.ts"
       ],
-      "@mp/app/updates/feature": ["libs/app/updates/feature/src/index.ts"],
-      "@mp/app/updates/util": ["libs/app/updates/util/src/index.ts"],
-      "@mp/app/user/data-access": ["libs/app/user/data-access/src/index.ts"],
-      "@mp/app/user/feature": ["libs/app/user/feature/src/index.ts"],
-      "@mp/app/user/util": ["libs/app/user/util/src/index.ts"],
+      "@mp/app/updates/feature": [
+        "libs/app/updates/feature/src/index.ts"
+      ],
+      "@mp/app/updates/util": [
+        "libs/app/updates/util/src/index.ts"
+      ],
+      "@mp/app/user/data-access": [
+        "libs/app/user/data-access/src/index.ts"
+      ],
+      "@mp/app/user/feature": [
+        "libs/app/user/feature/src/index.ts"
+      ],
+      "@mp/app/user/util": [
+        "libs/app/user/util/src/index.ts"
+      ],
       "@mp/app/verify/data-access": [
         "libs/app/verify/data-access/src/index.ts"
       ],
-      "@mp/app/verify/feature": ["libs/app/verify/feature/src/index.ts"],
-      "@mp/app/verify/util": ["libs/app/verify/util/src/index.ts"],
-      "@mp/app/version/ui": ["libs/app/version/ui/src/index.ts"],
+      "@mp/app/verify/feature": [
+        "libs/app/verify/feature/src/index.ts"
+      ],
+      "@mp/app/verify/util": [
+        "libs/app/verify/util/src/index.ts"
+      ],
+      "@mp/app/version/ui": [
+        "libs/app/version/ui/src/index.ts"
+      ],
       "@mp/app/welcome/data-access": [
         "libs/app/welcome/data-access/src/index.ts"
       ],
-      "@mp/app/welcome/feature": ["libs/app/welcome/feature/src/index.ts"],
-      "@mp/app/welcome/util": ["libs/app/welcome/util/src/index.ts"],
-      "@mp/cli/core/feature": ["libs/cli/core/feature/src/index.ts"]
+      "@mp/app/welcome/feature": [
+        "libs/app/welcome/feature/src/index.ts"
+      ],
+      "@mp/app/welcome/util": [
+        "libs/app/welcome/util/src/index.ts"
+      ],
+      "@mp/cli/core/feature": [
+        "libs/cli/core/feature/src/index.ts"
+      ]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": [
+    "node_modules",
+    "tmp"
+  ]
 }

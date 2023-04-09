@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { doc, docData, Firestore } from '@angular/fire/firestore';
 import { Functions, httpsCallable } from '@angular/fire/functions';
-import { user_profile } from '@mp/api/profiles/util';
+import { post } from '@mp/api/home/util';
 
 @Injectable()
 export class DashboardApi {
@@ -10,26 +10,16 @@ export class DashboardApi {
     private readonly functions: Functions
   ) {}
 
-  profile$(id: string) {
+  post$(id: string) {
     const docRef = doc(
       this.firestore,
-      `dashboard/${id}`
-    ).withConverter<user_profile>({
+      `posts/${id}`
+    ).withConverter<post>({
       fromFirestore: (snapshot) => {
-        return snapshot.data() as user_profile;
+        return snapshot.data() as post;
       },
-      toFirestore: (it: user_profile) => it,
+      toFirestore: (it: post) => it,
     });
     return docData(docRef, { idField: 'id' });
   }
-
-  // async updateAccountDetails(request: IUpdateAccountDetailsRequest) {
-  //   return await httpsCallable<
-  //     IUpdateAccountDetailsRequest,
-  //     IUpdateAccountDetailsResponse
-  //   >(
-  //     this.functions,
-  //     'updateAccountDetails'
-  //   )(request);
-  // }
 }

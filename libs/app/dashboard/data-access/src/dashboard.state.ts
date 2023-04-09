@@ -1,52 +1,20 @@
 import { Injectable } from '@angular/core';
-import {
-  user_profile
-} from '@mp/api/profiles/util';
-import { AuthState } from '@mp/app/auth/data-access';
-import { Logout as AuthLogout } from '@mp/app/auth/util';
-import { SetError } from '@mp/app/errors/util';
-import {
-  Logout,
-  SetProfile,
-  SubscribeToProfile
-} from '@mp/app/profile/util';
-import { Inject } from '@nestjs/common';
-import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
-import { tap } from 'rxjs';
+import { Selector, State, Store } from '@ngxs/store';
 import { DashboardApi } from './dashboard.api';
+import { post } from '@mp/api/home/util';
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface ProfileStateModel {
-  profile: user_profile | null;
+export interface DashboardStateModel {
+  posts: post[]
 }
 
-@State<ProfileStateModel>({
-  name: 'profile',
+@State<DashboardStateModel>({
+  name: 'posts',
   defaults: {
-    profile: {
-      user_id: "",
-      timeOfExpiry: 0,
-      notPublic: "",
-      username: "",
-      name: "",
-      profilePicturePath: "",
-      bio: "",
-      email: "",
-      password: "",
-      province: "",
-      likesLeft: 0,
-      dislikesLeft: 0,
-      commentLikesLeft: 0,
-      followers: [], //Array of user_id
-      following: [], //Array of user_id
-      blocked: [],    //Array of user_id
-      posts: [],  //Array of post_id
-      notifications: [], //Array of notification_id
-    }
+    posts: []
   }
 })
 @Injectable()
-export class ProfileState {
+export class DashboardState {
   //follower : number;
   constructor(
     private readonly dashboardApi: DashboardApi,
@@ -56,24 +24,24 @@ export class ProfileState {
 
 
   @Selector()
-  static profile(state: ProfileStateModel) {
-    return state.profile;
+  static posts(state: DashboardStateModel) {
+    return state.posts;
   }
 
-  @Action(Logout)
-  async logout(ctx: StateContext<ProfileStateModel>) {
-    return ctx.dispatch(new AuthLogout());
-  }
+  // @Action(Logout)
+  // async logout(ctx: StateContext<ProfileStateModel>) {
+  //   return ctx.dispatch(new AuthLogout());
+  // }
 
-  @Action(SubscribeToProfile)
-  subscribeToProfile(ctx: StateContext<ProfileStateModel>) {
-    const user = this.store.selectSnapshot(AuthState.user);
-    if (!user) return ctx.dispatch(new SetError('User not set'));
+  // @Action(SubscribeToProfile)
+  // subscribeToProfile(ctx: StateContext<ProfileStateModel>) {
+  //   const user = this.store.selectSnapshot(AuthState.user);
+  //   if (!user) return ctx.dispatch(new SetError('User not set'));
 
-    return this.dashboardApi
-      .profile$(user.uid)
-      .pipe(tap((profile: user_profile) => ctx.dispatch(new SetProfile(profile))));
-  }
+  //   return this.dashboardApi
+  //     .profile$(user.uid)
+  //     .pipe(tap((profile: user_profile) => ctx.dispatch(new SetProfile(profile))));
+  // }
 
   // @Action(SetProfile)
   // setProfile(ctx: StateContext<ProfileStateModel>, { profile }: SetProfile) {
