@@ -24,7 +24,7 @@
 
 
 <ion-content [fullscreen]="true" [scrollEvents]="true" (ionScroll)="onContentScroll($event)">
-
+<div *ngIf="!isSearchbarVisible" class="homePage">
   <br /><br />
   <!-- HOME BANNER -->
 <div>
@@ -151,5 +151,19 @@
   </div>
 
   </ion-list>
+</div>
 
+<div *ngIf="isSearchbarVisible" class="searchResults">
+  <ion-list>
+    <ion-item *ngFor="let post of searchResults">
+      <ion-thumbnail slot="start">
+        <img src="{{ post.img }}" alt="{{ post.title }}">
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.desc }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</div>
 </ion-content>
