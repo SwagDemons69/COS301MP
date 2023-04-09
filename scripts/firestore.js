@@ -40,10 +40,36 @@ const generateProfiles = async () => {
         }
 };
 
+
+const generatePosts = async () => {
+  try{
+    const posts = [
+    { id : "1",
+      post_id : "1",
+      user_id : "Sg1j9YlEbEbeOeg1Of3Un79W4Lj7",
+      content : "", likes : 0,
+      timeStamp : 13452824,
+      shares : 0,
+      kronos : 0,
+      comments : [],
+      categories : [],
+      taggedUsers : []}
+    ];
+
+    for (const post of posts) {
+      await db.collection('posts').doc(post.id).set(post);
+    }
+  }
+
+  finally{
+    admin.app().delete();
+  }
+};
+
 //=============================================
 // FUNCTION CALLS
 //=============================================
 
-generateProfiles();
+generatePosts();
 
 //=============================================
