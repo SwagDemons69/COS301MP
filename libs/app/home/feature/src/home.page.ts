@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IProfile } from '@mp/api/profiles/util';
+import { user_profile } from '@mp/api/profiles/util';
 import { ProfileState } from '@mp/app/profile/data-access';
 import { SubscribeToProfile } from '@mp/app/profile/util';
 import { Select, Store } from '@ngxs/store';
@@ -11,9 +11,9 @@ import { Observable } from 'rxjs';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage {
-  @Select(ProfileState.profile) profile$!: Observable<IProfile | null>;
+  @Select(ProfileState.profile) profile$!: Observable<user_profile | null>;
 
-  constructor(private readonly store: Store) {}
+  constructor(private readonly store: Store) { }
 
   ionViewWillEnter() {
     this.store.dispatch(new SubscribeToProfile());

@@ -21,7 +21,7 @@ db.settings({
 //===============================================
 
 const generateProfiles = async () => {
-        try {
+        //try {
           // Create sample data
           const profiles = [
               { id : '4', Name: 'Alice4', Surname: 'A4', Age: 72 },
@@ -33,11 +33,11 @@ const generateProfiles = async () => {
           for (const profile of profiles) {
             await db.collection('profiles').doc(profile.id).set(profile);
           }
-        } 
-        finally {
+        //} 
+        // finally {
         
-          admin.app().delete();
-        }
+        //   admin.app().delete();
+        // }
 };
 
 
@@ -73,3 +73,35 @@ const generatePosts = async () => {
 generatePosts();
 
 //=============================================
+
+const importProfiles = async () => {
+  const handle = await db.collection('profiles').get();
+  const profiles = [];
+  handle.forEach((doc) => {
+    if(doc.data().Name === "Alice4"){
+      const data = doc.data();
+      //const name = doc.data().Name;
+      profiles.push(doc.data());
+    }
+
+  });
+  //logProfiles(profiles)
+return profiles;
+}; 
+
+//   function logProfiles(profiles){
+//     console.log(profiles[0]);
+// }
+
+//=============================================
+// FUNCTION CALLS
+//=============================================
+
+async function test() {
+const profiles = await importProfiles();
+console.log(profiles);
+}
+
+test();
+
+admin.app().delete();

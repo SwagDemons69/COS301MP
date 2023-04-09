@@ -1,4 +1,5 @@
 import { ProfilesService } from '@mp/api/profiles/feature';
+import { ProfilePageServices } from '@mp/api/profiles/feature';
 import {
     IUpdateAccountDetailsRequest,
     IUpdateAccountDetailsResponse,
@@ -9,7 +10,9 @@ import {
     IUpdateOccupationDetailsRequest,
     IUpdateOccupationDetailsResponse,
     IUpdatePersonalDetailsRequest,
-    IUpdatePersonalDetailsResponse
+    IUpdatePersonalDetailsResponse,
+    DisplayProfileRequest,
+    DisplayProfileResponse
 } from '@mp/api/profiles/util';
 import { NestFactory } from '@nestjs/core';
 import * as functions from 'firebase-functions';
@@ -64,3 +67,15 @@ export const updateOccupationDetails = functions.https.onCall(
     return service.updateOccupationDetails(request);
   }
 );
+
+//===================================================================
+// CUSTOM FUNCTIONS
+//===================================================================
+
+// export const displayProfile = functions.https.onCall(
+//   async (request : DisplayProfileRequest): Promise<DisplayProfileResponse> => {
+//     const app = await NestFactory.createApplicationContext(CoreModule);
+//     const service = app.get(ProfilePageServices);
+//     return service.displayProfile(request);
+//   }
+// );
