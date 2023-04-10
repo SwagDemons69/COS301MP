@@ -1,4 +1,5 @@
 import { Component, Renderer2 } from '@angular/core';
+import { ScrollDetail } from '@ionic/angular';
 import { IProfile } from '@mp/api/profiles/util';
 import { ProfileState } from '@mp/app/profile/data-access';
 import { Select } from '@ngxs/store';
@@ -110,13 +111,19 @@ export class DashboardPage {
     this.isSearchbarVisible = !this.isSearchbarVisible;
   }
 
+  // Prevent re-setting css properties every scroll event
+  isKronosBarVisible = false;
   onContentScroll(event: any) {
     console.log(event.detail.scrollTop);
-    if (event.detail.scrollTop > 220) {
+
+    if (event.detail.scrollTop > 220 && !this.isKronosBarVisible) {
       this.renderer.setStyle(document.querySelector(".barKronos"), 'opacity', '1');
+      this.isKronosBarVisible = true;
     }
-    else {
+    else if (event.detail.scrollTop <= 220) {
       this.renderer.setStyle(document.querySelector(".barKronos"), 'opacity', '0');
+      this.renderer.setStyle(document.querySelector(".glassyBackground"), 'top', `${0.4*event.detail.scrollTop}px`);
+      this.isKronosBarVisible = false;
     }
   }
 
