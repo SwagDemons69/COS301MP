@@ -10,10 +10,11 @@ import {
   SetProfile,
   SubscribeToProfile
 } from '@mp/app/profile/util';
-import { Inject } from '@nestjs/common';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { tap } from 'rxjs';
 import { ProfilesApi } from './profiles.api';
+
+import produce from 'immer';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ProfileStateModel {
@@ -75,21 +76,14 @@ export class ProfileState {
       .pipe(tap((profile: user_profile) => ctx.dispatch(new SetProfile(profile))));
   }
 
-  // @Action(SetProfile)
-  // setProfile(ctx: StateContext<ProfileStateModel>, { profile }: SetProfile) {
-  //   if (profile?.followers) {
-  //     this.follower = profile?.followers?.length;
-  //   }
-  //   else {
-  //     this.follower = 69;
-  //   }
-  //   return ctx.setState(
-  //     produce((draft) => {
-  //       draft.profile = profile;
-  //     })
-  //   );
-
-  // }
+  @Action(SetProfile)
+  setProfile(ctx: StateContext<ProfileStateModel>, { profile }: SetProfile) {
+    return ctx.setState(
+      produce((draft) => {
+        draft.profile = profile;
+      })
+    );
+  }
 
 
   // @Action(LoadProfile)

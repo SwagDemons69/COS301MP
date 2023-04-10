@@ -68,6 +68,7 @@ export class AuthState {
     { email, password }: Register
   ) {
     try {
+      console.log("AUTH STATE")
       await this.authApi.register(email, password);
       return ctx.dispatch(new Navigate(['home']));
     } catch (error) {
