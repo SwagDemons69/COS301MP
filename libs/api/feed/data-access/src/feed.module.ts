@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { ProfilesRepository } from './profiles.repository';
+import { FeedRepository } from './feed.repository';
 
 @Module({
-  providers: [ProfilesRepository],
-  exports: [ProfilesRepository],
+  providers: [FeedRepository],
+  exports: [FeedRepository],
 })
-export class ProfilesModule {}
+export class FeedModule {}

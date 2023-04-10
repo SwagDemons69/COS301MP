@@ -1,31 +1,31 @@
 {
-  "name": "api-profiles-data-access",
+  "name": "api-feed-data-access",
   "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/api/profiles/data-access/src",
+  "sourceRoot": "libs/api/feed/data-access/src",
   "projectType": "library",
   "targets": {
     "build": {
       "executor": "@nrwl/js:tsc",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/libs/api/profiles/data-access",
-        "main": "libs/api/profiles/data-access/src/index.ts",
-        "tsConfig": "libs/api/profiles/data-access/tsconfig.lib.json",
-        "assets": ["libs/api/profiles/data-access/*.md"]
+        "outputPath": "dist/libs/api/feed/data-access",
+        "main": "libs/api/feed/data-access/src/index.ts",
+        "tsConfig": "libs/api/feed/data-access/tsconfig.lib.json",
+        "assets": ["libs/api/feed/data-access/*.md"]
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "outputs": ["{options.outputFile}"],
       "options": {
-        "lintFilePatterns": ["libs/api/profiles/data-access/**/*.ts"]
+        "lintFilePatterns": ["libs/api/feed/data-access/**/*.ts"]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "libs/api/profiles/data-access/jest.config.ts",
+        "jestConfig": "libs/api/feed/data-access/jest.config.ts",
         "passWithNoTests": true
       },
       "configurations": {
