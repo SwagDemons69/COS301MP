@@ -25,6 +25,12 @@
 
 <ion-content [fullscreen]="true" [scrollEvents]="true" (ionScroll)="onContentScroll($event)">
 <div *ngIf="!isSearchbarVisible" class="homePage">
+<!-- Background image overlay -->
+<div class="glassyBackground">
+  <img src="assets/images/glassy_lights.jpg" />
+  <div class="glassyBackgroundFade"></div>
+</div>
+
   <br /><br />
   <!-- HOME BANNER -->
 <div>
