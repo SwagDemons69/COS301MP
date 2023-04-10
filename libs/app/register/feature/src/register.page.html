@@ -1,17 +1,18 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <!-- <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
     <ion-title>Register</ion-title>
-  </ion-toolbar>
+  </ion-toolbar> -->
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Register</ion-title>
-    </ion-toolbar>
+  <ion-header >
+    <!-- <ion-toolbar> -->
+      <div id="header">
+      <ion-title >Twenty4</ion-title></div>
+    <!-- </ion-toolbar> -->
   </ion-header>
 
   <form
@@ -36,6 +37,7 @@
         color="danger">
         <small>{{ emailError }}</small>
       </ion-text>
+      
       <ion-item>
         <ion-label position="floating" class="required">Password</ion-label>
         <ion-input
@@ -60,6 +62,8 @@
       </ion-text>
     </ion-list>
 
+    
+
     <ion-grid class="ion-padding">
       <ion-row>
         <ion-col>
@@ -68,7 +72,7 @@
             [disabled]="!this.registerForm.valid || (busy$ | async)"
             type="submit">
             <ion-spinner *ngIf="busy$ | async"></ion-spinner>
-            <ion-text>Register</ion-text>
+            <ion-text>Sign up</ion-text>
           </ion-button>
         </ion-col>
       </ion-row>

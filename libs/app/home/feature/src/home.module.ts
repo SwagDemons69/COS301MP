@@ -10,3 +10,4 @@ import { HomeRouting } from './home.routing';
   declarations: [HomePage],
 })
 export class HomeModule {}
+// I think we should add the imports here, but I'm not sure

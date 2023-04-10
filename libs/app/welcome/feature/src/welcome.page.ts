@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ContinueWithGoogle } from '@mp/app/welcome/util';
 import { Store } from '@ngxs/store';
 
+
 @Component({
   selector: 'ms-welcome-page',
   templateUrl: './welcome.page.html',

@@ -1,7 +1,7 @@
 <ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
 
-    <div *ngIf="!isSearchbarVisible">
+    <div *ngIf="!isSearchbarVisible" class="barKronos">
         <ion-title class="title">
           <span>Home</span>
           <span style="float: right">{{kronos}}</span>
@@ -23,19 +23,42 @@
 </ion-header>
 
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" [scrollEvents]="true" (ionScroll)="onContentScroll($event)">
+<div *ngIf="!isSearchbarVisible" class="homePage">
+  <br /><br />
+  <!-- HOME BANNER -->
+<div>
+  <!-- App logo -->
+  <ion-img class="logo" src="assets/logos/logo.svg"></ion-img>
 
+  <ion-card-subtitle class="kronos">
+    {{kronos}}
+  </ion-card-subtitle>
+
+  <ng-container *ngIf="(profile$ | async) as profile;">
+    <ion-avatar class="avatar">
+      <img alt="Avatar" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+    </ion-avatar>
+  </ng-container>
+
+</div>
+
+
+  <br /><br />
   <!-- RECOMMENDED -->
   <h3 class="sectionTitle">RECOMMENDED FOR YOU</h3>
   <div>
     <!-- <ion-slides [options]="{ slidesPerView: 'auto', zoom: true, grabCursor: true }"> -->
-    <ion-slides>
+    <ion-slides [options]="{ slidesPerView: 1.5, freeMode: true }">
 
       <ion-slide *ngFor="let item of recommended">
         <ion-col>
           <ion-img [src]="item.img"></ion-img>
           <div class="overlay">
             <ion-label>{{item.title}}</ion-label>
+            <div class="reactions">
+              likes | comments
+            </div>
           </div>
         </ion-col>
       </ion-slide>
@@ -48,9 +71,33 @@
   <!-- GRAVEYARD -->
   <h3 id="graveyardTitle" class="sectionTitle">TODAY'S GRAVEYARD</h3>
   <div class="graveyard">
-    <ion-avatar class="gravestone">
-      <img alt="Avatar" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-    </ion-avatar>
+
+    <div class="gravestones">
+      <ion-avatar class="gravestone" *ngFor="let gs of [1, 2, 3, 4, 5, 6, 7, 8]">
+        <img alt="Avatar" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      </ion-avatar>
+    </div>
+
+    <div class="feelingBad">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="8">
+            <ion-card-title>
+              Feeling bad?
+            </ion-card-title>
+            <ion-card-subtitle>
+              Look at all these plebs.<br />Someone ought to give them a second chance.
+            </ion-card-subtitle>
+          </ion-col>
+
+          <ion-col size="4">
+            <ion-button class="glassyButton">
+              RESURRECT
+            </ion-button>
+          </ion-col>
+      </ion-row>
+      </ion-grid>
+    </div>
   </div>
 
   <br /><br />
@@ -68,7 +115,7 @@
     <ion-card class="trendingItem">
 
       <div class="image">
-        <img [src]="item.img">
+        <ion-img [src]="item.img"></ion-img>
       </div>
 
       <ion-label stacked>
@@ -104,5 +151,19 @@
   </div>
 
   </ion-list>
+</div>
 
+<div *ngIf="isSearchbarVisible" class="searchResults">
+  <ion-list>
+    <ion-item *ngFor="let post of searchResults">
+      <ion-thumbnail slot="start">
+        <img src="{{ post.img }}" alt="{{ post.title }}">
+      </ion-thumbnail>
+      <ion-label>
+        <h2>{{ post.title }}</h2>
+        <p>{{ post.desc }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</div>
 </ion-content>

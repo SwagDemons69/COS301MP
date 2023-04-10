@@ -1,28 +1,34 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <!-- <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/"></ion-back-button>
     </ion-buttons>
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
+    <div id = "header">
+     <ion-title>Twenty4</ion-title>
+    </div>
+  </ion-toolbar> -->
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Login</ion-title>
-    </ion-toolbar>
+  <ion-header >
+    <!-- <ion-toolbar> -->
+      <div id="header">
+      <ion-title >Twenty4</ion-title></div>
+    <!-- </ion-toolbar> -->
   </ion-header>
 
-  <form [formGroup]="loginForm" ngxsForm="login.loginForm" (submit)="login()">
+  <form id="form" [formGroup]="loginForm" ngxsForm="login.loginForm" (submit)="login()">
     <ion-list class="ion-padding-vertical">
       <ion-item>
-        <ion-label position="floating" class="required">Email</ion-label>
+        <!-- <ion-label position="floating" class="required">Email / Username...</ion-label> -->
         <ion-input
+          label="Outline input"
+          label-placement="floating"
+          fill = "outline"
           type="email"
           minlength="6"
           maxlength="64"
-          placeholder="Enter email"
+          placeholder="Email / Username..."
           required="true"
           autocomplete="email"
           formControlName="email"></ion-input>
@@ -34,12 +40,15 @@
         <small>{{ emailError }}</small>
       </ion-text>
       <ion-item>
-        <ion-label position="floating" class="required">Password</ion-label>
+        <!-- <ion-label position="floating" class="required">Password...</ion-label> -->
         <ion-input
+          label="Outline input"
+          label-placement="floating"
+          fill = "outline"
           [type]="showPassword ? 'text' : 'password'"
           minlength="6"
           maxlength="64"
-          placeholder="Enter password"
+          placeholder="Password"
           required="true"
           autocomplete="password"
           formControlName="password"></ion-input>
@@ -65,7 +74,9 @@
             [disabled]="!this.loginForm.valid || (busy$ | async)"
             type="submit">
             <ion-spinner *ngIf="busy$ | async"></ion-spinner>
-            <ion-text>Login</ion-text>
+            
+              <ion-text>Login</ion-text>
+           
           </ion-button>
         </ion-col>
       </ion-row>
@@ -92,3 +103,24 @@
 <ion-footer collapse="condense" class="ion-padding ion-text-center">
   <ms-copyright-component></ms-copyright-component>
 </ion-footer>
+
+<!-- //////////////////////////////new things/////////////////// -->
+<!-- <ion-content>
+  <div class="center-container">
+    <ion-card>
+      <ion-card-content>
+        <ion-input label="Outline input" label-placement="floating" placeholder="Email / Username...">
+        </ion-input>
+        <br>
+        <ion-input label="Outline input" label-placement="floating" placeholder="Password">
+        </ion-input>
+      </ion-card-content>
+      <ion-button expand="block" color="dark">Login</ion-button>
+    </ion-card>
+  </div>
+</ion-content>
+
+  <ion-footer collapse="condense" class="ion-padding ion-text-center">
+    <ms-copyright-component></ms-copyright-component>
+  </ion-footer>  -->
+ 

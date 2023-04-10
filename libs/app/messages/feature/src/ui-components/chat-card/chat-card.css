@@ -1,0 +1,51 @@
+.card{
+    height: 25vh;
+    display: flex;
+}
+
+.middle-section{
+    margin-top: 5vh;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    width: 80vw;
+}
+
+.left{
+    margin-top: 5vh;
+    align-items: center;
+}
+.profile-photo{
+    background: lightblue;
+    border-radius: 50%;
+    border-style: solid;
+    border-color: coral;
+    width: 13vh;
+    height: 13vh;
+}
+body{
+    background-color: black;
+}
+
+p{
+    color: white;
+}
+.name{
+    font-weight: bold;
+    font-family: 'Roboto';
+    font-size: 25px;
+    margin-top: 0px;
+    margin-bottom: 20px;
+}
+
+.time{
+    margin-top: 5vh;
+    font-weight: bold;
+    font-family: 'Roboto';
+    width: 15vw;
+}
+
+.last-message{
+    font-family: 'Roboto';
+    font-size: 14px;
+    margin: 0px;
+}
