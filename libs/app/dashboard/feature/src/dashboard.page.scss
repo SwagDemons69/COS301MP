@@ -1,4 +1,4 @@
-//=========== TOOLBAR ===========//
+/* //=========== TOOLBAR ===========// */
 
 ion-toolbar {
     --background: linear-gradient(180deg, #000000c0 0%, #00000080 40%, #00000000 100%);
@@ -17,7 +17,7 @@ ion-searchbar {
     transition: all 0.1s ease-in;
 }
 
-//========== BANNER ==========//
+/* //========== BANNER ==========// */
 
 .glassyBackground {
     position: absolute;
@@ -69,7 +69,7 @@ ion-avatar.avatar {
     box-shadow: 0px 0px 4px 0px #00000040;
 }
 
-//========== SECTIONS ==========//
+/* //========== SECTIONS ==========// */
 
 .sectionTitle {
     font-family: 'Roboto';
@@ -92,7 +92,7 @@ ion-avatar.avatar {
     border: 1px solid #ffffff20;
 }
 
-//========== RECOMMENDED ==========//
+/* //========== RECOMMENDED ==========// */
 
 ion-slide ion-col {
     // height: 61.8vw; // phi^-1
@@ -131,7 +131,7 @@ ion-img {
     max-width: 30%;
 }
 
-//=========== GRAVEYARD ==========//
+/* //=========== GRAVEYARD ==========// */
 
 .gravestones {
     position: relative;
@@ -193,7 +193,7 @@ $stone-positions: (
     border-radius: 14px 14px 6px 6px;
 }
 
-//========== TRENDING POSTS ==========//
+/* //========== TRENDING POSTS ==========// */
 
 .trendingPost hr {
     background-image: linear-gradient(90deg, transparent 0%, #ffffff 20%, transparent 100%);
@@ -245,7 +245,7 @@ $stone-positions: (
     font-size: 0.9em;
 }
 
-// Contains the poster profile, post date, and reactions
+/* // Contains the poster profile, post date, and reactions */
 .trendingItem .action {
     text-align: right;
 }
