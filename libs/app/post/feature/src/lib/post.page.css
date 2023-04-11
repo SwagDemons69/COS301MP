@@ -1,6 +1,7 @@
 .centered-box {
-    width: 60%;
-    height: 80%;
+    max-width: 100%;
+    width: 96%;
+    max-height: 95%;
     background-color: transparent;
     position: absolute;
     top: 50%;
@@ -69,8 +70,8 @@
 
 input[type="file"] 
 {
-  margin-left: 37%;
-  margin-top: 20%;
+  margin-left: 27%;
+  margin-top: 10%;
   margin-right: auto;
   margin-bottom: auto;
   /* border: 2px solid white;
@@ -79,7 +80,7 @@ input[type="file"]
 
 input[type="text"] 
 {
-  margin-left: 30%;
+  margin-left: 25%;
   margin-top: relative;
   margin-right: auto;
   margin-bottom: auto;
@@ -94,7 +95,7 @@ input[type="text"]
 
 input[type="submit"]
 {
-  margin-left: 40%;
+  margin-left: 30%;
   margin-top: relative;
   margin-right: auto;
   margin-bottom: auto;
