@@ -1,4 +1,5 @@
-// Style the toolbar
+//=========== TOOLBAR ===========//
+
 ion-toolbar {
     --background: linear-gradient(180deg, #000000F0 0%, #000000A0 60%, transparent 100%);
     --color: #ffffff;
@@ -11,6 +12,42 @@ ion-searchbar {
     --ion-background-color: transparent;
 }
 
+.barKronos {
+    opacity: 0;
+    transition: all 0.1s ease-in;
+}
+
+//========== BANNER ==========//
+
+ion-img.logo {
+    max-width: 30vw;
+    margin: auto;
+}
+
+ion-card-subtitle.kronos {
+    margin: auto;
+    display: block;
+    text-align: center;
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
+
+    font-family: 'Inter';
+    font-size: 3em;
+    font-weight: bold;
+    color: white;
+}
+
+ion-avatar.avatar {
+    margin: auto;
+    display: block;
+    margin-top: 1em;
+    outline: 10px solid black;
+    width: 10%;
+    height: auto;
+}
+
+//========== SECTIONS ==========//
+
 .sectionTitle {
     font-family: 'Roboto';
     color: #f0f0f0;
@@ -22,21 +59,118 @@ ion-searchbar {
     text-align: center;
 }
 
+.glassyButton {
+    --background: linear-gradient(45deg, #8c8a9920 0%, #ffffff00 100%);
+    --color: #ffffff;
+    --shadow: none;
+    --box-shadow: none;
+    --border-radius: 6px 6px 6px 6px;
+    border-radius: 6px 6px 6px 6px;
+    border: 1px solid #ffffff20;
+}
+
+//========== RECOMMENDED ==========//
+
+ion-slide ion-col {
+    // height: 61.8vw; // phi^-1
+    height: 41.2022vw; // (phi^-1) / 1.5
+}
+
+ion-img {
+    pointer-events: none; // prevent image being dragged
+}
+
 .overlay {
     position: absolute;
     z-index: 100;
     width: 100%;
     height: 40px;
+
     bottom: 0px;
-    opacity: 0.5;
-    background: linear-gradient(180deg, #00000000 0%, #000000F0 60%, #000000F0 100%);
-    color: #fff;
+    background: linear-gradient(180deg, #00000000 0%, #00000080 60%, #000000C0 100%);
 }
 
-ion-avatar.gravestone {
-    margin: 10%;
-    --border-radius: 50% 50% 10% 10%;
+.overlay ion-label {
+    color: white;
+    float: left;
+    text-align: left;
+    font-size: 0.7em;
+    padding-left: 1em;
+    max-width: 65%;
 }
+
+.overlay .reactions {
+    color: white;
+    float: right;
+    text-align: right;
+    font-size: 0.7em;
+    padding-right: 1.2em;
+    max-width: 30%;
+}
+
+//=========== GRAVEYARD ==========//
+
+.gravestones {
+    position: relative;
+    height: 200px;
+    // background: radial-gradient(ellipse, #101823 0%, #101823 59%, #17223100 80%);
+    background: radial-gradient(ellipse, #101823c0 0%, #10182340 60%, #17223100 80%);
+    background-size: 100% 60%;
+    background-repeat: no-repeat;
+    background-position-y: 64%;
+}
+
+$stone-positions: (
+    1:  (0.0,   0.5,    0.25),
+    2:  (0.1,   0.7,    0.2),
+    3:  (0.25,  0.4,    0.4),
+    4:  (0.4,   0.8,    0.6),
+    5:  (0.45,  0.0,    0.9),
+    6:  (0.65,  0.8,    0.4),
+    7:  (0.75,  0.2,    0.75),
+    8:  (1.0,   0.7,    0.3),
+);
+
+.gravestones .gravestone {
+    --border-radius: 50% 50% 10% 10%;
+    position: absolute;
+    box-shadow: 0px 3px 5px 0px #00000080;
+}
+
+@each $i, $pos in $stone-positions {
+    .gravestones .gravestone:nth-child(#{$i}) {
+        $x: nth($pos, 1);
+        $y: nth($pos, 2);
+        $size: nth($pos, 3);
+
+        left: #{10 + $x*70}vw; //10-80
+        top: #{20 + $y*130}px; //20-150
+        width: #{80*$size}px;
+        height: auto;
+    }
+}
+
+.feelingBad {
+    padding: 1em;
+}
+.feelingBad ion-card-title {
+    font-weight: light;
+    color: #f0f0f0;
+    margin-bottom: 0.3em;
+}
+.feelingBad ion-card-subtitle {
+    font-size: 0.6em;
+    font-weight: lighter;
+    color: #f0f0f0;
+    display: inline-block;
+}
+
+.feelingBad ion-button {
+    --border-radius: 14px 14px 6px 6px;
+    border-radius: 14px 14px 6px 6px;
+}
+
+//========== TRENDING POSTS ==========//
 
 .trendingPost hr {
     background-image: linear-gradient(90deg, transparent 0%, #ffffff 20%, transparent 100%);
@@ -54,6 +188,7 @@ ion-avatar.gravestone {
     box-shadow: none;
 
     color: white;
+    border-radius: 0px;
 }
 
 .trendingItem .image {
@@ -62,7 +197,7 @@ ion-avatar.gravestone {
     overflow: hidden;
 }
 
-.trendingItem img {
+.trendingItem ion-img {
     width: 100vw;
     max-width: 100%;
     max-height: 100%; 

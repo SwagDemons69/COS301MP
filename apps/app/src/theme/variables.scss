@@ -3,7 +3,11 @@
 
 @font-face {
   font-family: 'Roboto';
-  src: url('../assets/fonts/Roboto/Roboto-Regular.ttf') format('truetype');
+  src: url('../assets/fonts/Roboto_Flex/RobotoFlex-VariableFont_GRAD\,XTRA\,YOPQ\,YTAS\,YTDE\,YTFI\,YTLC\,YTUC\,opsz\,slnt\,wdth\,wght.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('../assets/fonts/Inter/Inter-VariableFont_slnt\,wght.ttf') format('truetype');
 }
 
 // Ionic CSS Variables
