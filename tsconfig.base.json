@@ -19,6 +19,11 @@
       "@mp/api/auth/data-access": ["libs/api/auth/data-access/src/index.ts"],
       "@mp/api/auth/feature": ["libs/api/auth/feature/src/index.ts"],
       "@mp/api/auth/util": ["libs/api/auth/util/src/index.ts"],
+      "@mp/api/comment/data-access": [
+        "libs/api/comment/data-access/src/index.ts"
+      ],
+      "@mp/api/comment/feature": ["libs/api/comment/feature/src/index.ts"],
+      "@mp/api/comment/util": ["libs/api/comment/util/src/index.ts"],
       "@mp/api/core/feature": ["libs/api/core/feature/src/index.ts"],
       "@mp/api/eventstore/data-access": [
         "libs/api/eventstore/data-access/src/index.ts"
@@ -27,6 +32,11 @@
         "libs/api/eventstore/feature/src/index.ts"
       ],
       "@mp/api/eventstore/util": ["libs/api/eventstore/util/src/index.ts"],
+      "@mp/api/graveyard/data-access": [
+        "libs/api/graveyard/data-access/src/index.ts"
+      ],
+      "@mp/api/graveyard/feature": ["libs/api/graveyard/feature/src/index.ts"],
+      "@mp/api/graveyard/util": ["libs/api/graveyard/util/src/index.ts"],
       "@mp/api/history/data-access": [
         "libs/api/history/data-access/src/index.ts"
       ],
@@ -54,6 +64,11 @@
       ],
       "@mp/api/profiles/feature": ["libs/api/profiles/feature/src/index.ts"],
       "@mp/api/profiles/util": ["libs/api/profiles/util/src/index.ts"],
+      "@mp/api/search/data-access": [
+        "libs/api/search/data-access/src/index.ts"
+      ],
+      "@mp/api/search/feature": ["libs/api/search/feature/src/index.ts"],
+      "@mp/api/search/util": ["libs/api/search/util/src/index.ts"],
       "@mp/api/users/data-access": ["libs/api/users/data-access/src/index.ts"],
       "@mp/api/users/feature": ["libs/api/users/feature/src/index.ts"],
       "@mp/api/users/util": ["libs/api/users/util/src/index.ts"],
