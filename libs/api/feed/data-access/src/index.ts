@@ -1,2 +1,2 @@
-export * from './profiles.module';
-export * from './profiles.repository';
+export * from './feed.module';
+export * from './feed.repository';
