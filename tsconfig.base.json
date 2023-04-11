@@ -19,6 +19,9 @@
       "@mp/api/auth/data-access": ["libs/api/auth/data-access/src/index.ts"],
       "@mp/api/auth/feature": ["libs/api/auth/feature/src/index.ts"],
       "@mp/api/auth/util": ["libs/api/auth/util/src/index.ts"],
+      "@mp/api/chat/data-access": ["libs/api/chat/data-access/src/index.ts"],
+      "@mp/api/chat/feature": ["libs/api/chat/feature/src/index.ts"],
+      "@mp/api/chat/util": ["libs/api/chat/util/src/index.ts"],
       "@mp/api/core/feature": ["libs/api/core/feature/src/index.ts"],
       "@mp/api/eventstore/data-access": [
         "libs/api/eventstore/data-access/src/index.ts"
@@ -61,6 +64,9 @@
       "@mp/app/auth/data-access": ["libs/app/auth/data-access/src/index.ts"],
       "@mp/app/auth/feature": ["libs/app/auth/feature/src/index.ts"],
       "@mp/app/auth/util": ["libs/app/auth/util/src/index.ts"],
+      "@mp/app/chat/data-access": ["libs/app/chat/data-access/src/index.ts"],
+      "@mp/app/chat/feature": ["libs/app/chat/feature/src/index.ts"],
+      "@mp/app/chat/util": ["libs/app/chat/util/src/index.ts"],
       "@mp/app/copyright/ui": ["libs/app/copyright/ui/src/index.ts"],
       "@mp/app/core/feature": ["libs/app/core/feature/src/index.ts"],
       "@mp/app/dashboard/data-access": [
