@@ -23,7 +23,7 @@ $ npm install -g firebase-tools
 ```
 yarn start:api:dev
 
-yarn start:emulators   OR   yarn start:emulators:imported
+yarn start:emulators
 
 yarn start:app:dev
 ```
