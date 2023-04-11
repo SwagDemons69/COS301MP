@@ -1,3 +1,16 @@
-p {
+div {
+    margin: auto;
+    margin-top: 0px;
+}
+
+div p {
+    text-align: center;
+    margin: 1em;
     color: white;
+    display: block;
+    padding: 0px;
+}
+
+div img {
+    width: 100%;
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -7,11 +7,14 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./blip.component.scss'],
 })
 export class BlipComponent {
-  // @Input() modelTitle: string;
+  @Input() data: any;
 
   constructor(
     private modalController: ModalController
-  ) {}
+  ) {
+    console.log("DATA:");
+    console.log(this.data);
+  }
 
   async closeModal() {
     await this.modalController.dismiss();

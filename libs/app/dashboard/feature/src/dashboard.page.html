@@ -91,7 +91,7 @@
           </ion-col>
 
           <ion-col size="4">
-            <ion-button class="glassyButton" (click)="openBlip({})">
+            <ion-button class="glassyButton">
               RESURRECT
             </ion-button>
           </ion-col>
@@ -111,7 +111,7 @@
     </ion-infinite-scroll-content>
   </ion-infinite-scroll> -->
 
-  <div class="trendingPost" *ngFor="let item of trending">
+  <div class="trendingPost" *ngFor="let item of trending" (click)="openBlip(item)">
     <ion-card class="trendingItem">
 
       <div class="image">
