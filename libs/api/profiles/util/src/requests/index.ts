@@ -5,3 +5,5 @@ export * from './update-contact-details.request';
 export * from './update-occupation-details.request';
 export * from './update-personal-details.request';
 export * from './update-profile-status.request';
+
+export * from './display-profile.request'

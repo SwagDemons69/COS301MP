@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IProfile } from '@mp/api/profiles/util';
+import { user_profile } from '@mp/api/profiles/util';
 import { ProfileState } from '@mp/app/profile/data-access';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
@@ -10,5 +10,5 @@ import { Observable } from 'rxjs';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage {
-  @Select(ProfileState.profile) profile$!: Observable<IProfile | null>;
+  @Select(ProfileState.profile) profile$!: Observable<user_profile | null>;
 }

@@ -21,3 +21,4 @@ import { ProfileRouting } from './profile.routing';
   declarations: [ProfilePage],
 })
 export class ProfileModule {}
+
