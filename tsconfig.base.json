@@ -121,6 +121,7 @@
       "@mp/app/register/data-access": [
         "libs/app/register/data-access/src/index.ts"
       ],
+      "@mp/app//shared-components": ["libs/app/shared-components/src/index.ts"],
       "@mp/app/register/feature": ["libs/app/register/feature/src/index.ts"],
       "@mp/app/register/util": ["libs/app/register/util/src/index.ts"],
       "@mp/app/reset/data-access": ["libs/app/reset/data-access/src/index.ts"],

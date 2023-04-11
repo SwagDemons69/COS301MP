@@ -1,7 +1,8 @@
 import { Component, Renderer2 } from '@angular/core';
-import { ScrollDetail } from '@ionic/angular';
 import { IProfile } from '@mp/api/profiles/util';
 import { ProfileState } from '@mp/app/profile/data-access';
+import { ModalController } from '@ionic/angular';
+import { ProfileOtherComponent } from '@mp/app//shared-components';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
@@ -16,6 +17,7 @@ export class DashboardPage {
 
   constructor (
     private renderer: Renderer2,
+    private modalController: ModalController,
   ) {}
 
   // A bunch of dummy recommended posts
@@ -127,11 +129,26 @@ export class DashboardPage {
     }
   }
 
-
   loadData(event: any) {
     setTimeout(() => {
       event.target.complete();
       event.target.disabled = true;
     }, 2000);
+  }
+
+  // See [https://stackblitz.com/edit/ionic6-angular13-wnmgmu?file=src/app/app.component.ts] for reference
+  async openBlip(data: any) {
+    const modal = await this.modalController.create({
+      component: ProfileOtherComponent,
+      componentProps: {
+        data: data
+      }
+    });
+
+    modal.onDidDismiss().then((data) => {
+      console.log(data);
+    });
+
+    return await modal.present();
   }
 }
