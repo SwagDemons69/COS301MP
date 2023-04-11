@@ -23,7 +23,26 @@
 </ion-header>
 
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" [scrollEvents]="true" (ionScroll)="onContentScroll($event)">
+<div *ngIf="!isSearchbarVisible" class="homePage">
+  <br /><br />
+  <!-- HOME BANNER -->
+<div>
+  <!-- App logo -->
+  <ion-img class="logo" src="assets/logos/logo.svg"></ion-img>
+
+  <ion-card-subtitle class="kronos">
+    {{kronos}}
+  </ion-card-subtitle>
+
+  <ng-container *ngIf="(profile$ | async) as profile;">
+    <ion-avatar class="avatar">
+      <img alt="Avatar" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+    </ion-avatar>
+  </ng-container>
+
+</div>
+
 
   <!-- RECOMMENDED -->
   <h3 class="sectionTitle">RECOMMENDED FOR YOU</h3>

@@ -32,6 +32,23 @@
       ],
       "@mp/api/history/feature": ["libs/api/history/feature/src/index.ts"],
       "@mp/api/history/util": ["libs/api/history/util/src/index.ts"],
+      "@mp/api/messages/data-access": [
+        "libs/api/messages/data-access/src/index.ts"
+      ],
+      "@mp/api/messages/feature": ["libs/api/messages/feature/src/index.ts"],
+      "@mp/api/messages/util": ["libs/api/messages/util/src/index.ts"],
+      "@mp/api/notifications/data-access": [
+        "libs/api/notifications/data-access/src/index.ts"
+      ],
+      "@mp/api/notifications/feature": [
+        "libs/api/notifications/feature/src/index.ts"
+      ],
+      "@mp/api/notifications/util": [
+        "libs/api/notifications/util/src/index.ts"
+      ],
+      "@mp/api/post/data-access": ["libs/api/post/data-access/src/index.ts"],
+      "@mp/api/post/feature": ["libs/api/post/feature/src/index.ts"],
+      "@mp/api/post/util": ["libs/api/post/util/src/index.ts"],
       "@mp/api/profiles/data-access": [
         "libs/api/profiles/data-access/src/index.ts"
       ],
@@ -64,11 +81,23 @@
       "@mp/app/login/data-access": ["libs/app/login/data-access/src/index.ts"],
       "@mp/app/login/feature": ["libs/app/login/feature/src/index.ts"],
       "@mp/app/login/util": ["libs/app/login/util/src/index.ts"],
+      "@mp/app/messages/data-access": [
+        "libs/app/messages/data-access/src/index.ts"
+      ],
       "@mp/app/messages/feature": ["libs/app/messages/feature/src/index.ts"],
-      "@np.app/post/feauture": ["libs/app/post/feature/src/index.ts"],
-
-      "@mp/app/messages/ui": ["libs/app/messages/ui/src/index.ts"],
-
+      "@mp/app/messages/util": ["libs/app/messages/util/src/index.ts"],
+      "@mp/app/notifications/data-access": [
+        "libs/app/notifications/data-access/src/index.ts"
+      ],
+      "@mp/app/notifications/feature": [
+        "libs/app/notifications/feature/src/index.ts"
+      ],
+      "@mp/app/notifications/util": [
+        "libs/app/notifications/util/src/index.ts"
+      ],
+      "@mp/app/post/data-access": ["libs/app/post/data-access/src/index.ts"],
+      "@mp/app/post/feature": ["libs/app/post/feature/src/index.ts"],
+      "@mp/app/post/util": ["libs/app/post/util/src/index.ts"],
       "@mp/app/privacy/feature": ["libs/app/privacy/feature/src/index.ts"],
       "@mp/app/profile/data-access": [
         "libs/app/profile/data-access/src/index.ts"

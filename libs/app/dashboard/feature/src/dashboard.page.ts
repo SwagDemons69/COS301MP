@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 import { IProfile } from '@mp/api/profiles/util';
 import { ProfileState } from '@mp/app/profile/data-access';
 import { Select } from '@ngxs/store';
@@ -71,6 +71,17 @@ export class DashboardPage {
   toggleSearchbar() {
     this.isSearchbarVisible = !this.isSearchbarVisible;
   }
+
+  onContentScroll(event: any) {
+    console.log(event.detail.scrollTop);
+    if (event.detail.scrollTop > 220) {
+      this.renderer.setStyle(document.querySelector(".barKronos"), 'opacity', '1');
+    }
+    else {
+      this.renderer.setStyle(document.querySelector(".barKronos"), 'opacity', '0');
+    }
+  }
+
 
   loadData(event: any) {
     setTimeout(() => {

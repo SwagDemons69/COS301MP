@@ -8,10 +8,4 @@ import { Component } from '@angular/core';
   styleUrls: ['./post.page.css']
 })
 export class PostPage {
-  
-  // constructor() {}
-
-  //   uploadFile() {
-      
-  // }
 }

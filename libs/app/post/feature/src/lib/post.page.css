@@ -1,6 +1,7 @@
 .centered-box {
-    width: 60%;
-    height: 80%;
+    max-width: 100%;
+    width: 96%;
+    max-height: 95%;
     background-color: transparent;
     position: absolute;
     top: 50%;
@@ -65,4 +66,39 @@
     left: 49%;
     transform: translate(-50%, -50%);
     cursor: pointer;
+}
+
+input[type="file"] 
+{
+  margin-left: 27%;
+  margin-top: 10%;
+  margin-right: auto;
+  margin-bottom: auto;
+  /* border: 2px solid white;
+  border-radius: 5px; */
+}
+
+input[type="text"] 
+{
+  margin-left: 25%;
+  margin-top: relative;
+  margin-right: auto;
+  margin-bottom: auto;
+  height: 70px;
+  width: 40%;
+  border: 2px solid white;
+  border-radius: 5px;
+  resize: vertical;
+
+}
+
+
+input[type="submit"]
+{
+  margin-left: 30%;
+  margin-top: relative;
+  margin-right: auto;
+  margin-bottom: auto;
+  border: 2px solid white;
+  border-radius: 5px;
 }
