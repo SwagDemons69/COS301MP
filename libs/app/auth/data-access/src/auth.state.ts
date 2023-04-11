@@ -45,6 +45,8 @@ export class AuthState {
 
   @Action(SetUser)
   async setUser(ctx: StateContext<AuthStateModel>, { user }: SetUser) {
+    console.log("SETTTING USER")
+    //console.log(user)
     ctx.setState(
       produce((draft) => {
         draft.user = user;

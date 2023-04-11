@@ -13,7 +13,7 @@ export class CreateProfileHandler
 
   async execute(command: CreateProfileCommand) {
     console.log(`${CreateProfileHandler.name}`);
-    console.log("@@@@@@@@@@@@@@@@@@@@@@@@")
+    //console.log("@@@@@@@@@@@@@@@@@@@@@@@@")
 
 
     const request = command.request;
@@ -47,7 +47,7 @@ export class CreateProfileHandler
 
     const profile = this.publisher.mergeObjectContext(Profile.fromData(data));
     
-    console.log(profile)
+    //console.log(profile)
 
     profile.create();
     profile.commit();

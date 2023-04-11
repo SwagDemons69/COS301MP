@@ -47,7 +47,9 @@ const generatePosts = async () => {
     { id : "1",
       post_id : "1",
       user_id : "Sg1j9YlEbEbeOeg1Of3Un79W4Lj7",
-      content : "", likes : 0,
+      content : "https://picsum.photos/id/19/300/300",
+      caption : "Test Post",
+      likes : 69,
       timeStamp : 13452824,
       shares : 0,
       kronos : 0,
@@ -97,11 +99,11 @@ return profiles;
 // FUNCTION CALLS
 //=============================================
 
-async function test() {
-const profiles = await importProfiles();
-console.log(profiles);
-}
+// async function test() {
+// const profiles = await importProfiles();
+// console.log(profiles);
+// }
 
-test();
+// test();
 
-admin.app().delete();
+// admin.app().delete();

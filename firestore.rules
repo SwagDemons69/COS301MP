@@ -9,5 +9,9 @@ service cloud.firestore {
       allow read: if true;
     }
 
+    match /posts/{postId} {
+      allow read: if true;
+    }
+
   }
 }

@@ -59,26 +59,46 @@
               </ion-row>
             </ion-grid>
 
-            <ion-card-subtitle class="bio">
-              Just your local demon posing as a time lord.
-              Nothing to see here, move along.
-              #Swaggity #SwagDemon69
-            </ion-card-subtitle>
+            <ion-card-subtitle class="bio"><ion-input [value]="(profile.bio)"></ion-input></ion-card-subtitle>
 
           </ion-card-content>
         </ng-container>
       </ion-card>
 
     </ion-row>
+    <ion-row>
+      <ng-container *ngIf="(posts$ | async) as posts; else noProfile">
+      <ion-card class="photos">
+        <ion-card-content class="ion-text-center">
+          <ion-content [fullscreen]="true" [scrollEvents]="true">
+              <ion-grid [fixed]="true">
+                <ion-row class="ion-justify-content-center">
+                    <ion-col class="ion-col"><ion-img [src]="(posts.content)" alt=""></ion-img></ion-col>
+                    <ion-col class="ion-col"><ion-img [src]="(posts.content)" alt=""></ion-img></ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col class="ion-col"><ion-img [src]="(posts.content)" alt=""></ion-img></ion-col>
+                    <ion-col class="ion-col"><ion-img [src]="(posts.content)" alt=""></ion-img></ion-col>
+                    <ion-col class="ion-col"><ion-img [src]="(posts.content)" alt=""></ion-img></ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col class="ion-col"><ion-img [src]="(posts.content)" alt=""></ion-img></ion-col>
+              </ion-row>
+              </ion-grid>
+          </ion-content>
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
+    </ion-row>
   </ion-grid>
 
-  <ng-container *ngIf="(profile$ | async) as profile; else noProfile">
+  <!-- <ng-container *ngIf="(profile$ | async) as profile; else noProfile"> -->
     <!-- <ms-profile-account-details-component></ms-profile-account-details-component>
     <ms-profile-personal-details-component></ms-profile-personal-details-component>
     <ms-profile-contact-details-component></ms-profile-contact-details-component>
     <ms-profile-address-details-component></ms-profile-address-details-component>
     <ms-profile-occupation-details-component></ms-profile-occupation-details-component> -->
-  </ng-container>
+  <!-- </ng-container> -->
 
   <ng-template #noProfile>
     <ion-grid>
@@ -90,7 +110,7 @@
     </ion-grid>
   </ng-template>
 
-  <ion-header collapse="condense">
+  <!-- <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large" class="ion-align-items-center">
         Profile
@@ -98,17 +118,17 @@
         </ng-container>
       </ion-title>
     </ion-toolbar>
-  </ion-header>
+  </ion-header> -->
 
-  <ng-container *ngIf="(profile$ | async) as profile; else noProfile">
+  <!-- <ng-container *ngIf="(profile$ | async) as profile; else noProfile"> -->
     <!-- <ms-profile-account-details-component></ms-profile-account-details-component>
     <ms-profile-personal-details-component></ms-profile-personal-details-component>
     <ms-profile-contact-details-component></ms-profile-contact-details-component>
     <ms-profile-address-details-component></ms-profile-address-details-component>
     <ms-profile-occupation-details-component></ms-profile-occupation-details-component> -->
-  </ng-container>
+  <!-- </ng-container> -->
 
-  <ng-template #noProfile>
+  <!-- <ng-template #noProfile>
     <ion-grid>
       <ion-row>
         <ion-col>
@@ -116,6 +136,6 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-  </ng-template>
+  </ng-template> -->
 
 </ion-content>

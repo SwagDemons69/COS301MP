@@ -51,3 +51,17 @@ ion-avatar {
   color: #606060;
   font-size: 0.8em;
 }
+
+.photos{
+  background-color: black  !important;
+  width: 100%;
+  box-shadow:inset !important;
+  height : 300px;
+}
+
+.ion-col{
+  background-color: white;
+  border: solid 1px #fff;
+  color: #fff;
+  text-align: center;
+}

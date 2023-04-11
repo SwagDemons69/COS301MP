@@ -8,17 +8,26 @@ import { SetError } from '@mp/app/errors/util';
 import {
   Logout,
   SetProfile,
-  SubscribeToProfile
+  SubscribeToProfile,
+  SubscribeToProfilePosts,
+  SetPosts
 } from '@mp/app/profile/util';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { tap } from 'rxjs';
 import { ProfilesApi } from './profiles.api';
-
 import produce from 'immer';
+import { post } from '@mp/api/home/util';
+import { doc } from '@firebase/firestore';
+
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ProfileStateModel {
   profile: user_profile | null;
+}
+
+// // eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface PostStateModel{
+  posts : post | null
 }
 
 @State<ProfileStateModel>({
@@ -46,6 +55,15 @@ export interface ProfileStateModel {
     }
   }
 })
+
+@State<PostStateModel>({
+  name : 'posts',
+  defaults: {
+    posts : null
+  }
+})
+
+
 @Injectable()
 export class ProfileState {
   //follower : number;
@@ -61,6 +79,11 @@ export class ProfileState {
     return state.profile;
   }
 
+  @Selector()
+  static posts(state : PostStateModel){
+    return state.posts;
+  }
+
   @Action(Logout)
   async logout(ctx: StateContext<ProfileStateModel>) {
     return ctx.dispatch(new AuthLogout());
@@ -70,12 +93,17 @@ export class ProfileState {
   subscribeToProfile(ctx: StateContext<ProfileStateModel>) {
     const user = this.store.selectSnapshot(AuthState.user);
     if (!user) return ctx.dispatch(new SetError('User not set'));
-
+    //console.log("SUBSCRIBE TO PROFILE")
+    //console.log("USER UID: " + user.uid)
+    console.log(this.profileApi.profile$(user.uid));
     return this.profileApi
       .profile$(user.uid)
       .pipe(tap((profile: user_profile) => ctx.dispatch(new SetProfile(profile))));
   }
-
+  //What does piping do?
+  //I think when profile api retuerns it is stored in profile of type user_profile and on completion of this 
+  //the set profile action is invoked
+  
   @Action(SetProfile)
   setProfile(ctx: StateContext<ProfileStateModel>, { profile }: SetProfile) {
     return ctx.setState(
@@ -84,6 +112,31 @@ export class ProfileState {
       })
     );
   }
+
+//============================================================================================
+
+  @Action(SubscribeToProfilePosts)
+  subscribeToProfilePosts(ctx: StateContext<PostStateModel>) {
+    const user = this.store.selectSnapshot(AuthState.user);
+    if (!user) return ctx.dispatch(new SetError('User not set'));
+    console.log("SUBSCRIBE PROFILE POST")
+    
+    return this.profileApi
+      .posts$(user.uid).pipe(tap((posts : post) => ctx.dispatch(new SetPosts(posts))));
+  }
+
+
+  @Action(SetPosts)
+  setPosts(ctx: StateContext<PostStateModel>, { posts }: SetPosts) {
+    console.log("SET POST")
+    return ctx.setState(
+      produce((draft) => {
+        draft.posts = posts;
+      })
+    );
+  }
+
+
 
 
   // @Action(LoadProfile)
