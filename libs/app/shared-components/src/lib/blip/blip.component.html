@@ -17,7 +17,24 @@
 </ion-content> -->
 
 <div>
-    <p><b>{{data.title}}</b></p>
-    <p>{{data.desc}}</p>
-    <img src="{{data.img}}" />
+    <p><b>{{data.caption}}</b></p>
+    <p>ID: {{data.post_id}}</p>
+    <img src="{{data.content}}" />
 </div>
+
+<!--
+TODO: Display all relevant post data
+interface post {
+  post_id : string;
+  user_id : string;
+  content : string;
+  caption : string | null | undefined;
+  likes : number;
+  timeStamp : number;
+  shares : number;
+  kronos : number;
+  comments : string[];
+  categories : string[];
+  taggedUsers : string[];
+}
+-->

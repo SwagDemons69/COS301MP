@@ -67,23 +67,16 @@
 
     </ion-row>
     <ion-row>
-      <ng-container *ngIf="(posts$ | async) as posts; else noProfile">
+      <ng-container *ngIf="(posts$ | async) as post; else noProfile">
       <ion-card class="photos">
         <ion-card-content class="ion-text-center">
           <ion-content [fullscreen]="true" [scrollEvents]="true">
               <ion-grid [fixed]="true">
-                <ion-row class="ion-justify-content-center">
-                    <ion-col class="ion-col"><ion-img [src]="(posts.content)" alt=""></ion-img></ion-col>
-                    <ion-col class="ion-col"><ion-img [src]="(posts.content)" alt=""></ion-img></ion-col>
+                <ion-row class="ion-justify-content-center" *ngFor="let i of [1, 2, 3]">
+                    <ion-col class="ion-col">
+                      <ion-img [src]="(post.content)" (click)="openBlip(post)" alt=""></ion-img>
+                    </ion-col>
                 </ion-row>
-                <ion-row>
-                    <ion-col class="ion-col"><ion-img [src]="(posts.content)" alt=""></ion-img></ion-col>
-                    <ion-col class="ion-col"><ion-img [src]="(posts.content)" alt=""></ion-img></ion-col>
-                    <ion-col class="ion-col"><ion-img [src]="(posts.content)" alt=""></ion-img></ion-col>
-                </ion-row>
-                <ion-row>
-                  <ion-col class="ion-col"><ion-img [src]="(posts.content)" alt=""></ion-img></ion-col>
-              </ion-row>
               </ion-grid>
           </ion-content>
         </ion-card-content>
