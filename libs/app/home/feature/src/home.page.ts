@@ -14,11 +14,11 @@ import { post } from '@mp/api/home/util';
 })
 export class HomePage {
   @Select(ProfileState.profile) profile$!: Observable<user_profile | null>;
-  @Select(ProfileState.posts) posts$!: Observable<post | null>;
+  //@Select(ProfileState.posts) posts$!: Observable<post | null>;
   constructor(private readonly store: Store) { }
 
   ionViewWillEnter() {
     this.store.dispatch(new SubscribeToProfile());
-    this.store.dispatch(new SubscribeToProfilePosts());
+    //this.store.dispatch(new SubscribeToProfilePosts());
   }
 }

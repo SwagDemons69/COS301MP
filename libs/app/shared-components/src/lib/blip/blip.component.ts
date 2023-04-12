@@ -8,6 +8,8 @@ import { post } from '@mp/api/home/util';
   styleUrls: ['./blip.component.scss'],
 })
 export class BlipComponent {
+  //user = "null";
+
   @Input() data: post = {
     post_id: "NONE",
     user_id: "",
@@ -20,7 +22,9 @@ export class BlipComponent {
     comments: [],
     categories: [],
     taggedUsers: []
-  };
+  }
+
+  @Input() user = "null2";
 
   constructor(
     private modalController: ModalController
@@ -29,4 +33,8 @@ export class BlipComponent {
   async closeModal() {
     await this.modalController.dismiss();
   }
+
+  // setUser(username:string){
+  //   this.user = username;
+  // }
 }

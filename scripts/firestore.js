@@ -67,12 +67,51 @@ const generatePosts = async () => {
     admin.app().delete();
   }
 };
+const user_id = "izuE9y78NUM9yw1cTv8OPCvGscEo";
+const addPosts = async () => {
+  try{
+        const posts = [
+          { id : "1",
+          post_id : "1",
+          user_id : user_id,
+          content : "https://picsum.photos/id/19/300/300",
+          caption : "Test Post 1",
+          likes : 69,
+          timeStamp : 13452824,
+          shares : 0,
+          kronos : 0,
+          comments : [],
+          categories : [],
+          taggedUsers : []
+        },
+        { id : "2",
+          post_id : "2",
+          user_id : user_id,
+          content : "https://picsum.photos/id/23/300/300",
+          caption : "Test Post 2",
+          likes : 69,
+          timeStamp : 13452824,
+          shares : 0,
+          kronos : 0,
+          comments : [],
+          categories : [],
+          taggedUsers : []
+        }
+      ];
+      //for(const post of posts){
+        await db.collection('profiles').doc(user_id).update({posts: posts});
+  }
+  finally{
+    admin.app().delete();
+  }
+}
 
 //=============================================
 // FUNCTION CALLS
 //=============================================
 
-generatePosts();
+//generatePosts();
+addPosts();
 
 //=============================================
 

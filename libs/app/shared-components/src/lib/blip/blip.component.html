@@ -16,10 +16,12 @@
   </ion-grid>
 </ion-content> -->
 
-<div>
-    <p><b>{{data.caption}}</b></p>
-    <p>ID: {{data.post_id}}</p>
-    <img src="{{data.content}}" />
+<script src="https://kit.fontawesome.com/0fbc59a2a8.js" crossorigin="anonymous"></script>
+
+<div class="div1">
+    <p class="username"><b>{{user}}</b></p>
+    <img src="{{data.content}}"/>
+    <p class="info">Likes: {{data.likes}}    Shares: {{data.comments.length}}    Comments: {{data.shares}}</p>
 </div>
 
 <!--
@@ -28,7 +30,7 @@ interface post {
   post_id : string;
   user_id : string;
   content : string;
-  caption : string | null | undefined;
+  caption : string;
   likes : number;
   timeStamp : number;
   shares : number;

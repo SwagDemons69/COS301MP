@@ -34,7 +34,7 @@
 
           <ng-container *ngIf="(profile$ | async) as profile; else noProfile">
             <ion-card-subtitle class="username">
-              <ion-input [value]="profile.email"> </ion-input>
+              <ion-input [value]="profile.username"> </ion-input>
             </ion-card-subtitle>
           </ng-container>
 
@@ -67,14 +67,14 @@
 
     </ion-row>
     <ion-row>
-      <ng-container *ngIf="(posts$ | async) as post; else noProfile">
+      <ng-container *ngIf="(profile$ | async) as profile; else noProfile">
       <ion-card class="photos">
         <ion-card-content class="ion-text-center">
           <ion-content [fullscreen]="true" [scrollEvents]="true">
               <ion-grid [fixed]="true">
-                <ion-row class="ion-justify-content-center" *ngFor="let i of [1, 2, 3]">
+                <ion-row class="ion-justify-content-center" *ngFor="let i of [0, 1]">
                     <ion-col class="ion-col">
-                      <ion-img [src]="(post.content)" (click)="openBlip(post)" alt=""></ion-img>
+                      <ion-img [src]="(profile.posts?.[i]?.content)" (click)="openBlip(profile.posts?.[i],profile.username)" alt=""></ion-img>
                     </ion-col>
                 </ion-row>
               </ion-grid>

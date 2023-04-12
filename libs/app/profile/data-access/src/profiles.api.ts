@@ -36,6 +36,13 @@ export class ProfilesApi {
     return docData(docRef, { idField: 'id' });
   }
 
+  // allposts$(user_id : string){
+  //   const docRef = doc(this.firestore, 'profiles/${user_id}/posts').withConverter<post[]>({
+  //     fromFirestore: (snapshot) => {return snapshot.data() as post[]; },
+  //     toFirestore: (it: post[]) => it,})
+  //   return docData(docRef,{});
+  // }
+
 
 
 

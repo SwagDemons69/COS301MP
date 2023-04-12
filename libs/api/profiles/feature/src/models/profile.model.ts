@@ -1,5 +1,6 @@
 import { ProfileCreatedEvent, user_profile } from '@mp/api/profiles/util';
 import { AggregateRoot } from '@nestjs/cqrs';
+import { post } from '@mp/api/home/util'
 
 export class Profile extends AggregateRoot implements user_profile {
   constructor(
@@ -18,7 +19,7 @@ export class Profile extends AggregateRoot implements user_profile {
     public commentLikesLeft: number | null | undefined,
     public followers: string[] | null | undefined, //Array of UserId
     public following: string[] | null | undefined, //Array of UserId
-    public posts: string[] | null | undefined,  //Array of PostId
+    public posts: post[] | null | undefined,  //Array of PostId
     public blocked: string[] | null | undefined,
     public notifications: string[] | null | undefined
   ) {
