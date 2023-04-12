@@ -2,11 +2,11 @@
 import { Component } from '@angular/core';
 // import { NavController } from '@ionic/angular/providers/nav-controller';
 
-interface ChatMessage {
-  message: string;
-  sender: string;
-  timestamp: number;
-}
+// interface ChatMessage {
+//   message: string;
+//   sender: string;
+//   timestamp: number;
+// }
 
 @Component({
   selector: 'chat-page',
