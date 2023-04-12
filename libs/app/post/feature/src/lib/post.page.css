@@ -8,40 +8,11 @@
     left: 50%;
     transform: translate(-50%, -50%);
     border: 4px solid purple;
-    background-image: 
-    repeating-linear-gradient(
-      to right,
-      transparent,
-      transparent 5px,
-      white 5px,
-      white 10px
-    ),
-    repeating-linear-gradient(
-      to bottom,
-      transparent,
-      transparent 5px,
-      white 5px,
-      white 10px
-    );
+    
   }
 
 .centered-box:hover {
     animation: border-color-change 1s infinite;
-}
-
-@keyframes border-color-change {
-    0% {
-    border-color: purple;
-    }
-    33% {
-    border-color: red;
-    }
-    66% {
-    border-color: blue;
-    }
-    100% {
-    border-color: purple;
-    }
 }
   
 .upload-icon {
@@ -111,4 +82,11 @@ title{
   left: 50%;
   transform: translate(-50%, -50%);
   cursor: pointer;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
 }

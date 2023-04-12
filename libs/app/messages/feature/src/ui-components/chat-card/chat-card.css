@@ -54,4 +54,9 @@
     left: 50%;
     margin-top: auto;
   }
+
+  a{
+    text-decoration: none;
+    /* color: #000; */
+  }
   
