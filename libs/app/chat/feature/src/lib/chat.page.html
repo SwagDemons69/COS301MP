@@ -7,7 +7,7 @@
     </ion-toolbar>
   </ion-header>
   
-<ion-content>
+  <ion-content [fullscreen]="true" >
     
     <!-- <div class="top-bar">
       <button class="back-button">back</button>
@@ -37,7 +37,7 @@
       </div>
       
     </div> -->
-    <ion-content>     
+        
       <ion-list>
         <!-- <a href="../tabs/tab3"> -->
           <ion-item *ngFor="let message of messages" class="message" id="scroll">
@@ -60,7 +60,5 @@
         <input type="text" placeholder="Type your message...">
         <button> Send</button>
       </div>
-
-    </ion-content>
 
 </ion-content>

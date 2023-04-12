@@ -17,6 +17,7 @@
     /* space between the cards */
     border-spacing: 10px;
     margin-bottom: 16px;
+    background-color: black;
   }
   
   .left {

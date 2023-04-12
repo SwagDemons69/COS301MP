@@ -74,11 +74,20 @@
   bottom: 0; 
   vertical-align: middle 
 } */
+ion-header{
+  background-color: #000000;
+  color: #000000;
+  border-radius: 10px;
+}
+
+ion-content{
+  background-color: #000000;
+}
 
 title{
   font-size: 2em;
   font-weight: bold;
-  color: #000;
+  color: #ffffff;
   text-align: center;
   margin: 0.5em 0;
 }
@@ -87,10 +96,12 @@ ionic-list{
   margin: 0.5em 0;
   border: 2px solid #ff0000;
   border-radius: 10px;
+  background-color: #000000;
 }
 
 ionic-item{
   margin: 0.5em 0;
+  background-color: #000000;
 }
 
 .message{
@@ -105,12 +116,13 @@ ionic-item{
   max-width: 92%;
   padding: 0.5em 0.5em;
   margin-left: 0.5em;
+  color: #ffffff;
 }
 
 input{
   font-size: 1.5em;
   font-weight: 300px;
-  color: #000000;
+  color: #ffffff;
   text-align: initial;
   margin: 0.5em 0;
   border: 1px solid #fafafa;
@@ -149,15 +161,13 @@ button{
   border-radius: 3px;
   width: 80px;
   height: 30px;
+  font-size: medium;
 }
 
 body{
   background-color: #000000;
 }
 
-/* .message-input{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0.5em 0;
+/* *{
+  background-color: #000000;
 } */
