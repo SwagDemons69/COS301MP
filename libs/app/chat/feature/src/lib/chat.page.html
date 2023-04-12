@@ -7,27 +7,17 @@
     </ion-toolbar>
   </ion-header>
   
-  <ion-content>
-    <!-- <ion-list>
-      <ion-item *ngFor="let message of messages">
-        <ion-avatar slot="start">
-          <img [src]="message.avatar" />
-        </ion-avatar>
-        <ion-label>
-          <h2>{{ message.name }}</h2>
-          <p>{{ message.message }}</p>
-        </ion-label>
-      </ion-item>
-    </ion-list> -->
-    <div class="top-bar">
+<ion-content>
+    
+    <!-- <div class="top-bar">
       <button class="back-button">back</button>
       <div class="profile">
         <div class="profile-photo"></div>
         <p class="name">Leo</p>
       </div>
-    </div>
+    </div> -->
   
-    <div class="messages" >
+    <!-- <div class="messages" >
   
       <div class="message">
         <p>Hello, how are you?</p>
@@ -46,10 +36,31 @@
         <p>I'm doing well, thanks for asking. How about you?</p>
       </div>
       
-    </div>
-  
-    <div class="message-input">
-      <input type="text" placeholder="Type your message...">
-      <button>Send</button>
-    </div>
-  </ion-content>
+    </div> -->
+    <ion-content>     
+      <ion-list>
+        <!-- <a href="../tabs/tab3"> -->
+          <ion-item *ngFor="let message of messages" class="message" id="scroll">
+            <ion-avatar slot="start">
+              <!-- <img [src]="message.avatar" /> -->
+            </ion-avatar>
+            <ion-label>
+              <h2>{{ message.sender }}</h2>
+              <p>{{ message.message }}</p>
+            </ion-label>
+          </ion-item>
+        <!-- </a> -->
+        <!-- <div class="message-input">
+          <ion-input [(ngModel)]="newMessage" placeholder="Type your message..."></ion-input>
+          <ion-button color="primary" (click)="sendMessage(newMessage)">Send</ion-button>
+        </div> -->
+      </ion-list> 
+      
+      <div class="message-input">
+        <input type="text" placeholder="Type your message...">
+        <button> Send</button>
+      </div>
+
+    </ion-content>
+
+</ion-content>
