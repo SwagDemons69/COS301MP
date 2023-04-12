@@ -15,7 +15,8 @@
     justify-content: space-around;
     margin-top: auto;
     /* space between the cards */
-    
+    border-spacing: 10px;
+    margin-bottom: 16px;
   }
   
   .left {

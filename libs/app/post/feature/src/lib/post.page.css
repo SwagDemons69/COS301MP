@@ -102,3 +102,13 @@ input[type="submit"]
   border: 2px solid white;
   border-radius: 5px;
 }
+
+title{
+  font-size: 1.5rem;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
