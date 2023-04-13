@@ -34,6 +34,13 @@
         "semi": [
             "error",
             "always"
+        ],
+        "no-unreachable": [
+            "error"
+        ],
+        "no-unreachable-loop": [
+            "error",
+            "always"
         ]
     }
 }
