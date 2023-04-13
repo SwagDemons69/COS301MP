@@ -78,8 +78,12 @@
       "@mp/app/login/data-access": ["libs/app/login/data-access/src/index.ts"],
       "@mp/app/login/feature": ["libs/app/login/feature/src/index.ts"],
       "@mp/app/login/util": ["libs/app/login/util/src/index.ts"],
+      "@mp/app/messages/data-access": [
+        "libs/app/messages/data-access/src/index.ts"
+      ],
       "@mp/app/messages/feature": ["libs/app/messages/feature/src/index.ts"],
       "@mp/app/messages/ui": ["libs/app/messages/ui/src/index.ts"],
+      "@mp/app/messages/util": ["libs/app/messages/util/src/index.ts"],
       "@mp/app/notifications/data-access": [
         "libs/app/notifications/data-access/src/index.ts"
       ],
