@@ -1,20 +1,20 @@
 import {
-    CreateProfileCommand,
-    IProfile,
-    ProfileStatus
+  CreateProfileCommand, user_profile
 } from '@mp/api/profiles/util';
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
-import { Timestamp } from 'firebase-admin/firestore';
 import { Profile } from '../models';
+//import { user_profile } from '@mp/api/profiles/util';
 
 @CommandHandler(CreateProfileCommand)
 export class CreateProfileHandler
   implements ICommandHandler<CreateProfileCommand>
 {
-  constructor(private publisher: EventPublisher) {}
+  constructor(private publisher: EventPublisher) { }
 
   async execute(command: CreateProfileCommand) {
     console.log(`${CreateProfileHandler.name}`);
+    //console.log("@@@@@@@@@@@@@@@@@@@@@@@@")
+
 
     const request = command.request;
     const userId = request.user.id;
@@ -23,38 +23,31 @@ export class CreateProfileHandler
     const photoURL = request.user.photoURL;
     const cellphone = request.user.phoneNumber;
 
-    const data: IProfile = {
-      userId,
-      accountDetails: {
-        displayName,
-        email,
-        photoURL,
-        status: ProfileStatus.INCOMPLETE,
-      },
-      personalDetails: {
-        age: null,
-        gender: null,
-        ethnicity: null,
-        status: ProfileStatus.INCOMPLETE,
-      },
-      contactDetails: {
-        cellphone,
-        status: ProfileStatus.INCOMPLETE,
-      },
-      addressDetails: {
-        residentialArea: null,
-        workArea: null,
-        status: ProfileStatus.INCOMPLETE,
-      },
-      occupationDetails: {
-        householdIncome: null,
-        occupation: null,
-        status: ProfileStatus.INCOMPLETE,
-      },
-      status: ProfileStatus.INCOMPLETE,
-      created: Timestamp.fromDate(new Date()),
-    };
+    const data: user_profile = {
+      user_id: userId,
+      timeOfExpiry: 420,
+      notPublic: "false",
+      username: displayName,
+      name: displayName,
+      profilePicturePath: photoURL,
+      bio: "",
+      email: email,
+      password: "",
+      province: "",
+      likesLeft: 10,
+      dislikesLeft: 10,
+      commentLikesLeft: 10,
+      followers: [], //Array of user_id
+      following: [], //Array of user_id
+      blocked: [],    //Array of user_id
+      posts: [],  //Array of post_id
+      notifications: [] //Array of notification_id
+    }
+
+
     const profile = this.publisher.mergeObjectContext(Profile.fromData(data));
+    
+    //console.log(profile)
 
     profile.create();
     profile.commit();
