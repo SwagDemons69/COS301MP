@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Selector, State, Store } from '@ngxs/store';
+import { Selector, State, Store, Action, StateContext } from '@ngxs/store';
 import { DashboardApi } from './dashboard.api';
 import { post } from '@mp/api/home/util';
-
+import { SetPosts } from '@mp/app/dashboard/util';
 export interface DashboardStateModel {
   posts: post[]
 }
@@ -21,13 +21,37 @@ export class DashboardState {
     private readonly store: Store,
   ) { }
 
-
-
   @Selector()
   static posts(state: DashboardStateModel) {
     return state.posts;
   }
 
+  @Action(SetPosts)
+  async setPosts(ctx: StateContext<DashboardStateModel>) {
+    //console.log(this.dashboardApi.posts$());
+    this.dashboardApi.posts$().subscribe((posts) => {
+      console.log("Posts");
+      console.log(posts);
+      ctx.patchState({ posts: posts });
+    })
+  }
+
+
+    //return ctx.patchState({posts: [this.dashboardApi.post$("1")]});
+
+  // export interface post {
+  //   post_id : string;
+  //   user_id : string;
+  //   content : string;
+  //   caption : string;
+  //   likes : number;
+  //   timeStamp : number;
+  //   shares : number;
+  //   kronos : number;
+  //   comments : string[];
+  //   categories : string[];
+  //   taggedUsers : string[];
+  
   // @Action(Logout)
   // async logout(ctx: StateContext<ProfileStateModel>) {
   //   return ctx.dispatch(new AuthLogout());
@@ -240,3 +264,4 @@ export class DashboardState {
   //   }
   // }
 }
+
