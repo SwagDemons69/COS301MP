@@ -65,3 +65,17 @@ ion-avatar {
   color: #fff;
   text-align: center;
 }
+
+.editProfileForm {
+  margin-top: 2em;
+  padding: 0px 5%;
+  color: #606060;
+  font-size: 0.8em;
+}
+
+.editProfileForm ion-button {
+  color: black;
+  margin: auto;
+  margin-top: 3em;
+  max-width: 200px;
+}

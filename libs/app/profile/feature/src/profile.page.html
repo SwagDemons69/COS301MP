@@ -3,9 +3,21 @@
 
     <ion-title class="ion-align-items-center">
       Profile
-      <ng-container *ngIf="(profile$ | async) as profile;">
-      </ng-container>
+      <!-- <ng-container *ngIf="(profile$ | async) as profile;"> -->
+      <!-- </ng-container> -->
     </ion-title>
+
+    <ion-buttons slot="end">
+
+      <ion-button *ngIf="!isEditingProfile" (click)="isEditingProfile = true">
+        <ion-icon name="pencil" style="font-size: 1.5rem; color: white;"></ion-icon>
+      </ion-button>
+
+      <ion-button *ngIf="isEditingProfile" (click)="isEditingProfile = false">
+        <ion-icon name="close" style="font-size: 1.5rem; color: white;"></ion-icon>
+      </ion-button>
+
+    </ion-buttons>
 
   </ion-toolbar>
 </ion-header>
@@ -13,7 +25,7 @@
 
 <ion-content [fullscreen]="true">
 
-  <!-- A basic profile page with the users avatar at the top center, followed by their username, as well as a three-column table showing the no. of people they're following, number of posts, and number of followers -->
+<div *ngIf="!isEditingProfile" class="profile">
   <ion-grid>
     <ion-row>
 
@@ -130,5 +142,42 @@
       </ion-row>
     </ion-grid>
   </ng-template> -->
+</div>
+
+<div *ngIf="isEditingProfile">
+    <form [formGroup]="userForm" (ngSubmit)="updateProfile()" class="editProfileForm">
+    <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input type="text" formControlName="name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Username</ion-label>
+      <ion-input type="text" formControlName="username"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Bio</ion-label>
+      <ion-input type="text" formControlName="bio"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Province</ion-label>
+      <ion-input type="text" formControlName="province"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Not Public</ion-label>
+      <ion-checkbox slot="end" formControlName="notPublic"></ion-checkbox>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Profile Picture</ion-label>
+      <ion-input slot="end" type="file" formControlName="profilePicturePath"></ion-input>
+    </ion-item>
+
+    <ion-button type="submit" expand="block">Save</ion-button>
+  </form>
+</div>
 
 </ion-content>
