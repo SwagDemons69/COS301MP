@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import {
-  user_profile
+  edit_profile,
+  user_profile,
+  EditProfileRequest,
+  EditProfileResponse
 } from '@mp/api/profiles/util';
 import { AuthState } from '@mp/app/auth/data-access';
 import { Logout as AuthLogout } from '@mp/app/auth/util';
@@ -10,7 +13,8 @@ import {
   SetProfile,
   SubscribeToProfile,
   SubscribeToProfilePosts,
-  SetPosts
+  SetPosts,
+  EditProfile
 } from '@mp/app/profile/util';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { tap } from 'rxjs';
@@ -18,6 +22,7 @@ import { ProfilesApi } from './profiles.api';
 import produce from 'immer';
 import { post } from '@mp/api/home/util';
 import { doc } from '@firebase/firestore';
+import { user } from 'firebase-functions/v1/auth';
 
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -25,9 +30,15 @@ export interface ProfileStateModel {
   profile: user_profile | null;
 }
 
-// // eslint-disable-next-line @typescript-eslint/no-empty-interface
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface PostStateModel{
   posts : post | null
+}
+
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface EditProfileModel{
+  user_id : string;
+  profile : edit_profile | null;
 }
 
 @State<ProfileStateModel>({
@@ -60,6 +71,15 @@ export interface PostStateModel{
   name : 'posts',
   defaults: {
     posts : null
+  }
+})
+
+
+@State<EditProfileModel>({
+  name : 'EditProfile',
+  defaults: {
+    user_id : "",
+    profile : null
   }
 })
 
@@ -136,31 +156,55 @@ export class ProfileState {
     );
   }
 
+getUserId(){
+  const user = this.store.selectSnapshot(AuthState.user);
+  return user?.uid;
+}
+
+//Sort out user_id
+@Action(EditProfile)
+async EditProfile(ctx: StateContext<ProfileStateModel>){
+  //Get state
+  const state = ctx.getState().profile;
+  //Ensure state is set
+  if(state == undefined){
+    return;
+  }
+  try{
+      const user_id = state.user_id; 
+      const notPublic = "False";
+      const name = "Jake";
+      const username = "Jake.MILEHAM";
+      const profilePicturePath = "https://picsum.photos/id/19/300/300";
+      const bio = "This is a new bio";
+      const province = "Western Cape";
+
+      //Maybe some data validation
+
+      const request: EditProfileRequest = {
+        user_id : user_id,
+        profile : {
+          notPublic,
+          name,
+          username,
+          profilePicturePath,
+          bio,
+          province
+        }
+      };
+
+      const responseRef = await this.profileApi.EditProfile(request);
+      const response = responseRef.data;
+      //Do we want to update profile state
+      return ctx.dispatch(new SetProfile(response.profile));
+
+  }
+  catch (error) {
+       return ctx.dispatch(new SetError((error as Error).message));
+     }
+}
 
 
-
-  // @Action(LoadProfile)
-  // getFollowCount(): number {
-  //   const user = this.store.selectSnapshot(AuthState.user);
-  //   let profile2;
-  //   if (user) {
-  //     profile2 = this.profileApi.profile$(user?.uid);
-  //   }
-  //   let count = 2;
-  //   profile2?.forEach((el) => {
-  //     if (el.followers) {
-  //       count = el.followers.length;
-  //     }
-  //   })
-  //   return count;
-  // }
-
-
-
-
-  // function getFollowingCount() {
-  //   return profile?.following?.length;
-  // }
 
 
 

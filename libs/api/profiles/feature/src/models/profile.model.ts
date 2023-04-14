@@ -1,4 +1,4 @@
-import { ProfileCreatedEvent, user_profile } from '@mp/api/profiles/util';
+import { edit_profile, ProfileCreatedEvent, user_profile, EditProfileEvent } from '@mp/api/profiles/util';
 import { AggregateRoot } from '@nestjs/cqrs';
 import { post } from '@mp/api/home/util'
 
@@ -53,6 +53,26 @@ export class Profile extends AggregateRoot implements user_profile {
   create() {
     this.apply(new ProfileCreatedEvent(this.toJSON()));
   }
+
+  edit(){
+    this.apply(new EditProfileEvent(this.toJSON()));
+  }
+
+  EditProfile(profile : edit_profile) {
+    this.notPublic = (this.notPublic == profile.notPublic) ? this.notPublic : profile.notPublic;
+    this.name = (this.name == profile.name) ? this.name : profile.name;
+    this.username = (this.username == profile.username) ? this.username : profile.username;
+    this.profilePicturePath = (this.profilePicturePath == profile.profilePicturePath) ? this.profilePicturePath : this.profilePicturePath;
+    this.bio = (this.bio == profile.bio) ? this.bio : profile.bio;
+    this.province = (this.province == profile.province) ? this.province : profile.province;
+  }
+
+  // notPublic : string;
+  // name : string | null;
+  // username : string | null;
+  // profilePicturePath : string | null | undefined;
+  // bio : string | null | undefined;
+  // province : string | null | undefined;
 
   // updateAddressDetails(addressDetails: IAddressDetails) {
   //   if (!this.addressDetails) this.addressDetails = {};

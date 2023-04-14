@@ -6,3 +6,4 @@ export * from './personal-details.interface';
 export * from './profile.interface';
 
 export * from './user-profile.interface'
+export * from './edit-profile.interface'

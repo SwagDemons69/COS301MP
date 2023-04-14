@@ -22,6 +22,12 @@ export class SetPosts {
   constructor(public readonly posts: post | null) { }
 }
 
+export class EditProfile {
+  static readonly type = '[Profile] EditProfile';
+}
+
+//========================================================
+
 export class UpdateAccountDetails {
   static readonly type = '[Profile] UpdateAccountDetails';
 }

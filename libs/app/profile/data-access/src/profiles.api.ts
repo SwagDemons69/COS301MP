@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { doc, docData, Firestore } from '@angular/fire/firestore';
 import { Functions, httpsCallable } from '@angular/fire/functions';
-import { user_profile } from '@mp/api/profiles/util';
+import { EditProfileRequest, EditProfileResponse, user_profile } from '@mp/api/profiles/util';
 import { post } from '@mp/api/home/util'
 
 const pId = "1";
@@ -43,8 +43,9 @@ export class ProfilesApi {
   //   return docData(docRef,{});
   // }
 
-
-
+//==========================================================================
+// CLOUD FUNCTIONS
+//==========================================================================
 
   // async updateAccountDetails(request: IUpdateAccountDetailsRequest) {
   //   return await httpsCallable<
@@ -55,4 +56,8 @@ export class ProfilesApi {
   //     'updateAccountDetails'
   //   )(request);
   // }
+
+  async EditProfile(request: EditProfileRequest){
+    return await httpsCallable<EditProfileRequest, EditProfileResponse>(this.functions, 'EditProfile')(request);
+  }
 }
