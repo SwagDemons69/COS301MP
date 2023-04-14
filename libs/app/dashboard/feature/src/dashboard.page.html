@@ -53,9 +53,9 @@
 
       <ion-slide *ngFor="let item of recommended">
         <ion-col>
-          <ion-img [src]="item.img"></ion-img>
+          <ion-img [src]="item.content"></ion-img>
           <div class="overlay">
-            <ion-label>{{item.title}}</ion-label>
+            <ion-label>{{item.caption}}</ion-label>
             <div class="reactions">
               likes | comments
             </div>
