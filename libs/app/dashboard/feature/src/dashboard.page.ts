@@ -3,8 +3,11 @@ import { user_profile } from '@mp/api/profiles/util';
 import { ProfileState } from '@mp/app/profile/data-access';
 import { ModalController } from '@ionic/angular';
 import { BlipComponent } from '@mp/app//shared-components';
-import { Select } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
+import { DashboardState} from '@mp/app/dashboard/data-access';
+import { SetPosts } from '@mp/app/dashboard/util';
+import { post } from '@mp/api/home/util';
 
 @Component({
   selector: 'ms-dashboard-page',
@@ -12,22 +15,32 @@ import { Observable } from 'rxjs';
   styleUrls: ['./dashboard.page.scss'],
 })
 
+
 export class DashboardPage {
   @Select(ProfileState.profile) profile$!: Observable<user_profile | null>;
-
+  @Select(DashboardState.posts) posts$!: Observable<post[]>;
+  
   constructor (
     private renderer: Renderer2,
     private modalController: ModalController,
+    private store : Store,
   ) {}
 
   // A bunch of dummy recommended posts
   recommended = [
-    { title: "Touching grass for the first time", desc: "Deleted my reddit account to try out this new Twenty4 thing", img: "https://picsum.photos/id/18/300/300" },
-    { title: "Wow look at this cool tree I found", desc: "fren.", img: "https://picsum.photos/id/19/300/300" },
-    { title: "My desk setup! Much wow very neat :)", desc: "Just kidding, this is a stock photo I stole. Please give me time immabouta die :'(", img: "https://picsum.photos/id/20/300/300" },
-    { title: "Selling my shoes as an NFT", desc: "Originally I wanted to sell the actual shoes, but then I realized I like them too much so instead I'll just sell this picture of them which is a very nice picture if I do say so myself. $400", img: "https://picsum.photos/id/21/300/300" },
-    { title: "A girl asked what my favorite position was", desc: "I told her, 'CEO'", img: "https://picsum.photos/id/22/300/300" },
-    { title: "I ONLY KNOW HOW TO USE CHOPSTICKS", desc: "PLEASE HELP I NEED TO USE ONE OF THESE OR IM GONNA STARVE TO DEATH", img: "https://picsum.photos/id/23/300/300" }
+    { 
+      post_id : "0",
+      user_id : "5",
+      content : "https://picsum.photos/id/19/300/300",
+      caption : "Test Post 0",
+      likes : 69,
+      timeStamp : 13452824,
+      shares : 0,
+      kronos : 0,
+      comments : ["Comment"],
+      categories : ["Category"],
+      taggedUsers : ["User"]
+    },
   ]
 
   // A bunch of dummy trending posts
@@ -51,6 +64,15 @@ export class DashboardPage {
     { title: "I'm a 20 year old virgin", desc: "I'm a 20 year old virgin", img: "https://picsum.photos/id/24/300/300" }, // Copilot generated this one lmao
   ]
 
+  async setDashboardPosts() {
+    this.store.dispatch(new SetPosts());
+    this.posts$.subscribe((posts) => {
+      for (let i = 0; i < posts.length; i++) {
+        this.recommended.push(posts[i]);
+      }
+    })
+  }
+
   isSearchbarVisible = false;
   // deathTime = 3132079200
   deathTime = Date.now() / 1000 + 10;
@@ -65,8 +87,11 @@ export class DashboardPage {
     return arr[Math.floor(Math.random() * arr.length)];
   }
 
+
   // Convert a unix timestamp to a kronos string
   displayKronos(timeDelta : number) {
+    
+    
     if (timeDelta < 0)
     {
       return ([
@@ -79,7 +104,9 @@ export class DashboardPage {
         this.pickRandom([ "DEAD", "LATE", ]),
       ])[Math.floor(Math.abs(timeDelta))%7] + "💀";
     }
-
+    
+    this.setDashboardPosts();
+    
     const [years, days, hours, minutes, seconds] = [
       Math.floor( timeDelta / (60*60*24*365)),
       Math.floor((timeDelta % (60*60*24*365)) / 86400),
@@ -114,7 +141,6 @@ export class DashboardPage {
   }
 
   onContentScroll(event: any) {
-    console.log(event.detail.scrollTop);
     if (event.detail.scrollTop > 220) {
       this.renderer.setStyle(document.querySelector(".barKronos"), 'opacity', '1');
     }
@@ -139,10 +165,8 @@ export class DashboardPage {
       }
     });
 
-    modal.onDidDismiss().then((data) => {
-      console.log(data);
-    });
-
     return await modal.present();
   }
 }
+
+
