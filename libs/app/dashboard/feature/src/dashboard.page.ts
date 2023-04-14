@@ -1,4 +1,4 @@
-import { Component, Renderer2 } from '@angular/core';
+import { Component, OnInit, Renderer2 } from '@angular/core';
 import { user_profile } from '@mp/api/profiles/util';
 import { ProfileState } from '@mp/app/profile/data-access';
 import { ModalController } from '@ionic/angular';
@@ -14,9 +14,7 @@ import { post } from '@mp/api/home/util';
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.scss'],
 })
-
-
-export class DashboardPage {
+export class DashboardPage implements OnInit {
   @Select(ProfileState.profile) profile$!: Observable<user_profile | null>;
   @Select(DashboardState.posts) posts$!: Observable<post[]>;
   
@@ -25,6 +23,10 @@ export class DashboardPage {
     private modalController: ModalController,
     private store : Store,
   ) {}
+
+  ngOnInit() {
+    this.setDashboardPosts();
+  }
 
   // A bunch of dummy recommended posts
   recommended = [
@@ -67,9 +69,7 @@ export class DashboardPage {
   async setDashboardPosts() {
     this.store.dispatch(new SetPosts());
     this.posts$.subscribe((posts) => {
-      for (let i = 0; i < posts.length; i++) {
-        this.recommended.push(posts[i]);
-      }
+      this.recommended = posts;
     })
   }
 
@@ -87,10 +87,8 @@ export class DashboardPage {
     return arr[Math.floor(Math.random() * arr.length)];
   }
 
-
   // Convert a unix timestamp to a kronos string
   displayKronos(timeDelta : number) {
-    
     
     if (timeDelta < 0)
     {
@@ -104,8 +102,6 @@ export class DashboardPage {
         this.pickRandom([ "DEAD", "LATE", ]),
       ])[Math.floor(Math.abs(timeDelta))%7] + "💀";
     }
-    
-    this.setDashboardPosts();
     
     const [years, days, hours, minutes, seconds] = [
       Math.floor( timeDelta / (60*60*24*365)),
@@ -167,6 +163,8 @@ export class DashboardPage {
 
     return await modal.present();
   }
+
+ 
+ 
+ 
 }
-
-
