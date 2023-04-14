@@ -1,4 +1,4 @@
-import { user_profile } from '@mp/api/profiles/util';
+import { edit_profile, user_profile } from '@mp/api/profiles/util';
 import { post } from '@mp/api/home/util';
 export class Logout {
   static readonly type = '[Profile] Logout';
@@ -24,6 +24,11 @@ export class SetPosts {
 
 export class EditProfile {
   static readonly type = '[Profile] EditProfile';
+}
+
+export class InitForm {
+  static readonly type = '[Profile] InitForm';
+  constructor(public readonly form: edit_profile | null) { }
 }
 
 //========================================================

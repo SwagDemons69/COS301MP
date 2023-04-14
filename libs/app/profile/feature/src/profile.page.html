@@ -105,15 +105,7 @@
     <ms-profile-occupation-details-component></ms-profile-occupation-details-component> -->
   <!-- </ng-container> -->
 
-  <ng-template #noProfile>
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ngx-skeleton-loader count="5" [theme]="{height: '150px'}" appearance="line"></ngx-skeleton-loader>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ng-template>
+ 
 
   <!-- <ion-header collapse="condense">
     <ion-toolbar>
@@ -143,27 +135,28 @@
     </ion-grid>
   </ng-template> -->
 </div>
-
+<ng-container *ngIf="(form$ | async) as form;">
 <div *ngIf="isEditingProfile">
-    <form [formGroup]="userForm" (ngSubmit)="updateProfile()" class="editProfileForm">
+    <form [formGroup]="userForm" ngxsForm="form" (ngSubmit)="updateProfile()" class="editProfileForm">
     <ion-item>
       <ion-label position="floating">Name</ion-label>
-      <ion-input type="text" formControlName="name"></ion-input>
+      <ion-input type="text" formControlName="name" ></ion-input>
+      <!-- <ion-input [value]="(profile.email)"></ion-input> -->
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Username</ion-label>
-      <ion-input type="text" formControlName="username"></ion-input>
+      <ion-input type="text" formControlName="username" ></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Bio</ion-label>
-      <ion-input type="text" formControlName="bio"></ion-input>
+      <ion-input type="text" formControlName="bio" ></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Province</ion-label>
-      <ion-input type="text" formControlName="province"></ion-input>
+      <ion-input type="text" formControlName="province" ></ion-input>
     </ion-item>
 
     <ion-item>
@@ -171,13 +164,36 @@
       <ion-checkbox slot="end" formControlName="notPublic"></ion-checkbox>
     </ion-item>
 
+    <!-- <ion-item>
+      <ion-label position="floating">Profile Picture</ion-label>
+      <ion-input slot="end" type="file" formControlName="profilePicturePath" [placeholder]="(profile.profilePicturePath)"></ion-input>
+    </ion-item> -->
+
+    <!-- While storage is not set we use images from internet so we will use link instead of file based images -->
     <ion-item>
       <ion-label position="floating">Profile Picture</ion-label>
-      <ion-input slot="end" type="file" formControlName="profilePicturePath"></ion-input>
+      <ion-input slot="end" type="text" formControlName="profilePicturePath" ></ion-input>
     </ion-item>
 
     <ion-button type="submit" expand="block">Save</ion-button>
   </form>
 </div>
+</ng-container>
+
+
+
+
+<!-- No profile -->
+<ng-template #noProfile>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ngx-skeleton-loader count="5" [theme]="{height: '150px'}" appearance="line"></ngx-skeleton-loader>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ng-template>
+
+
 
 </ion-content>

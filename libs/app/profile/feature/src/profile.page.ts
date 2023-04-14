@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { user_profile } from '@mp/api/profiles/util';
+import { edit_profile, user_profile } from '@mp/api/profiles/util';
 import { AlertController, ModalController } from '@ionic/angular';
 import { BlipComponent } from '@mp/app//shared-components';
 import { ProfileState } from '@mp/app/profile/data-access';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { post } from '@mp/api/home/util';
+import { Store } from '@ngxs/store';
+import { EditProfile, InitForm } from '@mp/app/profile/util';
+import { UpdateFormValue } from '@ngxs/form-plugin';
 
 @Component({
   selector: 'ms-profile-page',
@@ -15,12 +18,13 @@ import { post } from '@mp/api/home/util';
 })
 export class ProfilePage {
   @Select(ProfileState.profile) profile$!: Observable<user_profile | null>;
-  @Select(ProfileState.posts) posts$!: Observable<post | null>;
+  @Select(ProfileState.form) form$!: Observable<edit_profile | null>;
   userForm: FormGroup;
 
   constructor(
     private modalController: ModalController,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private readonly store : Store
   )
   {
     this.userForm = this.formBuilder.group({
@@ -55,9 +59,25 @@ export class ProfilePage {
     return await modal.present();
   }
 
+  
+
   updateProfile() {
     alert(JSON.stringify(this.userForm.value, null, 2));
     this.isEditingProfile = false;
+  
+    const JSONFORM : edit_profile = JSON.parse(JSON.stringify(this.userForm.value, null, 2));
+
+    const newForm: edit_profile = {
+      notPublic : JSONFORM.notPublic,
+      name : JSONFORM.name,
+      username : JSONFORM.username,
+      profilePicturePath : JSONFORM.profilePicturePath,
+      bio : JSONFORM.bio,
+      province : JSONFORM.province
+    };
+
+    this.store.dispatch(new InitForm(newForm));
+    this.store.dispatch(new EditProfile());
   }
 
 }

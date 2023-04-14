@@ -14,7 +14,8 @@ import {
   SubscribeToProfile,
   SubscribeToProfilePosts,
   SetPosts,
-  EditProfile
+  EditProfile,
+  InitForm
 } from '@mp/app/profile/util';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { tap } from 'rxjs';
@@ -28,6 +29,7 @@ import { user } from 'firebase-functions/v1/auth';
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ProfileStateModel {
   profile: user_profile | null;
+  form : edit_profile | null;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -63,6 +65,14 @@ export interface EditProfileModel{
       blocked: [],    //Array of user_id
       posts: [],  //Array of post_id
       notifications: [], //Array of notification_id
+    },
+    form : {
+      notPublic : "",
+      name : "",
+      username : "",
+      profilePicturePath : "",
+      bio : "",
+      province : ""
     }
   }
 })
@@ -100,6 +110,11 @@ export class ProfileState {
   }
 
   @Selector()
+  static form(state : ProfileStateModel){
+    return state.form;
+  }
+
+  @Selector()
   static posts(state : PostStateModel){
     return state.posts;
   }
@@ -113,9 +128,17 @@ export class ProfileState {
   subscribeToProfile(ctx: StateContext<ProfileStateModel>) {
     const user = this.store.selectSnapshot(AuthState.user);
     if (!user) return ctx.dispatch(new SetError('User not set'));
-    //console.log("SUBSCRIBE TO PROFILE")
-    //console.log("USER UID: " + user.uid)
-    console.log(this.profileApi.profile$(user.uid));
+    const defaultForm: edit_profile = {
+      notPublic : "",
+      name : "",
+      username : "",
+      profilePicturePath : "",
+      bio : "",
+      province : ""
+    };
+
+    ctx.dispatch(new InitForm(defaultForm))
+
     return this.profileApi
       .profile$(user.uid)
       .pipe(tap((profile: user_profile) => ctx.dispatch(new SetProfile(profile))));
@@ -133,13 +156,24 @@ export class ProfileState {
     );
   }
 
+  @Action(InitForm)
+  InitForm(ctx: StateContext<ProfileStateModel>, { form }: InitForm){
+  console.log("INIT FORM")
+  console.log(ctx.getState().form)
+  return ctx.setState(
+    produce((draft) => {
+      draft.form=form;
+    })
+  );
+  }
+
+
 //============================================================================================
 
   @Action(SubscribeToProfilePosts)
   subscribeToProfilePosts(ctx: StateContext<PostStateModel>) {
     const user = this.store.selectSnapshot(AuthState.user);
     if (!user) return ctx.dispatch(new SetError('User not set'));
-    console.log("SUBSCRIBE PROFILE POST")
     
     return this.profileApi
       .posts$(user.uid).pipe(tap((posts : post) => ctx.dispatch(new SetPosts(posts))));
@@ -166,18 +200,22 @@ getUserId(){
 async EditProfile(ctx: StateContext<ProfileStateModel>){
   //Get state
   const state = ctx.getState().profile;
+  const formState = ctx.getState().form;
   //Ensure state is set
-  if(state == undefined){
+  if(state == undefined || formState == undefined){
     return;
   }
   try{
+
+  
+      //const formState = ctx.getState().form;
       const user_id = state.user_id; 
-      const notPublic = "False";
-      const name = "Jake";
-      const username = "Jake.MILEHAM";
+      const notPublic = formState.notPublic;
+      const name = formState.name;
+      const username = formState.username;
       const profilePicturePath = "https://picsum.photos/id/19/300/300";
-      const bio = "This is a new bio";
-      const province = "Western Cape";
+      const bio = formState.bio;
+      const province = formState.province;
 
       //Maybe some data validation
 
@@ -192,7 +230,6 @@ async EditProfile(ctx: StateContext<ProfileStateModel>){
           province
         }
       };
-
       const responseRef = await this.profileApi.EditProfile(request);
       const response = responseRef.data;
       //Do we want to update profile state
