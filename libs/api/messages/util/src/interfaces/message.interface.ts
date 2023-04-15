@@ -6,5 +6,5 @@ export interface IMessage{
     receiverId : number | null | undefined; 
     message_type : string | null | undefined;
     message_timestamp: Timestamp | null | undefined;
-    message_content: string | null | undefined;
+    message_caption: string | null | undefined;
 }

@@ -5,6 +5,6 @@ import { UsersModule } from '@mp/api/users/feature';
 import { Module } from '@nestjs/common';
 
 @Module({
-  imports: [AuthModule, EventstoreModule, ProfilesModule, UsersModule],
+  imports: [AuthModule, EventstoreModule, ProfilesModule, UsersModule]
 })
 export class CoreModule {}
