@@ -41,7 +41,8 @@ export class CreateProfileHandler
       following: [], //Array of user_id
       blocked: [],    //Array of user_id
       posts: [],  //Array of post_id
-      notifications: [] //Array of notification_id
+      notifications: [], //Array of notification_id
+      followRequests: [] //Array of user_id
     }
 
 
