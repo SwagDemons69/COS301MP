@@ -41,6 +41,7 @@ ion-content{
 ion-item {
   margin-bottom: 10px; 
   border: 2px solid #ffffff;
+  border-radius: 10px;
 }
 
 .upload-button {
@@ -66,7 +67,19 @@ ion-label {
   cursor: pointer;
 }
 
-ion-input {
+p{
+  font-size: 1rem;
+  /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
+  color: white;
+  position: relative;
+  cursor: pointer;
+  margin: auto 0;
+  font-weight: 400;
+  left: 5px;
+
+}
+
+/* ion-input {
   font-size: 1rem;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   color: white;
@@ -75,7 +88,9 @@ ion-input {
   left: 50%;
   cursor: pointer; 
   text-align: left;
-}
+  font-weight: 400;
+  min-height: 40px;
+} */
 
 
 .camera-icon-container {
@@ -93,4 +108,3 @@ ion-icon {
   font-size: 2rem;
   color: #ffffff;
 }
-
