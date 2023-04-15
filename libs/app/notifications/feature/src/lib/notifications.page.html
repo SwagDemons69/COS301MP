@@ -6,7 +6,7 @@
 </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<!-- <ion-content [fullscreen]="true">
   
     <div class="notification" *ngFor="let notification of notifications">
       <div class="notification-icon">
@@ -19,4 +19,15 @@
         <i class="fa fa-times"></i>
       </div>
     </div>    
+</ion-content> -->
+<ion-content [fullscreen]="true">
+  
+  <div class="notification" *ngFor="let notification of notifications">
+    <div class="notification-icon">
+      <ion-icon name="{{ notification.icon }}"></ion-icon>
+    </div>
+    <div class="notification-message">
+      <p>{{ notification.message }}</p>
+    </div>
+  </div>    
 </ion-content>

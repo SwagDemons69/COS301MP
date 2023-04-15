@@ -9,12 +9,12 @@ import { Component } from '@angular/core';
 })
 export class NotificationsPage {
   notifications = [
-    { icon: 'fa-info-circle', message: 'Prof G has disliked your post.' },
-    { icon: 'fa-info-circle', message: 'Dr Marshal has liked your post.' },
-    { icon: 'fa-info-circle', message: 'Dr Anna has donated 1hr to you.' },
-    { icon: 'fa-info-circle', message: 'You have 0.5hrs left.' },
-    { icon: 'fa-info-circle', message: 'Dr Nills has liked your post.' },
-    { icon: 'fa-info-circle', message: 'Dr A has liked your post.' },
-    { icon: 'fa-info-circle', message: 'Welcome to Twenty4.' }
+    { icon: 'notifications-outline', message: 'Prof G has disliked your post.' },
+    { icon: 'notifications-outline', message: 'Dr Marshal has liked your post.' },
+    { icon: 'notifications-outline', message: 'Dr Anna has donated 1hr to you.' },
+    { icon: 'notifications-outline', message: 'You have 0.5hrs left.' },
+    { icon: 'notifications-outline', message: 'Dr Nills has liked your post.' },
+    { icon: 'notifications-outline', message: 'Dr A has liked your post.' },
+    { icon: 'notifications-outline', message: 'Welcome to Twenty4.' }
   ];
 }
