@@ -6,20 +6,20 @@
     </ion-toolbar>
     </ion-header>
     
-    <ion-content [fullscreen]="true">
-    
-        <ion-content>
-            <div class="centered-box">
-    
-                <div id="FileUpload">
-                    <form>
-                        <input type="file" name="file" id="file" class="inputfile" accept="image/*, video/*" required/><br><br>
-                        <input type="text" placeholder="Caption" /><br><br>
-                        <input type="submit" value="Upload" />
-                    </form>
-                </div>
+<ion-content [fullscreen]="true">
+
+    <ion-content>
+        <div class="centered-box">
+
+            <div id="FileUpload">
+                <form [formGroup]="postForm" (ngSubmit)="uploadPost()">
+                    <input type="file" formControlName="file" accept="image/*, video/*" required (change)="onFileChange($event)"/><br><br>
+                    <input type="text" formControlName="caption" placeholder="Write your post caption" /><br><br>
+                    <input type="submit" value="Upload"/>
+                </form>
             </div>
-        </ion-content>
+        </div>
+    </ion-content>
     
     </ion-content>  
     

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { doc, docData, Firestore } from '@angular/fire/firestore';
+import { doc, docData, Firestore , collection} from '@angular/fire/firestore';
 import { Functions, httpsCallable } from '@angular/fire/functions';
 import { EditProfileRequest, EditProfileResponse, user_profile } from '@mp/api/profiles/util';
 import { post } from '@mp/api/home/util'
@@ -34,6 +34,10 @@ export class ProfilesApi {
       fromFirestore: (snapshot) => { return snapshot.data() as post; },
       toFirestore: (it: post) => it,});
     return docData(docRef, { idField: 'id' });
+  }
+
+  someFunction(){
+    const col = collection(this.firestore, `profiles`);
   }
 
   // allposts$(user_id : string){

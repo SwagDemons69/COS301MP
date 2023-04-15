@@ -67,7 +67,7 @@ const generatePosts = async () => {
     admin.app().delete();
   }
 };
-const user_id = "mJA0Ac4JDPavNRVrybEZjHb6hqcG";
+const user_id = "bae7f9popp8IrbE2effYuG5dQcQe";
 const addPosts = async () => {
   try{
         const posts = [
