@@ -1,96 +1,4 @@
-.centered-box {
-    max-width: 100%;
-    width: 96%;
-    max-height: 95%;
-    background-color: transparent;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border: 4px solid purple;
-    
-  }
-
-.centered-box:hover {
-    animation: border-color-change 1s infinite;
-}
-  
-.upload-icon {
-    font-size: 5rem;
-    color: white;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    cursor: pointer;
-}
-
-.upload-icon:hover {
-    color: purple;
-}
-
-.upload-text {
-    font-size: 1.5rem;
-    color: rgb(149, 136, 136);
-    position: absolute;
-    top: 60%;
-    left: 49%;
-    transform: translate(-50%, -50%);
-    cursor: pointer;
-}
-
-input[type="file"] 
-{
-  margin-left: 27%;
-  margin-top: 10%;
-  margin-right: auto;
-  margin-bottom: auto;
-  background-color: gray;
-  /* border: 2px solid white;
-  border-radius: 5px; */
-}
-
-input[type="text"] 
-{
-  margin-left: 25%;
-  margin-top: relative;
-  margin-right: auto;
-  margin-bottom: auto;
-  height: 70px;
-  width: 40%;
-  border: 2px solid white;
-  border-radius: 5px;
-  resize: vertical;
-  background-color: gray;
-  color: white;
-
-}
-
-input[type="text"]:focus
-{
-  outline: none;
-  border: 2px solid purple;
-}
-
-/* input placeholder */
-input[type="text"]::placeholder
-{
-  color: white;
-}
-
-input[type="submit"]
-{
-  margin-left: 30%;
-  margin-top: relative;
-  margin-right: auto;
-  margin-bottom: auto;
-  border: 2px solid white;
-  border-radius: 5px;
-  background-color: gray;
-  color: white;
-}
-
-title{
+ion-title{
   font-size: 1.5rem;
   color: white;
   position: absolute;
@@ -98,6 +6,12 @@ title{
   left: 50%;
   transform: translate(-50%, -50%);
   cursor: pointer;
+  margin: auto 0;
+
+}
+
+ion-content{
+  background-color: #000000;
 }
 
 *{
@@ -105,4 +19,76 @@ title{
   padding: 0;
   box-sizing: border-box;
   overflow: hidden;
+  
+}
+
+.top-section {
+  height: 50%;
+  background-color: #f5f5f5; 
+  padding: 20px;
+}
+
+.upload-button {
+  margin-top: 10px; 
+}
+
+.bottom-section {
+  height: 50%;
+  padding: 20px; 
+
+}
+
+ion-item {
+  margin-bottom: 10px; 
+}
+
+.upload-button {
+  margin-top: 10px;
+  margin: auto 0;
+  color: #ffffff;
+  background-color: #000000;
+  border: 2px solid #ffffff;
+  border-radius: 10px;
+  width: 20%;
+  height: 5%;
+  position: absolute;
+  left: 36%;
+  font-size: medium;
+  top: 90;
+
+}
+
+ion-label {
+  font-size: 1.5rem;
+  color: white;
+  position: absolute;
+  cursor: pointer;
+}
+
+ion-input {
+  font-size: 1rem;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  cursor: pointer; 
+  text-align: left;
+}
+
+
+.camera-icon-container {
+  position: absolute;
+  bottom: 51%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #000000;
+  padding: 20px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+}
+
+ion-icon {
+  font-size: 2rem;
+  color: #ffffff;
 }

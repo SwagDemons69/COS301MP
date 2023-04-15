@@ -10,5 +10,5 @@ import { ChatCard } from '../ui-components/chat-card';
   styleUrls: ['./messages.page.css']
 })
 export class MessagesPage {
-
+  
 }

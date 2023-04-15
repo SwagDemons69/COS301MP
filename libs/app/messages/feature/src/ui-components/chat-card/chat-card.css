@@ -19,6 +19,10 @@
     margin-bottom: 16px;
     background-color: black;
   }
+
+  *{
+    background-color: black;
+  }
   
   .left {
     margin-right: 16px;
