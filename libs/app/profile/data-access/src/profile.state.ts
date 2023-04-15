@@ -52,6 +52,7 @@ export interface PostStateModel{
       blocked: [],    //Array of user_id
       posts: [],  //Array of post_id
       notifications: [], //Array of notification_id
+      followRequests: [], //Array of user_id
     }
   }
 })
