@@ -1,5 +1,5 @@
 export interface IContact{
-    userId: number| null | undefined;
+    user_id: number| null | undefined;
     name: string|null| undefined;
     profilePicturePath: string |null |undefined;
 }

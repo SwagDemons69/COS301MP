@@ -1,6 +1,6 @@
 import { IContact } from "./contact.interface";
 
 export interface IContacts{
-    contactsFollowing: IContact [] | null | undefined;
-    contactsFollowers: IContact [] | null | undefined;
+    following: IContact [] | null | undefined;
+    follwoers: IContact [] | null | undefined;
 }

@@ -1,10 +1,8 @@
 import { Timestamp } from "firebase-admin/firestore";
 
 export interface IMessage{
-    messageID : number | null | undefined;
-    senderId : number | null | undefined;
-    receiverId : number | null | undefined; 
-    message_type : string | null | undefined;
-    message_timestamp: Timestamp | null | undefined;
-    message_caption: string | null | undefined;
+    message_id : number | null | undefined;
+    from : number | null | undefined; 
+    timeStamp: Timestamp | null | undefined;
+    caption: string | null | undefined;
 }

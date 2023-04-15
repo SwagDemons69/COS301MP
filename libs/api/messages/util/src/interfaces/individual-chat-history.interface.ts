@@ -1,8 +1,8 @@
 import { IMessage } from "./message.interface";
 
 export interface IIndividualChatHistory {
-    flag: string | null | undefined;
+    chat_id: string;
+    chatName: string;
+    users: string[];
     messages: IMessage [];
-    chatID: number | null | undefined;
-    chatName: string | null | undefined;
 }
