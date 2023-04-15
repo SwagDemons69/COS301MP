@@ -57,6 +57,13 @@
       ],
       "@mp/api/profiles/feature": ["libs/api/profiles/feature/src/index.ts"],
       "@mp/api/profiles/util": ["libs/api/profiles/util/src/index.ts"],
+      "@mp/api/search-modal/data-access": [
+        "libs/api/search-modal/data-access/src/index.ts"
+      ],
+      "@mp/api/search-modal/feature": [
+        "libs/api/search-modal/feature/src/index.ts"
+      ],
+      "@mp/api/search-modal/util": ["libs/api/search-modal/util/src/index.ts"],
       "@mp/api/users/data-access": ["libs/api/users/data-access/src/index.ts"],
       "@mp/api/users/feature": ["libs/api/users/feature/src/index.ts"],
       "@mp/api/users/util": ["libs/api/users/util/src/index.ts"],
@@ -119,6 +126,13 @@
       "@mp/app/reset/data-access": ["libs/app/reset/data-access/src/index.ts"],
       "@mp/app/reset/feature": ["libs/app/reset/feature/src/index.ts"],
       "@mp/app/reset/util": ["libs/app/reset/util/src/index.ts"],
+      "@mp/app/search-modal/data-access": [
+        "libs/app/search-modal/data-access/src/index.ts"
+      ],
+      "@mp/app/search-modal/feature": [
+        "libs/app/search-modal/feature/src/index.ts"
+      ],
+      "@mp/app/search-modal/util": ["libs/app/search-modal/util/src/index.ts"],
       "@mp/app/tos/feature": ["libs/app/tos/feature/src/index.ts"],
       "@mp/app/updates/data-access": [
         "libs/app/updates/data-access/src/index.ts"
