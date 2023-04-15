@@ -4,7 +4,7 @@ import { user_profile } from "@mp/api/profiles/util" ;
 import * as admin from "firebase-admin";
 
 @Injectable()
-export class MessageRepository {
+export class MessagesRepository {
     // private chatConverter = {
     //   toFirestore(chat: IIndividualChatHistory): admin.firestore.DocumentData {
     //     return {
@@ -103,7 +103,6 @@ export class MessageRepository {
           .get();
         return chatDocs.docs.map(doc => doc.data());
       }
-
       async sendMessage(message: IMessage, chat: IIndividualChatHistory){
         const db = admin.firestore();
         // Add the message to the chat's messages array
