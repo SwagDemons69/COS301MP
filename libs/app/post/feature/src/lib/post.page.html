@@ -13,20 +13,28 @@
             
         <div class="bottom-section">
             <form>
-                <div class="camera-icon-container">
-                    <ion-icon name="camera"></ion-icon>
-                </div>
+                
+                <!-- <ion-icon name="camera"></ion-icon>
+                <input type="file" accept="image/*" capture="camera" class="camera-input"> -->
+                <label for="file-upload">
+                    <div class="camera-icon-container">
+                        <ion-icon name="camera"></ion-icon>
+                    </div>
+                </label>
+                <input id="file-upload" type="file" accept="image/*" style="display:none;" required>
+                
+                <p>Caption:</p>
+                <ion-item>                 
+                    <ion-label>insert caption</ion-label>
+                    <ion-input type="text"></ion-input>
+                </ion-item>
 
-                <ion-item>
-                    <ion-label position="floating">Caption</ion-label>
+                <p>Categories(#s):</p>
+                <ion-item>    
+                    <ion-label>insert categories(#s)</ion-label>
                     <ion-input type="text"></ion-input>
                 </ion-item>
-                
-                <ion-item>
-                    <ion-label position="floating">Categories (#s)</ion-label>
-                    <ion-input type="text"></ion-input>
-                </ion-item>
-                
+
                 <button ion-button block color="primary" class="upload-button">POST</button>
             </form>          
         </div>             

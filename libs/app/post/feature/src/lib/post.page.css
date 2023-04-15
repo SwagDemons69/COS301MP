@@ -40,6 +40,7 @@ ion-content{
 
 ion-item {
   margin-bottom: 10px; 
+  border: 2px solid #ffffff;
 }
 
 .upload-button {
@@ -92,3 +93,4 @@ ion-icon {
   font-size: 2rem;
   color: #ffffff;
 }
+
