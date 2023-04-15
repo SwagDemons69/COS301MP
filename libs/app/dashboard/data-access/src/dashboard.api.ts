@@ -3,7 +3,8 @@ import { doc, docData, Firestore } from '@angular/fire/firestore';
 import { Functions } from '@angular/fire/functions';
 import { post } from '@mp/api/home/util';
 import { map, Observable } from 'rxjs';
-import { from } from 'rxjs';  
+import { from } from 'rxjs';
+import { user_profile } from '@mp/api/profiles/util';
 import 'firebase/compat/database';
 import 'firebase/firestore';
 import { collection, getDocs } from 'firebase/firestore';@Injectable()
@@ -15,9 +16,96 @@ export class DashboardApi {
     private readonly functions: Functions
   ) {}
 
-  post$(id: string) {
+  profile$(id: string) {
+    const docRef = doc(
+      this.firestore,
+      `profiles/${id}`
+    ).withConverter<user_profile>({
+      fromFirestore: (snapshot) => {
+        return snapshot.data() as user_profile;
+      },
+      toFirestore: (it: user_profile) => it,
+    });
+    return docData(docRef, { idField: 'id' });
+  }
+
+  postsFromProfiles$(users: string[]): post[] {
+    const profileRef = collection(this.firestore, 'profiles');
+    const selectedProfiles = from(getDocs(profileRef)).pipe(
+      map((querySnapshot) => querySnapshot.docs
+        .filter((doc) => users.includes(doc.id))
+        .map((doc) => ({
+        user_id : doc.id,
+        timeOfExpiry: doc.data()['timeOfExpiry'],
+        notPublic : doc.data()['notPublic'],
+        username : doc.data()['username'],
+        name : doc.data()['name'],
+        profilePicturePath : doc.data()['profilePicturePath'],
+        bio : doc.data()['bio'],
+        email : doc.data()['email'],
+        password : doc.data()['password'],
+        province : doc.data()['province'],
+        likesLeft : doc.data()['likesLeft'],
+        dislikesLeft : doc.data()['dislikesLeft'],
+        commentLikesLeft :  doc.data()['commentLikesLeft'],
+        followers :  doc.data()['followers'],
+        following : doc.data()['following'],
+        posts : doc.data()['posts'],
+        blocked : doc.data()['blocked'],
+        notifications : doc.data()['notifications'],
+        followRequests : doc.data()['followRequests']
+      })))
+    ) as Observable<user_profile[]>;
     
 
+    let posts : post[];
+    posts = [];
+    posts = [];
+    selectedProfiles.subscribe((profiles) => {
+      profiles.forEach((profile) => {
+        if(profile.posts != null) {
+          profile.posts.forEach((post) => {
+            posts.push(post);
+            console.log(post);
+          })
+        }
+      })
+    });
+
+
+    return posts;
+  };
+
+  profiles$(users : string[]): Observable<user_profile[]> {
+    const profileRef = collection(this.firestore, 'profiles');
+    return from(getDocs(profileRef)).pipe(
+      map((querySnapshot) => querySnapshot.docs
+        .filter((doc) => users.includes(doc.id))
+        .map((doc) => ({
+        user_id : doc.id,
+        timeOfExpiry: doc.data()['timeOfExpiry'],
+        notPublic : doc.data()['notPublic'],
+        username : doc.data()['username'],
+        name : doc.data()['name'],
+        profilePicturePath : doc.data()['profilePicturePath'],
+        bio : doc.data()['bio'],
+        email : doc.data()['email'],
+        password : doc.data()['password'],
+        province : doc.data()['province'],
+        likesLeft : doc.data()['likesLeft'],
+        dislikesLeft : doc.data()['dislikesLeft'],
+        commentLikesLeft :  doc.data()['commentLikesLeft'],
+        followers :  doc.data()['followers'],
+        following : doc.data()['following'],
+        posts : doc.data()['posts'],
+        blocked : doc.data()['blocked'],
+        notifications : doc.data()['notifications'],
+        followRequests : doc.data()['followRequests']
+      })))
+    );
+  }
+
+  post$(id: string) {
     const docRef = doc(
       this.firestore,
       `posts/${id}`
