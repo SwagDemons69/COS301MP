@@ -28,7 +28,12 @@ export class DashboardState {
 
   @Action(SetPosts)
   async setPosts(ctx: StateContext<DashboardStateModel>) {
-    //console.log(this.dashboardApi.posts$());
+    this.dashboardApi.profiles$(["10398140"]).subscribe((profiles) => {
+      console.log("Profile"); 
+      console.log(profiles);
+      console.log(profiles[0].posts);
+    });
+    console.log(this.dashboardApi.postsFromProfiles$(["10398140","8971892","4512312342"]));
     this.dashboardApi.posts$().subscribe((posts) => {
       console.log("Posts");
       console.log(posts);
