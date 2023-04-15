@@ -65,6 +65,7 @@ export interface EditProfileModel{
       blocked: [],    //Array of user_id
       posts: [],  //Array of post_id
       notifications: [], //Array of notification_id
+      chats: [], //Array of chats the user has taken part in
     },
     form : {
       notPublic : "",
