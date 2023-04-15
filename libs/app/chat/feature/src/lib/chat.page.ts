@@ -1,13 +1,9 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { Component } from '@angular/core';
-// import { NavController } from '@ionic/angular/providers/nav-controller';
+// import { Component } from '@angular/core';
+import { NavController } from '@ionic/angular/providers/nav-controller';
+import { Component, ViewChild } from '@angular/core';
+import { IonContent } from '@ionic/angular';
 
-interface ChatMessage {
-  message: string;
-  sender: string;
-  timestamp: number;
-  
-}
 
 @Component({
   selector: 'chat-page',
@@ -16,19 +12,27 @@ interface ChatMessage {
 })
 export class ChatPage {
 
-  messages: ChatMessage[] = [
-    { message: 'Hello', sender: 'user', timestamp: 123456789 },
-    { message: 'Hi', sender: 'bot', timestamp: 123456789 },
-    { message: 'How are you?', sender: 'user', timestamp: 123456789 },
-    { message: 'I am fine', sender: 'bot', timestamp: 123456789 },
-    { message: 'What about you?', sender: 'user', timestamp: 123456789 },
-    { message: 'I am fine too', sender: 'bot', timestamp: 123456789 },
-    { message: 'What do you do?', sender: 'user', timestamp: 123456789 },
-    { message: 'I am a bot', sender: 'bot', timestamp: 123456789 },
-  ]
-  sendMessage(message: string) {
-    this.messages.push({ message, sender: 'user', timestamp: Date.now() });
+  @ViewChild(IonContent, { static: true })
+  content!: IonContent;
+  @ViewChild('messageList', { static: true }) messageList: any;
+
+  messages: { text: string; sent: boolean; sender: string }[] = [];
+  newMessage = '';
+  sender = 'Me'; 
+  receiver = 'John';
+
+  text1 = this.messages.push({ text: "Hi, it's John", sent: false, sender: this.receiver });
+  text2 = this.messages.push({ text: "Hi John, how are you?", sent: true, sender: this.sender });
+
+  displayReceiver() : string { 
+    return this.receiver; //displays John in ion-title
   }
 
-  newMessage = '';
+  sendMessage(): void {
+    if (this.newMessage.trim() !== '') {
+      this.messages.push({ text: this.newMessage.trim(), sent: true, sender: this.sender });
+      this.newMessage = '';
+    } 
+  }
+  
 }

@@ -18,11 +18,12 @@
                         <ion-icon name="camera"></ion-icon>
                     </div>
                 </label>
-                <input id="file-upload" type="file" accept="image/*" style="display:none;" required>
+                <input id="file-upload" type="file" accept="image/*" style="display:none;">
                 
                 <p>Caption:</p><br>
-                <ion-item>                 
+                <ion-item>  
                     <ion-textarea id="caption"></ion-textarea>
+                    <!-- <ion-textarea id="caption" (keydown.enter)="onEnterPress($event)"></ion-textarea> -->
                 </ion-item>
 
                 <p>Categories(#s):</p><br>
@@ -31,6 +32,7 @@
                 </ion-item>
 
                 <button ion-button block color="primary" class="upload-button">POST</button>
+                
             </form>          
         </div>             
     </ion-content>
