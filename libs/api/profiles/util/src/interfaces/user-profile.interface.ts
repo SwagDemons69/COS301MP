@@ -19,6 +19,7 @@ export interface user_profile {
     posts : post[] | null | undefined;  //Array of Posts
     blocked : string[] | null | undefined;
     notifications : string[] | null | undefined;
+    followRequests : string[] | null | undefined;
 };
 
 
