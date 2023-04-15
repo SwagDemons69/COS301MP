@@ -21,7 +21,8 @@ export class Profile extends AggregateRoot implements user_profile {
     public following: string[] | null | undefined, //Array of UserId
     public posts: post[] | null | undefined,  //Array of PostId
     public blocked: string[] | null | undefined,
-    public notifications: string[] | null | undefined
+    public notifications: string[] | null | undefined,
+    public followRequests: string[] | null | undefined
   ) {
     super();
   }
@@ -45,7 +46,8 @@ export class Profile extends AggregateRoot implements user_profile {
       profile.following,
       profile.posts,
       profile.blocked,
-      profile.notifications
+      profile.notifications,
+      profile.followRequests
     );
     return instance;
   }
@@ -251,7 +253,8 @@ export class Profile extends AggregateRoot implements user_profile {
       following: this.following,
       posts: this.posts,
       blocked: this.blocked,
-      notifications: this.notifications
+      notifications: this.notifications,
+      followRequests: this.followRequests
     };
   }
 }
