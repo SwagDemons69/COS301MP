@@ -3,8 +3,9 @@ import { IContacts } from "./contacts.interface";
 
 export interface IMessages {
     //contacts
-    userId: string;
+    userIds: string[] | null | undefined;
     contacts?: IContacts | null | undefined;
     //chathistory
     chatsHistory?: IChats | null | undefined;
+    chatID: string;
 }

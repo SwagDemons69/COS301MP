@@ -40,13 +40,15 @@ const generateProfiles = async () => {
         // }
 };
 
-
+// Change userID as is necessary,
+// you will get an error when trying to run this script if you do not change
+// userID
 const generatePosts = async () => {
   try{
     const posts = [
     { id : "1",
       post_id : "1",
-      user_id : "Sg1j9YlEbEbeOeg1Of3Un79W4Lj7",
+      user_id : "aXuq3eeEGAx6IP9uXNCZ3752rzbK",
       content : "https://picsum.photos/id/19/300/300",
       caption : "Test Post",
       likes : 69,
@@ -67,7 +69,7 @@ const generatePosts = async () => {
     admin.app().delete();
   }
 };
-const user_id = "mJA0Ac4JDPavNRVrybEZjHb6hqcG";
+const user_id = "aXuq3eeEGAx6IP9uXNCZ3752rzbK";
 const addPosts = async () => {
   try{
         const posts = [
