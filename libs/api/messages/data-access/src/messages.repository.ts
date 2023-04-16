@@ -5,61 +5,7 @@ import * as admin from "firebase-admin";
 
 @Injectable()
 export class MessagesRepository {
-    // private chatConverter = {
-    //   toFirestore(chat: IIndividualChatHistory): admin.firestore.DocumentData {
-    //     return {
-    //       flag: chat.flag,
-    //       messages: chat.messages.map((message) => this.messageConverter.toFirestore(message)),
-    //       chatID: chat.chatID,
-    //       chatName: chat.chatName,
-    //     };
-    //   },
-    //   fromFirestore(snapshot: admin.firestore.DocumentData): IIndividualChatHistory {
-    //     const data = snapshot['chat'].data();
-    //     const messages: IMessage[] = [];
-    //     if (data.messages) {
-    //       for (const message of data.messages) {
-    //         messages.push({
-    //             message_id: message.message_id,
-    //             from: message.from,
-    //         timeStamp: message.timeStamp,
-    //             caption: message.caption,
-    //         });
-    //       }
-    //     }
-    //     return {
-    //       flag: data.flag,
-    //       messages: messages,
-    //       chatID: data.chatID,
-    //       chatName: data.chatName,
-    //     };
-    //   }
-      
-    // };
-  
-    // private messageConverter = {
-    //   toFirestore(message: IMessage): FirebaseFirestore.DocumentData {
-    //     return {
-    //       message_id: message.message_id,
-    //       from: message.from,
-    //       timeStamp: message.timeStamp,
-    //       caption: message.caption,
-    //     };
-    //   },
-    //   fromFirestore(
-    //     snapshot: admin.firestore.DocumentData //needs to change to a valid query
-    //   ): IMessage {
-    //     const data = snapshot['message'].data();
-    //     return {
-    //         message_id: data.message_id,
-    //         from: data.from,
-    //         timeStamp: data.timeStamp,
-    //         caption: data.caption,
-    //     };
-    //   },
-    // };
-
-    //to find the user whose messages need to be loaded
+  // helper function used to find a specific user
     async findUser(user_id : string) {
         console.log("USER ID: " + user_id)
         return await admin

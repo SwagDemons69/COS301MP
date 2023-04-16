@@ -1,14 +1,14 @@
 import { MessagesRepository } from '@mp/api/messages/data-access';
-import { MessageSentEvent } from '@mp/api/messages/util';
+import { SendMessageEvent } from '@mp/api/messages/util';
 import { EventsHandler, IEventHandler } from '@nestjs/cqrs';
 
-@EventsHandler(MessageSentEvent)
-export class MessageSentHandler implements IEventHandler<MessageSentEvent>
+@EventsHandler(SendMessageEvent)
+export class MessageSentHandler implements IEventHandler<SendMessageEvent>
 {
     constructor(private readonly repository: MessagesRepository) {}
 
-    async handle(event: MessageSentEvent) {
+    async handle(event: SendMessageEvent) {
         console.log(`${MessageSentHandler.name}`);
-        await this.repository.sendMessage(event.messages);
+       // await this.repository.sendMessage();
     }
 }
