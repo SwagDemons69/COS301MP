@@ -1,5 +1,5 @@
 import { IIndividualChatHistory } from "../interfaces";
 
-export interface IGetChatHistory{
+export interface IGetChatHistoryRequest{
     chatHistory: IIndividualChatHistory;
 }

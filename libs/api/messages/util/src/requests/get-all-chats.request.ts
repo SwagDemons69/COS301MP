@@ -1,5 +1,5 @@
 import { IChats } from "../interfaces";
 
-export interface IGetAllChats{
+export interface IGetAllChatsRequest{
     allChats: IChats;
 }

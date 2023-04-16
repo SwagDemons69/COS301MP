@@ -1,4 +1,4 @@
-import { IChats, IIndividualChatHistory, IMessages, IMessage, IContacts} from "@mp/api/messages/util";
+import { IChats, IIndividualChatHistory, IMessage, IContacts} from "@mp/api/messages/util";
 import { Injectable } from "@nestjs/common";
 import { user_profile } from "@mp/api/profiles/util" ;
 import * as admin from "firebase-admin";
@@ -95,11 +95,12 @@ export class MessagesRepository {
             }))
           : null;
         return {
+          user_id: user_id,
           following: followingContacts,
           followers: followerContacts
         };
       }
-      
+
 }
     
    

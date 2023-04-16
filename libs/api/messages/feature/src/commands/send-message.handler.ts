@@ -1,6 +1,5 @@
 import {
-    SendMessageCommand,
-    IMessages
+    SendMessageCommand
 } from '@mp/api/messages/util';
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
 import { Timestamp } from 'firebase-admin/firestore';
@@ -14,6 +13,5 @@ export class SendMessageHandler implements ICommandHandler<SendMessageCommand>
     async execute(command: SendMessageCommand) {
         console.log(`${SendMessageHandler.name}`);
 
-        //todo
     }
 }

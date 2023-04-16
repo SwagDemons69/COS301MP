@@ -1,7 +1,4 @@
-import {
-    GetChatHistoryCommand,
-    IMessages,
-} from '@mp/api/messages/util';
+import { GetChatHistoryCommand } from '@mp/api/messages/util';
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
 import { Timestamp } from 'firebase-admin/firestore';
 import { Messages } from '../models';
@@ -13,7 +10,6 @@ export class GetChatHistoryHandler implements ICommandHandler<GetChatHistoryComm
 
     async execute(command: GetChatHistoryCommand) {
         console.log(`${GetChatHistoryHandler.name}`);
-
-        //todo
+    
     }
 }

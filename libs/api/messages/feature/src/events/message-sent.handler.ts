@@ -9,6 +9,7 @@ export class MessageSentHandler implements IEventHandler<SendMessageEvent>
 
     async handle(event: SendMessageEvent) {
         console.log(`${MessageSentHandler.name}`);
-       // await this.repository.sendMessage();
+        await this.repository.sendMessage(event.message, event.chat);
+        // If messages load twice
     }
 }

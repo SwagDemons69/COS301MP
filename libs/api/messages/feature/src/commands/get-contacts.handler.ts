@@ -1,11 +1,6 @@
-import {
-    GetContactsCommand,
-    IMessages,
-} from '@mp/api/messages/util';
+import { GetContactsCommand } from '@mp/api/messages/util';
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
 import { Timestamp } from 'firebase-admin/firestore';
-import { Messages } from '../models';
-
 @CommandHandler(GetContactsCommand)
 export class GetContactsHandler implements ICommandHandler<GetContactsCommand>
 {
@@ -13,7 +8,9 @@ export class GetContactsHandler implements ICommandHandler<GetContactsCommand>
 
     async execute(command: GetContactsCommand) {
         console.log(`${GetContactsHandler.name}`);
-
-        //todo
+        const request = command.request;
+        const user_id =  command.request.contacts.user_id;
+        //const following = 
+        //TO-DO
     }
 }
