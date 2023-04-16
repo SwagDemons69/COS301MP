@@ -1,4 +1,4 @@
-// export * from "./messages.interface";
+export * from "./messages.interface";
 export * from "./message.interface";
 export * from "./contacts.interface";
 export * from "./chats.interface";
