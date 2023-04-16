@@ -1,50 +1,28 @@
 import { Injectable } from '@angular/core';
-import { getStorage, ref , uploadBytes, connectStorageEmulator} from '@angular/fire/storage';
 import { initializeApp } from '@firebase/app';
-
-
+import { AddPhotoRequest, AddPhotoResponse } from '@mp/api/post/util';
+import { Functions, httpsCallable } from '@angular/fire/functions';
 import * as admin from 'firebase-admin';
-
-
-//const exampleRef = ref(storage,'images/space.jpg');
-//can use .root or .parent on example ref to navigate
-
-//Each ref has: fullPath, name, bucket
-//fullPath 
-//- 1 - 1024 bytes UTF-8
-//- no \n\r
-//- avoid using special characters
-
-
+//import { FirebaseStorage , ref, uploadBytes} from '@angular/fire/storage';
+//import { AngularFireStorageModule  } from '@angular/fire/storage';
+import {
+    connectStorageEmulator,
+    getStorage,
+    provideStorage,
+    ref,
+    uploadBytes
+} from '@angular/fire/storage';
 
 @Injectable()
 export class PostApi {
-//   constructor(){}
+    constructor(private readonly functions: Functions) {}
 
-uploadPost(file: File, fileName : string){
-    // admin.initializeApp({ projectId: 'twenty4-f9f8e' });
-    //const app = admin.app();
-   
-    // const storage = getStorage();
-    // //connectStorageEmulator(storage, "localhost", 5006);
-    // const photosRef = ref(storage,'photos');
-    // //const new
-    // const videosRef = ref(storage,'videos');
-    
+    async UploadPostToCloudStorage(request: AddPhotoRequest){
+        return await httpsCallable<AddPhotoRequest, AddPhotoResponse>(this.functions, 'AddPostToCloudStorage')(request);
+    }
 
-    // console.log(photosRef.bucket)//Correct bucket
-    // uploadBytes(photosRef, file).then((snapshot) =>{
-    //     console.log(fileName + " Uploaded!");
-    //     //console.log(snapshot.ref.fullPath)
-    // }).catch((error) => {
-    //     console.log(error);
-    // });
-    
-}
-// uploadPost(file: File, fileName : string){
-//     const storage = app.storage();
-
-// }
-
+    // async UploadPostToFirestore(){
+    //     return await httpsCallable<
+    // }
 
 }

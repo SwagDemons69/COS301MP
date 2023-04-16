@@ -70,6 +70,7 @@
     "ngx-moment": "^6.0.2",
     "ngx-skeleton-loader": "^7.0.0",
     "node-fetch": "^2.6.1",
+    "node-polyfill-webpack-plugin": "^2.0.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
