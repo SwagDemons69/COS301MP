@@ -1,4 +1,3 @@
-import { IMessageSource } from "@nestjs/cqrs";
 import { IChats, IContacts, IMessages } from "@mp/api/messages/util";
 import { AggregateRoot } from "@nestjs/cqrs";
 
