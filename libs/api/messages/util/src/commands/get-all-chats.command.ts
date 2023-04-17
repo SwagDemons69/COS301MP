@@ -1,5 +1,5 @@
-import { IGetAllChatsRequest } from "../requests";
+import { GetAllChatsRequest } from "../requests";
 
 export class GetAllChatsCommand {
-  constructor(public readonly request: IGetAllChatsRequest) {}
+  constructor(public readonly request: GetAllChatsRequest) {}
 }

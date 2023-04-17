@@ -1,5 +1,5 @@
-import { IGetContactsRequest } from '../requests';
+import { GetContactsRequest } from '../requests';
 
 export class GetContactsCommand {
-    constructor(public readonly request: IGetContactsRequest) {}
+    constructor(public readonly request: GetContactsRequest) {}
 }

@@ -1,5 +1,5 @@
-import { IGetChatHistoryRequest } from '../requests';
+import { GetChatHistoryRequest } from '../requests';
 
 export class GetChatHistoryCommand {
-    constructor(public readonly request: IGetChatHistoryRequest) {}
+    constructor(public readonly request: GetChatHistoryRequest) {}
 }

@@ -1,5 +1,5 @@
 import { message } from "../interfaces";
 
-export interface ISendMessageResponse {
+export interface SendMessageResponse {
     message: message;
 }

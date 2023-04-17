@@ -1,5 +1,5 @@
-import { ISendMessageRequest } from '../requests';
+import { SendMessageRequest } from '../requests';
 
 export class SendMessageCommand {
-    constructor(public readonly request: ISendMessageRequest) {}
+    constructor(public readonly request: SendMessageRequest) {}
 }

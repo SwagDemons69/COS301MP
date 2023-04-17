@@ -1,5 +1,5 @@
 import { contacts } from "../interfaces";
 
-export interface IGetContactsResponse{
+export interface GetContactsResponse{
     contacts: contacts;
 }
