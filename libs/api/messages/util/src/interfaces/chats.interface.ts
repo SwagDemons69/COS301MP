@@ -1,6 +1,5 @@
-import { IIndividualChatHistory } from "./individual-chat-history.interface";
+import { chat } from "./individual-chat-history.interface";
 
-export interface IChats {
-    chatIDs: string [];
-    chats: IIndividualChatHistory[];
+export interface chats {
+    chats: chat[];
 }

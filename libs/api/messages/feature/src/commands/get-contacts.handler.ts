@@ -19,7 +19,9 @@ export class GetContactsHandler implements ICommandHandler<GetContactsCommand>
             followers: followers,
         }
 
-        //const contactModel = this.publisher.mergeObjectContext(Messages.fromData(data));
-        //TO-DO
+        // const contactModel = this.publisher.mergeObjectContext(Messages.fromData());
+        //TO-DO Contacts model
+        //TO-DO Chats model
+        //TO-DO Messages model (if necessary)
     }
 }

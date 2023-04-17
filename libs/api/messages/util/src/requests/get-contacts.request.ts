@@ -1,5 +1,5 @@
-import { IContacts } from "../interfaces";
+import { contacts } from "../interfaces";
 
 export interface IGetContactsRequest{
-    contacts: IContacts;
+    contacts: contacts;
 }

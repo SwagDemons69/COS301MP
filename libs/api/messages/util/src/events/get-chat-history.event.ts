@@ -1,5 +1,5 @@
-import { IIndividualChatHistory } from "../interfaces";
+import { chat } from "../interfaces";
 
 export class GetChatHistoryEvent{
-	constructor(public readonly chatHistory : IIndividualChatHistory ){}
+	constructor(public readonly chatHistory : chat ){}
 }

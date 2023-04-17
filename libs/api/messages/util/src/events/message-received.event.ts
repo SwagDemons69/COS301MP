@@ -1,5 +1,5 @@
-import { IMessage } from "../interfaces";
+import { message } from "../interfaces";
 
 export class MessageReceivedEvent {
-    constructor(public readonly messages: IMessage) {}
+    constructor(public readonly messages: message) {}
 }

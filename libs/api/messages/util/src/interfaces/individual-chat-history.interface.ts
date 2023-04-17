@@ -1,8 +1,8 @@
-import { IMessage } from "./message.interface";
+import { message } from "./message.interface";
 
-export interface IIndividualChatHistory {
+export interface chat {
     chat_id: string;
     chatName: string;
-    users: string[];
-    messages: IMessage [];
+    receiver: string;
+    messages: message[];
 }

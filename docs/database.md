@@ -159,7 +159,22 @@ Any field value written as /\*\<tableName>\*/ indicates a reference to the table
     "following": [/*User*/],
     "blocked" : [/*User*/],
     "notifications": [/*Notification*/],
-	"chats": [/*Chat*/],
+	"chats": [
+            {
+                "chat_id": 3523,
+                "chatName": "Name of the Chat",
+                "receiver" :121212 //UserID,
+                "messages" : [
+                {
+                    "message_id": 235233,
+                    "from" : /*User*/,
+                    "timeStamp" : 129348768213,
+                    // caption and post are optional, but at least one is always necessary.
+                    "caption" : "I love you <3",
+                }   
+                ],
+            }
+        ]
 }
 
 ```
@@ -268,23 +283,7 @@ Any field value written as /\*\<tableName>\*/ indicates a reference to the table
 
 ```json
 
-"chats" : [
-    {
-        "chat_id": 3523,
-        "chatName": "Name of the Chat",
-        "users" : [/*User*/],
-        "messages" : [
-            {
-                "message_id": 235233,
-                "from" : /*User*/,
-                "timeStamp" : 129348768213,
-                // caption and post are optional, but at least one is always necessary.
-                "caption" : "I love you <3",
-                "post" : /*Post*/,
-            }
-        ],
-    }
-]
+
 
 ```
 
