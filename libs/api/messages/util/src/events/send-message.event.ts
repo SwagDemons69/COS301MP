@@ -1,5 +1,5 @@
-import { IIndividualChatHistory, IMessage } from "../interfaces";
+import { chat, message } from "../interfaces";
 
 export class SendMessageEvent{
-	constructor(public readonly message: IMessage, public  chat: IIndividualChatHistory){}
+	constructor(public readonly message: message, public  chat: chat){}
 }

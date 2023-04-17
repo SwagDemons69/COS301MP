@@ -1,5 +1,5 @@
-import { IContacts } from "../interfaces";
+import { contacts } from "../interfaces";
 
 export class GetContactsEvent{
-	constructor(public readonly contacts: IContacts){}
+	constructor(public readonly contacts: contacts){}
 }

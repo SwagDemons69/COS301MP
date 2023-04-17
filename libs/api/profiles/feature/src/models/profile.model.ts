@@ -1,6 +1,7 @@
 import { edit_profile, ProfileCreatedEvent, user_profile, EditProfileEvent } from '@mp/api/profiles/util';
 import { AggregateRoot } from '@nestjs/cqrs';
 import { post } from '@mp/api/home/util'
+import { chat } from '@mp/api/messages/util';
 
 export class Profile extends AggregateRoot implements user_profile {
   constructor(
@@ -22,7 +23,7 @@ export class Profile extends AggregateRoot implements user_profile {
     public posts: post[] | null | undefined,  //Array of PostId
     public blocked: string[] | null | undefined,
     public notifications: string[] | null | undefined,
-    public chats: string[] | null |undefined
+    public chats: chat[] | null |undefined
   ) {
     super();
   }

@@ -1,5 +1,5 @@
-import { IMessage } from "../interfaces";
+import { message } from "../interfaces";
 
 export interface ISendMessageRequest {
-    message: IMessage;
+    message: message;
 }

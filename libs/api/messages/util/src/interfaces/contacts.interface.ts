@@ -1,7 +1,7 @@
-import { IContact } from "./contact.interface";
+import { contact } from "./contact.interface";
 
-export interface IContacts{
+export interface contacts{
     user_id: string;
-    following: IContact [] | null | undefined;
-    followers: IContact [] | null | undefined;
+    following: contact [] | null | undefined;
+    followers: contact [] | null | undefined;
 }
