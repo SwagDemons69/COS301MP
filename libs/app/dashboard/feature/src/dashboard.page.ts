@@ -43,7 +43,7 @@ export class DashboardPage implements OnInit {
       user_id : "5",
       content : "https://picsum.photos/id/19/300/300",
       caption : "Test Post 0",
-      likes : 69,
+      likes : ["1"],
       timeStamp : 13452824,
       shares : 0,
       kronos : 0,
@@ -59,7 +59,7 @@ export class DashboardPage implements OnInit {
     user_id : "5",
     content : "https://picsum.photos/id/19/300/300",
     caption : "Test Post 0",
-    likes : 69,
+    likes : ["1"],
     timeStamp : 13452824,
     shares : 0,
     kronos : 0,
@@ -87,13 +87,13 @@ export class DashboardPage implements OnInit {
   async getRecommended() {
     const posts = await firstValueFrom(this.recommended_posts$);
     this.recommended = posts;
-    this.recommended.sort((a, b) => (a.likes < b.likes ? 1 : -1));
+    this.recommended.sort((a, b) => (a.timeStamp < b.timeStamp ? 1 : -1));
   }
 
   async getTrending() {
     const posts = await firstValueFrom(this.trending_posts$);
     this.trending = posts;
-    this.trending.sort((a, b) => (a.likes < b.likes ? 1 : -1));
+    this.trending.sort((a, b) => (a.likes.length < b.likes.length ? 1 : -1));
   }
 
   isSearchbarVisible = false;

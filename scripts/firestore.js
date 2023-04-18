@@ -1,6 +1,7 @@
 //================================================
 // IMPORTS && SETUP
-//================================================
+//================================================ 
+
 const admin = require('firebase-admin');
 
 //create connection to firebase app
@@ -64,7 +65,7 @@ const addAllData = async () => {
               timestamp: 63216132236,
               content: "C:\\images\\dodgeCoinMeme.jpg",
               caption: "Crypto go brrrrrr",
-              likes: 5231123,
+              likes: ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "","", "", "", "", "", "", "", ""],
               shares : 23432,
               kronos : 56734,
               comments: ["I love my mom"],
@@ -96,7 +97,7 @@ const addAllData = async () => {
         following: ["10398140", "6893798251", "4512312342"],
         followRequests: ["2346745234532"],
         chat : ["22424"],
-        blocked: ["123456fokjou"]
+        blocked: ["123456"]
       },
       {
         user_id: "4512312342",
@@ -119,7 +120,7 @@ const addAllData = async () => {
                 timestamp: 3489056708362,
                 content: "C:\\images\\screenshot456.jpg",
                 caption: "Can this code just compileeeeeeee?!?!?!?!",
-                likes: 542353,
+                likes: ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",],
                 shares : 5672,
                 kronos : 6973,
                 comments: [
@@ -128,7 +129,7 @@ const addAllData = async () => {
                         kronos : 6313,
                         text: "I understand the pain!!!",
                         user: 8971892,
-                        likes: 234,
+                        likes: 12876,
                         comments: []
                     },
                     {
@@ -136,21 +137,21 @@ const addAllData = async () => {
                         kronos : 643,
                         text: "You've got it love!",
                         user: 2346745234532,
-                        likes: 6,
+                        likes: 879,
                         comments: [
                             {   
                                 child_comment_id: 698768719324,
                                 kronos : 5,
                                 text: "<3",
                                 user: 4512312342,
-                                likes: 2
+                                likes: 97
                             },
                             {   
                                 child_comment_id: 28971230568,
                                 kronos : 2,
                                 text: "<3",
                                 user: 2346745234532,
-                                likes: 0
+                                likes: 980
                             }
                         ]
                     }
@@ -193,7 +194,7 @@ const addAllData = async () => {
                 timestamp: 7243127612,
                 content: "C:\\images\\img3521361.jpg",
                 caption: "Grabbed coffee with the best people ever!",
-                likes: 7898,
+                likes: ["", "", "", "", "", "", "", "", "", ""],
                 shares : 2547,
                 kronos : 980896,
                 comments: [
@@ -202,14 +203,14 @@ const addAllData = async () => {
                         kronos : 632,
                         text: "We must make this a regular thing",
                         user: 152346348,
-                        likes: 67,
+                        likes: 5456,
                         comments: [
                             {   
                                 child_comment_id: 231657423,
                                 kronos : 43,
                                 text: "Yesss please",
                                 user: 2346745234532,
-                                likes: 78
+                                likes: 23
                             }
                         ]
                     },
@@ -218,7 +219,7 @@ const addAllData = async () => {
                         kronos : 7,
                         text: "Was so much fun",
                         user: 6893798251,
-                        likes: 3,
+                        likes: 0,
                         comments: []
                     }
                 ],
@@ -231,7 +232,7 @@ const addAllData = async () => {
                 timestamp: 63421627,
                 content: "C:\\videos\\honeyMoonMemories.mp4",
                 caption: "A time I will never forget!",
-                likes: 631246,
+                likes: ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
                 shares : 12356,
                 kronos : 34153,
                 comments: [
@@ -240,7 +241,7 @@ const addAllData = async () => {
                         kronos : 63532,
                         text: "Congratulations! The perfect couple!!",
                         user: 152346348,
-                        likes: 753,
+                        likes: 234,
                         comments: []
                     }
                 ],
@@ -274,7 +275,7 @@ const addAllData = async () => {
                 timestamp: 83413451,
                 content: "C:\\videos\\hikeMemories.mp4",
                 caption: "Whataba 3 day hike",
-                likes: 6342,
+                likes: ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""],
                 shares : 6341,
                 kronos : 343,
                 comments: [
@@ -283,7 +284,7 @@ const addAllData = async () => {
                         kronos : 63532,
                         text: "Next time I'm joining no matter what",
                         user: 6893798251,
-                        likes: 352,
+                        likes: 3,
                         comments: []
                     }
                 ],
@@ -460,7 +461,7 @@ const generatePosts = async () => {
     admin.app().delete();
   }
 };
-const user_id = "izuE9y78NUM9yw1cTv8OPCvGscEo";
+const user_id = "uc8QbbFocqzdU7xRZcjTnMTbV9q1";
 const addPosts = async () => {
   try{
         const posts = [
