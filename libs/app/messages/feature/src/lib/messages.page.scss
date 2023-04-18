@@ -10,6 +10,7 @@ ion-title {
   margin: 0;
   padding: 0;
   font-family: "futura-pt", sans-serif;
+  margin-top: 1.5%;
 }
 
 ion-toolbar{
@@ -22,7 +23,7 @@ ion-searchbar{
   border: 1px solid white;
   border-radius: 10px;
   max-width: 98%;
-  height: 3%;
+  height: 8%;
   left: auto;
   right: auto;
   top: auto;
@@ -41,4 +42,20 @@ ion-fab-button{
 
 ion-icon{
   color: #000000;
+}
+
+ion-avatar{
+  margin: 0 auto;
+  margin-right: 10px;
+  border: 2px solid red;
+
+}
+
+ion-badge{
+  color: purple;
+}
+
+body{
+  background-color: rgb(0, 0, 0);
+  color: #ffffff;
 }

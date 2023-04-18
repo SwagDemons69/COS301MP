@@ -1,17 +1,26 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Messages</ion-title><br>
-    <ion-searchbar ></ion-searchbar>
+    <ion-title>Messages</ion-title>
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content [fullscreen]="true">
+  <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="getItems()"></ion-searchbar>
+
   <br>
-  <chat-card  time="Mon" name="Will Turner" snippet="I'm Captain Jack Sparrow, savvy?"> </chat-card>
-  <chat-card  time="Mon" name="Mr Gibbs" snippet="You seem somewhat familiar. Have I threatened you before?"> </chat-card>
-  <chat-card  time="Mon" name="Jack Sparrow" snippet="The problem is not the problem. The problem is your attitude about the problem."> </chat-card>
-  <chat-card  time="Mon" name="Amber Head" snippet="Why is the rum always gone? I need a huge pint of it, or I'll stab you."> </chat-card>
+
+  <ion-list>
+    <ion-item *ngFor="let item of filteredItems" (click)="goToDetails(item)">
+      <ion-avatar>
+        <img src="{{ item.avatar }}">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{ item.name }}</h2>
+        <p>{{ item.snippet }}</p>
+      </ion-label>
+      <ion-badge slot="end">{{ item.time }}</ion-badge>
+    </ion-item>
+  </ion-list>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="openSearchModal()">

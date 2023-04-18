@@ -1,10 +1,7 @@
 <ion-header>
   <ion-toolbar class="head">
-    <ion-buttons slot="start">
-        <a href="../../../../home/messages/">
-          <ion-icon id="back" name="arrow-back"></ion-icon>
-        </a>
-        
+    <ion-buttons slot="start"> 
+        <ion-icon (click)="backToMessage()" id="back" name="arrow-back"></ion-icon>   
     </ion-buttons>
     <ion-avatar slot="start">
       <img src="https://cdn2.iconfinder.com/data/icons/avatars-99/62/avatar-370-456322-512.png" />

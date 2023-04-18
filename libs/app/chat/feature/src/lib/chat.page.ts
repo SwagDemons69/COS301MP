@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 // import { Component } from '@angular/core';
-import { NavController } from '@ionic/angular/providers/nav-controller';
+import { NavController } from '@ionic/angular';
 import { Component, ViewChild } from '@angular/core';
 import { IonContent } from '@ionic/angular';
 
@@ -11,6 +11,8 @@ import { IonContent } from '@ionic/angular';
   styleUrls: ['./chat.page.css']
 })
 export class ChatPage {
+
+  constructor(private navCtrl: NavController) {}
 
   @ViewChild(IonContent, { static: true })
   content!: IonContent;
@@ -33,6 +35,10 @@ export class ChatPage {
       this.messages.push({ text: this.newMessage.trim(), sent: true, sender: this.sender });
       this.newMessage = '';
     } 
+  }
+
+  backToMessage() {
+    this.navCtrl.navigateBack('/home/messages');
   }
   
 }
