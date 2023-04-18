@@ -42,8 +42,10 @@
     <ion-content [fullscreen]="true">
     
         <ion-content>
-            <div class="top-section">              
-                <ion-img [src]="chosenPostBase64Data" alt=""></ion-img>
+            <div class="top-section" >
+                <div [hidden]="style">         
+                <ion-img [src]="chosenPostBase64Data" alt="" id="preview" #image></ion-img>
+            </div>     
             </div>
                 
             <div class="bottom-section">

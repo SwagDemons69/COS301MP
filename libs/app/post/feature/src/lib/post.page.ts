@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 // import { NavController } from '@ionic/angular/providers/nav-controller';
 import { PostApi } from '@mp/app/post/data-access';
@@ -12,19 +12,25 @@ import { Observable } from 'rxjs';
 import { post } from '@mp/api/home/util';
 import { Timestamp } from '@angular/fire/firestore';
 
+
+
 @Component({
   selector: 'post-page',
   templateUrl: './post.page.html',
   styleUrls: ['./post.page.css']
 })
+
+
+
 export class PostPage {
   @Select(ProfileState.profile) profile$!: Observable<user_profile | null>;
   postForm : FormGroup
-  file : File
   blob : Blob
   user : string | undefined
   chosenPost: Blob
   chosenPostBase64Data: string
+  style: string
+  
   //Dont think validators needed
   constructor(private formBuilder: FormBuilder,
               private readonly api : PostApi)
@@ -34,31 +40,38 @@ export class PostPage {
       caption: ['', Validators.required],
       categories: ['', Validators.required]
     })
-    this.file = new File(["foo"], "foo.txt", {
-      type: "text/plain",
-    });
     this.blob = new Blob();
     this.profile$.forEach((user) => {this.user = user?.user_id;});
     this.chosenPost = new Blob();
     this.chosenPostBase64Data = "";
+    this.style = "hidden"
   }
-  //get reference to file uploaded
+  //Get reference to file uploaded
   async onFileChange(event : any){
-    this.file = event.target.files[0];
+    
     this.blob = event.target.files[0];
     this.chosenPost = event.target.files[0];
-    
     //Convert to Base64
     const str: string = await this.blobToDataURL(this.chosenPost);
+    //const url: string = str.substring(str.indexOf(',')+1);
     this.chosenPostBase64Data = str;
+    //Show Image
+    this.style = "";
   }
 
+  //Hide Image div Each time Post Page is opened
+  ionViewWillEnter(){
+    this.style="hidden"
+  }
+  
+  //Upload Post on Upload Button Click
   async uploadPost(){
+    this.style = "hidden";
     const path = await this.addToCloudStorage();
     this.addToFirestore(path);
   }
   
-
+  //Convert Image to Base64
   async blobToDataURL(blob: Blob): Promise<string> {
     return new Promise<string>((resolve, reject) => {
       const reader = new FileReader();
@@ -67,7 +80,8 @@ export class PostPage {
       reader.readAsDataURL(blob);
     });
   }
-
+  
+  //Send Post Image to Cloud Storage an return url
   async addToCloudStorage(){
     //Convert to Base64
     const str: string = await this.blobToDataURL(this.blob);
@@ -79,6 +93,7 @@ export class PostPage {
     return response.data.pathToImage;
   }
 
+  //Add Post to Firestore
   async addToFirestore(pathToImage: string){
     
     //Ensure caption and userId are available
@@ -91,7 +106,7 @@ export class PostPage {
     if(this.user != undefined){
       fillerUserId = this.user;
     }
-    ///////
+    
     //Create Post
     const newPost: post = {
       post_id : "test post",
