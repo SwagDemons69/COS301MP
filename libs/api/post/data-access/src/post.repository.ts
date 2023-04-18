@@ -23,14 +23,19 @@ export class PostRepository {
     }
     
     async createPost(post: post){
+        
+
+
         const docRef = admin.firestore().collection('profiles').doc(post.user_id);
         return await admin.firestore().runTransaction(transaction =>{
             return transaction.get(docRef).then(doc =>{
                 if(!doc.data()?.['posts']){
+                    post.post_id = "0";
                     transaction.set(docRef, {posts: post})
                 }
                 else{
                     const posts = doc.data()?.['posts'];
+                    post.post_id = (posts.length).toString();
                     posts.push(post);
                     transaction.update(docRef, {posts: posts})
                 }
