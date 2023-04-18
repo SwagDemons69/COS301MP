@@ -1,5 +1,5 @@
 <ion-header>
-<ion-toolbar>
+<ion-toolbar >
     <ion-title>Search Users</ion-title>
     <ion-buttons slot="end">
         <ion-button (click)="dismiss()">
@@ -9,18 +9,16 @@
 </ion-toolbar>
 </ion-header>
 
-<ion-content>
-    <!-- <ion-searchbar (ionInput)="search($event)"></ion-searchbar>
-    <ion-list>
-        <ion-item *ngFor="let user of users">
-            <ion-avatar slot="start">
-                <img [src]="user.avatar_url" />
-            </ion-avatar>
-            <ion-label>
-                <h2>{{user.login}}</h2>
-                <p>{{user.html_url}}</p>
-            </ion-label>
-        </ion-item>
-    </ion-list> -->
 
+
+<ion-content >
+    <ion-searchbar (ionInput)="getUsers($event)"></ion-searchbar>
+    <ion-list class="ion-margin-top">
+        <ion-item *ngFor="let users of users"  (click)="goToChats(users.id)">
+        <ion-avatar item-left>
+            <img src="{{users.avatar}}">
+        </ion-avatar>
+        {{ users.username }}
+        </ion-item>
+    </ion-list>
 </ion-content>
