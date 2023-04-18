@@ -2,17 +2,18 @@ import { PostModule as PostDataAccessModule } from '@mp/api/post/data-access';
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { AddPhotoCommandHandler } from './commands';
+import { CreatePostCommandHandler } from './commands/create-post.handler';
 import { PostService } from './post.service';
-export const CommandHandlers = [ AddPhotoCommandHandler];
-// export const EventHandlers = [ ProfileCreatedHandler , EditProfileHandler];
-// import { ProfileCreatedHandler, EditProfileHandler } from './events';
+import { CreatePostEventHandler } from './events';
+export const CommandHandlers = [ AddPhotoCommandHandler, CreatePostCommandHandler];
+export const EventHandlers = [ CreatePostEventHandler ];
 
 @Module({
   imports: [CqrsModule, PostDataAccessModule],
   providers: [
     PostService,
-     ...CommandHandlers
-    // ...EventHandlers
+     ...CommandHandlers,
+     ...EventHandlers
   ],
   exports: [PostService],
 })

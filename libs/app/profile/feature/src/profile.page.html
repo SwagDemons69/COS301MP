@@ -84,7 +84,7 @@
         <ion-card-content class="ion-text-center">
           <ion-content [fullscreen]="true" [scrollEvents]="true">
               <ion-grid [fixed]="true">
-                <ion-row class="ion-justify-content-center" *ngFor="let i of [0, 1]">
+                <ion-row class="ion-justify-content-center" *ngFor="let i of postIndex">
                     <ion-col class="ion-col">
                       <ion-img [src]="(profile.posts?.[i]?.content)" (click)="openBlip(profile.posts?.[i],profile.username)" alt=""></ion-img>
                     </ion-col>
@@ -96,6 +96,8 @@
     </ng-container>
     </ion-row>
   </ion-grid>
+
+  <!-- http://127.0.0.1:5006/twenty4-f9f8e.appspot.com/photos%2Fblue-arrow-pointing-up.png -->
 
   <!-- <ng-container *ngIf="(profile$ | async) as profile; else noProfile"> -->
     <!-- <ms-profile-account-details-component></ms-profile-account-details-component>

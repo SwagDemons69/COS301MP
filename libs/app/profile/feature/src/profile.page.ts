@@ -8,7 +8,7 @@ import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { post } from '@mp/api/home/util';
 import { Store } from '@ngxs/store';
-import { EditProfile, InitForm } from '@mp/app/profile/util';
+import { EditProfile, InitForm, GetImages } from '@mp/app/profile/util';
 import { UpdateFormValue } from '@ngxs/form-plugin';
 
 @Component({
@@ -20,6 +20,9 @@ export class ProfilePage {
   @Select(ProfileState.profile) profile$!: Observable<user_profile | null>;
   @Select(ProfileState.form) form$!: Observable<edit_profile | null>;
   userForm: FormGroup;
+  postIndex: number[];
+
+  //postImages : string[]
 
   constructor(
     private modalController: ModalController,
@@ -35,8 +38,32 @@ export class ProfilePage {
       bio: ['', Validators.required],
       province: ['', Validators.required]
     });
-  }
+    this.postIndex = []
+    this.profile$.forEach((user) => {
+      if(user && user.posts){
+        const len = user.posts.length;
+        //Same functionality as python 'for i in range(len): push(i)'
+        this.postIndex = [...Array(len).keys()];
+      }
+    })
+    //this.postImages = []
 
+    // this.profile$.forEach((user) => {
+    //   if(user && user.posts){
+    //     const paths:string[] = [];
+    //     // user.posts.forEach((post)=>{
+    //     //   paths.push(post.content);
+    //     // });
+    //     // console.log(paths);
+    //     for(let i = 0;i < user.posts.length; i++){
+    //       paths.push(user.posts[i].content);
+    //     }
+    //     console.log(paths)
+    //     this.store.dispatch(new GetImages(paths));
+    //   }
+    // });
+  }
+  
   isEditingProfile = false;
 
   // data at the moment expects a json object as follows:

@@ -1,31 +1,45 @@
-import { user_profile } from '@mp/api/profiles/util';
 import { Injectable } from '@nestjs/common';
-import * as admin from 'firebase-admin';
 import { getStorage, ref , uploadBytes, connectStorageEmulator, uploadString} from 'firebase/storage';
 import { initializeApp } from '@firebase/app';
-import { AddPhotoResponse } from '@mp/api/post/util';
+import { AddPhotoResponse, CreatePostResponse } from '@mp/api/post/util';
+import { post } from '@mp/api/home/util';
+import * as admin from 'firebase-admin';
 
 @Injectable()
 export class PostRepository {
 
     async AddPhoto(file: string, fileName : string): Promise<AddPhotoResponse> {
-    console.log("PHOTO REPO WITH FILE: " + fileName)
-    // admin.initializeApp({ projectId: 'twenty4-f9f8e' });
-    // const app = admin.app();
-    //console.log("I")
+        const storage = getStorage(initializeApp({projectId: 'twenty4-f9f8e',  storageBucket : 'twenty4-f9f8e.appspot.com'}));
+        const bucket = admin.storage().bucket();
 
-    //const storage = getStorage();
-    const storage = getStorage(initializeApp({projectId: 'twenty4-f9f8e', 
-                                               storageBucket : 'twenty4-f9f8e.appspot.com'}));
-    connectStorageEmulator(storage, "localhost", 5006);
-    const photosRef = ref(storage,`photos/${fileName}`);
+        connectStorageEmulator(storage, "localhost", 5006);
+        const photosRef = ref(storage,`photos/${fileName}`);
+        const snapshot = await uploadString(photosRef, file, 'base64');
 
-    const snapshot = await uploadString(photosRef, file, 'base64');
-    return { pathToImage: snapshot.metadata.fullPath };
-    // return new Promise<AddPhotoResponse>((resolve,reject) => {
-    //     const snapshot = uploadString(photosRef, file, 'base64');
-    //     snapshot.then = () => resolve(snapshot.)
-    // });
+        const file2 = await bucket.file(snapshot.metadata.fullPath).makePublic();
+        const url = bucket.file(snapshot.metadata.fullPath).publicUrl();
+
+        return { pathToImage: url };
+    }
+    
+    async createPost(post: post){
+
+
+
+        const docRef = admin.firestore().collection('profiles').doc(post.user_id);
+
+        return await admin.firestore().runTransaction(transaction =>{
+            return transaction.get(docRef).then(doc =>{
+                if(!doc.data()?.['posts']){
+                    transaction.set(docRef, {posts: post})
+                }
+                else{
+                    const posts = doc.data()?.['posts'];
+                    posts.push(post);
+                    transaction.update(docRef, {posts: posts})
+                }
+            });
+        })
     }
 }
 

@@ -31,6 +31,11 @@ export class InitForm {
   constructor(public readonly form: edit_profile | null) { }
 }
 
+export class GetImages {
+  static readonly type = '[Profile] GetImages';
+  constructor(public readonly images: string[] | []) { }
+}
+
 //========================================================
 
 export class UpdateAccountDetails {

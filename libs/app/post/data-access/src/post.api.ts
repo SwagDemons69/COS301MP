@@ -1,17 +1,6 @@
 import { Injectable } from '@angular/core';
-import { initializeApp } from '@firebase/app';
-import { AddPhotoRequest, AddPhotoResponse } from '@mp/api/post/util';
+import { AddPhotoRequest, AddPhotoResponse, CreatePostRequest, CreatePostResponse } from '@mp/api/post/util';
 import { Functions, httpsCallable } from '@angular/fire/functions';
-import * as admin from 'firebase-admin';
-//import { FirebaseStorage , ref, uploadBytes} from '@angular/fire/storage';
-//import { AngularFireStorageModule  } from '@angular/fire/storage';
-import {
-    connectStorageEmulator,
-    getStorage,
-    provideStorage,
-    ref,
-    uploadBytes
-} from '@angular/fire/storage';
 
 @Injectable()
 export class PostApi {
@@ -21,8 +10,8 @@ export class PostApi {
         return await httpsCallable<AddPhotoRequest, AddPhotoResponse>(this.functions, 'AddPostToCloudStorage')(request);
     }
 
-    // async UploadPostToFirestore(){
-    //     return await httpsCallable<
-    // }
+    async UploadPostToFirestore(request: CreatePostRequest){
+        return await httpsCallable<CreatePostRequest, CreatePostResponse>(this.functions, 'AddPostToFirestore')(request);
+    }
 
 }

@@ -15,7 +15,8 @@ import {
   SubscribeToProfilePosts,
   SetPosts,
   EditProfile,
-  InitForm
+  InitForm,
+  GetImages
 } from '@mp/app/profile/util';
 import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
 import { tap } from 'rxjs';
@@ -241,6 +242,13 @@ async EditProfile(ctx: StateContext<ProfileStateModel>){
      }
 }
 
+
+// @Action(GetImages)
+// async GetImages(images: string[]){
+//   //console.log("ACTION GET IMAGES")
+//   //console.log(images)
+//   return this.profileApi.getPostContentFromCloudStorage(images);
+// }
 
 
 

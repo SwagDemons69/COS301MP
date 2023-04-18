@@ -1,21 +1,18 @@
-import { AddPhotoRequest, AddPhotoResponse } from '@mp/api/post/util';
+import { AddPhotoRequest, AddPhotoResponse, CreatePostRequest, CreatePostResponse } from '@mp/api/post/util';
 import { Injectable } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
-import { AddPhotoCommand } from '@mp/api/post/util';
+import { AddPhotoCommand, CreatePostCommand } from '@mp/api/post/util';
 @Injectable()
 export class PostService {
   constructor(private readonly commandBus: CommandBus) {}
-
-
-//   async EditProfile(request: EditProfileRequest): Promise<EditProfileResponse> {
-//     return await this.commandBus.execute<EditProfileCommand, EditProfileResponse>(new EditProfileCommand(request));
-//   }
 
     async AddPhoto(request: AddPhotoRequest): Promise<AddPhotoResponse> {
         return await this.commandBus.execute<AddPhotoCommand, AddPhotoResponse>(new AddPhotoCommand(request));
     }
  
-  
+    async CreatePost(request: CreatePostRequest): Promise<CreatePostResponse> {
+        return await this.commandBus.execute<CreatePostCommand, CreatePostResponse>(new CreatePostCommand(request));
+    }
   //=======================================================
   // EXAMPLE CODE FROM DEMO REPO
   //=======================================================

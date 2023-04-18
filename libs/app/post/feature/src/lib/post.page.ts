@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 // import { NavController } from '@ionic/angular/providers/nav-controller';
 import { PostApi } from '@mp/app/post/data-access';
-import { AddPhotoRequest, AddPhotoResponse } from '@mp/api/post/util';
+import { AddPhotoRequest, AddPhotoResponse, CreatePostRequest } from '@mp/api/post/util';
 import { read } from 'fs';
 import { ProfileState } from '@mp/app/profile/data-access';
 import { user_profile } from '@mp/api/profiles/util';
@@ -96,8 +96,8 @@ export class PostPage {
       categories : [],
       taggedUsers : []
     }
-
-    
+    const request: CreatePostRequest = {post: newPost};
+    const responseStatus = await this.api.UploadPostToFirestore(request);
   }
 
 }
