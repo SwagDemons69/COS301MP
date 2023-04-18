@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<!-- <ion-header [translucent]="true">
     <ion-toolbar>
         <ion-title>
         Post
@@ -21,7 +21,7 @@
         </div>
     </ion-content>
     
-    </ion-content>  
+    </ion-content>   -->
     
     
     <!-- 
@@ -33,3 +33,41 @@
     yarn start:app:dev 
     
     -->
+    <ion-header [translucent]="true">
+        <ion-toolbar>
+            <ion-title>Post</ion-title>
+        </ion-toolbar>
+    </ion-header>
+        
+    <ion-content [fullscreen]="true">
+    
+        <ion-content>
+            <div class="top-section">              
+                <ion-img [src]="chosenPostBase64Data" alt=""></ion-img>
+            </div>
+                
+            <div class="bottom-section">
+                <form [formGroup]="postForm" (ngSubmit)="uploadPost()">
+                    <label for="file">
+                        <div class="camera-icon-container">
+                            <ion-icon name="camera"></ion-icon>
+                        </div>
+                    </label>
+                    <input type="file" id="file" formControlName="file" accept="image/*, video/*" required (change)="onFileChange($event)" style="display:none;"/><br><br>
+                    
+                    <p>Caption:</p><br>
+                    <!-- <ion-item>   -->
+                        <input type="text" formControlName="caption" placeholder="Write your post caption" /><br><br>
+                    <!-- </ion-item> -->
+    
+                    <p>Categoriess:</p><br>
+                    <!-- <ion-item>                        -->
+                        <input type="text" formControlName="categories" placeholder="Write your post caption" /><br><br>
+                    <!-- </ion-item> -->
+    
+                    <input type="submit" value="Upload"/>
+                    
+                </form>          
+            </div>             
+        </ion-content>
+    </ion-content>   

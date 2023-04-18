@@ -23,24 +23,34 @@ export class PostPage {
   file : File
   blob : Blob
   user : string | undefined
+  chosenPost: Blob
+  chosenPostBase64Data: string
   //Dont think validators needed
   constructor(private formBuilder: FormBuilder,
               private readonly api : PostApi)
   {
     this.postForm = this.formBuilder.group({
       file: ['', Validators.required],
-      caption: ['', Validators.required]
+      caption: ['', Validators.required],
+      categories: ['', Validators.required]
     })
     this.file = new File(["foo"], "foo.txt", {
       type: "text/plain",
     });
     this.blob = new Blob();
     this.profile$.forEach((user) => {this.user = user?.user_id;});
+    this.chosenPost = new Blob();
+    this.chosenPostBase64Data = "";
   }
   //get reference to file uploaded
-  onFileChange(event : any){
+  async onFileChange(event : any){
     this.file = event.target.files[0];
     this.blob = event.target.files[0];
+    this.chosenPost = event.target.files[0];
+    
+    //Convert to Base64
+    const str: string = await this.blobToDataURL(this.chosenPost);
+    this.chosenPostBase64Data = str;
   }
 
   async uploadPost(){

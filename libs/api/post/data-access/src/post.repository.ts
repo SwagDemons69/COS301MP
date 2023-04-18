@@ -23,11 +23,7 @@ export class PostRepository {
     }
     
     async createPost(post: post){
-
-
-
         const docRef = admin.firestore().collection('profiles').doc(post.user_id);
-
         return await admin.firestore().runTransaction(transaction =>{
             return transaction.get(docRef).then(doc =>{
                 if(!doc.data()?.['posts']){
