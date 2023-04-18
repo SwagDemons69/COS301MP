@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-empty-function */
 // import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
@@ -40,5 +41,19 @@ export class ChatPage {
   backToMessage() {
     this.navCtrl.navigateBack('/home/messages');
   }
+
+  limitCharactersPerLine() {
+    
+    // eslint-disable-next-line prefer-const
+    let lines = this.newMessage.split('\n');
+    for (let i = 0; i < lines.length; i++) {
+      if (lines[i].length > 23) {
+          let truncatedLine = lines[i].substring(0, 23);
+        lines[i] = truncatedLine + '\n' + lines[i].substring(23);
+      }
+    }
+    this.newMessage = lines.join('\n');
+  }
+  
   
 }

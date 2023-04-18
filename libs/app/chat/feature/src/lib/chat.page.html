@@ -20,7 +20,7 @@
 
   <ion-footer>
     <ion-toolbar class="send">
-      <ion-textarea placeholder="Type a message" [(ngModel)]="newMessage" (keyup.enter)="newMessage = newMessage + '\n'"></ion-textarea>
+      <ion-textarea placeholder="Type a message" [(ngModel)]="newMessage" (keyup.enter)="newMessage = newMessage + '\n'" (input)="limitCharactersPerLine()"></ion-textarea>
       <ion-buttons slot="end">
         <ion-button (click)="sendMessage()">Send</ion-button>
       </ion-buttons>
