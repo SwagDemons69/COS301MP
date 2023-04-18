@@ -91,8 +91,10 @@ export class searchmodalPage {
     
         goToChats(Selecteduser: string) {
           console.log(Selecteduser);
-          //move to the tab3 page
-          this.navCtrl.navigateForward("../tab3/tab3.page");
+          //move to the chat page and dismiss the modal using the dismiss method
+          this.navCtrl.navigateForward('/home/chat');
+         
+          this.dismiss();
         }  
 
     ngOnInit() {}
