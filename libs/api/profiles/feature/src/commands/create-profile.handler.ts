@@ -23,13 +23,21 @@ export class CreateProfileHandler
     const photoURL = request.user.photoURL;
     const cellphone = request.user.phoneNumber;
 
+    let temp = "";
+    if(!displayName){
+       temp = "";
+    }
+    else{
+      temp = displayName;
+    }
+
     const data: user_profile = {
       user_id: userId,
       timeOfExpiry: 420,
       notPublic: "false",
-      username: displayName,
-      name: displayName,
-      profilePicturePath: photoURL,
+      username: temp,
+      name: temp,
+      profilePicturePath: "",
       bio: "",
       email: email,
       password: "",

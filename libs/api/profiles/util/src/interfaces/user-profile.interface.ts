@@ -6,7 +6,7 @@ export interface user_profile {
     notPublic : string;
     username : string | null | undefined;
     name : string | null | undefined;
-    profilePicturePath : string | null | undefined;
+    profilePicturePath : string;
     bio : string | null | undefined;
     email : string | null | undefined;
     password : string;

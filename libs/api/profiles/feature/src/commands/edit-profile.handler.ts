@@ -19,7 +19,7 @@ export class EditProfileCommandHandler
     //Get user in firestore and wrap in user_profile interface
     const request = command.request;
     console.log("REQUEST IN HANDLER BELOW")
-    console.log(request.user_id)
+    //console.log(request)
     const profileDoc = await this.repository.findUser(request.user_id);
     const profileData = profileDoc.data();
 

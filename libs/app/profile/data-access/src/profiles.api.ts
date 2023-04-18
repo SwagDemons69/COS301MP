@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { doc, docData, Firestore , collection} from '@angular/fire/firestore';
 import { Functions, httpsCallable } from '@angular/fire/functions';
-import { EditProfileRequest, EditProfileResponse, user_profile } from '@mp/api/profiles/util';
+import {  EditProfileRequest, EditProfileResponse, user_profile } from '@mp/api/profiles/util';
 import { post } from '@mp/api/home/util'
+import { AddPhotoRequest, AddPhotoResponse } from '@mp/api/post/util';
 
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 
@@ -70,17 +71,11 @@ export class ProfilesApi {
 // CLOUD FUNCTIONS
 //==========================================================================
 
-  // async updateAccountDetails(request: IUpdateAccountDetailsRequest) {
-  //   return await httpsCallable<
-  //     IUpdateAccountDetailsRequest,
-  //     IUpdateAccountDetailsResponse
-  //   >(
-  //     this.functions,
-  //     'updateAccountDetails'
-  //   )(request);
-  // }
-
   async EditProfile(request: EditProfileRequest){
     return await httpsCallable<EditProfileRequest, EditProfileResponse>(this.functions, 'EditProfile')(request);
+  }
+
+  async UploadProfilePhotoToCloudStorage(request: AddPhotoRequest){
+    return await httpsCallable<AddPhotoRequest, AddPhotoResponse>(this.functions, 'AddPhotoToCloudStorage')(request);
   }
 }

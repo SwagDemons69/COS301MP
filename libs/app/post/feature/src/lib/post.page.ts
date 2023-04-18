@@ -51,6 +51,7 @@ export class PostPage {
     
     this.blob = event.target.files[0];
     this.chosenPost = event.target.files[0];
+
     //Convert to Base64
     const str: string = await this.blobToDataURL(this.chosenPost);
     //const url: string = str.substring(str.indexOf(',')+1);

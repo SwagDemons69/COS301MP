@@ -7,7 +7,7 @@ export class PostApi {
     constructor(private readonly functions: Functions) {}
 
     async UploadPostToCloudStorage(request: AddPhotoRequest){
-        return await httpsCallable<AddPhotoRequest, AddPhotoResponse>(this.functions, 'AddPostToCloudStorage')(request);
+        return await httpsCallable<AddPhotoRequest, AddPhotoResponse>(this.functions, 'AddPhotoToCloudStorage')(request);
     }
 
     async UploadPostToFirestore(request: CreatePostRequest){
