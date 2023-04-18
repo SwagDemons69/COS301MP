@@ -7,6 +7,7 @@ import { from } from 'rxjs';
 import { user_profile } from '@mp/api/profiles/util';
 import 'firebase/compat/database';
 import 'firebase/firestore';
+import { firstValueFrom } from 'rxjs';
 import { collection, getDocs } from 'firebase/firestore';@Injectable()
 
 
@@ -29,7 +30,7 @@ export class DashboardApi {
     return docData(docRef, { idField: 'id' });
   }
 
-  postsFromProfiles$(users: string[]): post[] {
+  async postsFromFollowers$(users: string[]): Promise<post[]> {
     const profileRef = collection(this.firestore, 'profiles');
     const selectedProfiles = from(getDocs(profileRef)).pipe(
       map((querySnapshot) => querySnapshot.docs
@@ -56,31 +57,24 @@ export class DashboardApi {
         followRequests : doc.data()['followRequests']
       })))
     ) as Observable<user_profile[]>;
-    
 
-    let posts : post[];
-    posts = [];
-    posts = [];
-    selectedProfiles.subscribe((profiles) => {
-      profiles.forEach((profile) => {
-        if(profile.posts != null) {
-          profile.posts.forEach((post) => {
-            posts.push(post);
-            console.log(post);
-          })
-        }
-      })
+    const posts: post[] = [];
+    const profiles = await firstValueFrom(selectedProfiles);
+    profiles.forEach((profile) => {
+      if (profile.posts != null) {
+        profile.posts.forEach((post: post) => {
+          posts.push(post);
+        });
+      }
     });
-
 
     return posts;
   };
 
-  profiles$(users : string[]): Observable<user_profile[]> {
+  async allPosts$(): Promise<post[]> {
     const profileRef = collection(this.firestore, 'profiles');
-    return from(getDocs(profileRef)).pipe(
+    const selectedProfiles = from(getDocs(profileRef)).pipe(
       map((querySnapshot) => querySnapshot.docs
-        .filter((doc) => users.includes(doc.id))
         .map((doc) => ({
         user_id : doc.id,
         timeOfExpiry: doc.data()['timeOfExpiry'],
@@ -102,8 +96,20 @@ export class DashboardApi {
         notifications : doc.data()['notifications'],
         followRequests : doc.data()['followRequests']
       })))
-    );
-  }
+    ) as Observable<user_profile[]>;
+
+    const posts: post[] = [];
+    const profiles = await firstValueFrom(selectedProfiles);
+    profiles.forEach((profile) => {
+      if (profile.posts != null) {
+        profile.posts.forEach((post: post) => {
+          posts.push(post);
+        });
+      }
+    });
+
+    return posts;
+  };
 
   post$(id: string) {
     const docRef = doc(

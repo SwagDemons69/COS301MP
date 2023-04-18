@@ -50,14 +50,13 @@
   <div>
     <!-- <ion-slides [options]="{ slidesPerView: 'auto', zoom: true, grabCursor: true }"> -->
     <ion-slides [options]="{ slidesPerView: 1.5, freeMode: true }">
-
       <ion-slide *ngFor="let item of recommended">
         <ion-col>
           <ion-img [src]="item.content"></ion-img>
           <div class="overlay">
             <ion-label>{{item.caption}}</ion-label>
             <div class="reactions">
-              likes | comments
+              likes | comments | {{item.likes}}
             </div>
           </div>
         </ion-col>
@@ -126,7 +125,6 @@
             <ion-col class="subtext" size="9">
               <h2>{{item.caption}}</h2>
               <br/>
-              <h4>{{item.desc}}</h4>
             </ion-col>
 
             <!-- Profile, Time posted, Reactions -->
@@ -142,7 +140,6 @@
               </ion-grid>
                 <!-- <ion-label>Item Avatar</ion-label> -->
             </ion-col>
-
           </ion-row>
         </ion-grid>
       </ion-label>

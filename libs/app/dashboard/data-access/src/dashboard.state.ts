@@ -4,18 +4,19 @@ import { DashboardApi } from './dashboard.api';
 import { post } from '@mp/api/home/util';
 import { SetPosts } from '@mp/app/dashboard/util';
 export interface DashboardStateModel {
-  posts: post[]
+  recommended_posts: Promise<post[]>,
+  trending_posts: Promise<post[]>,
 }
 
 @State<DashboardStateModel>({
   name: 'posts',
   defaults: {
-    posts: []
+    recommended_posts: Promise.resolve([]),
+    trending_posts: Promise.resolve([])
   }
 })
 @Injectable()
 export class DashboardState {
-  //follower : number;
   constructor(
     private readonly dashboardApi: DashboardApi,
     private readonly store: Store,
@@ -23,22 +24,23 @@ export class DashboardState {
 
   @Selector()
   static posts(state: DashboardStateModel) {
-    return state.posts;
+    return state.recommended_posts;
+  }
+
+  @Selector()
+  static recommendedPosts(state: DashboardStateModel) {
+    return state.recommended_posts;
+  }
+
+  @Selector()
+  static trendingPosts(state: DashboardStateModel) {
+    return state.trending_posts;
   }
 
   @Action(SetPosts)
-  async setPosts(ctx: StateContext<DashboardStateModel>) {
-    this.dashboardApi.profiles$(["10398140"]).subscribe((profiles) => {
-      console.log("Profile"); 
-      console.log(profiles);
-      console.log(profiles[0].posts);
-    });
-    console.log(this.dashboardApi.postsFromProfiles$(["10398140","8971892","4512312342"]));
-    this.dashboardApi.posts$().subscribe((posts) => {
-      console.log("Posts");
-      console.log(posts);
-      ctx.patchState({ posts: posts });
-    })
+  async setPosts(ctx: StateContext<DashboardStateModel>, { profile }: SetPosts) {
+    ctx.patchState({ trending_posts: this.dashboardApi.allPosts$() });
+    ctx.patchState({ recommended_posts: this.dashboardApi.postsFromFollowers$(profile?.following || [])});
   }
 
 
