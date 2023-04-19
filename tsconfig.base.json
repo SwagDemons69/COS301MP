@@ -49,6 +49,9 @@
       "@mp/api/notifications/util": [
         "libs/api/notifications/util/src/index.ts"
       ],
+      "@mp/api/home/data-access": ["libs/api/home/data-access/src/index.ts"],
+      "@mp/api/home/feature": ["libs/api/home/feature/src/index.ts"],
+      "@mp/api/home/util": ["libs/api/home/util/src/index.ts"],
       "@mp/api/post/data-access": ["libs/api/post/data-access/src/index.ts"],
       "@mp/api/post/feature": ["libs/api/post/feature/src/index.ts"],
       "@mp/api/post/util": ["libs/api/post/util/src/index.ts"],
@@ -67,6 +70,7 @@
       "@mp/api/users/data-access": ["libs/api/users/data-access/src/index.ts"],
       "@mp/api/users/feature": ["libs/api/users/feature/src/index.ts"],
       "@mp/api/users/util": ["libs/api/users/util/src/index.ts"],
+      "@mp/app//shared-components": ["libs/app/shared-components/src/index.ts"],
       "@mp/app/auth/data-access": ["libs/app/auth/data-access/src/index.ts"],
       "@mp/app/auth/feature": ["libs/app/auth/feature/src/index.ts"],
       "@mp/app/auth/util": ["libs/app/auth/util/src/index.ts"],
@@ -98,6 +102,7 @@
         "libs/app/messages/data-access/src/index.ts"
       ],
       "@mp/app/messages/feature": ["libs/app/messages/feature/src/index.ts"],
+      "@mp/app/messages/ui": ["libs/app/messages/ui/src/index.ts"],
       "@mp/app/messages/util": ["libs/app/messages/util/src/index.ts"],
       "@mp/app/notifications/data-access": [
         "libs/app/notifications/data-access/src/index.ts"

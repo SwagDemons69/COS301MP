@@ -9,6 +9,7 @@ export class CreateAuthHandler implements ICommandHandler<CreateAuthCommand> {
 
   async execute(command: CreateAuthCommand) {
     console.log(`${CreateAuthHandler.name}`);
+    console.log("INSIDE CREATE AUTH HANDLER")
 
     const request = command.request;
     const data: IAuth = {

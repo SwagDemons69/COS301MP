@@ -72,8 +72,8 @@
     },
     "singleProjectMode": true,
     "ui": {
-      "port": 5001,
-      "enabled": false
+      "port" : 5001,
+      "enabled": true
     }
   },
   "remoteconfig": {

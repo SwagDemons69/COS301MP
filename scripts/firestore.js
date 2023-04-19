@@ -21,7 +21,7 @@ db.settings({
 //===============================================
 
 const generateProfiles = async () => {
-        try {
+        //try {
           // Create sample data
           const profiles = [
               { id : '4', Name: 'Alice4', Surname: 'A4', Age: 72 },
@@ -33,17 +33,118 @@ const generateProfiles = async () => {
           for (const profile of profiles) {
             await db.collection('profiles').doc(profile.id).set(profile);
           }
-        } 
-        finally {
+        //} 
+        // finally {
         
-          admin.app().delete();
-        }
+        //   admin.app().delete();
+        // }
 };
+
+// Change userID as is necessary,
+// you will get an error when trying to run this script if you do not change
+// userID
+const generatePosts = async () => {
+  try{
+    const posts = [
+    { id : "1",
+      post_id : "1",
+      user_id : "aXuq3eeEGAx6IP9uXNCZ3752rzbK",
+      content : "https://picsum.photos/id/19/300/300",
+      caption : "Test Post",
+      likes : 69,
+      timeStamp : 13452824,
+      shares : 0,
+      kronos : 0,
+      comments : [],
+      categories : [],
+      taggedUsers : []}
+    ];
+
+    for (const post of posts) {
+      await db.collection('posts').doc(post.id).set(post);
+    }
+  }
+
+  finally{
+    admin.app().delete();
+  }
+};
+const user_id = "aXuq3eeEGAx6IP9uXNCZ3752rzbK";
+const addPosts = async () => {
+  try{
+        const posts = [
+          { id : "1",
+          post_id : "1",
+          user_id : user_id,
+          content : "https://picsum.photos/id/19/300/300",
+          caption : "Test Post 1",
+          likes : 69,
+          timeStamp : 13452824,
+          shares : 0,
+          kronos : 0,
+          comments : [],
+          categories : [],
+          taggedUsers : []
+        },
+        { id : "2",
+          post_id : "2",
+          user_id : user_id,
+          content : "https://picsum.photos/id/23/300/300",
+          caption : "Test Post 2",
+          likes : 69,
+          timeStamp : 13452824,
+          shares : 0,
+          kronos : 0,
+          comments : [],
+          categories : [],
+          taggedUsers : []
+        }
+      ];
+      //for(const post of posts){
+        await db.collection('profiles').doc(user_id).update({posts: posts});
+  }
+  finally{
+    admin.app().delete();
+  }
+}
 
 //=============================================
 // FUNCTION CALLS
 //=============================================
 
-generateProfiles();
+//generatePosts();
+addPosts();
 
 //=============================================
+
+const importProfiles = async () => {
+  const handle = await db.collection('profiles').get();
+  const profiles = [];
+  handle.forEach((doc) => {
+    if(doc.data().Name === "Alice4"){
+      const data = doc.data();
+      //const name = doc.data().Name;
+      profiles.push(doc.data());
+    }
+
+  });
+  //logProfiles(profiles)
+return profiles;
+}; 
+
+//   function logProfiles(profiles){
+//     console.log(profiles[0]);
+// }
+
+//=============================================
+// FUNCTION CALLS
+//=============================================
+
+// async function test() {
+// const profiles = await importProfiles();
+// console.log(profiles);
+// }
+
+// test();
+
+// admin.app().delete();
