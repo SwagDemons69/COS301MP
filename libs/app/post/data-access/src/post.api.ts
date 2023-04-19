@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AddPhotoRequest, AddPhotoResponse, CreatePostLikeRequest, CreatePostLikeResponse, CreatePostRequest, CreatePostResponse } from '@mp/api/post/util';
+import { AddPhotoRequest, AddPhotoResponse, CreatePostChildCommentRequest, CreatePostChildCommentResponse, CreatePostLikeRequest, CreatePostLikeResponse, CreatePostRequest, CreatePostResponse, CreatePostRootCommentRequest, CreatePostRootCommentResponse } from '@mp/api/post/util';
 import { Functions, httpsCallable } from '@angular/fire/functions';
 
 @Injectable()
@@ -18,9 +18,11 @@ export class PostApi {
         return await httpsCallable<CreatePostLikeRequest, CreatePostLikeResponse>(this.functions, 'CreatePostLike')(request);
     }
 
-    // async CreatePostComment(){
-
-    // }
-
+    async CreatePostRootComment(request: CreatePostRootCommentRequest){
+        return await httpsCallable<CreatePostRootCommentRequest, CreatePostRootCommentResponse>(this.functions, 'CreateRootComment')(request);
+    }
     
+    async CreatePostChildComment(request: CreatePostChildCommentRequest){
+        return await httpsCallable<CreatePostChildCommentRequest, CreatePostChildCommentResponse>(this.functions, 'CreateChildComment')(request);
+    }
 }

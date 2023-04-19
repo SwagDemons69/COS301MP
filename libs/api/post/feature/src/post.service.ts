@@ -1,7 +1,20 @@
-import { AddPhotoRequest, AddPhotoResponse, CreatePostLikeCommand, CreatePostLikeRequest, CreatePostLikeResponse, CreatePostRequest, CreatePostResponse } from '@mp/api/post/util';
+import { AddPhotoRequest, 
+  AddPhotoResponse, 
+  CreatePostLikeCommand, 
+  CreatePostLikeRequest, 
+  CreatePostLikeResponse, 
+  CreatePostRequest, 
+  CreatePostResponse, 
+  CreatePostRootCommentRequest, 
+  CreatePostRootCommentResponse,
+  CreatePostChildCommentRequest,
+  CreatePostChildCommentResponse } from '@mp/api/post/util';
 import { Injectable } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
-import { AddPhotoCommand, CreatePostCommand } from '@mp/api/post/util';
+import { AddPhotoCommand, 
+  CreatePostCommand , 
+  CreatePostChildCommentCommand, 
+  CreatePostRootCommentCommand } from '@mp/api/post/util';
 @Injectable()
 export class PostService {
   constructor(private readonly commandBus: CommandBus) {}
@@ -17,6 +30,14 @@ export class PostService {
     async CreatePostLike(request: CreatePostLikeRequest): Promise<CreatePostLikeResponse> {
         return await this.commandBus.execute<CreatePostLikeCommand, CreatePostLikeResponse>(new CreatePostLikeCommand(request));
     }
+
+    async CreateRootComment(request: CreatePostRootCommentRequest): Promise<CreatePostRootCommentResponse> {
+        return await this.commandBus.execute<CreatePostRootCommentCommand, CreatePostRootCommentResponse>(new CreatePostRootCommentCommand(request));
+    }
+
+    async CreateChildComment(request: CreatePostChildCommentRequest): Promise<CreatePostChildCommentResponse> {
+      return await this.commandBus.execute<CreatePostChildCommentCommand, CreatePostChildCommentResponse>(new CreatePostChildCommentCommand(request));
+  }
   //=======================================================
   // EXAMPLE CODE FROM DEMO REPO
   //=======================================================

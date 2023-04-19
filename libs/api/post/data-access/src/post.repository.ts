@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { getStorage, ref , uploadBytes, connectStorageEmulator, uploadString} from 'firebase/storage';
 import { initializeApp } from '@firebase/app';
-import { AddPhotoResponse, CreatePostLikeResponse, CreatePostResponse } from '@mp/api/post/util';
+import { AddPhotoResponse, ChildComment, CreatePostChildCommentResponse, CreatePostLikeResponse, CreatePostResponse, CreatePostRootCommentResponse } from '@mp/api/post/util';
 import { post } from '@mp/api/home/util';
 import * as admin from 'firebase-admin';
 import { firestore } from 'firebase-admin';
@@ -75,10 +75,16 @@ export class PostRepository {
 
         return {msg: "200 OK"};
     }
+    //need to set comment id after creation
+    async createPostRootComment(user: string, post: string, content: string, kronos: number, likes: number, comments: ChildComment[]): Promise<CreatePostRootCommentResponse>{
+        console.log("Root Comment Added");
+        return { post_comments: []};
+    }
 
-    // async addLike(user: string, post: string) {
-
-    // }
+    async createPostChildComment(user: string, post: string, rootComment: string, content: string, kronos: number, likes: number): Promise<CreatePostChildCommentResponse> {
+        console.log("Child Comment Added");
+        return { post_comments: []};
+    }
 }
 
     // const handle = await db.collection('profiles').doc(user);
