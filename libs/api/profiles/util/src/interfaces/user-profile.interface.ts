@@ -1,5 +1,4 @@
 import { post } from '@mp/api/home/util'
-import { chat } from '@mp/api/messages/util'
 export interface user_profile {
     user_id : string;
     timeOfExpiry: number;
@@ -19,7 +18,7 @@ export interface user_profile {
     posts : post[] | null | undefined;  //Array of Posts
     blocked : string[] | null | undefined;
     notifications : string[] | null | undefined;
-    chats : chat[]| null |undefined ;
+    chats : string [] |null |undefined;
 };
 
 

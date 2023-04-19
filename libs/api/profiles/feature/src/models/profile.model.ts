@@ -23,7 +23,7 @@ export class Profile extends AggregateRoot implements user_profile {
     public posts: post[] | null | undefined,  //Array of PostId
     public blocked: string[] | null | undefined,
     public notifications: string[] | null | undefined,
-    public chats: chat[] | null |undefined
+    public chats: string[] | null |undefined
   ) {
     super();
   }
