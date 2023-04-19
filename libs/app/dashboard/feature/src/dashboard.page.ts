@@ -3,6 +3,8 @@ import { IProfile } from '@mp/api/profiles/util';
 import { ProfileState } from '@mp/app/profile/data-access';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
+import { SearchRequest, SearchResponse} from '@mp/api/search/util';
+import { SearchApi } from '@mp/app/dashboard/data-access';
 
 @Component({
   selector: 'ms-dashboard-page',
@@ -15,6 +17,7 @@ export class DashboardPage {
 
   constructor (
     private renderer: Renderer2,
+    private readonly api : SearchApi
   ) {}
 
   // A bunch of dummy recommended posts
@@ -126,5 +129,11 @@ export class DashboardPage {
       event.target.complete();
       event.target.disabled = true;
     }, 2000);
+  }
+
+  async search(query : string){
+    const request : SearchRequest = {query : query};
+    const response = await this.api.search(request);
+    return response.data;
   }
 }
