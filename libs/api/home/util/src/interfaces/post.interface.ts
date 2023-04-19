@@ -3,7 +3,7 @@ export interface post {
     user_id : string;
     content : string;
     caption : string;
-    likes : number;
+    likes : string[];
     timeStamp : number;
     shares : number;
     kronos : number;

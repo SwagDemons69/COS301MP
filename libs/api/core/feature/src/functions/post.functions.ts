@@ -1,5 +1,5 @@
 import { PostService } from '@mp/api/post/feature';
-import { AddPhotoRequest, AddPhotoResponse, CreatePostRequest, CreatePostResponse } from '@mp/api/post/util';
+import { AddPhotoRequest, AddPhotoResponse, CreatePostLikeRequest, CreatePostLikeResponse, CreatePostRequest, CreatePostResponse } from '@mp/api/post/util';
 import { NestFactory } from '@nestjs/core';
 import * as functions from 'firebase-functions';
 import { CoreModule } from '../core.module';
@@ -18,5 +18,13 @@ export const AddPostToFirestore = functions.https.onCall(
       const app = await NestFactory.createApplicationContext(CoreModule);
       const service = app.get(PostService);
       return service.CreatePost(request);
+    }
+  );
+
+  export const CreatePostLike = functions.https.onCall(
+    async (request : CreatePostLikeRequest): Promise<CreatePostLikeResponse> => {
+      const app = await NestFactory.createApplicationContext(CoreModule);
+      const service = app.get(PostService);
+      return service.CreatePostLike(request);
     }
   );

@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { getStorage, ref , uploadBytes, connectStorageEmulator, uploadString} from 'firebase/storage';
 import { initializeApp } from '@firebase/app';
-import { AddPhotoResponse, CreatePostResponse } from '@mp/api/post/util';
+import { AddPhotoResponse, CreatePostLikeResponse, CreatePostResponse } from '@mp/api/post/util';
 import { post } from '@mp/api/home/util';
 import * as admin from 'firebase-admin';
+import { firestore } from 'firebase-admin';
 
 @Injectable()
 export class PostRepository {
@@ -23,9 +24,6 @@ export class PostRepository {
     }
     
     async createPost(post: post){
-        
-
-
         const docRef = admin.firestore().collection('profiles').doc(post.user_id);
         return await admin.firestore().runTransaction(transaction =>{
             return transaction.get(docRef).then(doc =>{
@@ -42,7 +40,51 @@ export class PostRepository {
             });
         })
     }
+    //Using arrays in firestore was not the way because now I have to overwrite whole posts object.
+    //Sub collections should have been used :(
+    async createPostLike(user_id: string, post_id: string): Promise<CreatePostLikeResponse>{
+
+        const postId = Number(post_id);
+        const docRef = admin.firestore().collection('profiles').doc(user_id);
+        
+        await admin.firestore().runTransaction(transaction =>{
+            return transaction.get(docRef).then(doc =>{
+                if(!doc.data()?.['posts'][0]['likes']){
+                    console.log("ERROR, CANT FIND LIKES")
+                }
+                else{
+                    let found = false;
+                    const posts = doc.data()?.['posts'];
+                    const likes = doc.data()?.['posts'][postId]['likes'];
+                    for(const like of likes){
+                        if(like == user_id){
+                            found = true;
+                        }
+                    }
+                    //Validation ensuring you cant like twice
+                    if(!found){
+                        likes.push(user_id);
+                        posts[postId]['likes'] = likes;
+                        transaction.update(docRef, {posts: posts})
+                    }
+                    
+                }
+            });
+        })
+        
+
+        return {msg: "200 OK"};
+    }
+
+    // async addLike(user: string, post: string) {
+
+    // }
 }
+
+    // const handle = await db.collection('profiles').doc(user);
+   
+    // const post = await Promise.resolve(handle.get());
+    // console.log(post.data()['posts'][postId]) 
 
 // async blobToDataURL(blob: Blob): Promise<string> {
 //     return new Promise<string>((resolve, reject) => {

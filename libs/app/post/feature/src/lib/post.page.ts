@@ -114,7 +114,7 @@ export class PostPage {
       user_id : fillerUserId,
       content : pathToImage,
       caption : fillerCaption,
-      likes : 0,
+      likes : [],
       timeStamp : 696969696,
       shares : 0,
       kronos : 0,

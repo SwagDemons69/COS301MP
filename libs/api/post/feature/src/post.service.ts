@@ -1,4 +1,4 @@
-import { AddPhotoRequest, AddPhotoResponse, CreatePostRequest, CreatePostResponse } from '@mp/api/post/util';
+import { AddPhotoRequest, AddPhotoResponse, CreatePostLikeCommand, CreatePostLikeRequest, CreatePostLikeResponse, CreatePostRequest, CreatePostResponse } from '@mp/api/post/util';
 import { Injectable } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
 import { AddPhotoCommand, CreatePostCommand } from '@mp/api/post/util';
@@ -12,6 +12,10 @@ export class PostService {
  
     async CreatePost(request: CreatePostRequest): Promise<CreatePostResponse> {
         return await this.commandBus.execute<CreatePostCommand, CreatePostResponse>(new CreatePostCommand(request));
+    }
+
+    async CreatePostLike(request: CreatePostLikeRequest): Promise<CreatePostLikeResponse> {
+        return await this.commandBus.execute<CreatePostLikeCommand, CreatePostLikeResponse>(new CreatePostLikeCommand(request));
     }
   //=======================================================
   // EXAMPLE CODE FROM DEMO REPO

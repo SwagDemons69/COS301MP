@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AddPhotoRequest, AddPhotoResponse, CreatePostRequest, CreatePostResponse } from '@mp/api/post/util';
+import { AddPhotoRequest, AddPhotoResponse, CreatePostLikeRequest, CreatePostLikeResponse, CreatePostRequest, CreatePostResponse } from '@mp/api/post/util';
 import { Functions, httpsCallable } from '@angular/fire/functions';
 
 @Injectable()
@@ -14,4 +14,13 @@ export class PostApi {
         return await httpsCallable<CreatePostRequest, CreatePostResponse>(this.functions, 'AddPostToFirestore')(request);
     }
 
+    async CreatePostLike(request: CreatePostLikeRequest){
+        return await httpsCallable<CreatePostLikeRequest, CreatePostLikeResponse>(this.functions, 'CreatePostLike')(request);
+    }
+
+    // async CreatePostComment(){
+
+    // }
+
+    
 }

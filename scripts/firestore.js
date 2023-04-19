@@ -2,6 +2,7 @@
 // IMPORTS && SETUP
 //================================================
 const admin = require('firebase-admin');
+const { resolve } = require('path');
 
 //create connection to firebase app
 admin.initializeApp({ projectId: 'twenty4-f9f8e' });
@@ -106,13 +107,29 @@ const addPosts = async () => {
   }
 }
 
+const user = "tJSoPLSEhxEvIrutrPDZV1VcKZbV";
+const postId = 0;
+const createPostLike = async() => {
+  try{
+    //Gets the Post
+    // const handle = await db.collection('profiles').doc(user);
+   
+    // const post = await Promise.resolve(handle.get());
+    // console.log(post.data()['posts'][postId]) 
+    
+  }
+  finally{
+    admin.app().delete();
+  }
+}
+
 //=============================================
 // FUNCTION CALLS
 //=============================================
 
 //generatePosts();
-addPosts();
-
+//addPosts();
+createPostLike();
 //=============================================
 
 const importProfiles = async () => {
@@ -133,6 +150,7 @@ return profiles;
 //   function logProfiles(profiles){
 //     console.log(profiles[0]);
 // }
+
 
 //=============================================
 // FUNCTION CALLS

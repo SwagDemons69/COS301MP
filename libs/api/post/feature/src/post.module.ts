@@ -5,7 +5,8 @@ import { AddPhotoCommandHandler } from './commands';
 import { CreatePostCommandHandler } from './commands/create-post.handler';
 import { PostService } from './post.service';
 import { CreatePostEventHandler } from './events';
-export const CommandHandlers = [ AddPhotoCommandHandler, CreatePostCommandHandler];
+import { CreatePostLikeCommandHandler } from './commands/create-post-like.handler';
+export const CommandHandlers = [ AddPhotoCommandHandler, CreatePostCommandHandler, CreatePostLikeCommandHandler];
 export const EventHandlers = [ CreatePostEventHandler ];
 
 @Module({
