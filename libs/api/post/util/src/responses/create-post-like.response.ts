@@ -1,3 +1,5 @@
+import { post_like } from "../interfaces";
+
 export interface CreatePostLikeResponse{
-    msg: string;
+    likes: post_like[]
 }

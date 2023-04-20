@@ -3,8 +3,10 @@ import { getStorage, ref , uploadBytes, connectStorageEmulator, uploadString} fr
 import { initializeApp } from '@firebase/app';
 import { AddPhotoResponse, ChildComment, CreatePostChildCommentResponse, CreatePostLikeResponse, CreatePostResponse, CreatePostRootCommentResponse, GetPostsResponse, RootComment } from '@mp/api/post/util';
 import { post } from '@mp/api/home/util';
+import { post_like } from '@mp/api/post/util';
 import * as admin from 'firebase-admin';
 import { firestore } from 'firebase-admin';
+import { user } from 'firebase-functions/v1/auth';
 
 @Injectable()
 export class PostRepository {
@@ -29,36 +31,21 @@ export class PostRepository {
     
     async createPostLike(user_id: string, post_id: string): Promise<CreatePostLikeResponse>{
 
-        const postId = Number(post_id);
-        const docRef = admin.firestore().collection('profiles').doc(user_id);
+        const handle = await admin.firestore().collection(`profiles/${user_id}/posts/${post_id}/likes`).get();
+        const likes = handle.docs.map((doc) => { return doc.data() as post_like;});
+        let flag = false;
+        for(let i = 0;i < likes.length; i++){
+            if(likes[i].user == user_id)
+                flag = true;
+        }
         
-        await admin.firestore().runTransaction(transaction =>{
-            return transaction.get(docRef).then(doc =>{
-                if(!doc.data()?.['posts'][0]['likes']){
-                    console.log("ERROR, CANT FIND LIKES")
-                }
-                else{
-                    let found = false;
-                    const posts = doc.data()?.['posts'];
-                    const likes = doc.data()?.['posts'][postId]['likes'];
-                    for(const like of likes){
-                        if(like == user_id){
-                            found = true;
-                        }
-                    }
-                    //Validation ensuring you cant like twice
-                    if(!found){
-                        likes.push(user_id);
-                        posts[postId]['likes'] = likes;
-                        transaction.update(docRef, {posts: posts})
-                    }
-                    
-                }
-            });
-        })
-        
-
-        return {msg: "200 OK"};
+        if(!flag){
+            const newLike = admin.firestore().collection(`profiles/${user_id}/posts/${post_id}/likes`).doc();
+            await newLike.set({user: user_id});
+        }
+        const likesRef = await admin.firestore().collection(`profiles/${user_id}/posts/${post_id}/likes`).get();
+        const allLikes = likesRef.docs.map((doc) => { return doc.data() as post_like;});
+        return {likes : allLikes};
     }
     
     async createPostRootComment(user: string, post: string, comment: RootComment): Promise<CreatePostRootCommentResponse>{
