@@ -41,7 +41,7 @@ export class DashboardPage {
     { title: "I'm a 20 year old virgin", desc: "I'm a 20 year old virgin", img: "https://picsum.photos/id/24/300/300" }, // Copilot generated this one lmao
   ]
 
-  searchResults = [
+  searchResultsPosts = [
     { title: "Touching grass for the first time", desc: "Deleted my reddit account to try out this new Twenty4 thing", img: "https://picsum.photos/id/18/300/300" },
     { title: "Wow look at this cool tree I found", desc: "fren.", img: "https://picsum.photos/id/19/300/300" },
     { title: "My desk setup! Much wow very neat :)", desc: "Just kidding, this is a stock photo I stole. Please give me time immabouta die :'(", img: "https://picsum.photos/id/20/300/300" },
@@ -49,6 +49,10 @@ export class DashboardPage {
     { title: "A girl asked what my favorite position was", desc: "I told her, 'CEO'", img: "https://picsum.photos/id/22/300/300" },
     { title: "I ONLY KNOW HOW TO USE CHOPSTICKS", desc: "PLEASE HELP I NEED TO USE ONE OF THESE OR IM GONNA STARVE TO DEATH", img: "https://picsum.photos/id/23/300/300" },
     { title: "I'm a 20 year old virgin", desc: "I'm a 20 year old virgin", img: "https://picsum.photos/id/24/300/300" }, // Copilot generated this one lmao
+  ]
+
+  searchResultsUsers = [
+
   ]
 
   isSearchbarVisible = false;
@@ -123,7 +127,6 @@ export class DashboardPage {
     }
   }
 
-
   loadData(event: any) {
     setTimeout(() => {
       event.target.complete();
@@ -134,6 +137,7 @@ export class DashboardPage {
   async search(query : string){
     const request : SearchRequest = {query : query};
     const response = await this.api.search(request);
-    return response.data;
+    this.searchResultsPosts = response;
+    return response;
   }
 }
