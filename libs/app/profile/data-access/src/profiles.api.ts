@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
-import { doc, docData, Firestore , collection} from '@angular/fire/firestore';
+import { doc, docData, Firestore , collection, getDocs, query} from '@angular/fire/firestore';
+
 import { Functions, httpsCallable } from '@angular/fire/functions';
-import { EditProfileRequest, EditProfileResponse, user_profile } from '@mp/api/profiles/util';
+import {  EditProfileRequest, EditProfileResponse, user_profile } from '@mp/api/profiles/util';
 import { post } from '@mp/api/home/util'
+import { AddPhotoRequest, AddPhotoResponse, GetPostsRequest, GetPostsResponse } from '@mp/api/post/util';
 
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { getDoc } from 'firebase/firestore';
-
+//import { AngularFireStore } from '@angular/fire/firestore';
 
 const pId = "1";
 
@@ -40,12 +42,8 @@ export class ProfilesApi {
     return docData(docRef, { idField: 'id' });
   }
 
-  async getPosts(user: string){
-    const postsRef = doc(this.firestore, `profiles/${user}/posts`);
-    const posts = await getDoc(postsRef);
-    const postsArr = posts.data;
-    console.log(postsArr);
-
+  async getPosts(request: GetPostsRequest){
+   return await httpsCallable<GetPostsRequest, GetPostsResponse>(this.functions, 'GetPosts')(request);
   }
 
   // async getPostContentFromCloudStorage(images: string[]){
@@ -79,17 +77,11 @@ export class ProfilesApi {
 // CLOUD FUNCTIONS
 //==========================================================================
 
-  // async updateAccountDetails(request: IUpdateAccountDetailsRequest) {
-  //   return await httpsCallable<
-  //     IUpdateAccountDetailsRequest,
-  //     IUpdateAccountDetailsResponse
-  //   >(
-  //     this.functions,
-  //     'updateAccountDetails'
-  //   )(request);
-  // }
-
   async EditProfile(request: EditProfileRequest){
     return await httpsCallable<EditProfileRequest, EditProfileResponse>(this.functions, 'EditProfile')(request);
+  }
+
+  async UploadProfilePhotoToCloudStorage(request: AddPhotoRequest){
+    return await httpsCallable<AddPhotoRequest, AddPhotoResponse>(this.functions, 'AddPhotoToCloudStorage')(request);
   }
 }

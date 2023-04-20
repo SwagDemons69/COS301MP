@@ -214,7 +214,7 @@ async EditProfile(ctx: StateContext<ProfileStateModel>){
       const notPublic = formState.notPublic;
       const name = formState.name;
       const username = formState.username;
-      const profilePicturePath = "https://picsum.photos/id/19/300/300";
+      const profilePicturePath = formState.profilePicturePath;
       const bio = formState.bio;
       const province = formState.province;
 

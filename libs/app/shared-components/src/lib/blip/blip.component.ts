@@ -15,7 +15,7 @@ export class BlipComponent {
     user_id: "",
     content: "",
     caption: "Oops! This post could not be loaded.",
-    likes: 0,
+    likes: [],
     timeStamp: 0,
     shares: 0,
     kronos: 0,

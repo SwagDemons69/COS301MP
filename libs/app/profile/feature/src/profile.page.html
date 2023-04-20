@@ -40,10 +40,11 @@
 
           <ng-container *ngIf="(profile$ | async) as profile; else noProfile">
             <ion-avatar>
-              <img alt="Avatar" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+              <ion-img alt="Avatar" [src]="profileImage" ></ion-img>
             </ion-avatar>
           </ng-container>
-
+          <!-- (profile.profilePicturePath)
+          https://ionicframework.com/docs/img/demos/avatar.svg -->
           <ng-container *ngIf="(profile$ | async) as profile; else noProfile">
             <ion-card-subtitle class="username">
               <ion-input [value]="profile.username"> </ion-input>
@@ -59,7 +60,7 @@
               <ion-row class="statsNumber">
 
                 <ion-col><ion-input [value]="(profile.following?.length)"></ion-input></ion-col>
-                <ion-col><ion-input [value]="(profile.posts?.length)"></ion-input></ion-col>
+                <ion-col><ion-input [value]="(posts.length)"></ion-input></ion-col>
                 <ion-col><ion-input [value]="(profile.followers?.length)"></ion-input></ion-col>
 
               </ion-row>
@@ -86,7 +87,7 @@
               <ion-grid [fixed]="true">
                 <ion-row class="ion-justify-content-center" *ngFor="let i of postIndex">
                     <ion-col class="ion-col">
-                      <ion-img [src]="(profile.posts?.[i]?.content)" (click)="openBlip(profile.posts?.[i],profile.username)" alt=""></ion-img>
+                      <ion-img [src]="(posts[i].content)" (click)="openBlip(posts[i],profile.username)" alt=""></ion-img>
                     </ion-col>
                 </ion-row>
               </ion-grid>
@@ -166,16 +167,19 @@
       <ion-checkbox slot="end" formControlName="notPublic"></ion-checkbox>
     </ion-item>
 
-    <!-- <ion-item>
-      <ion-label position="floating">Profile Picture</ion-label>
-      <ion-input slot="end" type="file" formControlName="profilePicturePath" [placeholder]="(profile.profilePicturePath)"></ion-input>
-    </ion-item> -->
+    <ion-item class="profilePic">
+      <!-- <ion-label position="floating">Profile Picture</ion-label> -->
+      <!-- <label for="file"></label> -->
+      <input type="file" id="file" formControlName="file" accept="image/* " (change)="onFileChange($event)" />
+    </ion-item>
+    <!-- style="display:none;" -->
+    <!-- (change)="onFileChange($event)"  -->
 
     <!-- While storage is not set we use images from internet so we will use link instead of file based images -->
-    <ion-item>
+    <!-- <ion-item>
       <ion-label position="floating">Profile Picture</ion-label>
       <ion-input slot="end" type="text" formControlName="profilePicturePath" ></ion-input>
-    </ion-item>
+    </ion-item> -->
 
     <ion-button type="submit" expand="block">Save</ion-button>
   </form>

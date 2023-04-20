@@ -7,7 +7,7 @@ export class Post extends AggregateRoot implements post{
     public user_id : string,
     public content : string,
     public caption : string,
-    public likes : number,
+    public likes : string[],
     public timeStamp : number,
     public shares : number,
     public kronos : number,

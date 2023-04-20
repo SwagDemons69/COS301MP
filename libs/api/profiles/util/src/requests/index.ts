@@ -8,3 +8,4 @@ export * from './update-profile-status.request';
 
 export * from './display-profile.request'
 export * from './edit-profile.request'
+export * from './edit-profile-photo.request'
