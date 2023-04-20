@@ -14,11 +14,11 @@ export class SearchApi {
     ) {}
 
   async search(request: SearchRequest) {
-    const users = doc(this.firestore, `users/${request}`).withConverter<IProfile>({fromFirestore: (snapshot) => {return snapshot.data() as IProfile;},toFirestore: (it: IProfile) => it,});
-    const posts = doc(this.firestore, `users/user/posts/post/caption/${request}`).withConverter<post>({fromFirestore: (snapshot) => {return snapshot.data() as post;},toFirestore: (it: post) => it,});
+    // const users = doc(this.firestore, `users/${request}`).withConverter<IProfile>({fromFirestore: (snapshot) => {return snapshot.data() as IProfile;},toFirestore: (it: IProfile) => it,});
+    // const posts = doc(this.firestore, `users/user/posts/post/caption/${request}`).withConverter<post>({fromFirestore: (snapshot) => {return snapshot.data() as post;},toFirestore: (it: post) => it,});
     // return docData(docRef, { idField: 'id' });
-    // return await httpsCallable<SearchRequest, SearchResponse>(this.functions, 'Search')(request).catch(e => {
-    //   console.log(e);
-    // });
+    return await httpsCallable<SearchRequest, SearchResponse>(this.functions, 'Search')(request).catch(e => {
+      console.log(e);
+    });
   }
 }

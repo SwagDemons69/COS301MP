@@ -1,9 +1,9 @@
 import { SearchRepository } from '@mp/api/search/data-access';
 import { SearchQuery, SearchResponse} from '@mp/api/search/util';
-import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
+import { QueryHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
 //import { Profile } from '../models';
 
-@CommandHandler(SearchQuery)
+@QueryHandler(SearchQuery)
 export class SearchQueryHandler
   implements
     ICommandHandler<SearchQuery, SearchResponse>
