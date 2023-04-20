@@ -64,14 +64,33 @@ export class PostRepository {
     async createPostRootComment(user: string, post: string, comment: RootComment): Promise<CreatePostRootCommentResponse>{
         const handle = admin.firestore().collection(`profiles/${user}/posts/${post}/root-comments`).doc();
         comment.root_comment_id = handle.id;
-        await handle.set(comment);    
+        await handle.set(comment);
+        //Get all comments and their child comments    
         const commentsRef = await admin.firestore().collection(`profiles/${user}/posts/${post}/root-comments`).get(); 
-        return { post_comments:commentsRef.docs.map((doc) => { return doc.data() as RootComment;})};
+        const RootComments = commentsRef.docs.map((doc) => { return doc.data() as RootComment;});
+
+        for(let i = 0; i < RootComments.length; i++){
+            const commentsRef = await admin.firestore().collection(`profiles/${user}/posts/${post}/root-comments/${RootComments[i].root_comment_id}/child-comments`).get();
+            const ChildComments = commentsRef.docs.map((doc) => { return doc.data() as ChildComment;});
+            RootComments[i].comments = ChildComments;
+        }
+        return { post_comments: RootComments };
     }
 
-    async createPostChildComment(user: string, post: string, rootComment: string, content: string, kronos: number, likes: number): Promise<CreatePostChildCommentResponse> {
-        console.log("Child Comment Added");
-        return { post_comments: []};
+    async createPostChildComment(user: string, post: string, rootComment: string, comment: ChildComment): Promise<CreatePostChildCommentResponse> {
+        const handle = admin.firestore().collection(`profiles/${user}/posts/${post}/root-comments/${rootComment}/child-comments`).doc();
+        comment.child_comment_id = handle.id;
+        await handle.set(comment);    
+         //Get all comments and their child comments    
+         const commentsRef = await admin.firestore().collection(`profiles/${user}/posts/${post}/root-comments`).get(); 
+         const RootComments = commentsRef.docs.map((doc) => { return doc.data() as RootComment;});
+ 
+         for(let i = 0; i < RootComments.length; i++){
+             const commentsRef = await admin.firestore().collection(`profiles/${user}/posts/${post}/root-comments/${RootComments[i].root_comment_id}/child-comments`).get();
+             const ChildComments = commentsRef.docs.map((doc) => { return doc.data() as ChildComment;});
+             RootComments[i].comments = ChildComments;
+         }
+         return { post_comments: RootComments };
     }
 
     async getPosts(user: string): Promise<GetPostsResponse>{

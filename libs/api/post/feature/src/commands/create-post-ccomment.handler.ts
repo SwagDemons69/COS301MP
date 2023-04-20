@@ -21,8 +21,6 @@ export class CreatePostChildCommentCommandHandler
         request.user_id,
          request.post_id,
          request.root_comment_id,
-         request.comment.content,
-         request.comment.kronos,
-         request.comment.likes);
+         request.comment);
   }
 }
