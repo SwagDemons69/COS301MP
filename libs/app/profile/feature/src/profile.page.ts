@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { edit_profile, user_profile } from '@mp/api/profiles/util';
 import { AlertController, ModalController } from '@ionic/angular';
 import { BlipComponent } from '@mp/app//shared-components';
-import { ProfileState } from '@mp/app/profile/data-access';
+import { ProfilesApi, ProfileState } from '@mp/app/profile/data-access';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { post } from '@mp/api/home/util';
@@ -27,7 +27,8 @@ export class ProfilePage {
   constructor(
     private modalController: ModalController,
     private formBuilder: FormBuilder,
-    private readonly store : Store
+    private readonly store : Store,
+    private readonly api : ProfilesApi
   )
   {
     this.userForm = this.formBuilder.group({
@@ -44,6 +45,7 @@ export class ProfilePage {
         const len = user.posts.length;
         //Same functionality as python 'for i in range(len): push(i)'
         this.postIndex = [...Array(len).keys()];
+        //this.api.getPosts("858L5KxcsV5yAgBQ5bseUk2EhLZe");
       }
     })
     //this.postImages = []
@@ -89,6 +91,7 @@ export class ProfilePage {
   
 
   updateProfile() {
+    
     alert(JSON.stringify(this.userForm.value, null, 2));
     this.isEditingProfile = false;
   

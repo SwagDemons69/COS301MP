@@ -5,6 +5,7 @@ import { EditProfileRequest, EditProfileResponse, user_profile } from '@mp/api/p
 import { post } from '@mp/api/home/util'
 
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { getDoc } from 'firebase/firestore';
 
 
 const pId = "1";
@@ -37,6 +38,14 @@ export class ProfilesApi {
       fromFirestore: (snapshot) => { return snapshot.data() as post; },
       toFirestore: (it: post) => it,});
     return docData(docRef, { idField: 'id' });
+  }
+
+  async getPosts(user: string){
+    const postsRef = doc(this.firestore, `profiles/${user}/posts`);
+    const posts = await getDoc(postsRef);
+    const postsArr = posts.data;
+    console.log(postsArr);
+
   }
 
   // async getPostContentFromCloudStorage(images: string[]){

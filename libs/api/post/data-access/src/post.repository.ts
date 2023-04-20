@@ -23,19 +23,36 @@ export class PostRepository {
     }
     
     async createPost(post: post){
-        const docRef = admin.firestore().collection('profiles').doc(post.user_id);
-        return await admin.firestore().runTransaction(transaction =>{
-            return transaction.get(docRef).then(doc =>{
-                if(!doc.data()?.['posts']){
-                    transaction.set(docRef, {posts: post})
-                }
-                else{
-                    const posts = doc.data()?.['posts'];
-                    posts.push(post);
-                    transaction.update(docRef, {posts: posts})
-                }
-            });
-        })
+        // const docRef = admin.firestore()
+        // .collection('profiles').doc(post.user_id)
+        // .collection('posts');
+        // const posts = await docRef.get();
+        // const length = posts.docs.length;
+        
+        const postRef = admin.firestore()
+        .collection(`profiles/${post.user_id}/posts`).doc();
+
+        post.post_id = postRef.id;
+        postRef.set(post);
+
+        //const newPost = await postRef.get();
+        
+        //admin.firestore().collection(`profiles/${post.user_id}/posts`).doc().update({post_id: newPost.});
+        // return await admin.firestore().runTransaction(transaction =>{
+        //     return transaction.get(docRef).then(doc =>{
+        //         if(!doc.data()?.['posts']){
+        //             post.post_id = "0";
+        //             transaction.set(docRef, {posts: post})
+        //         }
+        //         else{
+        //             const posts = doc.data()?.['posts'];
+        //             post.post_id = (posts.length).toString();
+        //             posts.push(post);
+        //             transaction.update(docRef, {posts: posts})
+        //         }
+        //     });
+        // })
+
     }
 }
 
