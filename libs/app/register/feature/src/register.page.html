@@ -12,9 +12,27 @@
     ngxsForm="register.registerForm"
     (submit)="register()">
     <ion-list class="ion-padding-vertical">
+    
       <ion-item>
-        <!-- <ion-label position="floating" class="required">Email</ion-label> -->
         <ion-input
+          class="custom"
+          type="text"
+          minlength="3"
+          maxlength="64"
+          placeholder="Username"
+          required="true"
+          formControlName="username"></ion-input>
+      </ion-item>
+      <ion-text
+        *ngIf="username?.invalid && (username?.dirty || username?.touched)"
+        class="ion-padding-start"
+        color="danger">
+        <small>{{ usernameError }}</small>
+      </ion-text>
+
+      <ion-item>
+        <ion-input
+        class="custom"
           type="email"
           minlength="6"
           maxlength="64"
@@ -32,6 +50,7 @@
       <ion-item>
         <!-- <ion-label position="floating" class="required">Password</ion-label> -->
         <ion-input
+        class="custom"
           [type]="showPassword ? 'text' : 'password'"
           minlength="6"
           maxlength="64"
@@ -52,6 +71,28 @@
         <small>{{ passwordError }}</small>
       </ion-text>
 
+      <ion-item>
+        <ion-input
+          class="custom"
+          [type]="showPassword ? 'text' : 'password'"
+          minlength="6"
+          maxlength="64"
+          placeholder="Confirm Password"
+          required="true"
+          autocomplete="password"
+          formControlName="confirmPassword"></ion-input>
+        <ion-icon
+          [name]="showPassword ? 'eye-outline' : 'eye-off-outline'"
+          slot="end"
+          class="ion-align-self-center"
+          (click)="toggleShowPassword()"></ion-icon>
+      </ion-item>
+      <ion-text
+        *ngIf="confirmPassword?.invalid && (confirmPassword?.dirty || confirmPassword?.touched)"
+        class="ion-padding-start"
+        color="danger">
+        <small>{{ confirmPasswordError }}</small>
+      </ion-text>
         
     </ion-list>
 
