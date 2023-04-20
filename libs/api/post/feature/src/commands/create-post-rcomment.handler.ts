@@ -20,9 +20,6 @@ export class CreatePostRootCommentCommandHandler
     return  await this.repository.createPostRootComment(
         request.user_id, 
         request.post_id, 
-        request.comment.content,
-        request.comment.kronos,
-        request.comment.likes,
-        request.comment.comments);
+        request.comment);
   }
 }

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { getStorage, ref , uploadBytes, connectStorageEmulator, uploadString} from 'firebase/storage';
 import { initializeApp } from '@firebase/app';
-import { AddPhotoResponse, ChildComment, CreatePostChildCommentResponse, CreatePostLikeResponse, CreatePostResponse, CreatePostRootCommentResponse } from '@mp/api/post/util';
+import { AddPhotoResponse, ChildComment, CreatePostChildCommentResponse, CreatePostLikeResponse, CreatePostResponse, CreatePostRootCommentResponse, RootComment } from '@mp/api/post/util';
 import { post } from '@mp/api/home/util';
 import * as admin from 'firebase-admin';
 import { firestore } from 'firebase-admin';
@@ -76,8 +76,16 @@ export class PostRepository {
         return {msg: "200 OK"};
     }
     //need to set comment id after creation
-    async createPostRootComment(user: string, post: string, content: string, kronos: number, likes: number, comments: ChildComment[]): Promise<CreatePostRootCommentResponse>{
-        console.log("Root Comment Added");
+    async createPostRootComment(user: string, post: string, comment: RootComment): Promise<CreatePostRootCommentResponse>{
+        //console.log("Root Comment Added");
+        //doc(this.firestore, 'profiles/${user_id}/posts')
+        // const docRef = admin.firestore()
+        // .collection('profiles').doc(`${user}/posts/${post}`);
+        // //.collection('likes').doc("0").create(comment);
+        // docRef.get().then((value) => {
+        //     console.log(value.data())
+        // })
+
         return { post_comments: []};
     }
 
