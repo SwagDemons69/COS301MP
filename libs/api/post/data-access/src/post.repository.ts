@@ -52,6 +52,7 @@ export class PostRepository {
         const handle = admin.firestore().collection(`profiles/${user}/posts/${post}/root-comments`).doc();
         comment.root_comment_id = handle.id;
         await handle.set(comment);
+        
         //Get all comments and their child comments    
         const commentsRef = await admin.firestore().collection(`profiles/${user}/posts/${post}/root-comments`).get(); 
         const RootComments = commentsRef.docs.map((doc) => { return doc.data() as RootComment;});
