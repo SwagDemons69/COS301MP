@@ -41,16 +41,17 @@ const getProfiles = async() => {
     const handle = await db.collection('profiles').get();
     const profiles = [];
     handle.forEach((doc) => {
-      if(doc.data().Name === "Alice4"){
+      var received = "" + doc.data().Name;
+      if(received.includes("Alice")){
         const data = doc.data();
         //const name = doc.data().Name;
         profiles.push(doc.data());
       }
     });
 
-  for(const user in profiles){
-    console.log(profiles);
-  }
+    for(let i = 0; i < profiles.length; i++){
+      console.log(profiles[i].Name);
+    }
   return profiles;
 };
 
@@ -59,7 +60,12 @@ const getProfiles = async() => {
 //=============================================
 
 generateProfiles();
-console.log(getProfiles());
+const foundUsers = getProfiles();
+
+for(var user in foundUsers){
+  console.log(user.Name);
+}
+
 admin.app().delete();
 
 //=============================================

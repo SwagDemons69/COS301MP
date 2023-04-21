@@ -10,50 +10,52 @@ export class SearchRepository {
 
     async search(query: string): Promise<SearchResponse> {
         const foundUsers = this.GetSearchedUsers(query);
+        // const foundPosts = this.GetSearchedPosts(query);
         let profiles: user[] = [];
         let posts: post[] = [];
 
-        for(var user in foundUsers){
-          profiles.push();
-        }
+        // for(let i = 0; i < foundUsers.length; i++){
+        //   var content = user[i].displayName;
+        //   var bio = user[i].bio;
+        //   var photoURL = user[i].username;
+        //   var profileId = user[i].user_id;
+        //   profiles.push({content, bio, photoURL, });
+        // }
         var response = {profiles, posts};
 
         return response;
     }
     
-    async GetSearchedUsers(query : string): Promise<any> {
+    async GetSearchedUsers(query : string) {
       const handle = await admin.firestore().collection('profiles').get();
-      const profiles: admin.firestore.DocumentData[] = [];
+      const profiles: user[] = [];
       handle.forEach((doc) => {
         if(doc.data()?.['displayName'] === query){
-          profiles.push(doc.data());
+          profiles.push()
         }
       });
 
-      if(profiles.length != 0){
-        return profiles;
-      }
-      else return "";
-      
-    }
+      return profiles;
+    };
 
-    async GetSearchedPosts(query : string): Promise<any> {
-      const handle = await admin.firestore().collection('users').get();
-      const profiles: admin.firestore.DocumentData[] = [];
-      handle.forEach((doc) => {
-        if(doc.data()?.['posts'].'post'.'caption' === query){
-          const data = doc.data();
-          //const name = doc.data().Name;
-          profiles.push(doc.data());
-        }
-      });
-
-      if(profiles.length != 0){
-        return profiles;
-      }
-      else return "";
-      
+    getStringValue(value: any): string {
+      return value.toString();
     }
+    //### Not working, try subcollections ###
+    // async GetSearchedPosts(query : string): Promise<any> {
+    //   const handle = await admin.firestore().collection('users').get();
+    //   const returnedPosts: post[] = [];
+    //   handle.forEach((doc) => {
+    //     const p = doc.data()?.collection('posts');
+    //     p.forEach((p2) => {
+    //       if(p2.['caption'] === query){
+    //         posts.push({})
+    //       }
+    //     })
+    //   });
+      
+    //   return returnedPosts; 
+    // }
 }
 
 
