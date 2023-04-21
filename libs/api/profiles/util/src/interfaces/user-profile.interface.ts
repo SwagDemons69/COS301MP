@@ -1,10 +1,12 @@
+import { post } from '@mp/api/home/util'
+
 export interface user_profile {
     user_id : string;
     timeOfExpiry: number;
     notPublic : string;
     username : string | null | undefined;
     name : string | null | undefined;
-    profilePicturePath : string | null | undefined;
+    profilePicturePath : string;
     bio : string | null | undefined;
     email : string | null | undefined;
     password : string;
@@ -14,7 +16,7 @@ export interface user_profile {
     commentLikesLeft : number | null | undefined;
     followers :  string[] | null | undefined; //Array of UserId
     following : string[] | null | undefined; //Array of UserId
-    posts : string[] | null | undefined;  //Array of PostId
+    posts : post[] | null | undefined;  //Array of Posts
     blocked : string[] | null | undefined;
     notifications : string[] | null | undefined;
 };

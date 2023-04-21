@@ -7,89 +7,16 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-    <!--  -->
-    <div class="notification">
-        <div class="notification-icon">
-          <i class="fa fa-info-circle"></i>
-        </div>
-        <div class="notification-message">
-          <p>Prof G has disliked your post.</p>
-        </div>
-        <div class="notification-close">
-          <i class="fa fa-times"></i>
-        </div>
-    </div>
-
-    <div class="notification">
-        <div class="notification-icon">
-          <i class="fa fa-info-circle"></i>
-        </div>
-        <div class="notification-message">
-          <p>Dr Marshal has liked your post.</p>
-        </div>
-        <div class="notification-close">
-          <i class="fa fa-times"></i>
-        </div>
-    </div>
-
-    <div class="notification">
-        <div class="notification-icon">
-          <i class="fa fa-info-circle"></i>
-        </div>
-        <div class="notification-message">
-          <p>Dr Anna has donated 1hr to you.</p>
-        </div>
-        <div class="notification-close">
-          <i class="fa fa-times"></i>
-        </div>
-    </div>
-
-    <div class="notification">
-        <div class="notification-icon">
-          <i class="fa fa-info-circle"></i>
-        </div>
-        <div class="notification-message">
-          <p>You have 0.5hrs left.</p>
-        </div>
-        <div class="notification-close">
-          <i class="fa fa-times"></i>
-        </div>
-    </div>
-
-    <div class="notification">
-        <div class="notification-icon">
-          <i class="fa fa-info-circle"></i>
-        </div>
-        <div class="notification-message">
-          <p>Dr Nills has liked your post.</p>
-        </div>
-        <div class="notification-close">
-          <i class="fa fa-times"></i>
-        </div>
-    </div>
-
-    <div class="notification">
-        <div class="notification-icon">
-          <i class="fa fa-info-circle"></i>
-        </div>
-        <div class="notification-message">
-          <p>Dr A has liked your post.</p>
-        </div>
-        <div class="notification-close">
-          <i class="fa fa-times"></i>
-        </div>
-    </div>
-
-    <div class="notification">
-        <div class="notification-icon">
-          <i class="fa fa-info-circle"></i>
-        </div>
-        <div class="notification-message">
-          <p>Welcome to Twenty4.</p>
-        </div>
-        <div class="notification-close">
-          <i class="fa fa-times"></i>
-        </div>
-    </div>
-      
+  
+    <div class="notification" *ngFor="let notification of notifications">
+      <div class="notification-icon">
+        <i class="fa {{ notification.icon }}"></i>
+      </div>
+      <div class="notification-message">
+        <p>{{ notification.message }}</p>
+      </div>
+      <div class="notification-close">
+        <i class="fa fa-times"></i>
+      </div>
+    </div>    
 </ion-content>

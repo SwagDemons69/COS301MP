@@ -7,3 +7,5 @@ export * from './update-personal-details.response';
 export * from './update-profile-status.response';
 
 export * from './display-profile.response'
+export * from './edit-profile.response'
+export * from './edit-profile-photo.response'

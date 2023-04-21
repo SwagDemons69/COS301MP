@@ -1,7 +1,8 @@
 import { Component, Renderer2 } from '@angular/core';
-import { ScrollDetail } from '@ionic/angular';
-import { IProfile } from '@mp/api/profiles/util';
+import { user_profile } from '@mp/api/profiles/util';
 import { ProfileState } from '@mp/app/profile/data-access';
+import { ModalController } from '@ionic/angular';
+import { BlipComponent } from '@mp/app//shared-components';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
@@ -12,10 +13,11 @@ import { Observable } from 'rxjs';
 })
 
 export class DashboardPage {
-  @Select(ProfileState.profile) profile$!: Observable<IProfile | null>;
+  @Select(ProfileState.profile) profile$!: Observable<user_profile | null>;
 
   constructor (
     private renderer: Renderer2,
+    private modalController: ModalController,
   ) {}
 
   // A bunch of dummy recommended posts
@@ -30,13 +32,13 @@ export class DashboardPage {
 
   // A bunch of dummy trending posts
   trending = [
-    { title: "Touching grass for the first time", desc: "Deleted my reddit account to try out this new Twenty4 thing", img: "https://picsum.photos/id/18/300/300" },
-    { title: "Wow look at this cool tree I found", desc: "fren.", img: "https://picsum.photos/id/19/300/300" },
-    { title: "My desk setup! Much wow very neat :)", desc: "Just kidding, this is a stock photo I stole. Please give me time immabouta die :'(", img: "https://picsum.photos/id/20/300/300" },
-    { title: "Selling my shoes as an NFT", desc: "Originally I wanted to sell the actual shoes, but then I realized I like them too much so instead I'll just sell this picture of them which is a very nice picture if I do say so myself. $400", img: "https://picsum.photos/id/21/300/300" },
-    { title: "A girl asked what my favorite position was", desc: "I told her, 'CEO'", img: "https://picsum.photos/id/22/300/300" },
-    { title: "I ONLY KNOW HOW TO USE CHOPSTICKS", desc: "PLEASE HELP I NEED TO USE ONE OF THESE OR IM GONNA STARVE TO DEATH", img: "https://picsum.photos/id/23/300/300" },
-    { title: "I'm a 20 year old virgin", desc: "I'm a 20 year old virgin", img: "https://picsum.photos/id/24/300/300" }, // Copilot generated this one lmao
+    { caption: "Touching grass for the first time", desc: "Deleted my reddit account to try out this new Twenty4 thing", content: "https://picsum.photos/id/18/300/300" },
+    { caption: "Wow look at this cool tree I found", desc: "fren.", content: "https://picsum.photos/id/19/300/300" },
+    { caption: "My desk setup! Much wow very neat :)", desc: "Just kidding, this is a stock photo I stole. Please give me time immabouta die :'(", content: "https://picsum.photos/id/20/300/300" },
+    { caption: "Selling my shoes as an NFT", desc: "Originally I wanted to sell the actual shoes, but then I realized I like them too much so instead I'll just sell this picture of them which is a very nice picture if I do say so myself. $400", content: "https://picsum.photos/id/21/300/300" },
+    { caption: "A girl asked what my favorite position was", desc: "I told her, 'CEO'", content: "https://picsum.photos/id/22/300/300" },
+    { caption: "I ONLY KNOW HOW TO USE CHOPSTICKS", desc: "PLEASE HELP I NEED TO USE ONE OF THESE OR IM GONNA STARVE TO DEATH", content: "https://picsum.photos/id/23/300/300" },
+    { caption: "I'm a 20 year old virgin", desc: "I'm a 20 year old virgin", content: "https://picsum.photos/id/24/300/300" }, // Copilot generated this one lmao
   ]
 
   searchResults = [
@@ -111,27 +113,36 @@ export class DashboardPage {
     this.isSearchbarVisible = !this.isSearchbarVisible;
   }
 
-  // Prevent re-setting css properties every scroll event
-  isKronosBarVisible = false;
   onContentScroll(event: any) {
     console.log(event.detail.scrollTop);
-
-    if (event.detail.scrollTop > 220 && !this.isKronosBarVisible) {
+    if (event.detail.scrollTop > 220) {
       this.renderer.setStyle(document.querySelector(".barKronos"), 'opacity', '1');
-      this.isKronosBarVisible = true;
     }
-    else if (event.detail.scrollTop <= 220) {
+    else {
       this.renderer.setStyle(document.querySelector(".barKronos"), 'opacity', '0');
-      this.renderer.setStyle(document.querySelector(".glassyBackground"), 'top', `${0.4*event.detail.scrollTop}px`);
-      this.isKronosBarVisible = false;
     }
   }
-
 
   loadData(event: any) {
     setTimeout(() => {
       event.target.complete();
       event.target.disabled = true;
     }, 2000);
+  }
+
+  // See [https://stackblitz.com/edit/ionic6-angular13-wnmgmu?file=src/app/app.component.ts] for reference
+  async openBlip(data: any) {
+    const modal = await this.modalController.create({
+      component: BlipComponent,
+      componentProps: {
+        data: data
+      }
+    });
+
+    modal.onDidDismiss().then((data) => {
+      console.log(data);
+    });
+
+    return await modal.present();
   }
 }

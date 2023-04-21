@@ -2,8 +2,8 @@ export interface post {
     post_id : string;
     user_id : string;
     content : string;
-    caption : string | null | undefined;
-    likes : number;
+    caption : string;
+    likes : string[];
     timeStamp : number;
     shares : number;
     kronos : number;

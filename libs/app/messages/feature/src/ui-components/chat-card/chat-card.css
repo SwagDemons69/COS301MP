@@ -1,51 +1,67 @@
-.card{
-    height: 25vh;
+.card {
     display: flex;
-}
-
-.middle-section{
-    margin-top: 5vh;
-    margin-left: 5vw;
-    margin-right: 5vw;
-    width: 80vw;
-}
-
-.left{
-    margin-top: 5vh;
     align-items: center;
-}
-.profile-photo{
-    background: lightblue;
-    border-radius: 50%;
-    border-style: solid;
-    border-color: coral;
-    width: 13vh;
-    height: 13vh;
-}
-body{
+    padding: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    max-width: 98%;
+    margin: 0 auto;
+    left: auto;
+    right: auto;
+    top: auto;
+    bottom: auto;
+    position: relative;
+    justify-content: space-around;
+    margin-top: auto;
+    /* space between the cards */
+    border-spacing: 10px;
+    margin-bottom: 16px;
     background-color: black;
-}
-
-p{
-    color: white;
-}
-.name{
+  }
+  
+  .left {
+    margin-right: 16px;
+  }
+  
+  .profile-photo {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    /* background-color: #ccc; */
+    border: 2px solid #ff0303;
+  }
+  
+  .middle-section {
+    flex-grow: 1;
+  }
+  
+  .name {
+    font-size: 18px;
     font-weight: bold;
-    font-family: 'Roboto';
-    font-size: 25px;
-    margin-top: 0px;
-    margin-bottom: 20px;
-}
-
-.time{
-    margin-top: 5vh;
-    font-weight: bold;
-    font-family: 'Roboto';
-    width: 15vw;
-}
-
-.last-message{
-    font-family: 'Roboto';
+    margin: 0;
+  }
+  
+  .last-message {
     font-size: 14px;
-    margin: 0px;
-}
+    margin: 0;
+  }
+  
+  .time {
+    font-size: 12px;
+    margin: 0;
+    color: #ea00e2;
+    top: 99%;
+    left: 50%;
+    margin-top: auto;
+  }
+
+  a{
+    text-decoration: none;
+    /* color: #000; */
+  }
+
+  *{
+    background-color: black;
+  }
+  

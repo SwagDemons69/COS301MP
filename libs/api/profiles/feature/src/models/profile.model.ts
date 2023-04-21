@@ -1,5 +1,6 @@
-import { ProfileCreatedEvent, user_profile } from '@mp/api/profiles/util';
+import { edit_profile, ProfileCreatedEvent, user_profile, EditProfileEvent } from '@mp/api/profiles/util';
 import { AggregateRoot } from '@nestjs/cqrs';
+import { post } from '@mp/api/home/util'
 
 export class Profile extends AggregateRoot implements user_profile {
   constructor(
@@ -8,7 +9,7 @@ export class Profile extends AggregateRoot implements user_profile {
     public notPublic: string,
     public username: string | null | undefined,
     public name: string | null | undefined,
-    public profilePicturePath: string | null | undefined,
+    public profilePicturePath: string,
     public bio: string | null | undefined,
     public email: string | null | undefined,
     public password: string,
@@ -18,7 +19,7 @@ export class Profile extends AggregateRoot implements user_profile {
     public commentLikesLeft: number | null | undefined,
     public followers: string[] | null | undefined, //Array of UserId
     public following: string[] | null | undefined, //Array of UserId
-    public posts: string[] | null | undefined,  //Array of PostId
+    public posts: post[] | null | undefined,  //Array of PostId
     public blocked: string[] | null | undefined,
     public notifications: string[] | null | undefined
   ) {
@@ -53,183 +54,18 @@ export class Profile extends AggregateRoot implements user_profile {
     this.apply(new ProfileCreatedEvent(this.toJSON()));
   }
 
-  // updateAddressDetails(addressDetails: IAddressDetails) {
-  //   if (!this.addressDetails) this.addressDetails = {};
-  //   this.addressDetails.residentialArea = addressDetails.residentialArea
-  //     ? addressDetails.residentialArea
-  //     : this.addressDetails.residentialArea;
-  //   this.addressDetails.workArea = addressDetails.workArea
-  //     ? addressDetails.workArea
-  //     : this.addressDetails.workArea;
-  //   this.apply(new AddressDetailsUpdatedEvent(this.toJSON()));
-  // }
+  edit(){
+    this.apply(new EditProfileEvent(this.toJSON()));
+  }
 
-  // updateContactDetails(contactDetails: IContactDetails) {
-  //   if (!this.contactDetails) this.contactDetails = {};
-  //   this.contactDetails.cellphone = contactDetails.cellphone
-  //     ? contactDetails.cellphone
-  //     : this.contactDetails.cellphone;
-  //   this.apply(new ContactDetailsUpdatedEvent(this.toJSON()));
-  // }
-
-  // updatePersonalDetails(personalDetails: IPersonalDetails) {
-  //   if (!this.personalDetails) this.personalDetails = {};
-  //   this.personalDetails.age = personalDetails.age
-  //     ? personalDetails.age
-  //     : this.personalDetails.age;
-  //   this.personalDetails.gender = personalDetails.gender
-  //     ? personalDetails.gender
-  //     : this.personalDetails.gender;
-  //   this.personalDetails.ethnicity = personalDetails.ethnicity
-  //     ? personalDetails.ethnicity
-  //     : this.personalDetails.ethnicity;
-  //   this.apply(new PersonalDetailsUpdatedEvent(this.toJSON()));
-  // }
-
-  // updateOccupationDetails(occupationDetails: IOccupationDetails) {
-  //   if (!this.occupationDetails) this.occupationDetails = {};
-  //   this.occupationDetails.householdIncome = occupationDetails.householdIncome
-  //     ? occupationDetails.householdIncome
-  //     : this.occupationDetails.householdIncome;
-  //   this.occupationDetails.occupation = occupationDetails.occupation
-  //     ? occupationDetails.occupation
-  //     : this.occupationDetails.occupation;
-  //   this.apply(new OccupationDetailsUpdatedEvent(this.toJSON()));
-  // }
-
-  // updateAccountDetails(accountDetails: IAccountDetails) {
-  //   if (!this.accountDetails) this.accountDetails = {};
-  //   this.accountDetails.displayName = accountDetails.displayName
-  //     ? accountDetails.displayName
-  //     : this.accountDetails.displayName;
-  //   this.accountDetails.email = accountDetails.email
-  //     ? accountDetails.email
-  //     : this.accountDetails.email;
-  //   this.accountDetails.photoURL = accountDetails.photoURL
-  //     ? accountDetails.photoURL
-  //     : this.accountDetails.photoURL;
-  //   this.accountDetails.password = accountDetails.password
-  //     ? accountDetails.password
-  //     : this.accountDetails.password;
-  //   this.apply(new AccountDetailsUpdatedEvent(this.toJSON()));
-  // }
-
-  // private updateAccountDetailsStatus() {
-  //   if (!this.accountDetails) {
-  //     this.accountDetails = {};
-  //     this.accountDetails.status = ProfileStatus.INCOMPLETE;
-  //     this.status = ProfileStatus.INCOMPLETE;
-  //     return;
-  //   }
-
-  //   if (!this.accountDetails.displayName || !this.accountDetails.email) {
-  //     this.accountDetails.status = ProfileStatus.INCOMPLETE;
-  //     this.status = ProfileStatus.INCOMPLETE;
-  //     return;
-  //   }
-
-  //   this.accountDetails.status = ProfileStatus.COMPLETE;
-  //   return;
-  // }
-
-  // private updateAddressDetailsStatus() {
-  //   if (!this.addressDetails) {
-  //     this.addressDetails = {};
-  //     this.addressDetails.status = ProfileStatus.INCOMPLETE;
-  //     this.status = ProfileStatus.INCOMPLETE;
-  //     return;
-  //   }
-
-  //   if (!this.addressDetails.residentialArea || !this.addressDetails.workArea) {
-  //     this.addressDetails.status = ProfileStatus.INCOMPLETE;
-  //     this.status = ProfileStatus.INCOMPLETE;
-  //     return;
-  //   }
-
-  //   this.addressDetails.status = ProfileStatus.COMPLETE;
-  //   return;
-  // }
-
-  // private updateContactDetailsStatus() {
-  //   if (!this.contactDetails) {
-  //     this.contactDetails = {};
-  //     this.contactDetails.status = ProfileStatus.INCOMPLETE;
-  //     this.status = ProfileStatus.INCOMPLETE;
-  //     return;
-  //   }
-
-  //   if (!this.contactDetails.cellphone) {
-  //     this.contactDetails.status = ProfileStatus.INCOMPLETE;
-  //     this.status = ProfileStatus.INCOMPLETE;
-  //     return;
-  //   }
-
-  //   this.contactDetails.status = ProfileStatus.COMPLETE;
-  //   return;
-  // }
-
-  // private updatePersonalDetailsStatus() {
-  //   if (!this.personalDetails) {
-  //     this.personalDetails = {};
-  //     this.personalDetails.status = ProfileStatus.INCOMPLETE;
-  //     this.status = ProfileStatus.INCOMPLETE;
-  //     return;
-  //   }
-
-  //   if (
-  //     !this.personalDetails.age ||
-  //     !this.personalDetails.gender ||
-  //     !this.personalDetails.ethnicity
-  //   ) {
-  //     this.personalDetails.status = ProfileStatus.INCOMPLETE;
-  //     this.status = ProfileStatus.INCOMPLETE;
-  //     return;
-  //   }
-
-  //   this.personalDetails.status = ProfileStatus.COMPLETE;
-  //   return;
-  // }
-
-  // private updateOccupationDetailsStatus() {
-  //   if (!this.occupationDetails) {
-  //     this.occupationDetails = {};
-  //     this.occupationDetails.status = ProfileStatus.INCOMPLETE;
-  //     this.status = ProfileStatus.INCOMPLETE;
-  //     return;
-  //   }
-
-  //   if (
-  //     !this.occupationDetails.householdIncome ||
-  //     !this.occupationDetails.occupation
-  //   ) {
-  //     this.occupationDetails.status = ProfileStatus.INCOMPLETE;
-  //     this.status = ProfileStatus.INCOMPLETE;
-  //     return;
-  //   }
-
-  //   this.occupationDetails.status = ProfileStatus.COMPLETE;
-  //   return;
-  // }
-
-  // updateStatus() {
-  //   this.updateAccountDetailsStatus();
-  //   this.updateAddressDetailsStatus();
-  //   this.updateContactDetailsStatus();
-  //   this.updatePersonalDetailsStatus();
-  //   this.updateOccupationDetailsStatus();
-
-  //   if (
-  //     this.accountDetails?.status === ProfileStatus.COMPLETE &&
-  //     this.addressDetails?.status === ProfileStatus.COMPLETE &&
-  //     this.contactDetails?.status === ProfileStatus.COMPLETE &&
-  //     this.personalDetails?.status === ProfileStatus.COMPLETE &&
-  //     this.occupationDetails?.status === ProfileStatus.COMPLETE
-  //   ) {
-  //     this.status = ProfileStatus.COMPLETE;
-  //   }
-
-  //   this.apply(new ProfileStatusUpdatedEvent(this.toJSON()));
-  // }
+  EditProfile(profile : edit_profile) {
+    this.notPublic = (profile.notPublic == "DO-NOT-MODFIY") ? this.notPublic : profile.notPublic;
+    this.name = (profile.name == "DO-NOT-MODFIY") ? this.name : profile.name;
+    this.username = (profile.username == "DO-NOT-MODFIY") ? this.username : profile.username;
+    this.profilePicturePath = (profile.profilePicturePath == "DO-NOT-MODFIY") ? this.profilePicturePath : profile.profilePicturePath;
+    this.bio = (profile.bio == "DO-NOT-MODFIY") ? this.bio : profile.bio;
+    this.province = (profile.province == "DO-NOT-MODFIY") ? this.province : profile.province;
+  }
 
   toJSON(): user_profile {
     return {

@@ -25,12 +25,6 @@
 
 <ion-content [fullscreen]="true" [scrollEvents]="true" (ionScroll)="onContentScroll($event)">
 <div *ngIf="!isSearchbarVisible" class="homePage">
-<!-- Background image overlay -->
-<div class="glassyBackground">
-  <img src="assets/images/glassy_lights.jpg" />
-  <div class="glassyBackgroundFade"></div>
-</div>
-
   <br /><br />
   <!-- HOME BANNER -->
 <div>
@@ -117,11 +111,11 @@
     </ion-infinite-scroll-content>
   </ion-infinite-scroll> -->
 
-  <div class="trendingPost" *ngFor="let item of trending">
+  <div class="trendingPost" *ngFor="let item of trending" (click)="openBlip(item)">
     <ion-card class="trendingItem">
 
       <div class="image">
-        <ion-img [src]="item.img"></ion-img>
+        <ion-img [src]="item.content"></ion-img>
       </div>
 
       <ion-label stacked>
@@ -130,7 +124,7 @@
 
             <!-- Title + Description -->
             <ion-col class="subtext" size="9">
-              <h2>{{item.title}}</h2>
+              <h2>{{item.caption}}</h2>
               <br/>
               <h4>{{item.desc}}</h4>
             </ion-col>

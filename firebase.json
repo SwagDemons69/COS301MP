@@ -6,6 +6,9 @@
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
   },
+  "storage" : {
+    "rules" : "storage.rules"
+  },
   "functions": [
     {
       "source": "dist/apps/api",
@@ -45,9 +48,6 @@
       }
     ]
   },
-  "storage": {
-    "rules": "storage.rules"
-  },
   "emulators": {
     "auth": {
       "port": 5002
@@ -62,7 +62,9 @@
       "port": 5005
     },
     "storage": {
-      "port": 5006
+      "port": 5006,
+      "host" : "0.0.0.0",
+      "rules" : "storage.rules"
     },
     "hosting": {
       "port": 5007

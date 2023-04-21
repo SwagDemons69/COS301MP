@@ -2,6 +2,7 @@
 // IMPORTS && SETUP
 //================================================
 const admin = require('firebase-admin');
+const { resolve } = require('path');
 
 //create connection to firebase app
 admin.initializeApp({ projectId: 'twenty4-f9f8e' });
@@ -47,7 +48,9 @@ const generatePosts = async () => {
     { id : "1",
       post_id : "1",
       user_id : "Sg1j9YlEbEbeOeg1Of3Un79W4Lj7",
-      content : "", likes : 0,
+      content : "https://picsum.photos/id/19/300/300",
+      caption : "Test Post",
+      likes : 69,
       timeStamp : 13452824,
       shares : 0,
       kronos : 0,
@@ -65,13 +68,68 @@ const generatePosts = async () => {
     admin.app().delete();
   }
 };
+const user_id = "bae7f9popp8IrbE2effYuG5dQcQe";
+const addPosts = async () => {
+  try{
+        const posts = [
+          { id : "1",
+          post_id : "1",
+          user_id : user_id,
+          content : "https://picsum.photos/id/19/300/300",
+          caption : "Test Post 1",
+          likes : 69,
+          timeStamp : 13452824,
+          shares : 0,
+          kronos : 0,
+          comments : [],
+          categories : [],
+          taggedUsers : []
+        },
+        { id : "2",
+          post_id : "2",
+          user_id : user_id,
+          content : "https://picsum.photos/id/23/300/300",
+          caption : "Test Post 2",
+          likes : 69,
+          timeStamp : 13452824,
+          shares : 0,
+          kronos : 0,
+          comments : [],
+          categories : [],
+          taggedUsers : []
+        }
+      ];
+      //for(const post of posts){
+        await db.collection('profiles').doc(user_id).update({posts: posts});
+  }
+  finally{
+    admin.app().delete();
+  }
+}
+
+const user = "tJSoPLSEhxEvIrutrPDZV1VcKZbV";
+const postId = 0;
+const createPostLike = async() => {
+  try{
+    //Gets the Post
+    // const handle = await db.collection('profiles').doc(user);
+   
+    // const post = await Promise.resolve(handle.get());
+    // console.log(post.data()['posts'][postId]) 
+    
+  }
+  finally{
+    admin.app().delete();
+  }
+}
 
 //=============================================
 // FUNCTION CALLS
 //=============================================
 
-generatePosts();
-
+//generatePosts();
+//addPosts();
+createPostLike();
 //=============================================
 
 const importProfiles = async () => {
@@ -93,15 +151,16 @@ return profiles;
 //     console.log(profiles[0]);
 // }
 
+
 //=============================================
 // FUNCTION CALLS
 //=============================================
 
-async function test() {
-const profiles = await importProfiles();
-console.log(profiles);
-}
+// async function test() {
+// const profiles = await importProfiles();
+// console.log(profiles);
+// }
 
-test();
+// test();
 
-admin.app().delete();
+// admin.app().delete();

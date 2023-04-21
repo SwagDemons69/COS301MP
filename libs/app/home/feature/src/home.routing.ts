@@ -34,6 +34,11 @@ const routes: Routes = [
           import('@mp/app/notifications/feature').then((m) => m.NotificationsModule)
       },
       {
+        path: 'chat',
+        loadChildren: () =>
+          import('@mp/app/chat/feature').then((m) => m.ChatModule)
+      },
+      {
         path: '',
         pathMatch: 'full',
         redirectTo: '/home/dashboard',
