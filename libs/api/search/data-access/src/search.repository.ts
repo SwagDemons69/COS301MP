@@ -1,65 +1,59 @@
 import { Injectable } from '@nestjs/common';
 import { getStorage, ref , uploadBytes, connectStorageEmulator, uploadString} from 'firebase/storage';
 import { initializeApp } from '@firebase/app';
-import { SearchResponse} from '@mp/api/search/util';
+import { SearchResponse, user, post} from '@mp/api/search/util';
 import * as admin from 'firebase-admin';
 import { IProfile } from '@mp/api/profiles/util';
-import { post } from '@mp/api/post/util';
-
 
 @Injectable()
 export class SearchRepository {
 
     async search(query: string): Promise<SearchResponse> {
-        const storage = getStorage(initializeApp({projectId: 'twenty4-f9f8e',  storageBucket : 'twenty4-f9f8e.appspot.com'}));
-        const bucket = admin.storage().bucket();
-        const allUsers = this.GetUsers(query);
+        const foundUsers = this.GetSearchedUsers(query);
+        let profiles: user[] = [];
+        let posts: post[] = [];
 
-        // for(const user in allUsers){
-        //   if(user.)
-        // }
-        const profiles = {
-            name : "temp name",
-            bio : "temp bio",
-            photoURL : "temp photoURL",
-            profileId : "temp profileID"
+        for(var user in foundUsers){
+          profiles.push();
         }
-             
-        const post = {
-            "content" : "string",
-            "caption" : "temp caption",
-            "postId" : "temp id",
-            "profileId" : "temp profileID"
-        }
-        const response = {profiles : [profiles], posts : [post]};
+        var response = {profiles, posts};
+
         return response;
-        // for(const user of allUsers){
-            
-        // }
-
-
-        //to get a photo:
-
-        // connectStorageEmulator(storage, "localhost", 5006);
-        // const photosRef = ref(storage,`users/user/posts/caption/${query}`);
-        // const snapshot = await uploadString(photosRef, file, 'base64');
-
-        // const file2 = await bucket.file(snapshot.metadata.fullPath).makePublic();
-        // const url = bucket.file(snapshot.metadata.fullPath).publicUrl();
     }
     
-    async GetUsers(username: string) {
-        return await admin
-          .firestore()
-          .collection('users')
-          .withConverter<IProfile>({
-            fromFirestore: (snapshot) => {
-              return snapshot.data() as IProfile;
-            },
-            toFirestore: (it: IProfile) => it,
-          })
-          .get();
+    async GetSearchedUsers(query : string): Promise<any> {
+      const handle = await admin.firestore().collection('profiles').get();
+      const profiles: admin.firestore.DocumentData[] = [];
+      handle.forEach((doc) => {
+        if(doc.data()?.['displayName'] === query){
+          profiles.push(doc.data());
+        }
+      });
+
+      if(profiles.length != 0){
+        return profiles;
       }
+      else return "";
+      
+    }
+
+    async GetSearchedPosts(query : string): Promise<any> {
+      const handle = await admin.firestore().collection('users').get();
+      const profiles: admin.firestore.DocumentData[] = [];
+      handle.forEach((doc) => {
+        if(doc.data()?.['posts'].'post'.'caption' === query){
+          const data = doc.data();
+          //const name = doc.data().Name;
+          profiles.push(doc.data());
+        }
+      });
+
+      if(profiles.length != 0){
+        return profiles;
+      }
+      else return "";
+      
+    }
 }
 
 
