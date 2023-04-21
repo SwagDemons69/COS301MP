@@ -34,10 +34,61 @@ const generateProfiles = async () => {
             await db.collection('profiles').doc(profile.id).set(profile);
           }
         } 
-        finally {
-        
-          admin.app().delete();
-        }
+        finally {}
+};
+
+class user {
+  constructor(name, surname){
+    this.name = name;
+    this.surname = surname;
+  }
+
+  toString(){
+    return this.name + ' ' + this.surname;
+  }
+};
+
+const getProfiles = async() => {
+  try{
+    // const found = [];
+  // const allUsers =  await db.collection('profiles').get();
+  const allUsersConverter = {
+    toFireStore: (user) => {
+      return {
+        Name : user.name,
+        Surname : user.Surname
+      };
+    },
+    fromFirestore: (snapshot, options) => {
+      const data = snapshot.data(options);
+      return new user(data.name, data.surname);
+    }
+  };
+
+  const ref = db.collection("profiles").withConverter(allUsersConverter);
+  const allUsers = [];
+
+  if(ref){
+    allUsers = ref.get();
+    console.log("success ==> " + allUsers);
+    return allUsers;
+  }
+  else{
+    console.log("Failure");
+    return allUsers;
+  }
+  }
+  catch{
+    console.log("fail")
+  }
+  
+
+  // for(const user of allUsers){
+  //   if(user.Name == "Alice4"){
+  //     found.push(user.id);
+  //   }
+  // }
+
 };
 
 //=============================================
@@ -45,5 +96,7 @@ const generateProfiles = async () => {
 //=============================================
 
 generateProfiles();
+console.log(getProfiles());
+admin.app().delete();
 
 //=============================================

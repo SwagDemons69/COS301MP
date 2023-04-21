@@ -14,6 +14,10 @@ export class SearchRepository {
         const storage = getStorage(initializeApp({projectId: 'twenty4-f9f8e',  storageBucket : 'twenty4-f9f8e.appspot.com'}));
         const bucket = admin.storage().bucket();
         const allUsers = this.GetUsers(query);
+
+        // for(const user in allUsers){
+        //   if(user.)
+        // }
         const profiles = {
             name : "temp name",
             bio : "temp bio",
@@ -36,8 +40,8 @@ export class SearchRepository {
 
         //to get a photo:
 
-        connectStorageEmulator(storage, "localhost", 5006);
-        const photosRef = ref(storage,`users/user/posts/caption/${query}`);
+        // connectStorageEmulator(storage, "localhost", 5006);
+        // const photosRef = ref(storage,`users/user/posts/caption/${query}`);
         // const snapshot = await uploadString(photosRef, file, 'base64');
 
         // const file2 = await bucket.file(snapshot.metadata.fullPath).makePublic();

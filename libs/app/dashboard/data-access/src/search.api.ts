@@ -7,11 +7,11 @@ import { IProfile } from '@mp/api/profiles/util'
 
 @Injectable()
 export class SearchApi {
-  // constructor(private readonly functions: Functions) {}
-  constructor( 
-      private readonly firestore: Firestore,
-      private readonly functions: Functions
-    ) {}
+  constructor(private readonly functions: Functions) {}
+  // constructor( 
+  //     private readonly firestore: Firestore,
+  //     private readonly functions: Functions
+  //   ) {}
 
   async search(request: SearchRequest) {
     // const users = doc(this.firestore, `users/${request}`).withConverter<IProfile>({fromFirestore: (snapshot) => {return snapshot.data() as IProfile;},toFirestore: (it: IProfile) => it,});

@@ -137,7 +137,7 @@ export class DashboardPage {
   async search(query : string){
     const request : SearchRequest = {query : query};
     const response = await this.api.search(request);
-    this.searchResultsPosts = response;
+    // this.searchResultsPosts = response;
     return response;
   }
 }
