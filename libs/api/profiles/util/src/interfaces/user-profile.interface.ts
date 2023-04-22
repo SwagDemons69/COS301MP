@@ -8,7 +8,7 @@ export interface user_profile {
     name : string | null | undefined;
     profilePicturePath : string;
     bio : string | null | undefined;
-    email : string | null | undefined;
+    email : string;
     password : string;
     province : string | null | undefined;
     likesLeft : number | null | undefined;
