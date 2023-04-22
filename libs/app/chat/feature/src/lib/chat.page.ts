@@ -9,7 +9,7 @@ import { IonContent } from '@ionic/angular';
 @Component({
   selector: 'chat-page',
   templateUrl: './chat.page.html',
-  styleUrls: ['./chat.page.css']
+  styleUrls: ['./chat.page.scss']
 })
 export class ChatPage {
 
@@ -19,13 +19,25 @@ export class ChatPage {
   content!: IonContent;
   @ViewChild('messageList', { static: true }) messageList: any;
 
-  messages: { text: string; sent: boolean; sender: string }[] = [];
   newMessage = '';
   sender = 'Me'; 
   receiver = 'John';
 
-  text1 = this.messages.push({ text: "Hi, it's John", sent: false, sender: this.receiver });
-  text2 = this.messages.push({ text: "Hi John, how are you?", sent: true, sender: this.sender });
+  messages: { text: string; sent: boolean; sender: string }[] = [
+    { text: "Hi, it's John", sent: false, sender: this.receiver },
+    { text: "Hi John, how are you?", sent: true, sender: this.sender },
+    { text: "Hi John, how are you?", sent: true, sender: this.sender },
+    { text: "Hi John, how are you?", sent: true, sender: this.sender },
+    { text: "Hi John, how are you?", sent: true, sender: this.sender },
+    { text: "Hi John, how are you?", sent: true, sender: this.sender },
+    { text: "Hi John, how are you?", sent: true, sender: this.sender },
+    { text: "Hi John, how are you?", sent: true, sender: this.sender },
+    { text: "Hi John, how are you?", sent: true, sender: this.sender },
+    { text: "Hi John, how are you?", sent: true, sender: this.sender },
+    { text: "Hi John, how are you?", sent: true, sender: this.sender },
+    { text: "Hi John, how are you?", sent: true, sender: this.sender },
+    { text: "Hi John, how are you?", sent: true, sender: this.sender },
+  ];
 
   displayReceiver() : string { 
     return this.receiver; //displays John in ion-title
@@ -41,19 +53,4 @@ export class ChatPage {
   backToMessage() {
     this.navCtrl.navigateBack('/home/messages');
   }
-
-  limitCharactersPerLine() {
-    
-    // eslint-disable-next-line prefer-const
-    let lines = this.newMessage.split('\n');
-    for (let i = 0; i < lines.length; i++) {
-      if (lines[i].length > 23) {
-          let truncatedLine = lines[i].substring(0, 23);
-        lines[i] = truncatedLine + '\n' + lines[i].substring(23);
-      }
-    }
-    this.newMessage = lines.join('\n');
-  }
-  
-  
 }

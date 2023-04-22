@@ -1,16 +1,13 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Messages</ion-title>
-  </ion-toolbar>
 </ion-header>
-
 <ion-content [fullscreen]="true">
   <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="getItems()"></ion-searchbar>
 
   <br>
 
   <ion-list>
-    <ion-item *ngFor="let item of headers" (click)="goToDetails(item)">
+    <div *ngFor="let item of headers" class="chatItem">
+    <ion-item (click)="goToDetails(item)" lines="none">
       <ion-avatar>
         <img src="https://shorturl.at/osyUY">
       </ion-avatar>
@@ -20,11 +17,13 @@
       </ion-label>
       <!-- <ion-badge slot="end">{{ item.t }}</ion-badge> -->
     </ion-item>
+    <hr />
+  </div>
   </ion-list>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="openSearchModal()">
-      <ion-icon name="search-outline"></ion-icon>
+    <ion-fab-button (click)="openSearchModal()" color="dark" bottom left>
+      <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>

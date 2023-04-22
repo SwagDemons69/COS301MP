@@ -113,13 +113,19 @@ export class DashboardPage {
     this.isSearchbarVisible = !this.isSearchbarVisible;
   }
 
+  // Prevent re-setting css properties every scroll event
+  isKronosBarVisible = false;
   onContentScroll(event: any) {
     console.log(event.detail.scrollTop);
-    if (event.detail.scrollTop > 220) {
+
+    if (event.detail.scrollTop > 220 && !this.isKronosBarVisible) {
       this.renderer.setStyle(document.querySelector(".barKronos"), 'opacity', '1');
+      this.isKronosBarVisible = true;
     }
-    else {
+    else if (event.detail.scrollTop <= 220) {
       this.renderer.setStyle(document.querySelector(".barKronos"), 'opacity', '0');
+      this.renderer.setStyle(document.querySelector(".glassyBackground"), 'top', `${0.5*event.detail.scrollTop}px`);
+      this.isKronosBarVisible = false;
     }
   }
 
