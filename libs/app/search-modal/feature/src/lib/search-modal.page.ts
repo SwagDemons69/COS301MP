@@ -109,4 +109,8 @@ export class searchmodalPage {
     });
     }
 
+
+    onUserAddFriend(user: any) {
+      alert("Adding fren: " + JSON.stringify(user, null, 2));
+    }
 }

@@ -42,15 +42,33 @@ ion-list{
 }
 
 .chatItem {
-  padding: 0px;
+    padding: 0px;
 }
 
 .chatItem hr {
-  height: 1.1px;
-  background-image: linear-gradient(90deg, transparent 0%, #ffffff40 20%, transparent 100%);
-  margin: 0px;
+    height: 1.1px;
+    background-image: linear-gradient(90deg, transparent 0%, #ffffff40 20%, transparent 100%);
+    margin: 0px;
 }
 
 .chatItem ion-label {
-  pointer-events: none;
+    pointer-events: none;
+  }
+
+.chatItem ion-icon {
+    display: inline-block;
+    text-align: right;
+
+    border: 1px solid #b5b5b5;
+    padding: 2px;
+    border-radius: 25%;
+
+    font-size: 1em;
+
+    margin-right: 10px;
+}
+
+.chatItem ion-icon:hover {
+    border: 1px solid #ff7dfd;
+    color: #ff7dfd;
 }
