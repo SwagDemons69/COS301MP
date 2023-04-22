@@ -19,6 +19,9 @@
       "@mp/api/auth/data-access": ["libs/api/auth/data-access/src/index.ts"],
       "@mp/api/auth/feature": ["libs/api/auth/feature/src/index.ts"],
       "@mp/api/auth/util": ["libs/api/auth/util/src/index.ts"],
+      "@mp/api/chat/data-access": ["libs/api/chat/data-access/src/index.ts"],
+      "@mp/api/chat/feature": ["libs/api/chat/feature/src/index.ts"],
+      "@mp/api/chat/util": ["libs/api/chat/util/src/index.ts"],
       "@mp/api/core/feature": ["libs/api/core/feature/src/index.ts"],
       "@mp/api/eventstore/data-access": [
         "libs/api/eventstore/data-access/src/index.ts"
@@ -54,12 +57,22 @@
       ],
       "@mp/api/profiles/feature": ["libs/api/profiles/feature/src/index.ts"],
       "@mp/api/profiles/util": ["libs/api/profiles/util/src/index.ts"],
+      "@mp/api/search-modal/data-access": [
+        "libs/api/search-modal/data-access/src/index.ts"
+      ],
+      "@mp/api/search-modal/feature": [
+        "libs/api/search-modal/feature/src/index.ts"
+      ],
+      "@mp/api/search-modal/util": ["libs/api/search-modal/util/src/index.ts"],
       "@mp/api/users/data-access": ["libs/api/users/data-access/src/index.ts"],
       "@mp/api/users/feature": ["libs/api/users/feature/src/index.ts"],
       "@mp/api/users/util": ["libs/api/users/util/src/index.ts"],
       "@mp/app/auth/data-access": ["libs/app/auth/data-access/src/index.ts"],
       "@mp/app/auth/feature": ["libs/app/auth/feature/src/index.ts"],
       "@mp/app/auth/util": ["libs/app/auth/util/src/index.ts"],
+      "@mp/app/chat/data-access": ["libs/app/chat/data-access/src/index.ts"],
+      "@mp/app/chat/feature": ["libs/app/chat/feature/src/index.ts"],
+      "@mp/app/chat/util": ["libs/app/chat/util/src/index.ts"],
       "@mp/app/copyright/ui": ["libs/app/copyright/ui/src/index.ts"],
       "@mp/app/core/feature": ["libs/app/core/feature/src/index.ts"],
       "@mp/app/dashboard/data-access": [
@@ -113,6 +126,13 @@
       "@mp/app/reset/data-access": ["libs/app/reset/data-access/src/index.ts"],
       "@mp/app/reset/feature": ["libs/app/reset/feature/src/index.ts"],
       "@mp/app/reset/util": ["libs/app/reset/util/src/index.ts"],
+      "@mp/app/search-modal/data-access": [
+        "libs/app/search-modal/data-access/src/index.ts"
+      ],
+      "@mp/app/search-modal/feature": [
+        "libs/app/search-modal/feature/src/index.ts"
+      ],
+      "@mp/app/search-modal/util": ["libs/app/search-modal/util/src/index.ts"],
       "@mp/app/tos/feature": ["libs/app/tos/feature/src/index.ts"],
       "@mp/app/updates/data-access": [
         "libs/app/updates/data-access/src/index.ts"
