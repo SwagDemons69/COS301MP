@@ -4,9 +4,7 @@ import { initializeApp } from '@firebase/app';
 import { SearchResponse, User, Post} from '@mp/api/search/util';
 import * as admin from 'firebase-admin';
 
-// import { Functions } from '@angular/fire/functions';
-// import { IProfile } from '@mp/api/profiles/util';
-// import { SearchResponse } from '@mp/api/search/util';
+
 @Injectable()
 export class SearchRepository {
   constructor(){}
@@ -16,49 +14,42 @@ export class SearchRepository {
         const foundUsers = await this.GetSearchedUsers(query);
         await this.iterateAllPosts(query);
         const retrievedprofiles: User[] = []
-        const posts: Post[] = [];
   
 
         for(let i = 0; i < foundUsers.length; i++){
-          var name = foundUsers[i].name;
-          var bio = foundUsers[i].bio;
-          var photoURL = foundUsers[i].photoURL;
-          var profileId = foundUsers[i].profileId;
-          retrievedprofiles.push({name, bio, photoURL, profileId});
+          const name = foundUsers[i].name;
+          const bio = foundUsers[i].bio;
+          const photoURL = foundUsers[i].photoURL;
+          const profileId = foundUsers[i].profileId;
+          const email = foundUsers[i].email
+          retrievedprofiles.push({name, bio, photoURL, profileId, email});
         }
 
-        for(let i = 0; i < this.returnedPosts.length; i++){
-          var name = this.returnedPosts[i].content;
-          var bio = this.returnedPosts[i].caption;
-          var photoURL = this.returnedPosts[i].profileId;
-          var profileId = this.returnedPosts[i].profileId;
-          retrievedprofiles.push({name, bio, photoURL, profileId});
-        }
-        var response = {profiles : retrievedprofiles, posts: this.returnedPosts};
+        const response = {profiles : retrievedprofiles, posts: this.returnedPosts};
 
         return response;
     }
     
+    //will need to change searched for value to displayName to user when merging with completed profile page
     async GetSearchedUsers(query : string) : Promise<User[]> {
       // const querySnapshot = await admin.firestore().collection('profiles').get();
       // const querySnapshot = await admin.firestore().collectionGroup('users').where(query, 'in', ['*', '']);
-      const querySnapshot = await admin.firestore().collection('users').where('displayName', '>=', query).where('displayName', '<=', query + '\uf8ff').get(); //from ChatGBT
+      const querySnapshot = await admin.firestore().collection('users').where('email', '>=', query).where('email', '<=', query + '\uf8ff').get(); //from ChatGBT
       
-      const numDocs = querySnapshot.size;
-      console.log(`There are ${numDocs} documents in the 'profiles' collection.`);
       const returnedUsers: User[] = [];
 
 
-      querySnapshot.forEach((doc) => {
-          console.log(doc.data());  
+      querySnapshot.forEach((doc) => { 
           const myUser : User = {
-            name    : doc.data()?.['username'],
+            name    : doc.data()?.['displayName'],
             bio    : doc.data()?.['bio'],
             photoURL : doc.data()?.['profilePicturePath'],
-            profileId : doc.data()?.['user_id']
+            profileId : doc.data()?.['user_id'],
+            email : doc.data()?.['email']
           }
           returnedUsers.push(myUser);
       });
+
       return returnedUsers;
     };
 

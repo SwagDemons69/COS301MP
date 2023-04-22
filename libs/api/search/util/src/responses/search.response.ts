@@ -6,6 +6,7 @@ export interface User{
     bio    : string;
     photoURL : string;
     profileId : string;
+    email : string;
 }
 export interface Post{
     content : string;

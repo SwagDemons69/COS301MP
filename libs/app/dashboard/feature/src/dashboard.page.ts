@@ -132,10 +132,11 @@ export class DashboardPage {
     }, 2000);
   }
 
-  async search(query : string){
+  async search(event: any){
+    var query = event.detail.value;
     const request : SearchRequest = {query : query};
     const response = await this.api.search(request);
-    console.log(response);
+    
     return response;
   }
 }
