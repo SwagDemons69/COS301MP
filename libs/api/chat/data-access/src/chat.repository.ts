@@ -1,0 +1,147 @@
+import { Injectable } from '@nestjs/common';
+import { getStorage, ref , uploadBytes, connectStorageEmulator, uploadString} from 'firebase/storage';
+import { initializeApp } from '@firebase/app';
+import { post } from '@mp/api/home/util';
+import { post_like } from '@mp/api/post/util';
+import * as admin from 'firebase-admin';
+import { firestore } from 'firebase-admin';
+import { user } from 'firebase-functions/v1/auth';
+import { CreateChatMessageResponse, ChatMessage, ChatMessages, ChatHeadersResponse, ChatHeader, ChatHeaders } from '@mp/api/chat/util';
+import { Timestamp } from 'firebase-admin/firestore';
+import { user_profile } from '@mp/api/profiles/util';
+
+export interface recip {
+    recipient: string;
+};
+
+
+@Injectable()
+export class ChatRepository {
+
+    async getChatHeaders(user: string): Promise<ChatHeadersResponse>{
+        const chatHeaders = [];
+
+        const userChatsRef = await admin.firestore().collection(`profiles/${user}/chats`).get();
+        const chats = userChatsRef.docs.map((doc) => { return doc.data() as recip;});
+
+        for(let i = 0; i < chats.length; i++){
+            const profilesRef = admin.firestore().collection(`profiles`).doc(chats[i].recipient);
+            const profile = await profilesRef.get();
+            const profileData = profile.data() as user_profile;
+            
+            //If username not set then get email
+            console.log(profileData)
+            let username = profileData.username;
+            if(typeof username != "string" || ( (typeof username == "string") && (username == "") )){
+                username = profileData.email
+            }
+            const picture  = profileData.profilePicturePath;
+            
+            const messagesRef = await admin.firestore().collection(`profiles/${user}/chats/${chats[i].recipient}/chat`).get();
+            const messages    = messagesRef.docs.map((doc) => { return doc.data() as ChatMessage;});
+
+            let index = 0;
+            let max = "0";
+            for(let j = 0; j < messages.length; j++){
+                if(messages[j].timeStamp > max){
+                    max = messages[j].timeStamp;
+                    index = j;
+                }
+            }
+
+            const lastMessage = messages[index].payload;
+
+            const chat: ChatHeader = {
+                username: username,
+                picture: picture,
+                lastMessage: lastMessage
+            }
+            chatHeaders.push(chat);
+        }
+        
+        return { chats: chatHeaders };
+    }
+
+
+    async getChatMessages(sender: string, receiver: string, chat: ChatMessage): Promise<CreateChatMessageResponse>{
+
+        const handle = await admin.firestore().collection(`profiles/${sender}/chats`).get();
+        const chats = handle.docs.map((doc) => { return doc.data() as ChatMessages;});
+
+        let flag = false;
+        for(let i = 0;i < chats.length; i++){
+            if(chats[i].recipient == receiver)
+                flag = true;
+        }
+
+        //If false chat dosent exist
+        if(!flag){
+            return { messages :  {recipient: receiver, messages: []}};
+        }
+        else{
+            const handle = await admin.firestore().collection(`profiles/${sender}/chats/${receiver}/chat`).get();
+            return { messages :  {recipient: receiver, messages: handle.docs.map((doc) => { return doc.data() as ChatMessage;}) }};
+        }
+    }
+
+    //Send message to someone in an existing chat
+    async sendChatMessage(sender: string, receiver: string, timeStamp: string, payload: string){
+
+        const handle = await admin.firestore().collection(`profiles/${sender}/chats`).get();
+        const chats = handle.docs.map((doc) => { return doc.data() as recip;});
+        
+        let flag = false;
+        for(let i = 0;i < chats.length; i++){
+            if(chats[i].recipient == receiver)
+                flag = true;
+        }
+
+        //Flag=false -> Create a chat
+        if(!flag)
+            await this.createChat(sender, receiver, timeStamp, payload);
+        else
+            await this.addChatMessage(sender, receiver, timeStamp, payload);
+    }
+    
+    //Create Chat with someone
+    async createChat(sender: string, receiver: string, timeStamp: string, payload: string){
+        
+        //Chat Needs to be created for both users
+        const senderRef = admin.firestore().collection(`profiles/${sender}/chats`).doc(receiver);
+        const receiverRef = admin.firestore().collection(`profiles/${receiver}/chats`).doc(sender);
+        senderRef.set({ recipient : receiver});
+        receiverRef.set({ recipient : sender});
+
+        const senderChatRef = admin.firestore().collection(`profiles/${sender}/chats/${receiver}/chat`).doc();
+        const recieveChatRef = admin.firestore().collection(`profiles/${receiver}/chats/${sender}/chat`).doc();
+
+        
+        const message: ChatMessage = 
+        { sender    : sender,
+          receiver  : receiver,
+          timeStamp :  Timestamp.now().seconds.toString(),
+          payload   : payload
+        };
+        await senderChatRef.set(message);
+        await recieveChatRef.set(message);
+    }
+
+    async addChatMessage(sender: string, receiver: string, timeStamp: string, payload: string){
+        //"Send" Message to both users
+        const senderRef = admin.firestore().collection(`profiles/${sender}/chats/${receiver}/chat`).doc();
+        const recieveRef = admin.firestore().collection(`profiles/${receiver}/chats/${sender}/chat`).doc();
+
+        const message: ChatMessage = 
+        { sender    : sender,
+          receiver  : receiver,
+          timeStamp : Timestamp.now().seconds.toString(),
+          payload   : payload
+        };
+
+        await senderRef.set(message);
+        await recieveRef.set(message);
+    }
+
+
+
+}

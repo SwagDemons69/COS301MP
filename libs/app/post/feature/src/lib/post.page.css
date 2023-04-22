@@ -32,15 +32,18 @@ ion-content{
   margin-top: 10px; 
 }
 
+/* Upload button */
 .bottom-section {
   height: 50%;
   padding: 20px; 
-
+  color: black;
+  text-align: center;
+  align-items: center;
 }
 
 ion-item {
   margin-bottom: 10px; 
-  border: 2px solid #ffffff;
+  border: 2px solid black;
   border-radius: 10px;
 }
 

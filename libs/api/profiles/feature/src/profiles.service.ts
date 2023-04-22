@@ -1,4 +1,8 @@
 import {
+    EditProfileRequest,
+    EditProfileResponse,
+    EditProfileCommand,
+    //============================
     IUpdateAccountDetailsRequest,
     IUpdateAccountDetailsResponse,
     IUpdateAddressDetailsRequest,
@@ -21,6 +25,16 @@ import { CommandBus } from '@nestjs/cqrs';
 @Injectable()
 export class ProfilesService {
   constructor(private readonly commandBus: CommandBus) {}
+
+
+  async EditProfile(request: EditProfileRequest): Promise<EditProfileResponse> {
+    return await this.commandBus.execute<EditProfileCommand, EditProfileResponse>(new EditProfileCommand(request));
+  }
+ 
+  
+  //=======================================================
+  // EXAMPLE CODE FROM DEMO REPO
+  //=======================================================
 
   async updateAccountDetails(
     request: IUpdateAccountDetailsRequest

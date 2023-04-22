@@ -1,19 +1,16 @@
 import { Injectable } from '@angular/core';
-import { doc, docData, Firestore } from '@angular/fire/firestore';
+import { doc, docData, Firestore , collection, getDocs, query} from '@angular/fire/firestore';
+
 import { Functions, httpsCallable } from '@angular/fire/functions';
-import {
-    IProfile,
-    IUpdateAccountDetailsRequest,
-    IUpdateAccountDetailsResponse,
-    IUpdateAddressDetailsRequest,
-    IUpdateAddressDetailsResponse,
-    IUpdateContactDetailsRequest,
-    IUpdateContactDetailsResponse,
-    IUpdateOccupationDetailsRequest,
-    IUpdateOccupationDetailsResponse,
-    IUpdatePersonalDetailsRequest,
-    IUpdatePersonalDetailsResponse
-} from '@mp/api/profiles/util';
+import {  EditProfileRequest, EditProfileResponse, user_profile } from '@mp/api/profiles/util';
+import { post } from '@mp/api/home/util'
+import { AddPhotoRequest, AddPhotoResponse, GetPostsRequest, GetPostsResponse } from '@mp/api/post/util';
+
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { getDoc } from 'firebase/firestore';
+//import { AngularFireStore } from '@angular/fire/firestore';
+
+const pId = "1";
 
 @Injectable()
 export class ProfilesApi {
@@ -26,62 +23,65 @@ export class ProfilesApi {
     const docRef = doc(
       this.firestore,
       `profiles/${id}`
-    ).withConverter<IProfile>({
+    ).withConverter<user_profile>({
       fromFirestore: (snapshot) => {
-        return snapshot.data() as IProfile;
+        return snapshot.data() as user_profile;
       },
-      toFirestore: (it: IProfile) => it,
+      toFirestore: (it: user_profile) => it,
     });
     return docData(docRef, { idField: 'id' });
   }
 
-  async updateAccountDetails(request: IUpdateAccountDetailsRequest) {
-    return await httpsCallable<
-      IUpdateAccountDetailsRequest,
-      IUpdateAccountDetailsResponse
-    >(
-      this.functions,
-      'updateAccountDetails'
-    )(request);
+
+
+  posts$(id: string) {
+    console.log("FIRESTORE POST")
+    const docRef = doc(this.firestore,`posts/${pId}`).withConverter<post>({
+      fromFirestore: (snapshot) => { return snapshot.data() as post; },
+      toFirestore: (it: post) => it,});
+    return docData(docRef, { idField: 'id' });
   }
 
-  async updateContactDetails(request: IUpdateContactDetailsRequest) {
-    return await httpsCallable<
-      IUpdateContactDetailsRequest,
-      IUpdateContactDetailsResponse
-    >(
-      this.functions,
-      'updateContactDetails'
-    )(request);
+  async getPosts(request: GetPostsRequest){
+   return await httpsCallable<GetPostsRequest, GetPostsResponse>(this.functions, 'GetPosts')(request);
   }
 
-  async updateAddressDetails(request: IUpdateAddressDetailsRequest) {
-    return await httpsCallable<
-      IUpdateAddressDetailsRequest,
-      IUpdateAddressDetailsResponse
-    >(
-      this.functions,
-      'updateAddressDetails'
-    )(request);
+  // async getPostContentFromCloudStorage(images: string[]){
+  //   console.log("IN PROFILE APP API")
+  //   const urls:string[] = [];
+  //   const storage = getStorage();
+  //   console.log(images)
+  //   console.log(images.length)
+  //   if(images.length > 0){
+  //     for(let i = 0; i < images.length; i++){
+  //       console.log("@@@@@@@@@@")
+  //       console.log(images[i])
+  //       // const imageRef = ref(storage, images[i]);
+  //       // const url= await getDownloadURL(imageRef);
+  //       // urls.push(url);
+  //       // console.log("URL " + (i+1) + ": " + url);
+  //     }
+  //   }
+  //   //const starsRef = ref(storage, 'images/stars.jpg');
+  // }
+  
+
+  // allposts$(user_id : string){
+  //   const docRef = doc(this.firestore, 'profiles/${user_id}/posts').withConverter<post[]>({
+  //     fromFirestore: (snapshot) => {return snapshot.data() as post[]; },
+  //     toFirestore: (it: post[]) => it,})
+  //   return docData(docRef,{});
+  // }
+
+//==========================================================================
+// CLOUD FUNCTIONS
+//==========================================================================
+
+  async EditProfile(request: EditProfileRequest){
+    return await httpsCallable<EditProfileRequest, EditProfileResponse>(this.functions, 'EditProfile')(request);
   }
 
-  async updatePersonalDetails(request: IUpdatePersonalDetailsRequest) {
-    return await httpsCallable<
-      IUpdatePersonalDetailsRequest,
-      IUpdatePersonalDetailsResponse
-    >(
-      this.functions,
-      'updatePersonalDetails'
-    )(request);
-  }
-
-  async updateOccupationDetails(request: IUpdateOccupationDetailsRequest) {
-    return await httpsCallable<
-      IUpdateOccupationDetailsRequest,
-      IUpdateOccupationDetailsResponse
-    >(
-      this.functions,
-      'updateOccupationDetails'
-    )(request);
+  async UploadProfilePhotoToCloudStorage(request: AddPhotoRequest){
+    return await httpsCallable<AddPhotoRequest, AddPhotoResponse>(this.functions, 'AddPhotoToCloudStorage')(request);
   }
 }
