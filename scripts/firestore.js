@@ -60,7 +60,7 @@ const getProfiles = async() => {
         //const name = doc.data().Name;
         profiles.push(doc.data());
       }
-    });
+    }); 
 
     for(let i = 0; i < profiles.length; i++){
       console.log(profiles[i].Name);

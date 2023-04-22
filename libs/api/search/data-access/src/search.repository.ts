@@ -35,7 +35,7 @@ export class SearchRepository {
           var profileId = this.returnedPosts[i].profileId;
           retrievedprofiles.push({name, bio, photoURL, profileId});
         }
-        var response = {profiles : retrievedprofiles, posts};
+        var response = {profiles : retrievedprofiles, posts: this.returnedPosts};
 
         return response;
     }
