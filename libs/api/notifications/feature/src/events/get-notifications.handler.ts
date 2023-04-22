@@ -7,7 +7,7 @@ export class GetNotificationsEventHandler implements IEventHandler<GetNotificati
     constructor(private readonly notificationRepository: NotificationRepository) {}
 
     async handle(event: GetNotificationsEvent) {
-        return await this.notificationRepository.getNotifications(event.user_id);
+        return await this.notificationRepository.getNotifications(event.getNotifications.userId);
     }
 }
 

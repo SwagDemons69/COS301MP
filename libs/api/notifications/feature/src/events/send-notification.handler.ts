@@ -7,6 +7,6 @@ export class SendNotificationEventHandler implements IEventHandler<SendNotificat
     constructor(private readonly notificationRepository: NotificationRepository) {}
 
     async handle(event: SendNotificationEvent) {
-        return await this.notificationRepository.sendNotification(event.notification);
+        return await this.notificationRepository.sendNotification(event.sendNotification);
     }
 }
