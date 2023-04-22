@@ -155,13 +155,13 @@
 
 <div *ngIf="isSearchbarVisible" class="searchResults">
   <ion-list>
-    <ion-item *ngFor="let post of searchResultsPosts">
-      <ion-thumbnail slot="start">
+    <ion-item *ngFor="let user of searchResultsUsers">
+      <!-- <ion-thumbnail slot="start">
         <img src="{{ post.img }}" alt="{{ post.title }}">
-      </ion-thumbnail>
+      </ion-thumbnail> -->
       <ion-label>
-        <h2>{{ post.title }}</h2>
-        <p>{{ post.desc }}</p>
+        <h2>{{ user.name }}</h2>
+        <p>{{ user.email }}</p>
       </ion-label>
     </ion-item>
   </ion-list>

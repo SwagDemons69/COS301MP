@@ -13,7 +13,7 @@ export class SearchQueryHandler
     private readonly repository: SearchRepository
   ) {}
 
-  async execute(query: SearchQuery) {
+  async execute(query: SearchQuery): Promise<SearchResponse> {
     console.log(`${SearchQueryHandler.name}`);
  
     const request = query.request;

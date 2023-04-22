@@ -9,23 +9,13 @@ import * as admin from 'firebase-admin';
 export class SearchRepository {
   constructor(){}
     returnedPosts: Post[] = []; //What is returned after all posts are found
-
     async search(query: string): Promise<SearchResponse> {
         const foundUsers = await this.GetSearchedUsers(query);
         await this.iterateAllPosts(query);
-        const retrievedprofiles: User[] = []
-  
 
-        for(let i = 0; i < foundUsers.length; i++){
-          const name = foundUsers[i].name;
-          const bio = foundUsers[i].bio;
-          const photoURL = foundUsers[i].photoURL;
-          const profileId = foundUsers[i].profileId;
-          const email = foundUsers[i].email
-          retrievedprofiles.push({name, bio, photoURL, profileId, email});
-        }
+        const response = {profiles : foundUsers, posts: this.returnedPosts};
 
-        const response = {profiles : retrievedprofiles, posts: this.returnedPosts};
+        console.log(response)
 
         return response;
     }
@@ -37,7 +27,6 @@ export class SearchRepository {
       const querySnapshot = await admin.firestore().collection('users').where('email', '>=', query).where('email', '<=', query + '\uf8ff').get(); //from ChatGBT
       
       const returnedUsers: User[] = [];
-
 
       querySnapshot.forEach((doc) => { 
           const myUser : User = {

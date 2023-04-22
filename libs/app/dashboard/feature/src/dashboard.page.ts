@@ -5,6 +5,7 @@ import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { SearchRequest, SearchResponse} from '@mp/api/search/util';
 import { SearchApi } from '@mp/app/dashboard/data-access';
+import { User, Post} from '@mp/api/search/util';
 
 @Component({
   selector: 'ms-dashboard-page',
@@ -51,7 +52,7 @@ export class DashboardPage {
     { title: "I'm a 20 year old virgin", desc: "I'm a 20 year old virgin", img: "https://picsum.photos/id/24/300/300" }, // Copilot generated this one lmao
   ]
 
-  searchResultsUsers = []
+  searchResultsUsers: User[] = []
 
   isSearchbarVisible = false;
   // deathTime = 3132079200
@@ -135,8 +136,9 @@ export class DashboardPage {
   async search(event: any){
     var query = event.detail.value;
     const request : SearchRequest = {query : query};
-    const response = await this.api.search(request);
-    
-    return response;
+    const response: SearchResponse = await this.api.search(request);
+    for(let i = 0; i < response.profiles.length; i++){
+      this.searchResultsUsers.push(response.profiles[i]);
+    }
   }
 }
