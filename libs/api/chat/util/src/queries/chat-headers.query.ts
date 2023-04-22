@@ -1,5 +1,5 @@
 import { ChatHeadersRequest } from '../requests';
 
-export class ChatHeadersCommand {
+export class ChatHeadersQuery {
   constructor(public readonly request: ChatHeadersRequest) {}
 }

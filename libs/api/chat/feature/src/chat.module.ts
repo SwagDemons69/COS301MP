@@ -1,18 +1,21 @@
 import { ChatModule as ChatDataAccessModule } from '@mp/api/chat/data-access';
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
-import { ChatHeadersCommandHandler, CreateChatMessageCommandHandler } from './commands';
+import { CreateChatMessageCommandHandler } from './commands';
 import { CreateChatMessageEventHandler} from './events';
 import { ChatService } from './chat.service';
-export const CommandHandlers = [ ChatHeadersCommandHandler, CreateChatMessageCommandHandler ];
+import { ChatHeadersQueryHandler } from './queries';
+export const CommandHandlers = [ CreateChatMessageCommandHandler ];
 export const EventHandlers = [ CreateChatMessageEventHandler ];
+export const QueryHandlers = [ ChatHeadersQueryHandler ];
 
 @Module({
   imports: [CqrsModule, ChatDataAccessModule],
   providers: [
     ChatService,
      ...CommandHandlers,
-     ...EventHandlers
+     ...EventHandlers,
+     ...QueryHandlers
   ],
   exports: [ChatService],
 })
