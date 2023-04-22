@@ -1,6 +1,4 @@
-import {
-  CreateProfileCommand, user_profile
-} from '@mp/api/profiles/util';
+import { CreateProfileCommand, user_profile} from '@mp/api/profiles/util';
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
 import { Profile } from '../models';
 //import { user_profile } from '@mp/api/profiles/util';
