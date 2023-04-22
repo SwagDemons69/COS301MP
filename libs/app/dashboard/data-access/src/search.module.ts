@@ -8,4 +8,5 @@ import { SearchApi } from './search.api';
   imports: [CommonModule, AuthModule],
   providers: [SearchApi],
 })
-export class SearchModule {}
+export class SearchModule {
+}

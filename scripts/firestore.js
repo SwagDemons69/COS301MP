@@ -47,7 +47,9 @@ const generateProfiles = async () => {
             await db.collection('profiles').doc(profile.id).set(profile);
           }
         } 
-        finally {}
+        finally {
+          admin.app().delete();
+        }
 };
 
 const getProfiles = async() => {
@@ -88,6 +90,5 @@ const getProfiles2 = async(query) => {
 
 generateProfiles();
 getProfiles2("A");
-admin.app().delete();
 
 //=============================================

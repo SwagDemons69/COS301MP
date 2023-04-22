@@ -3,14 +3,13 @@ import { getStorage, ref , uploadBytes, connectStorageEmulator, uploadString} fr
 import { initializeApp } from '@firebase/app';
 import { SearchResponse, User, Post} from '@mp/api/search/util';
 import * as admin from 'firebase-admin';
-import { AnyARecord } from 'dns';
-
 
 // import { Functions } from '@angular/fire/functions';
 // import { IProfile } from '@mp/api/profiles/util';
 // import { SearchResponse } from '@mp/api/search/util';
 @Injectable()
 export class SearchRepository {
+  constructor(){}
     returnedPosts: Post[] = []; //What is returned after all posts are found
 
     async search(query: string): Promise<SearchResponse> {

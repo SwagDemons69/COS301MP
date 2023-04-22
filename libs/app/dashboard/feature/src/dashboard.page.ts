@@ -51,9 +51,7 @@ export class DashboardPage {
     { title: "I'm a 20 year old virgin", desc: "I'm a 20 year old virgin", img: "https://picsum.photos/id/24/300/300" }, // Copilot generated this one lmao
   ]
 
-  searchResultsUsers = [
-
-  ]
+  searchResultsUsers = []
 
   isSearchbarVisible = false;
   // deathTime = 3132079200
@@ -137,6 +135,7 @@ export class DashboardPage {
   async search(query : string){
     const request : SearchRequest = {query : query};
     const response = await this.api.search(request);
+    console.log(response);
     return response;
   }
 }
