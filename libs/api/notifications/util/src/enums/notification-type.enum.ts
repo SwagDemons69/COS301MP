@@ -5,7 +5,7 @@ export enum NotificationType {
     NewFollowerNotification = 'New Follower Notification', // go the profile of the follower
     NewDonationNotification = 'New Donation Notification', //just a message
     CommentLikedNotification = 'Comment Liked Notification', //go to the post and focus on the comment
-    NewPostCommentLike = 'NewPostCommentLike', //go to the post and focus on the comment
+    NewPostCommentLike = 'New Post Comment Like', //go to the post and focus on the comment
     TimeRunningOutNotification = 'Time Running Out Notification', //just a message
     SystemNotification = 'System Notification', // just a message
 

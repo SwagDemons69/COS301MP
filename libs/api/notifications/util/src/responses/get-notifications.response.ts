@@ -1,5 +1,5 @@
 import { notification } from '../interfaces';
 
-export interface GetNotificationResponse {
+export interface GetNotificationsResponse {
     notifications: notification[];
 }
