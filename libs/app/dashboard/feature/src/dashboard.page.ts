@@ -134,6 +134,7 @@ export class DashboardPage {
   }
 
   async search(event: any){
+    this.searchResultsUsers = []; // we should rather keep a state, Tumi will do this. (but this should be fine... for now)
     var query = event.detail.value;
     const request : SearchRequest = {query : query};
     const response: SearchResponse = await this.api.search(request);
