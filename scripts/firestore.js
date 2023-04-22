@@ -21,13 +21,26 @@ db.settings({
 //===============================================
 
 const generateProfiles = async () => {
+
+  // "user_id" : 10398140,
+  // "username": "DieSeeKat",
+  // "name": "Lukas Anthonissen",
+  // "email": "lukas007@gmail.com",
+  // "password": "ynw8yw82n283c2doNdq6T*&nqn",
+
+  // const myUser : User = {
+  //   name    : "string",
+  //   bio    : "string",
+  //   photoURL : "string",
+  //   profileId : "string"
+  // }
         try {
           // Create sample data
           const profiles = [
-              { id : '4', Name: 'Alice4', Surname: 'A4', Age: 72 },
-              { id : '2', Name: 'Alice2', Surname: 'A2', Age: 70 },
-              { id : '3', Name: 'Alice3', Surname: 'A3', Age: 71 },
-              { id : '5', Name: 'Alice3', Surname: 'A3', Age: 71 }
+              { id : '4', Name: 'Alice', Surname: 'A4', Age: 72, bio: "I am a bio Alice", photoURL: "https://www.google.com"},
+              { id : '2', Name: 'Bob', Surname: 'A4', Age: 72, bio: "I am a bio Bob", photoURL: "https://www.google.com"},
+              { id : '3', Name: 'Charlie', Surname: 'A4', Age: 72, bio: "I am a bio Charlie", photoURL: "https://www.google.com"},
+              { id : '5', Name: 'Daniel', Surname: 'A4', Age: 72, bio: "I am a bio Daniel", photoURL: "https://www.google.com"}
             ];
 
           for (const profile of profiles) {

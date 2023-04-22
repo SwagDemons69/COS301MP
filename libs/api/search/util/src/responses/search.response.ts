@@ -1,13 +1,13 @@
 // import { IProfile } from '@mp/api/profiles/util';
 // import { post } from '@mp/api/post/util';
 
-export interface user{
+export interface User{
     name    : string;
     bio    : string;
     photoURL : string;
     profileId : string;
 }
-export interface post{
+export interface Post{
     content : string;
     caption : string;
     postId : string;
@@ -15,6 +15,6 @@ export interface post{
 }
 
 export interface SearchResponse {
-    profiles: user[];
-    posts: post[];
+    profiles: User[];
+    posts: Post[];
 }
