@@ -21,54 +21,63 @@ export class searchmodalPage {
             "id": 1,
             "name": "Mia Graham",
             "username": "Bret",
+            "isFriend": false,
             "avatar": "https://cdn.iconscout.com/icon/premium/png-512-thumb/avatar-95-116461.png?f=avif&w=256" 
           },
           {
             "id": 2,
             "name": "Ethan Howell",
             "username": "Antonette",
+            "isFriend": true,
             "avatar": "https://cdn.iconscout.com/icon/premium/png-512-thumb/avatar-95-116461.png?f=avif&w=256"
           },
           {     
             "id": 3,
             "name": "Joy Bauch",
             "username": "Samantha",
+            "isFriend": false,
             "avatar": "https://cdn.iconscout.com/icon/premium/png-512-thumb/avatar-95-116461.png?f=avif&w=256"
           },
           {
             "id": 4,
             "name": "Patricia Lebsack",
             "username": "Charlotte",
+            "isFriend": true,
             "avatar": "https://cdn.iconscout.com/icon/premium/png-512-thumb/avatar-133-116499.png?f=avif&w=256"
           },
           {
             "id": 5,
             "name": "Avery Dietrich",
             "username": "Kamren",
+            "isFriend": false,
             "avatar": "https://cdn.iconscout.com/icon/premium/png-512-thumb/avatar-133-116499.png?f=avif&w=256"
           },
           {
             "id": 6,
             "name": "Bari Schulist",
             "username": "Jackson",
+            "isFriend": true,
             "avatar": "https://cdn.iconscout.com/icon/premium/png-512-thumb/avatar-133-116499.png?f=avif&w=256"
           },
           {
             "id": 7,
             "name": "Emma Weissnat",
             "username": "Emma",
+            "isFriend": true,
             "avatar": "https://cdn.iconscout.com/icon/premium/png-512-thumb/avatar-136-116502.png?f=avif&w=256"
           },
           {
             "id": 8,
             "name": "Isabella Runolfsdottir V",
             "username": "Isabella",
+            "isFriend": false,
             "avatar": "https://cdn.iconscout.com/icon/premium/png-512-thumb/avatar-136-116502.png?f=avif&w=256"
           },
           {
             "id": 9,
             "name": "Olivia Huels",
             "username": "Olivia",
+            "isFriend": true,
             "avatar": "https://cdn.iconscout.com/icon/premium/png-512-thumb/avatar-136-116502.png?f=avif&w=256"
           }  
         ];}
@@ -111,6 +120,7 @@ export class searchmodalPage {
 
 
     onUserAddFriend(user: any) {
-      alert("Adding fren: " + JSON.stringify(user, null, 2));
+      // alert("Adding fren: " + JSON.stringify(user, null, 2));
+      user.isFriend = !user.isFriend;
     }
 }

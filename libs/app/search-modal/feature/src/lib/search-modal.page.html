@@ -11,16 +11,16 @@
 
 
 
-<ion-content >
+<ion-content>
     <ion-searchbar (ionInput)="getUsers($event)"></ion-searchbar>
     <ion-list class="ion-margin-top">
     <div *ngFor="let user of users" class="chatItem">
-        <ion-item (click)="goToChats(user.id)" lines="none">
-            <ion-avatar item-left>
+        <ion-item lines="none">
+            <ion-avatar item-left (click)="goToChats(user.id)">
                 <img src="{{user.avatar}}">
             </ion-avatar>
             {{ user.username }}
-            <ion-icon (click)="onUserAddFriend(user)" name="add-outline" slot="end"></ion-icon>
+            <ion-icon (click)="onUserAddFriend(user)" name="{{user.isFriend ? 'add-outline' : 'remove-outline'}}" slot="end"></ion-icon>
         </ion-item>
         <hr />
     </div>
