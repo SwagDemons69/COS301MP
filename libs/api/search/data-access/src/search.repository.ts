@@ -11,34 +11,39 @@ import { AnyARecord } from 'dns';
 // import { SearchResponse } from '@mp/api/search/util';
 @Injectable()
 export class SearchRepository {
+    returnedPosts: Post[] = []; //What is returned after all posts are found
 
     async search(query: string): Promise<SearchResponse> {
-    
-
-        
-        // const foundUsers = this.GetSearchedUsers(query);
-        // const foundPosts = this.GetSearchedPosts(query);
+        const foundUsers = await this.GetSearchedUsers(query);
+        await this.iterateAllPosts(query);
+        const retrievedprofiles: User[] = []
+        const posts: Post[] = [];
   
 
-        // for(let i = 0; i < foundUsers.length; i++){
-        //   var content = user[i].displayName;
-        //   var bio = user[i].bio;
-        //   var photoURL = user[i].username;
-        //   var profileId = user[i].user_id;
-        //   profiles.push({content, bio, photoURL, });
-        // }
-        // var response = {profiles : this.GetSearchedUsers(query), posts};
+        for(let i = 0; i < foundUsers.length; i++){
+          var name = foundUsers[i].name;
+          var bio = foundUsers[i].bio;
+          var photoURL = foundUsers[i].photoURL;
+          var profileId = foundUsers[i].profileId;
+          retrievedprofiles.push({name, bio, photoURL, profileId});
+        }
 
-        const profiles: User[] = await this.GetSearchedUsers(query);
-        const posts: Post[] = await this.GetSearchedPosts(query);
+        for(let i = 0; i < this.returnedPosts.length; i++){
+          var name = this.returnedPosts[i].content;
+          var bio = this.returnedPosts[i].caption;
+          var photoURL = this.returnedPosts[i].profileId;
+          var profileId = this.returnedPosts[i].profileId;
+          retrievedprofiles.push({name, bio, photoURL, profileId});
+        }
+        var response = {profiles : retrievedprofiles, posts};
 
-        return {profiles : profiles, posts : posts};
+        return response;
     }
     
     async GetSearchedUsers(query : string) : Promise<User[]> {
       // const querySnapshot = await admin.firestore().collection('profiles').get();
       // const querySnapshot = await admin.firestore().collectionGroup('users').where(query, 'in', ['*', '']);
-      const querySnapshot = await admin.firestore().collection('profiles').where('Name', '>=', query).where('Name', '<=', query + '\uf8ff').get(); //from ChatGBT
+      const querySnapshot = await admin.firestore().collection('users').where('displayName', '>=', query).where('displayName', '<=', query + '\uf8ff').get(); //from ChatGBT
       
       const numDocs = querySnapshot.size;
       console.log(`There are ${numDocs} documents in the 'profiles' collection.`);
@@ -46,50 +51,42 @@ export class SearchRepository {
 
 
       querySnapshot.forEach((doc) => {
-        // if(doc.data()?.['displayName'] === query){
-          // console.log("hi");
           console.log(doc.data());  
-          // const name = doc.data()?.['Name'];
           const myUser : User = {
-            name    : doc.data()?.['Name'],
+            name    : doc.data()?.['username'],
             bio    : doc.data()?.['bio'],
-            photoURL : doc.data()?.['photoURL'],
-            profileId : doc.data()?.['id']
+            photoURL : doc.data()?.['profilePicturePath'],
+            profileId : doc.data()?.['user_id']
           }
           returnedUsers.push(myUser);
       });
       return returnedUsers;
     };
 
+    async iterateAllPosts(query : string) {
+      const usersRef = await admin.firestore().collection('users').get();
+      const allFoundPosts = [];
 
+      usersRef.forEach(doc => {
+        this.GetSearchedPosts(query, doc.ref, doc.data()?.['user_id']);
+      });
+    };
 
-    // ### Not working, try subcollections ###
-    async GetSearchedPosts(query : string): Promise<Post[]> {
-      // const handle = await admin.firestore().collection('users').get();
+    async GetSearchedPosts(query : string, userRef : FirebaseFirestore.DocumentReference, id : string) {
 
-      const myPost : Post = {
-        content : "string",
-        caption : "string",
-        postId : "string",
-        profileId : "string"
-      }
-      const returnedPosts: Post[] = [myPost];
-      // handle.forEach((doc) => {
-      //   const p = doc.data()?.collection('posts');
-      //   p.forEach((p2) => {
-      //     if(p2.['caption'] === query){
-      //       posts.push({})
-      //     }
-      //   })
-      // });
-      
-      return returnedPosts; 
+      const postRef = await userRef.collection('posts').where('caption', '>=', query).where('caption', '<=', query + '\uf8ff').get();
+
+      postRef.forEach((doc) => {
+          console.log(doc.data());  
+          const myPost : Post = {
+            content : doc.data()?.['content'],
+            caption : doc.data()?.['caption'],
+            postId : doc.data()?.['postId'],
+            profileId : id
+          }
+          this.returnedPosts.push(myPost);
+      });
     }
-
-    getStringValue(value: any): string {
-      return value.toString();
-    }
-  
 }
 
 

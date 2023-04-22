@@ -38,9 +38,9 @@ const generateProfiles = async () => {
           // Create sample data
           const profiles = [
               { id : '4', Name: 'Alice', Surname: 'A4', Age: 72, bio: "I am a bio Alice", photoURL: "https://www.google.com"},
-              { id : '2', Name: 'Bob', Surname: 'A4', Age: 72, bio: "I am a bio Bob", photoURL: "https://www.google.com"},
-              { id : '3', Name: 'Charlie', Surname: 'A4', Age: 72, bio: "I am a bio Charlie", photoURL: "https://www.google.com"},
-              { id : '5', Name: 'Daniel', Surname: 'A4', Age: 72, bio: "I am a bio Daniel", photoURL: "https://www.google.com"}
+              { id : '2', Name: 'Alice2', Surname: 'A4', Age: 72, bio: "I am a bio Bob", photoURL: "https://www.google.com"},
+              { id : '3', Name: 'Alice3', Surname: 'A4', Age: 72, bio: "I am a bio Charlie", photoURL: "https://www.google.com"},
+              { id : '5', Name: 'Alice4', Surname: 'A4', Age: 72, bio: "I am a bio Daniel", photoURL: "https://www.google.com"}
             ];
 
           for (const profile of profiles) {
@@ -68,17 +68,26 @@ const getProfiles = async() => {
   return profiles;
 };
 
+const getProfiles2 = async(query) => {
+  const querySnapshot = await db.collection('profiles').where('Name', '>=', query).where('Name', '<=', query + '\uf8ff').get(); //from ChatGBT
+  const profiles = [];
+  var count = 0;
+    querySnapshot.forEach((doc) => {
+      console.log(count++);
+      profiles.push(doc.data());
+    });
+
+    for(let i = 0; i < profiles.length; i++){
+      console.log(profiles[i]);
+    }
+}
+
 //=============================================
 // FUNCTION CALLS
 //=============================================
 
 generateProfiles();
-const foundUsers = getProfiles();
-
-for(var user in foundUsers){
-  console.log(user.Name);
-}
-
+getProfiles2("A");
 admin.app().delete();
 
 //=============================================
