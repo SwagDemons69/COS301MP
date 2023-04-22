@@ -16,7 +16,6 @@ export class ChatHeadersQueryHandler
   async execute(command: ChatHeadersQuery) {
     console.log(`${ChatHeadersQueryHandler.name}`);
     const request = command.request;
-    console.log("Chat Query Handler")
-    return  {chats: []};
+    return await this.repository.getChatHeaders(request.user)
   }
 }

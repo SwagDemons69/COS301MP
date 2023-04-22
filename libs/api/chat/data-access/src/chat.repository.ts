@@ -6,12 +6,17 @@ import { post_like } from '@mp/api/post/util';
 import * as admin from 'firebase-admin';
 import { firestore } from 'firebase-admin';
 import { user } from 'firebase-functions/v1/auth';
-import { CreateChatMessageResponse, ChatMessage, ChatMessages } from '@mp/api/chat/util';
+import { CreateChatMessageResponse, ChatMessage, ChatMessages, ChatHeadersResponse } from '@mp/api/chat/util';
+import { Timestamp } from 'firebase-admin/firestore';
 
 
 @Injectable()
 export class ChatRepository {
 
+    async getChatHeaders(user: string): Promise<ChatHeadersResponse>{
+        const userChatsRef = admin.firestore().collection(`profiles/${user}/chats`)
+        return {chats:[]};
+    }
 
     async getChatMessages(sender: string, receiver: string, chat: ChatMessage): Promise<CreateChatMessageResponse>{
 
@@ -37,10 +42,13 @@ export class ChatRepository {
     //Send message to someone in an existing chat
     async sendChatMessage(sender: string, receiver: string, timeStamp: string, payload: string){
 
+        interface recip {
+            recipient: string;
+        };
+
         const handle = await admin.firestore().collection(`profiles/${sender}/chats`).get();
-
-        const chats = handle.docs.map((doc) => { return doc.data() as ChatMessages;});
-
+        const chats = handle.docs.map((doc) => { return doc.data() as recip;});
+        
         let flag = false;
         for(let i = 0;i < chats.length; i++){
             if(chats[i].recipient == receiver)
@@ -59,18 +67,20 @@ export class ChatRepository {
         
         //Chat Needs to be created for both users
         const senderRef = admin.firestore().collection(`profiles/${sender}/chats`).doc(receiver);
-        const recieveRef = admin.firestore().collection(`profiles/${receiver}/chats`).doc(sender);
+        const receiverRef = admin.firestore().collection(`profiles/${receiver}/chats`).doc(sender);
+        senderRef.set({ recipient : receiver});
+        receiverRef.set({ recipient : sender});
 
         const senderChatRef = admin.firestore().collection(`profiles/${sender}/chats/${receiver}/chat`).doc();
         const recieveChatRef = admin.firestore().collection(`profiles/${receiver}/chats/${sender}/chat`).doc();
 
+        
         const message: ChatMessage = 
         { sender    : sender,
           receiver  : receiver,
           timeStamp : timeStamp,
           payload   : payload
         };
-
         await senderChatRef.set(message);
         await recieveChatRef.set(message);
     }
@@ -83,7 +93,7 @@ export class ChatRepository {
         const message: ChatMessage = 
         { sender    : sender,
           receiver  : receiver,
-          timeStamp : timeStamp,
+          timeStamp : Timestamp.now().seconds.toString(),
           payload   : payload
         };
 
