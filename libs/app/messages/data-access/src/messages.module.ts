@@ -9,4 +9,4 @@ import { MessagesApi } from './messages.api';
   imports: [CommonModule, NgxsModule.forFeature([MessagesState]), AuthModule],
   providers: [MessagesApi],
 })
-export class ProfileModule {}
+export class MessagesModule {}
