@@ -94,4 +94,19 @@
         </div>
     </div>
       
+
+
+    
+
+    <div *ngFor="let notification of notifications" class="notification">
+      <div class="notification-icon">
+        <i class="fa fa-info-circle"></i>
+      </div>
+      <div class="notification-message">
+        <p>{{ notification.text}}"</p>
+      </div>
+      <div class="notification-close">
+        <i class="fa fa-times"></i>
+      </div>
+  </div>
 </ion-content>
