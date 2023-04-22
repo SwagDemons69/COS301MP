@@ -7,9 +7,14 @@ import { post } from '@mp/api/home/util'
 import { AddPhotoRequest, AddPhotoResponse, GetPostsRequest, GetPostsResponse } from '@mp/api/post/util';
 
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import { getDoc } from 'firebase/firestore';
-import { ChatHeadersRequest, ChatHeadersResponse } from '@mp/api/chat/util';
+import { getDoc, onSnapshot, where } from 'firebase/firestore';
+import { ChatHeader, ChatHeadersRequest, ChatHeadersResponse } from '@mp/api/chat/util';
+import { Observable } from 'rxjs';
 //import { AngularFireStore } from '@angular/fire/firestore';
+
+export interface recip {
+    recipient : string;
+}
 
 @Injectable()
 export class MessagesApi {
@@ -18,13 +23,50 @@ export class MessagesApi {
     private readonly functions: Functions
   ) {}
 
-  async headers$(user: string){
+  async headers(user: string) {
     const request: ChatHeadersRequest = { user: user};
     const chats = await httpsCallable<ChatHeadersRequest, ChatHeadersResponse>(this.functions, 'ChatHeaders')(request);
-    console.log("Headers")
-    console.log(chats.data.chats);
+   
+   
+    // console.log("Headers")
+    // console.log(chats.data.chats);
+    //const obs = new Observable();
+
+//     const unsubscribe = onSnapshot(collection(this.firestore, "cities"), () => {
+//     // Respond to data
+//     // ...
+//   });
     return chats.data.chats;
 }
+
+
+
+
+    headers$(id: string) {
+        const docRef = doc(
+        this.firestore,
+        `profiles/${id}`
+        ).withConverter<user_profile>({
+        fromFirestore: (snapshot) => {
+            return snapshot.data() as user_profile;
+        },
+        toFirestore: (it: user_profile) => it,
+        });
+        return docData(docRef, { idField: 'id' });
+    }
+
+//   profile$(id: string) {
+//     const docRef = doc(
+//       this.firestore,
+//       `profiles/${id}`
+//     ).withConverter<user_profile>({
+//       fromFirestore: (snapshot) => {
+//         return snapshot.data() as user_profile;
+//       },
+//       toFirestore: (it: user_profile) => it,
+//     });
+//     return docData(docRef, { idField: 'id' });
+//   }
 
   
 }

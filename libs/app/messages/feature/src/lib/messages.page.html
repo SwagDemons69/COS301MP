@@ -10,15 +10,15 @@
   <br>
 
   <ion-list>
-    <ion-item *ngFor="let item of filteredItems" (click)="goToDetails(item)">
+    <ion-item *ngFor="let item of headers" (click)="goToDetails(item)">
       <ion-avatar>
-        <img src="{{ item.avatar }}">
+        <img src="https://shorturl.at/osyUY">
       </ion-avatar>
       <ion-label>
-        <h2>{{ item.name }}</h2>
-        <p>{{ item.snippet }}</p>
+        <h2>{{ item.username }}</h2>
+        <p>{{ item.lastMessage }}</p>
       </ion-label>
-      <ion-badge slot="end">{{ item.time }}</ion-badge>
+      <!-- <ion-badge slot="end">{{ item.t }}</ion-badge> -->
     </ion-item>
   </ion-list>
 

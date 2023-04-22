@@ -55,13 +55,18 @@ export class MessagesState {
     const user = this.store.selectSnapshot(AuthState.user);
     if (!user) return ctx.dispatch(new SetError('User not set'));
 
-    const headers = await this.messagesApi.headers$(user.uid);
+    return this.messagesApi
+                 .headers$(user.uid)
+                 .pipe(tap((profile : user_profile) => ctx.dispatch( new SetHeaders(user.uid) )));
     
-    return this.store.dispatch(new SetHeaders(headers));
+    //return this.store.dispatch(new SetHeaders(headers));
   }
 
   @Action(SetHeaders)
-  SetHeaders(ctx: StateContext<MessagesStateModel>, { headers }: SetHeaders) {
+  async SetHeaders(ctx: StateContext<MessagesStateModel>, { user }: SetHeaders) {
+    //console.log("PROFILE CHANGED");
+    const headers = await this.messagesApi.headers(user);
+    //console.log(headers[0].lastMessage);
     return ctx.setState(
         produce((draft) =>{
             draft.headers = headers;
@@ -69,4 +74,6 @@ export class MessagesState {
     )
   }
 
+
+  //Update on emulators UI will make it change
 }

@@ -30,7 +30,7 @@ export class ChatRepository {
             const profileData = profile.data() as user_profile;
             
             //If username not set then get email
-            console.log(profileData)
+            // console.log(profileData)
             let username = profileData.username;
             if(typeof username != "string" || ( (typeof username == "string") && (username == "") )){
                 username = profileData.email
@@ -48,15 +48,17 @@ export class ChatRepository {
                     index = j;
                 }
             }
-
-            const lastMessage = messages[index].payload;
+            const sentBy = messages[index].sender;
+            
+            const lastMessage = (sentBy == user) ? ("You: " + messages[index].payload) : (username + ": " + messages[index].payload) ;
 
             const chat: ChatHeader = {
                 username: username,
                 picture: picture,
                 lastMessage: lastMessage
             }
-            chatHeaders.push(chat);
+            if(profileData.user_id != user)
+                chatHeaders.push(chat);
         }
         
         return { chats: chatHeaders };
@@ -115,7 +117,17 @@ export class ChatRepository {
         const senderChatRef = admin.firestore().collection(`profiles/${sender}/chats/${receiver}/chat`).doc();
         const recieveChatRef = admin.firestore().collection(`profiles/${receiver}/chats/${sender}/chat`).doc();
 
+        ///////////////////////
+        //Real time update use
+        const senderRef2 = admin.firestore().collection(`profiles`).doc(receiver);
+        const receiveRef2 = admin.firestore().collection(`profiles`).doc(sender);
         
+        //Pain
+        await senderRef2.set({lastEdited: Timestamp.now().seconds.toString()}, {merge: true});
+        await receiveRef2.set({lastEdited: Timestamp.now().seconds.toString()}, {merge: true});
+        ///////////////////////
+
+
         const message: ChatMessage = 
         { sender    : sender,
           receiver  : receiver,
@@ -130,6 +142,18 @@ export class ChatRepository {
         //"Send" Message to both users
         const senderRef = admin.firestore().collection(`profiles/${sender}/chats/${receiver}/chat`).doc();
         const recieveRef = admin.firestore().collection(`profiles/${receiver}/chats/${sender}/chat`).doc();
+
+
+        ///////////////////
+        const senderRef2 = admin.firestore().collection(`profiles`).doc(receiver);
+        const receiveRef2 = admin.firestore().collection(`profiles`).doc(sender);
+
+        //Pain
+        await senderRef2.set({lastEdited: Timestamp.now().seconds.toString()}, {merge: true});
+        await receiveRef2.set({lastEdited: Timestamp.now().seconds.toString()}, {merge: true});
+        ///////////////////
+
+
 
         const message: ChatMessage = 
         { sender    : sender,

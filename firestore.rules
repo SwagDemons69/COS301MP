@@ -13,7 +13,15 @@ service cloud.firestore {
       allow read: if true;
     }
 
-    match /profiles/{userId}/posts/{postId}{
+    match /profiles/{userId}/posts/{postId} {
+      allow read: if true;
+    }
+
+    match /profiles/{userId}/chats/{chatsId} {
+      allow read: if true;
+    }
+
+    match /profiles/{userId}/chats/{chatsId}/chat/{chatId} {
       allow read: if true;
     }
   }

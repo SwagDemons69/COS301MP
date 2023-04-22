@@ -6,7 +6,12 @@ import { Component } from '@angular/core';
 import { searchmodalPage } from '../../../../search-modal/feature/src/lib/search-modal.page';
 import { ModalController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
-
+import { MessagesState } from '@mp/app/messages/data-access';
+import { Observable } from 'rxjs';
+import { Select } from '@ngxs/store';
+import { ChatHeader } from '@mp/api/chat/util';
+import { Store } from '@ngxs/store';
+import { SetHeaders} from "@mp/app/messages/util"
 
 @Component({
   selector: 'messages-page',
@@ -14,7 +19,8 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./messages.page.scss']
 })
 export class MessagesPage {
-
+  @Select(MessagesState.headers) headers$! : Observable<ChatHeader[] | [] > 
+  headers : ChatHeader[]
   searchTerm = '';
   items: any[] = [
     { avatar: "https://shorturl.at/qtGLZ", name: 'Will Turner', time: 'Mon', snippet: "The problem is not the problem. The problem is your attitude about the problem." },
@@ -24,8 +30,17 @@ export class MessagesPage {
   ];
   filteredItems: any[] = [];
 
-  constructor(private navCtrl: NavController, private modalController: ModalController) {
+  constructor(private navCtrl: NavController,
+              private modalController: ModalController,
+              private readonly store: Store) {
     this.initializeItems();
+    this.headers = [];
+    this.headers$.forEach((headers)=>{
+      if(headers){
+        this.headers = headers;
+        
+      }
+    })
   }
 
   async openSearchModal(){
@@ -36,7 +51,7 @@ export class MessagesPage {
   }
 
   initializeItems() {
-    this.filteredItems = this.items;
+    this.filteredItems = this.headers;
   }
 
   getItems() {
