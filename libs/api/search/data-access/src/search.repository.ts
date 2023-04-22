@@ -8,12 +8,11 @@ import * as admin from 'firebase-admin';
 @Injectable()
 export class SearchRepository {
   constructor(){}
-    returnedPosts: Post[] = []; //What is returned after all posts are found
     async search(query: string): Promise<SearchResponse> {
         const foundUsers = await this.GetSearchedUsers(query);
-        await this.iterateAllPosts(query);
+        const foundPosts = await this.iterateAllPosts(query);//Need to look at how to access subcollections
 
-        const response = {profiles : foundUsers, posts: this.returnedPosts};
+        const response = {profiles : foundUsers, posts: foundPosts};
 
         console.log(response)
 
@@ -21,16 +20,15 @@ export class SearchRepository {
     }
     
     //will need to change searched for value to displayName to user when merging with completed profile page
+    //check what the used name convention is for users/profiles
     async GetSearchedUsers(query : string) : Promise<User[]> {
-      // const querySnapshot = await admin.firestore().collection('profiles').get();
-      // const querySnapshot = await admin.firestore().collectionGroup('users').where(query, 'in', ['*', '']);
-      const querySnapshot = await admin.firestore().collection('users').where('email', '>=', query).where('email', '<=', query + '\uf8ff').get(); //from ChatGBT
+      const querySnapshot = await admin.firestore().collection('profiles').where('username', '>=', query).where('username', '<=', query + '\uf8ff').get(); //from ChatGBT
       
       const returnedUsers: User[] = [];
 
-      querySnapshot.forEach((doc) => { 
+      querySnapshot.forEach((doc) => {
           const myUser : User = {
-            name    : doc.data()?.['displayName'],
+            name    : doc.data()?.['username'],
             bio    : doc.data()?.['bio'],
             photoURL : doc.data()?.['profilePicturePath'],
             profileId : doc.data()?.['user_id'],
@@ -38,49 +36,42 @@ export class SearchRepository {
           }
           returnedUsers.push(myUser);
       });
-
       return returnedUsers;
     };
 
-    async iterateAllPosts(query : string) {
-      const usersRef = await admin.firestore().collection('users').get();
-      const allFoundPosts = [];
+    async iterateAllPosts(query : string): Promise<Post[]> {
+      const returnedPosts: Post[] = [];
+      const usersRef = await admin.firestore().collection('profiles').get();
 
-      usersRef.forEach(doc => {
-        this.GetSearchedPosts(query, doc.ref, doc.data()?.['user_id']);
+      usersRef.forEach(async (doc) => {
+        const posts = await this.GetSearchedPosts(query, doc.ref, doc.data()?.['username']); 
+        returnedPosts.concat(posts);
       });
+
+      return returnedPosts;
     };
 
-    async GetSearchedPosts(query : string, userRef : FirebaseFirestore.DocumentReference, id : string) {
+    async GetSearchedPosts(query : string, userRef : FirebaseFirestore.DocumentReference, username : string): Promise<Post[]> {
+      const returnedPosts: Post[] = [];
 
-      const postRef = await userRef.collection('posts').where('caption', '>=', query).where('caption', '<=', query + '\uf8ff').get();
+      const postRef = await userRef.collection('posts').get();
+
+      console.log("User '" + username + "' has " + postRef.size + " posts");
 
       postRef.forEach((doc) => {
-          console.log(doc.data());  
+        if(doc.data()?.['caption'].includes(query)){
+          console.log("Here we are")
           const myPost : Post = {
             content : doc.data()?.['content'],
             caption : doc.data()?.['caption'],
             postId : doc.data()?.['postId'],
-            profileId : id
+            username : username
           }
-          this.returnedPosts.push(myPost);
+          console.log(myPost);
+          returnedPosts.push(myPost);
+        }
       });
-    }
+
+      return returnedPosts;
+    };
 }
-
-
-
-// async blobToDataURL(blob: Blob): Promise<string> {
-//     return new Promise<string>((resolve, reject) => {
-//       const reader = new FileReader();
-//       reader.onload = () => resolve(reader.result as string);
-//       reader.onerror = reject;
-//       reader.readAsDataURL(blob);
-//     });
-
-// return uploadString(photosRef, file, 'base64').then((snapshot) => { 
-//     console.log('Uploaded a base64 string!');
-//     console.log(typeof snapshot.ref);
-//     const JSONFORM : JSON = JSON.parse(JSON.stringify(snapshot.ref, null, 2));
-//     console.log(snapshot.metadata.fullPath)
-// });

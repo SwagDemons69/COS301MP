@@ -12,7 +12,7 @@ export interface Post{
     content : string;
     caption : string;
     postId : string;
-    profileId : string;
+    username : string;
 }
 
 export interface SearchResponse {
