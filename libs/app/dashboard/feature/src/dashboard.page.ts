@@ -122,7 +122,7 @@ export class DashboardPage {
     }
     else if (event.detail.scrollTop <= 220) {
       this.renderer.setStyle(document.querySelector(".barKronos"), 'opacity', '0');
-      this.renderer.setStyle(document.querySelector(".glassyBackground"), 'top', `${0.4*event.detail.scrollTop}px`);
+      this.renderer.setStyle(document.querySelector(".glassyBackground"), 'top', `${0.5*event.detail.scrollTop}px`);
       this.isKronosBarVisible = false;
     }
   }

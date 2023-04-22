@@ -18,9 +18,9 @@ export class MessagesPage {
   searchTerm = '';
   items: any[] = [
     { avatar: "https://shorturl.at/qtGLZ", name: 'Will Turner', time: 'Mon', snippet: "The problem is not the problem. The problem is your attitude about the problem." },
-    { avatar: "https://shorturl.at/ftM36", name: 'Mr Gibbs', time: 'Tues', snippet: "You seem somewhat familiar. Have I threatened you before?" },
+    { avatar: "https://shorturl.at/ftM36", name: 'Mr Gibbs', time: 'Tue', snippet: "You seem somewhat familiar. Have I threatened you before?" },
     { avatar: "https://shorturl.at/yHJMR", name: 'Jack Sparrow', time: 'Wed', snippet: "I'm Captain Jack Sparrow, savvy?"},
-    { avatar: "https://shorturl.at/osyUY", name: 'Amber Head', time: 'Satu', snippet: "Why is the rum always gone? I need a huge pint of it, or I'll stab you." }
+    { avatar: "https://shorturl.at/osyUY", name: 'Amber Head', time: 'Sat', snippet: "Why is the rum always gone? I need a huge pint of it, or I'll stab you." }
   ];
   filteredItems: any[] = [];
 
