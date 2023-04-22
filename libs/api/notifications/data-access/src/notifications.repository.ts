@@ -11,14 +11,16 @@ import * as admin from 'firebase-admin';
 @Injectable()
 export class NotificationRepository {
 
-    async sendNotification(sendNotificationRequest : SendNotificationRequest): Promise<any> {
+    async sendNotification(sendNotificationRequest : SendNotificationRequest): Promise<SendNotificationReponse> {
         // create a notification object and add it to the firebase collection for notifications
         // create a document in the firebase collection for notifications in user collection
         // add the notification id to the user's notifications array
-        
+        return {success: false};
     }
     
-    async getNotifications(user_id: string): Promise<any> {
+    async getNotifications(user_id: string): Promise<GetNotificationsResponse> {
         // get an array of notifications for a user from the firebase collection for notifications
+
+        return {notifications: []};
     }
 }
