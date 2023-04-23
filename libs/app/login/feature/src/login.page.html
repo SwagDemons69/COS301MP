@@ -1,31 +1,26 @@
 <ion-header [translucent]="true">
-  <!-- <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="/"></ion-back-button>
-    </ion-buttons>
-    <div id = "header">
-     <ion-title>Twenty4</ion-title>
-    </div>
-  </ion-toolbar> -->
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header >
-      <div id="header">
-      <ion-title >Twenty4</ion-title></div>
-  </ion-header>
+  <ion-title>
+    <ion-img class="logo" src="assets/logos/logo.svg" style="height:120px;"></ion-img>
+  </ion-title>
+  
 
-  <form id="form" [formGroup]="loginForm" ngxsForm="login.loginForm" (submit)="login()">
+  <form [formGroup]="loginForm" ngxsForm="login.loginForm" (submit)="login()">
     <ion-list class="ion-padding-vertical">
       <ion-item>
+        <!-- <ion-label position="floating" class="required">Email</ion-label> -->
         <ion-input
-          aria-label="Email / Username..." 
-          placeholder="Email / Username..." 
           class="custom" 
-          helperText="Helper text"
-        >
-        </ion-input>
-       <ion-icon name="person-outline"></ion-icon>
+          type="email"
+          minlength="6"
+          maxlength="64"
+          placeholder="Email / Username..."
+          required="true"
+          autocomplete="email"
+          formControlName="email"></ion-input>
+          <ion-icon name="perm_identity"></ion-icon>
       </ion-item>
       <ion-text
         *ngIf="email?.invalid && (email?.dirty || email?.touched)"
@@ -34,11 +29,9 @@
         <small>{{ emailError }}</small>
       </ion-text>
       <ion-item>
+        <!-- <ion-la/bel position="floating" class="required">Password</ion-label> -->
         <ion-input
-          label="Outline input"
-          label-placement="floating"
-          class="custom"
-          fill = "outline"
+        class = "custom"
           [type]="showPassword ? 'text' : 'password'"
           minlength="6"
           maxlength="64"
@@ -46,12 +39,11 @@
           required="true"
           autocomplete="password"
           formControlName="password"></ion-input>
-        <!-- <ion-icon
-          [name]="showPassword ? 'eye-outline' : 'eye-off-outline'"
+        <ion-icon
+          [name]="showPassword ? 'lock-open-outline' : 'lock-outline'"
           slot="end"
           class="ion-align-self-center"
-          (click)="toggleShowPassword()"></ion-icon> -->
-          <ion-icon name="lock-closed-outline"></ion-icon>
+          (click)="toggleShowPassword()"></ion-icon>
       </ion-item>
       <ion-text
         *ngIf="password?.invalid && (password?.dirty || password?.touched)"
@@ -69,53 +61,25 @@
             [disabled]="!this.loginForm.valid || (busy$ | async)"
             type="submit">
             <ion-spinner *ngIf="busy$ | async"></ion-spinner>
-            
-              <ion-text>Login</ion-text>
-           
+            <ion-text style="color: rgb(255, 255, 255);">Login</ion-text>
           </ion-button>
         </ion-col>
       </ion-row>
-      <!-- <ion-row class="ion-padding-top">
-        <ion-col class="ion-text-center">
-          Having trouble?
-          <ion-nav-link routerLink="/forgot">
-            <ion-text color="primary">Forgot Password</ion-text>
-          </ion-nav-link>
-        </ion-col>
-      </ion-row>
+
       <ion-row>
         <ion-col class="ion-text-center">
-          Don't have an account?
+          <p>Don't have an account?</p>
           <ion-nav-link routerLink="/register">
             <ion-text color="primary">Register</ion-text>
           </ion-nav-link>
         </ion-col>
-      </ion-row> -->
+      </ion-row>
     </ion-grid>
   </form>
 </ion-content>
+
 
 <ion-footer collapse="condense" class="ion-padding ion-text-center">
   <ms-copyright-component></ms-copyright-component>
 </ion-footer>
 
-<!-- //////////////////////////////new things/////////////////// -->
-<!-- <ion-content>
-  <div class="center-container">
-    <ion-card>
-      <ion-card-content>
-        <ion-input label="Outline input" label-placement="floating" placeholder="Email / Username...">
-        </ion-input>
-        <br>
-        <ion-input label="Outline input" label-placement="floating" placeholder="Password">
-        </ion-input>
-      </ion-card-content>
-      <ion-button expand="block" color="dark">Login</ion-button>
-    </ion-card>
-  </div>
-</ion-content>
-
-  <ion-footer collapse="condense" class="ion-padding ion-text-center">
-    <ms-copyright-component></ms-copyright-component>
-  </ion-footer>  -->
- 

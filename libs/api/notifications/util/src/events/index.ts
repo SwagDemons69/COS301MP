@@ -1,1 +1,2 @@
-export * from './new-follower.event';
+export * from './get-notifications.event';
+export * from './send-notification.event';

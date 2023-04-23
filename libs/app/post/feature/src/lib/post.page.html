@@ -1,35 +1,39 @@
 <ion-header [translucent]="true">
     <ion-toolbar>
-        <ion-title>
-        Post
-        </ion-title>
+        <ion-title>Post</ion-title>
     </ion-toolbar>
-    </ion-header>
+</ion-header>
     
-    <ion-content [fullscreen]="true">
-    
-        <ion-content>
-            <div class="centered-box">
-    
-                <div id="FileUpload">
-                    <form>
-                        <input type="file" name="file" id="file" class="inputfile" accept="image/*, video/*" required/><br><br>
-                        <input type="text" placeholder="Caption" /><br><br>
-                        <input type="submit" value="Upload" />
-                    </form>
-                </div>
-            </div>
-        </ion-content>
-    
-    </ion-content>  
-    
-    
-    <!-- yarn start:api:dev
-    
-    yarn start:emulators
-    
-    yarn start:app:dev 
-    
-    (change)="uploadFile($event.target.files)"
-    
-    (click)="uploadFile()"-->
+<ion-content [fullscreen]="true">
+
+    <ion-content>
+        <div class="top-section">              
+            
+        </div>
+            
+        <div class="bottom-section">
+            <form>
+                <label for="file-upload">
+                    <div class="camera-icon-container">
+                        <ion-icon name="camera"></ion-icon>
+                    </div>
+                </label>
+                <input id="file-upload" type="file" accept="image/*" style="display:none;">
+                
+                <p>Caption:</p><br>
+                <ion-item>  
+                    <ion-textarea id="caption"></ion-textarea>
+                    <!-- <ion-textarea id="caption" (keydown.enter)="onEnterPress($event)"></ion-textarea> -->
+                </ion-item>
+
+                <p>Categories(#s):</p><br>
+                <ion-item>                       
+                    <ion-textarea id="category"></ion-textarea>
+                </ion-item>
+
+                <button ion-button block color="primary" class="upload-button">POST</button>
+                
+            </form>          
+        </div>             
+    </ion-content>
+</ion-content>  
