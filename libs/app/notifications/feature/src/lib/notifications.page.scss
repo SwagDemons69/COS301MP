@@ -1,0 +1,72 @@
+.notification {
+    background-color: #000000;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 96%;
+    margin: 10px auto;
+    padding: 10px;
+  }
+
+.notification-icon {
+  font-size: 24px;
+  margin-right: 10px;
+  color: #ccc;
+}
+
+.notification-message {
+  flex: 1;
+}
+
+.notification-close {
+  cursor: pointer;
+  display: block;
+  font-size: 20px;
+  overflow: hidden;
+}
+
+title{
+  font-size: 1.5rem;
+  color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+}
+
+ion-title {
+  font-size: 24px;
+  color: #ffffff;
+  font-weight: 500;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  font-family: "futura-pt", sans-serif;
+}
+
+.notif {
+  padding: 0px;
+}
+
+.notif hr {
+  height: 1.2px;
+  background-image: linear-gradient(90deg, transparent 0%, #ffffff40 20%, transparent 100%);
+  margin: 0px;
+}
+
+.notif ion-label {
+  margin-left: 1em;
+  pointer-events: none;
+  font-size: 0.8em;
+  font-weight: light;
+}
+
+.notif ion-badge {
+  font-family: "Roboto";
+  background: transparent;
+  font-weight: light;
+}
