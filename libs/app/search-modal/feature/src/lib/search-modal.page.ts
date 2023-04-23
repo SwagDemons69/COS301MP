@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 import { Select } from '@ngxs/store';
 import { SearchProfileModal } from '@mp/api/search-modal/util';
 import { Store } from '@ngxs/store';
-import { SetChatMessages } from '@mp/app/chat/util';
+import { SetChatMessages, SetRecipient } from '@mp/app/chat/util';
 export interface Ordered{
   order_id : string;
   profile : SearchProfileModal;
@@ -70,13 +70,14 @@ export interface Ordered{
         goToChats(Selecteduser: string) {
           console.log(Selecteduser);
           const profile = this.users[parseInt(Selecteduser)];
-
+          console.log(profile.profile.user_id);
           //Basic checking for now
           if(typeof this.user == "undefined"){
             alert("Search-modal.page.ts - user is undefined")
           }
           else {
               console.log("DISPATCH SETTING ACTION")
+              this.store.dispatch(new SetRecipient(profile.profile.user_id));
               this.store.dispatch(new SetChatMessages(this.user?.user_id, profile.profile.user_id));
           }
           //move to the chat page and dismiss the modal using the dismiss method

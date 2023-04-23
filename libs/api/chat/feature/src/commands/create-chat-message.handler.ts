@@ -23,10 +23,10 @@ export class CreateChatMessageCommandHandler
     
     chat.manageChatMessage(newChatMessage);
     
+    //Get messages before I sent - idk
+    const messages = await this.repository.getChatMessages(request.sender, request.receiver);
 
-    const messages = await this.repository.getChatMessages(request.sender, request.receiver, request.chat);
-
-    // //Add new message to chat for client side
+    // //Add new message to chat f or client side
     // messages.messages.messages.push(newChatMessage);
 
     //Send message to recipient - Creates Event
@@ -37,6 +37,6 @@ export class CreateChatMessageCommandHandler
 
     //Return client side view to client messages tab
     //Call getMessages to get new messages - wont work trying to update it "client side"
-    return messages;
+    return { messages: {recipient: request.receiver, messages: messages.messages } } ;
   }
 }

@@ -24,11 +24,18 @@ export class CreateProfileHandler
     const cellphone = request.user.phoneNumber;
 
     let temp = "";
+    let tempEmail = ""
     if(!displayName){
        temp = "";
     }
     else{
       temp = displayName;
+    }
+    if(!email){
+      tempEmail = "";
+    }
+    else{
+      tempEmail = email;
     }
 
     const data: user_profile = {
@@ -39,7 +46,7 @@ export class CreateProfileHandler
       name: temp,
       profilePicturePath: "",
       bio: "",
-      email: email,
+      email: tempEmail,
       password: "",
       province: "",
       likesLeft: 10,

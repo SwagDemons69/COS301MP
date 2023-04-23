@@ -26,7 +26,7 @@ import { post } from '@mp/api/home/util';
 import { doc } from '@firebase/firestore';
 import { user } from 'firebase-functions/v1/auth';
 import { ChatMessage, ChatMessages } from '@mp/api/chat/util';
-import { SubscribeToChat, SetChatMessages } from '@mp/app/chat/util';
+import { SubscribeToChat, SetChatMessages, SetRecipient } from '@mp/app/chat/util';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ChatStateModel {
@@ -74,6 +74,11 @@ export class ChatState {
     return state.chats;
   }
 
+  @Selector()
+  static recipient(state : ChatStateModel){
+    return state.recipient;
+  }
+
   @Action(SubscribeToChat)
   SubscribeToChat(ctx: StateContext<ChatStateModel>){
     const user = this.store.selectSnapshot(AuthState.user);
@@ -85,16 +90,29 @@ export class ChatState {
   }
 
   @Action(SetChatMessages)
-  async SetChatMessages(ctx: StateContext<ChatStateModel>, { profile, profile2 }: SetChatMessages){
-  
+  async SetChatMessages(ctx: StateContext<ChatStateModel>, { sender, reciever }: SetChatMessages){
+     console.log("IT SHOULD BE CHANGING WTF")
      //const headers = await this.messagesApi.headers(user);
-     const chats = await this.chatApi.getChatMessages({ sender: profile, reciever: profile2 });
+     console.log(sender + " " + reciever);
+     const chats = await this.chatApi.getChatMessages({ sender: sender, reciever: "t2VuWgqzjpOf1CfQSpaEnb3U90cB" });
+     console.log(chats.data.messages);
      return ctx.setState(
          produce((draft) =>{
-             draft.chats = [];
+             draft.chats = chats.data.messages;
          })
-     )
+     );
   }
+
+  @Action(SetRecipient)
+  SetRecipient(ctx: StateContext<ChatStateModel>, { user }: SetRecipient){
+  return ctx.setState(
+    produce((draft) => {
+      draft.recipient = user;
+    })
+  );
+  }
+
+  
 
 //   @Action(Logout)
 //   async logout(ctx: StateContext<ProfileStateModel>) {

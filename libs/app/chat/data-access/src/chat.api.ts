@@ -20,16 +20,16 @@ export class ChatApi {
 
   chats$(id: string) {
     const docRef = doc(
-      this.firestore,
-      `profiles/${id}`
+    this.firestore,
+    `profiles/${id}`
     ).withConverter<user_profile>({
-      fromFirestore: (snapshot) => {
+    fromFirestore: (snapshot) => {
         return snapshot.data() as user_profile;
-      },
-      toFirestore: (it: user_profile) => it,
+    },
+    toFirestore: (it: user_profile) => it,
     });
     return docData(docRef, { idField: 'id' });
-  }
+}
 
 
 

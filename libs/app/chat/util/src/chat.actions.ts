@@ -6,6 +6,10 @@ export class SubscribeToChat {
   
 export class SetChatMessages {
     static readonly type = '[Chat] SetChatMessages';
-    constructor(public readonly profile: string | "", public readonly profile2: string | "") { }
+    constructor(public readonly sender: string | "", public readonly reciever: string | "") { }
 }
   
+export class SetRecipient {
+    static readonly type = '[Chat] SetRecipient';
+    constructor(public readonly user: string | "") { }
+}

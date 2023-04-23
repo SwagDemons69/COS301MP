@@ -9,6 +9,7 @@ import { Select, Store } from '@ngxs/store';
 import { Observable, tap } from 'rxjs';
 import { post } from '@mp/api/home/util';
 import { ChatHeader } from '@mp/api/chat/util';
+import { SubscribeToChat } from '@mp/app/chat/util';
 
 @Component({
   selector: 'ms-home-page',
@@ -23,5 +24,6 @@ export class HomePage {
   ionViewWillEnter() {
     this.store.dispatch(new SubscribeToProfile());
     this.store.dispatch(new SubscribeToMessageHeaders());
+    this.store.dispatch(new SubscribeToChat());
   }
 }
