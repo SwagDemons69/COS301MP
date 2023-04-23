@@ -22,11 +22,15 @@ export class SearchRepository {
     //will need to change searched for value to displayName to user when merging with completed profile page
     //check what the used name convention is for users/profiles
     async GetSearchedUsers(query : string) : Promise<User[]> {
-      const querySnapshot = await admin.firestore().collection('profiles').where('username', '>=', query).where('username', '<=', query + '\uf8ff').get(); //from ChatGBT
+      const querySnapshot = await admin.firestore().collection('profiles').get(); //from ChatGBT
       
       const returnedUsers: User[] = [];
 
       querySnapshot.forEach((doc) => {
+        const username = "" + doc.data()?.['username'];
+        const email = "" +  doc.data()?.['email'];
+        if(query === ""){}
+        else if(username.toLowerCase().includes(query.toLowerCase()) || email.toLowerCase().includes(query.toLowerCase())){
           const myUser : User = {
             name    : doc.data()?.['username'],
             bio    : doc.data()?.['bio'],
@@ -35,6 +39,7 @@ export class SearchRepository {
             email : doc.data()?.['email']
           }
           returnedUsers.push(myUser);
+        }
       });
       return returnedUsers;
     };
@@ -43,33 +48,25 @@ export class SearchRepository {
       const returnedPosts: Post[] = [];
       const usersRef = await admin.firestore().collection('profiles').get();
 
+
       usersRef.forEach(async (doc) => {
-        const posts = await this.GetSearchedPosts(query, doc.ref, doc.data()?.['username']); 
-        returnedPosts.concat(posts);
-      });
-
-      return returnedPosts;
-    };
-
-    async GetSearchedPosts(query : string, userRef : FirebaseFirestore.DocumentReference, username : string): Promise<Post[]> {
-      const returnedPosts: Post[] = [];
-
-      const postRef = await userRef.collection('posts').get();
-
-      console.log("User '" + username + "' has " + postRef.size + " posts");
-
-      postRef.forEach((doc) => {
-        if(doc.data()?.['caption'].includes(query)){
-          console.log("Here we are")
-          const myPost : Post = {
-            content : doc.data()?.['content'],
-            caption : doc.data()?.['caption'],
-            postId : doc.data()?.['postId'],
-            username : username
+        const posts: [] = doc.data()?.['posts'] as [];
+        if(posts && posts.length){
+          for(let i = 0; i < posts.length; i++){
+            if(query === ''){}
+            else if(doc.data()?.['posts'][i]['caption'].includes(query)){
+              const myPost : Post = {
+                content : doc.data()?.['posts'][i]['content'],
+                caption : doc.data()?.['posts'][i]['caption'],
+                postId : doc.data()?.['posts'][i]['post_id'],
+                username : doc.data()?.['username']
+              }
+              returnedPosts.push(myPost);
+            }
           }
-          console.log(myPost);
-          returnedPosts.push(myPost);
         }
+        
+        
       });
 
       return returnedPosts;

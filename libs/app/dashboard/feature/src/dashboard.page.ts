@@ -139,4 +139,12 @@ export class DashboardPage {
       this.searchResultsPosts.push(response.posts[i]);
     }
   }
+
+  tester(){
+    console.log("Yo Yo");
+  }
+
+  toUser(){
+    console.log("TO USER");
+  }
 }

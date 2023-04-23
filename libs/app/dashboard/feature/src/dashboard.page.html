@@ -153,13 +153,13 @@
   </ion-list>
 </div>
 
-<div style="justify-content: space-evenly;" *ngIf="isSearchbarVisible" class="searchResults">
-  <div>
+<div *ngIf="isSearchbarVisible" class="searchResults">
+  <div width="40%">
     <ion-list>
       <ion-item *ngFor="let post of searchResultsPosts">
-        <ion-label>
+        <ion-label (click)="tester()">
           <ion-thumbnail slot="start">
-            <img src="{{ post.content }}" alt="{{ post.content }}">
+            <img src="{{ post.content }}" alt="">
           </ion-thumbnail>
           <h2>{{ post.caption }}</h2>
           <p>Posted by: {{ post.username }}</p>
@@ -167,10 +167,10 @@
       </ion-item>
     </ion-list>
   </div>
-  <div>
+  <div width="40%">
     <ion-list>
       <ion-item *ngFor="let user of searchResultsUsers">
-        <ion-label>
+        <ion-label  (click)="toUser()">
           <h2>{{ user.name }}</h2>
           <p>{{ user.email }}</p>
         </ion-label>

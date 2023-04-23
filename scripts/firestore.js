@@ -63,7 +63,7 @@ const addAllData = async () => {
               post_id: "69",
               user_id: "10398140",
               timestamp: 63216132236,
-              content: "C:\\images\\dodgeCoinMeme.jpg",
+              content: "https://images.mktw.net/im-429485?width=700&height=487",
               caption: "Crypto go brrrrrr",
               likes: ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "","", "", "", "", "", "", "", ""],
               shares : 23432,
