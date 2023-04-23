@@ -144,12 +144,12 @@ export class DashboardPage {
     }
   }
 
-  toPost(){
-    console.log("Yo Yo");
+  toPost(username : any, postId : any){
+    console.log(postId + " postsed by " + username);
   }
 
-  toUser(){
-    console.log("TO USER");
+  toUser(user_id : any){
+    console.log(user_id);
   }
 
   toggleToUsers(){

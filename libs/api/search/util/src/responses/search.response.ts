@@ -13,6 +13,7 @@ export interface Post{
     caption : string;
     postId : string;
     username : string;
+    user_id : string;
 }
 
 export interface SearchResponse {

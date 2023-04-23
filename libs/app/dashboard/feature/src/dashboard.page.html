@@ -169,13 +169,13 @@
   
   <ng-template [ngIf]="userToggle" [ngIfElse]="posts">
     <ion-list class="searchResultsType">
-      <ion-item  *ngFor="let user of searchResultsUsers">
+      <ion-item (click)="toUser(user.profileId)" *ngFor="let user of searchResultsUsers">
         <ion-avatar class="Profile-Pic">
           <img src="" alt="">
         </ion-avatar>
         &nbsp;
         &nbsp;
-        <ion-label  (click)="toUser()">
+        <ion-label>
           <h2>{{ user.name }}</h2>
           <p>{{ user.email }}</p>
         </ion-label>
@@ -185,9 +185,9 @@
   
   <ng-template #posts>
     <ion-list class="searchResultsType">
-      <ion-item *ngFor="let post of searchResultsPosts">
-        <ion-label (click)="toPost()">
-          <ion-thumbnail slot="start">
+      <ion-item (click)="toPost(post.user_id, post.postId)" *ngFor="let post of searchResultsPosts">
+        <ion-label>
+          <ion-thumbnail style="float: right" slot="start">
             <img src="{{ post.content }}" alt="Img">
           </ion-thumbnail>
           <ion-label>

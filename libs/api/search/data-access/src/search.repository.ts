@@ -59,7 +59,8 @@ export class SearchRepository {
                 content : doc.data()?.['posts'][i]['content'],
                 caption : doc.data()?.['posts'][i]['caption'],
                 postId : doc.data()?.['posts'][i]['post_id'],
-                username : doc.data()?.['username']
+                username : doc.data()?.['username'],
+                user_id : doc.data()?.['user_id']
               }
               returnedPosts.push(myPost);
             }

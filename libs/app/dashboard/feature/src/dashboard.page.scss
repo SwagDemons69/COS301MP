@@ -57,17 +57,21 @@ ion-avatar.avatar {
     --background: clear;
     --width: 100%;
     --color: white;
-    --background-activated: grey;
 }
 
 .SearchTypeButton:hover{
     background: grey;
 }
 
+ion-thumbnail{
+    --size: 50%;
+}
 
-
+#goToProfile{
+    --background: #FF00CC;
+    --color: white;
+}
 /* //========== SECTIONS ==========// */
-
 .sectionTitle {
     font-family: 'Roboto';
     color: #f0f0f0;
