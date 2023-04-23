@@ -1,4 +1,4 @@
-import { Component, Renderer2 } from '@angular/core';
+import { Component, Renderer2, OnInit } from '@angular/core';
 import { IProfile } from '@mp/api/profiles/util';
 import { ProfileState } from '@mp/app/profile/data-access';
 import { Select } from '@ngxs/store';
@@ -42,11 +42,15 @@ export class DashboardPage {
     { title: "I'm a 20 year old virgin", desc: "I'm a 20 year old virgin", img: "https://picsum.photos/id/24/300/300" }, // Copilot generated this one lmao
   ]
 
+
+  //Search required variables
   searchResultsPosts: Post[] = []
 
   searchResultsUsers: User[] = []
 
   isSearchbarVisible = false;
+  userToggle = true;
+
   // deathTime = 3132079200
   deathTime = Date.now() / 1000 + 10;
   kronos = ""
@@ -140,11 +144,23 @@ export class DashboardPage {
     }
   }
 
-  tester(){
+  toPost(){
     console.log("Yo Yo");
   }
 
   toUser(){
     console.log("TO USER");
+  }
+
+  toggleToUsers(){
+    if(!this.userToggle){
+      this.userToggle = !this.userToggle;
+    }
+  }
+
+  toggleToPosts(){
+    if(this.userToggle){
+      this.userToggle = !this.userToggle;
+    }
   }
 }

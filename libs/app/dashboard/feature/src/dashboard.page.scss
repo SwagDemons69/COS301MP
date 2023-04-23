@@ -47,6 +47,23 @@ ion-avatar.avatar {
 }
 
 /* //========== SEARCH BAR ==========// */
+.searchResults{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+.SearchTypeButton{
+    --background: clear;
+    --width: 100%;
+    --color: white;
+    --background-activated: grey;
+}
+
+.SearchTypeButton:hover{
+    background: grey;
+}
+
 
 
 /* //========== SECTIONS ==========// */

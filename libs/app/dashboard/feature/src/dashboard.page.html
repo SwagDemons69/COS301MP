@@ -154,28 +154,50 @@
 </div>
 
 <div *ngIf="isSearchbarVisible" class="searchResults">
-  <div width="40%">
-    <ion-list>
-      <ion-item *ngFor="let post of searchResultsPosts">
-        <ion-label (click)="tester()">
-          <ion-thumbnail slot="start">
-            <img src="{{ post.content }}" alt="">
-          </ion-thumbnail>
-          <h2>{{ post.caption }}</h2>
-          <p>Posted by: {{ post.username }}</p>
-        </ion-label>
-      </ion-item>
-    </ion-list>
-  </div>
-  <div width="40%">
-    <ion-list>
-      <ion-item *ngFor="let user of searchResultsUsers">
+  <ion-row class="searchType">
+    <ion-col>
+      <ion-button expand="block" color="grey" class="SearchTypeButton" id="SearchUserButton" (click) = "toggleToUsers()">
+        Users
+      </ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button expand="block" class="SearchTypeButton" id="SearchPostButton" (click) = "toggleToPosts()">
+        Posts
+      </ion-button>
+    </ion-col>
+  </ion-row>
+  
+  <ng-template [ngIf]="userToggle" [ngIfElse]="posts">
+    <ion-list class="searchResultsType">
+      <ion-item  *ngFor="let user of searchResultsUsers">
+        <ion-avatar class="Profile-Pic">
+          <img src="" alt="">
+        </ion-avatar>
+        &nbsp;
+        &nbsp;
         <ion-label  (click)="toUser()">
           <h2>{{ user.name }}</h2>
           <p>{{ user.email }}</p>
         </ion-label>
       </ion-item>
     </ion-list>
-  </div>
+  </ng-template>
+  
+  <ng-template #posts>
+    <ion-list class="searchResultsType">
+      <ion-item *ngFor="let post of searchResultsPosts">
+        <ion-label (click)="toPost()">
+          <ion-thumbnail slot="start">
+            <img src="{{ post.content }}" alt="Img">
+          </ion-thumbnail>
+          <ion-label>
+            <h2>{{ post.caption }}</h2>
+            <p>Posted by: {{ post.username }}</p>
+          </ion-label>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ng-template>
+  
 </div>
 </ion-content>
