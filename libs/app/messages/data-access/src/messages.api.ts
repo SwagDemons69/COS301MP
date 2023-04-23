@@ -26,18 +26,10 @@ export class MessagesApi {
   async headers(user: string) {
     const request: ChatHeadersRequest = { user: user};
     const chats = await httpsCallable<ChatHeadersRequest, ChatHeadersResponse>(this.functions, 'ChatHeaders')(request);
-   
-   
-    // console.log("Headers")
-    // console.log(chats.data.chats);
-    //const obs = new Observable();
-
-//     const unsubscribe = onSnapshot(collection(this.firestore, "cities"), () => {
-//     // Respond to data
-//     // ...
-//   });
     return chats.data.chats;
-}
+  }
+
+  
 
 
 

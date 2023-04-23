@@ -4,7 +4,10 @@ ChatHeadersRequest,
 ChatHeadersResponse,
 CreateChatMessageCommand,
 CreateChatMessageRequest,
-CreateChatMessageResponse} from '@mp/api/chat/util';
+CreateChatMessageResponse,
+GetChatMessagesQuery,
+GetChatMessagesRequest,
+GetChatMessagesResponse} from '@mp/api/chat/util';
   import { Injectable } from '@nestjs/common';
   import { CommandBus, QueryBus } from '@nestjs/cqrs';
 
@@ -18,6 +21,10 @@ CreateChatMessageResponse} from '@mp/api/chat/util';
 
     async SendChatMessage(request: CreateChatMessageRequest): Promise<CreateChatMessageResponse> {
         return await this.commandBus.execute<CreateChatMessageCommand, CreateChatMessageResponse>(new CreateChatMessageCommand(request));
+    }
+
+    async getChatMessages(request: GetChatMessagesRequest): Promise<GetChatMessagesResponse> {
+        return await this.queryBus.execute<GetChatMessagesQuery, GetChatMessagesResponse>(new GetChatMessagesQuery(request));
     }
 }
   

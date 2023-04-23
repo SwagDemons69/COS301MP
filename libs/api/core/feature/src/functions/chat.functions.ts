@@ -2,7 +2,7 @@ import { ChatService } from '@mp/api/chat/feature';
 
 import { SearchModalService } from '@mp/api/search-modal/feature';
 
-import { ChatHeadersRequest, ChatHeadersResponse, CreateChatMessageRequest, CreateChatMessageResponse } from '@mp/api/chat/util';
+import { ChatHeadersRequest, ChatHeadersResponse, CreateChatMessageRequest, CreateChatMessageResponse, GetChatMessagesRequest, GetChatMessagesResponse } from '@mp/api/chat/util';
 import { RetrieveProfilesRequest, RetrieveProfilesResponse } from '@mp/api/search-modal/util';
 import { NestFactory } from '@nestjs/core';
 import * as functions from 'firebase-functions';
@@ -13,6 +13,14 @@ export const ChatHeaders = functions.https.onCall(
     const app = await NestFactory.createApplicationContext(CoreModule);
     const service = app.get(ChatService);
     return service.getChatHeaders(request);
+  }
+);
+
+export const GetChatMessages = functions.https.onCall(
+  async (request: GetChatMessagesRequest): Promise<GetChatMessagesResponse> => {
+    const app = await NestFactory.createApplicationContext(CoreModule);
+    const service = app.get(ChatService);
+    return service.getChatMessages(request);
   }
 );
 

@@ -4,10 +4,10 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { CreateChatMessageCommandHandler } from './commands';
 import { CreateChatMessageEventHandler} from './events';
 import { ChatService } from './chat.service';
-import { ChatHeadersQueryHandler } from './queries';
+import { ChatHeadersQueryHandler, GetChatMessagesQueryHandler } from './queries';
 export const CommandHandlers = [ CreateChatMessageCommandHandler ];
 export const EventHandlers = [ CreateChatMessageEventHandler ];
-export const QueryHandlers = [ ChatHeadersQueryHandler ];
+export const QueryHandlers = [ ChatHeadersQueryHandler, GetChatMessagesQueryHandler ];
 
 @Module({
   imports: [CqrsModule, ChatDataAccessModule],

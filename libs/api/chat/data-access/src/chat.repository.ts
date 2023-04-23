@@ -6,7 +6,7 @@ import { post_like } from '@mp/api/post/util';
 import * as admin from 'firebase-admin';
 import { firestore } from 'firebase-admin';
 import { user } from 'firebase-functions/v1/auth';
-import { CreateChatMessageResponse, ChatMessage, ChatMessages, ChatHeadersResponse, ChatHeader, ChatHeaders } from '@mp/api/chat/util';
+import { CreateChatMessageResponse, ChatMessage, ChatMessages, ChatHeadersResponse, ChatHeader, ChatHeaders, GetChatMessagesResponse } from '@mp/api/chat/util';
 import { Timestamp } from 'firebase-admin/firestore';
 import { user_profile } from '@mp/api/profiles/util';
 
@@ -65,7 +65,7 @@ export class ChatRepository {
     }
 
 
-    async getChatMessages(sender: string, receiver: string, chat: ChatMessage): Promise<CreateChatMessageResponse>{
+    async getChatMessages(sender: string, receiver: string): Promise<GetChatMessagesResponse>{
 
         const handle = await admin.firestore().collection(`profiles/${sender}/chats`).get();
         const chats = handle.docs.map((doc) => { return doc.data() as ChatMessages;});
@@ -78,11 +78,11 @@ export class ChatRepository {
 
         //If false chat dosent exist
         if(!flag){
-            return { messages :  {recipient: receiver, messages: []}};
+            return { messages : [] };
         }
         else{
             const handle = await admin.firestore().collection(`profiles/${sender}/chats/${receiver}/chat`).get();
-            return { messages :  {recipient: receiver, messages: handle.docs.map((doc) => { return doc.data() as ChatMessage;}) }};
+            return { messages : handle.docs.map((doc) => { return doc.data() as ChatMessage;}) };
         }
     }
 
