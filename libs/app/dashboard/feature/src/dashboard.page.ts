@@ -5,6 +5,8 @@ import { ModalController } from '@ionic/angular';
 import { BlipComponent } from '@mp/app//shared-components';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
+import { SearchRequest, SearchResponse} from '@mp/api/search/util';
+// import { SearchApi } from '@mp/app/dashboard/data-access';
 
 @Component({
   selector: 'ms-dashboard-page',
@@ -18,6 +20,7 @@ export class DashboardPage {
   constructor (
     private renderer: Renderer2,
     private modalController: ModalController,
+
   ) {}
 
   // A bunch of dummy recommended posts
@@ -146,3 +149,4 @@ export class DashboardPage {
     return await modal.present();
   }
 }
+
