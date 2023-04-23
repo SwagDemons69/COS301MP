@@ -27,3 +27,12 @@ export const sendMessage = functions.https.onCall(
         return service.updateOccupationDetails(request);
     }
 );
+
+
+// export const retrieveProfiles = functions.https.onCall(
+//     async (request: IUpdateOccupationDetailsRequest):   Promise<IUpdateOccupationDetailsResponse> => {
+//         const app = await NestFactory.createApplicationContext(CoreModule);
+//         const service = app.get(ProfilesService);
+//         return service.updateOccupationDetails(request);
+//     }
+// );

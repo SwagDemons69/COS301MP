@@ -5,8 +5,15 @@ import { UsersModule } from '@mp/api/users/feature';
 import { PostModule } from '@mp/api/post/feature'
 import { Module } from '@nestjs/common';
 import { ChatModule } from '@mp/api/chat/feature'
+import { SearchModalModule } from '@mp/api/search-modal/feature';
 
 @Module({
-  imports: [AuthModule, EventstoreModule, ProfilesModule, UsersModule, PostModule, ChatModule]
+  imports: [AuthModule,
+     EventstoreModule,
+      ProfilesModule,
+       UsersModule,
+        PostModule,
+         ChatModule,
+          SearchModalModule]
 })
 export class CoreModule {}

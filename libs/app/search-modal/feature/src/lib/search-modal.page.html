@@ -16,11 +16,11 @@
     <ion-list class="ion-margin-top">
     <div *ngFor="let user of users" class="chatItem">
         <ion-item lines="none">
-            <ion-avatar item-left (click)="goToChats(user.id)">
-                <img src="{{user.avatar}}">
+            <ion-avatar item-left (click)="goToChats(user.order_id)">
+                <img src="{{user.profile.pictureUrl}}">
             </ion-avatar>
-            {{ user.username }}
-            <ion-icon (click)="onUserAddFriend(user)" name="{{user.isFriend ? 'add-outline' : 'remove-outline'}}" slot="end"></ion-icon>
+            {{ user.profile.username }}
+            <ion-icon (click)="onUserAddFriend(user)" name="{{user.profile.isFriend ? 'add-outline' : 'remove-outline'}}" slot="end"></ion-icon>
         </ion-item>
         <hr />
     </div>

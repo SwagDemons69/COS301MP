@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 // import { ChatCard } from '../ui-components/chat-card';
 // eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { searchmodalPage } from '../../../../search-modal/feature/src/lib/search-modal.page';
+import { SearchModalPage } from '@mp/app/search-modal/feature';
 import { ModalController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 import { MessagesState } from '@mp/app/messages/data-access';
@@ -45,7 +45,7 @@ export class MessagesPage {
 
   async openSearchModal(){
     const modal = await this.modalController.create({
-      component: searchmodalPage,
+      component: SearchModalPage,
     });
     return await modal.present();
   }

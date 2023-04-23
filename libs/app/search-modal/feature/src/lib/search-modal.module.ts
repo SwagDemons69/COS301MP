@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { searchmodalPage } from './search-modal.page';
-import { searchmodalRouting } from './search-modal.routing';
-
+import { SearchModalPage } from './search-modal.page';
+import { SearchModalRouting } from './search-modal.routing';
+import { SearchModalModule as DataAccessSearchModalModule } from '@mp/app/search-modal/data-access';
 
 @NgModule({
-  imports: [CommonModule, IonicModule, searchmodalRouting],
-  exports: [searchmodalPage],
-  declarations: [searchmodalPage],
+  imports: [CommonModule, IonicModule, SearchModalRouting, DataAccessSearchModalModule],
+  exports: [SearchModalPage],
+  declarations: [SearchModalPage],
 })
-export class searchmodalModule{}
+export class SearchModalModule{}
