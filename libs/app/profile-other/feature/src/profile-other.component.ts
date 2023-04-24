@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-// import { Select } from '@ngxs/store';
 
 @Component({
   selector: 'ms-profile-other-component',
@@ -9,7 +8,11 @@ import { ModalController } from '@ionic/angular';
 })
 
 export class ProfileOtherComponent {
-  // @Input modelTitle: string;
+  @Input() profile: any = {
+    username: "Null username",
+    email: "null@null.com",
+    photoURL: "https://picsum.photos/id/20/300/300",
+  };
 
   constructor (
     private modalController: ModalController
@@ -17,5 +20,9 @@ export class ProfileOtherComponent {
 
   async closeModal() {
     await this.modalController.dismiss();
+  }
+
+  goToMessages() {
+    return;
   }
 }

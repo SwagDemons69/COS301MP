@@ -137,11 +137,11 @@ export class DashboardPage {
   }
 
   // See [https://stackblitz.com/edit/ionic6-angular13-wnmgmu?file=src/app/app.component.ts] for reference
-  async openBlip(data: any) {
+  async openProfile(profileData: any) {
     const modal = await this.modalController.create({
       component: ProfileOtherComponent,
       componentProps: {
-        data: data
+        profile: profileData
       }
     });
 

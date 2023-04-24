@@ -1,36 +1,71 @@
-/* //=========== TOOLBAR ===========// */
-
-ion-toolbar {
-    --background: linear-gradient(180deg, #000000c0 0%, #00000080 40%, #00000000 100%);
-    --color: #ffffff;
-    --shadow: none;
-    --box-shadow: none;
-    filter: none;
+ion-title {
+  display: flex;
 }
 
-ion-searchbar {
-    --ion-background-color: transparent;
+ion-card-title {
+  display: flex;
 }
 
-.glassyBackground {
-    position: absolute;
-    top: 0px;
+ion-card-title > ion-icon {
+  margin-top: 0px;
 }
 
-.glassyBackground img {
-    position: relative;
-    width: 100%;
-    height: auto;
-    z-index: -1000;
+ion-icon {
+  padding-left: 5px;
 }
 
-// Controls fade to black for background image
-.glassyBackgroundFade {
-    position: absolute;
-    bottom: 0px;
-    background-image: linear-gradient(180deg, transparent 0%, #000000c0 40%, black 100%);
-    // background-image: linear-gradient(180deg, #ff000088 0%, #ff000088 100%);
-    width: 100%;
-    height: 800px;
-    z-index: -999;
+ion-card {
+  background-color: transparent;
+  width: 100%;
+  box-shadow: none;
+}
+
+ion-avatar {
+  margin: auto;
+}
+
+.kronos {
+  color: #606060;
+  margin-bottom: 0.8em;
+}
+
+.username {
+  color: white;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-top: 0.6em;
+}
+
+.statsNumber {
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+.statsTitle {
+  font-size: 0.8em; 
+}
+
+.bio {
+  margin-top: 2em;
+  padding: 0px 5%;
+  color: #606060;
+  font-size: 0.8em;
+}
+
+.connectButton {
+  --background: transparent;
+  color: white;
+  border-radius: 6px;
+  padding: 0px;
+  --padding-start: 1em;
+  --padding-end: 1em;
+}
+
+.connectButton ion-icon {
+  margin: 0px;
+  padding: 0px;
+}
+
+.rowSpacing {
+  margin-left: 2em;
 }

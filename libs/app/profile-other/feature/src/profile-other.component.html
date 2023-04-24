@@ -1,14 +1,64 @@
-<ion-header class="ion-no-border">
-  <ion-toolbar>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
-  Hello world
-  This is a profile-other
-  <ion-card>
-    asdf
-  </ion-card>
-  <ion-header>
-  </ion-header>
-</ion-content>
+  <ion-grid>
+    <ion-row>
+
+        <ion-card class="ion-text-center">
+          <ion-card-header>
+
+            <ion-card-subtitle class="kronos">
+                06:09:42
+            </ion-card-subtitle>
+
+            <ng-container>
+              <ion-avatar>
+                <img alt="Avatar" src="{{ profile.photoURL }}" />
+              </ion-avatar>
+            </ng-container>
+
+            <ion-card-subtitle class="username">
+              {{ profile.username }}
+            </ion-card-subtitle>
+
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-grid class="stats">
+              <ion-row class="statsNumber">
+                <ion-col>666</ion-col>
+                <ion-col>69</ion-col>
+                <ion-col>420</ion-col>
+              </ion-row>
+
+              <ion-row class="statsLabel">
+                <ion-col>Following</ion-col>
+                <ion-col>Posts</ion-col>
+                <ion-col>Followers</ion-col>
+              </ion-row>
+            </ion-grid>
+
+            <ion-row class="ion-justify-content-center">
+      
+              <ion-button class="connectButton">
+                <ion-icon name="person-add-outline"></ion-icon>
+              </ion-button>
+
+              <div class="rowSpacing"></div>
+
+              <ion-button (click)="goToMessages()" class="connectButton">
+                <ion-icon name="chatbox-ellipses-outline"></ion-icon>
+              </ion-button>
+
+            </ion-row>
+
+            <ion-card-subtitle class="bio">
+              Just your local demon posing as a time lord.
+              Nothing to see here, move along.
+              #Swaggity #SwagDemon69
+            </ion-card-subtitle>
+        
+
+          </ion-card-content>
+        </ion-card>
+
+    </ion-row>
+  </ion-grid>
