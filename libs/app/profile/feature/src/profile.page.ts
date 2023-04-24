@@ -1,19 +1,15 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { edit_profile, user_profile, EditProfilePhotoRequest } from '@mp/api/profiles/util';
+import { edit_profile, user_profile } from '@mp/api/profiles/util';
 import { AddPhotoRequest } from '@mp/api/post/util';
-import { AlertController, ModalController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { BlipComponent } from '@mp/app//shared-components';
 import { ProfilesApi, ProfileState } from '@mp/app/profile/data-access';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { post } from '@mp/api/home/util';
 import { Store } from '@ngxs/store';
-import { EditProfile, InitForm, GetImages } from '@mp/app/profile/util';
-import { UpdateFormValue } from '@ngxs/form-plugin';
-import {
-  setTimeout,
-} from 'timers/promises';
+import { EditProfile, InitForm } from '@mp/app/profile/util';
 
 @Component({
   selector: 'ms-profile-page',
@@ -185,5 +181,4 @@ export class ProfilePage {
     this.store.dispatch(new EditProfile());
     this.addedFile = false;
   }
-
 }

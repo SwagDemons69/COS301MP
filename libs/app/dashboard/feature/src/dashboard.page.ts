@@ -2,8 +2,9 @@ import { Component, Renderer2 } from '@angular/core';
 import { user_profile } from '@mp/api/profiles/util';
 import { ProfileState } from '@mp/app/profile/data-access';
 import { ModalController } from '@ionic/angular';
-import { BlipComponent } from '@mp/app//shared-components';
+import { ProfileOtherComponent } from '@mp/app/profile-other/feature';
 import { Select } from '@ngxs/store';
+
 import { Observable } from 'rxjs';
 
 @Component({
@@ -137,11 +138,26 @@ export class DashboardPage {
   }
 
   // See [https://stackblitz.com/edit/ionic6-angular13-wnmgmu?file=src/app/app.component.ts] for reference
-  async openBlip(data: any) {
+  // async openBlip(data: any) {
+  //   const modal = await this.modalController.create({
+  //     component: BlipComponent,
+  //     componentProps: {
+  //       data: data
+  //     }
+  //   });
+
+  //   modal.onDidDismiss().then((data) => {
+  //     console.log(data);
+  //   });
+
+  //   return await modal.present();
+  // }
+
+  async openProfile(profileData: any) {
     const modal = await this.modalController.create({
-      component: BlipComponent,
+      component: ProfileOtherComponent,
       componentProps: {
-        data: data
+        profile: profileData
       }
     });
 

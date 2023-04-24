@@ -8,6 +8,9 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ProfilePage } from './profile.page';
 import { ProfileRouting } from './profile.routing';
 
+
+
+
 @NgModule({
   imports: [
     CommonModule,

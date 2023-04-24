@@ -13,15 +13,11 @@ import { post } from '@mp/api/home/util';
 import { Timestamp } from '@angular/fire/firestore';
 
 
-
 @Component({
   selector: 'post-page',
   templateUrl: './post.page.html',
-  styleUrls: ['./post.page.css']
+  styleUrls: ['./post.page.scss']
 })
-
-
-
 export class PostPage {
   @Select(ProfileState.profile) profile$!: Observable<user_profile | null>;
   postForm : FormGroup
@@ -126,9 +122,6 @@ export class PostPage {
     const responseStatus = await this.api.UploadPostToFirestore(request);
   }
 
-}
-
-
  // async toBase64(blob: Blob /*, callback: (result: string | ArrayBuffer | null, name: string) => void*/) {
     //   const reader = new FileReader();
     //   reader.readAsDataURL(blob);
@@ -160,3 +153,42 @@ export class PostPage {
     
    // try{ const response = (await this.api.UploadPost(request)).data; }
     //catch(error){ console.log("ERROR"); }
+
+  caption = ""
+  tags = [
+    "", "The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"
+  ]
+
+  updateTagList() {
+    const tagList = document.getElementById("tagList");
+    if(tagList == null) return;
+
+    // Remove previous tags
+    while(tagList.lastChild) {
+      document.removeChild(tagList.lastChild);
+    }
+
+    this.tags.forEach(x => x.toLowerCase().trim());
+    this.tags.sort();
+
+    let prevTag = "";
+    for(let t = 0; t < this.tags.length; t++) {
+      const tag = this.tags[t];
+
+      // Skip duplicates and empty strings
+      if(tag == prevTag) {
+        continue;
+      }
+
+      const el = document.createElement("ion-badge");
+      el.innerText = "#" + tag;
+
+      tagList?.appendChild(el);
+
+      prevTag = tag;
+    }
+  }
+
+  onCaptionChanged() {
+  }
+}

@@ -97,7 +97,7 @@
           </ion-col>
 
           <ion-col size="4">
-            <ion-button class="glassyButton">
+            <ion-button class="glassyButton" (click)="openProfile({username:'test', photoURL:'https://picsum.photos/id/20/300/300'})">
               RESURRECT
             </ion-button>
           </ion-col>
@@ -117,7 +117,8 @@
     </ion-infinite-scroll-content>
   </ion-infinite-scroll> -->
 
-  <div class="trendingPost" *ngFor="let item of trending" (click)="openBlip(item)">
+  <div class="trendingPost" *ngFor="let item of trending">
+    <!-- (click)="openBlip(item)"> -->
     <ion-card class="trendingItem">
 
       <div class="image">

@@ -1,33 +1,15 @@
 <ion-header [translucent]="true">
-<ion-toolbar>
-    <ion-title>
-    Notifications
-    </ion-title>
-</ion-toolbar>
 </ion-header>
 
-<!-- <ion-content [fullscreen]="true">
-  
-    <div class="notification" *ngFor="let notification of notifications">
-      <div class="notification-icon">
-        <i class="fa {{ notification.icon }}"></i>
-      </div>
-      <div class="notification-message">
-        <p>{{ notification.message }}</p>
-      </div>
-      <div class="notification-close">
-        <i class="fa fa-times"></i>
-      </div>
-    </div>    
-</ion-content> -->
 <ion-content [fullscreen]="true">
-  
-  <div class="notification" *ngFor="let notification of notifications">
-    <div class="notification-icon">
-      <ion-icon name="{{ notification.icon }}"></ion-icon>
-    </div>
-    <div class="notification-message">
-      <p>{{ notification.message }}</p>
-    </div>
-  </div>    
+  <ion-list>
+    <div *ngFor="let notif of notifications" class="notif">
+    <ion-item lines="none">
+      <ion-icon name="{{ notif.icon }}"></ion-icon>
+      <ion-label>{{ notif.message }}</ion-label>
+      <ion-badge slot="end">{{ notif.time }}</ion-badge>
+    </ion-item>
+    <hr />
+  </div>
+  </ion-list>
 </ion-content>

@@ -52,38 +52,20 @@ ion-avatar {
   font-size: 0.8em;
 }
 
-.photos{
-  background-color: black  !important;
-  width: 100%;
-  box-shadow:inset !important;
-  height : 300px;
+.connectButton {
+  --background: transparent;
+  color: white;
+  border-radius: 6px;
+  padding: 0px;
+  --padding-start: 1em;
+  --padding-end: 1em;
 }
 
-.ion-col{
-  background-color: white;
-  border: solid 1px #fff;
-  color: #fff;
-  text-align: center;
+.connectButton ion-icon {
+  margin: 0px;
+  padding: 0px;
 }
 
-.editProfileForm {
-  margin-top: 2em;
-  padding: 0px 5%;
-  color: #606060;
-  font-size: 0.8em;
-}
-
-.editProfileForm ion-button {
-  color: black;
-  margin: auto;
-  margin-top: 3em;
-  max-width: 200px;
-}
-
-.profilePic{
-  text-align: end;
-}
-
-input[type='file']{
-  color:rgba(0,0,0,0)
+.rowSpacing {
+  margin-left: 2em;
 }
