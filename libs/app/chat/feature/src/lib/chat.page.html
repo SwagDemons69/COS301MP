@@ -3,9 +3,11 @@
     <ion-buttons slot="start"> 
         <ion-icon (click)="backToMessage()" id="back" name="arrow-back"></ion-icon>   
     </ion-buttons>
-    <ion-avatar slot="start">
-      <img src="https://cdn2.iconfinder.com/data/icons/avatars-99/62/avatar-370-456322-512.png" />
-    </ion-avatar>
+    <ng-container *ngIf="(recipient$ | async) as recipient;">
+        <ion-avatar slot="start">
+          <img [src]="(recipient.pictureUrl)" />
+        </ion-avatar>
+    </ng-container>
     <ion-title >{{ displayReceiver() }}</ion-title>
   </ion-toolbar>
 </ion-header>

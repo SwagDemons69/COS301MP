@@ -77,14 +77,14 @@ export class MessagesPage {
     }
   }
 
-  goToDetails(item: any) {
+  goToDetails(item: ChatHeader) {
     
     //Set Messages of current contact
     if(typeof this.user == "undefined"){
       alert("message.page.ts - user is undefined")
     }
     else {
-      this.store.dispatch(new SetRecipient({user_id: item.user_id, username: item.username, pictureUrl: item.pictureUrl}))
+      this.store.dispatch(new SetRecipient({user_id: item.user_id, username: item.username, pictureUrl: item.picture}))
       this.store.dispatch(new SetChatMessages(this.user?.user_id, item.user_id));
     }
       // Navigate to details page with item as a parameter
