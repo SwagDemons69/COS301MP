@@ -5,7 +5,6 @@ import { CreatePostEventHandler } from '../../events';
 describe('CreatePostEventHandler', () => {
   let handler: CreatePostEventHandler;
   let repository: PostRepository;
-
   beforeEach(() => {
     repository = {
       createPost: jest.fn(),
