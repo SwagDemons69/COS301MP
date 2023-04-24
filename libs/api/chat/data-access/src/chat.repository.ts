@@ -52,7 +52,10 @@ export class ChatRepository {
             
             const lastMessage = (sentBy == user) ? ("You: " + messages[index].payload) : (username + ": " + messages[index].payload) ;
 
+            const user_id = profileData.user_id;
+
             const chat: ChatHeader = {
+                user_id: user_id,
                 username: username,
                 picture: picture,
                 lastMessage: lastMessage

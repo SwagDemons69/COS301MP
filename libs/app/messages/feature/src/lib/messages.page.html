@@ -9,7 +9,7 @@
     <div *ngFor="let item of headers" class="chatItem">
     <ion-item (click)="goToDetails(item)" lines="none">
       <ion-avatar>
-        <img src="https://shorturl.at/osyUY">
+        <img [src]="item.picture">
       </ion-avatar>
       <ion-label>
         <h2>{{ item.username }}</h2>

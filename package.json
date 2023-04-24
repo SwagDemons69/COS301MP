@@ -26,7 +26,8 @@
     "shipit:prod": "yarn build:app:prod && yarn build:api:prod && yarn deploy:prod",
     "generate:pwa:assets:icons": "pwa-asset-generator apps/app/src/assets/logos/schadre-logo-only.png apps/app/src/assets/pwa --favicon --icon-only --padding \"20px\" --mstile --maskable --manifest apps/app/src/manifest.webmanifest",
     "generate:pwa:assets:splashes": "pwa-asset-generator apps/app/src/assets/logos/schadre-logo-only.png apps/app/src/assets/pwa --favicon --splash-only --padding \"150px\" --mstile --maskable --manifest apps/app/src/manifest.webmanifest",
-    "host:app": "http-server dist/apps/app"
+    "host:app": "http-server dist/apps/app",
+    "start:everything": "$TERMINAL yarn start:api:dev & $TERMINAL yarn start:app:dev & $TERMINAL yarn start:emulators & "
   },
   "private": true,
   "dependencies": {

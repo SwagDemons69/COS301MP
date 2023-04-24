@@ -26,23 +26,34 @@ import { post } from '@mp/api/home/util';
 import { doc } from '@firebase/firestore';
 import { user } from 'firebase-functions/v1/auth';
 import { ChatMessage, ChatMessages } from '@mp/api/chat/util';
-import { SubscribeToChat, SetChatMessages, SetRecipient } from '@mp/app/chat/util';
+import { SubscribeToChat, SetChatMessages, SetRecipient, SetUsername } from '@mp/app/chat/util';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ChatStateModel {
-  username: string;
-  pictureUrl: string;
+  recipient: {
+    user_id : string;
+    username : string;
+    pictureUrl: string;
+  },
   chats : ChatMessage[]
-  recipient: string;
 }
+// // eslint-disable-next-line @typescript-eslint/no-empty-interface
+// export interface RecipientState {
+//   username: string;
+//   pictureUrl: string;
+//   chats : ChatMessage[]
+//   recipient: string;
+// }
 
 @State<ChatStateModel>({
   name: 'chat',
   defaults: {
-    username: "",
-    pictureUrl: "",
+    recipient: {
+      user_id : "",
+      username: "",
+      pictureUrl: "",
+    },
     chats: [],
-    recipient: ""
   }
 })
 
@@ -56,18 +67,6 @@ export class ChatState {
     private readonly chatApi: ChatApi,
     private readonly store: Store,
   ) { }
-
-
-
-  @Selector()
-  static username(state: ChatStateModel) {
-    return state.username;
-  }
-
-  @Selector()
-  static picture(state : ChatStateModel){
-    return state.pictureUrl;
-  }
 
   @Selector()
   static chats(state : ChatStateModel){
@@ -86,15 +85,16 @@ export class ChatState {
 
     return this.chatApi
        .chats$(user.uid)
-       .pipe(tap((profile: user_profile) => ctx.dispatch(new SetChatMessages(user.uid, ctx.getState().recipient))));
+       .pipe(tap((profile: user_profile) => ctx.dispatch(new SetChatMessages(user.uid, ctx.getState().recipient.user_id))));
   }
 
   @Action(SetChatMessages)
-  async SetChatMessages(ctx: StateContext<ChatStateModel>, { sender, reciever }: SetChatMessages){
+  async SetChatMessages(ctx: StateContext<ChatStateModel>, { sender, receiver }: SetChatMessages){
      console.log("IT SHOULD BE CHANGING WTF")
      //const headers = await this.messagesApi.headers(user);
-     console.log(sender + " " + reciever);
-     const chats = await this.chatApi.getChatMessages({ sender: sender, reciever: "t2VuWgqzjpOf1CfQSpaEnb3U90cB" });
+     console.log(sender + " " + receiver);
+     //"k1BcHMYPHPBOa3Kokj7KYwke9VBF"
+     const chats = await this.chatApi.getChatMessages({ sender: sender, reciever: receiver });
      console.log(chats.data.messages);
      return ctx.setState(
          produce((draft) =>{
@@ -112,56 +112,14 @@ export class ChatState {
   );
   }
 
-  
-
-//   @Action(Logout)
-//   async logout(ctx: StateContext<ProfileStateModel>) {
-//     return ctx.dispatch(new AuthLogout());
-//   }
-
-//   @Action(SubscribeToProfile)
-//   subscribeToProfile(ctx: StateContext<ProfileStateModel>) {
-//     const user = this.store.selectSnapshot(AuthState.user);
-//     if (!user) return ctx.dispatch(new SetError('User not set'));
-//     const defaultForm: edit_profile = {
-//       notPublic : "",
-//       name : "",
-//       username : "",
-//       profilePicturePath : "",
-//       bio : "",
-//       province : ""
-//     };
-
-//     ctx.dispatch(new InitForm(defaultForm))
-
-//     return this.profileApi
-//       .profile$(user.uid)
-//       .pipe(tap((profile: user_profile) => ctx.dispatch(new SetProfile(profile))));
-//   }
-//   //What does piping do?
-//   //I think when profile api retuerns it is stored in profile of type user_profile and on completion of this 
-//   //the set profile action is invoked
-  
-//   @Action(SetProfile)
-//   setProfile(ctx: StateContext<ProfileStateModel>, { profile }: SetProfile) {
-//     return ctx.setState(
-//       produce((draft) => {
-//         draft.profile = profile;
-//       })
-//     );
-//   }
-
-//   @Action(InitForm)
-//   InitForm(ctx: StateContext<ProfileStateModel>, { form }: InitForm){
-//   console.log("INIT FORM")
-//   console.log(ctx.getState().form)
-//   return ctx.setState(
-//     produce((draft) => {
-//       draft.form=form;
-//     })
-//   );
-//   }
-
+  @Action(SetUsername)
+  SetUsername(ctx: StateContext<ChatStateModel>, { username }: SetUsername){
+  return ctx.setState(
+    produce((draft) => {
+      draft.recipient.username = username;
+    })
+  );
+  }
 }
 //============================================================================================
 

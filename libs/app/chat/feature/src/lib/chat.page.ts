@@ -11,22 +11,32 @@ import { ChatMessage } from '@mp/api/chat/util';
 import { ProfileState } from '@mp/app/profile/data-access';
 import { user_profile } from '@mp/api/profiles/util';
 
+export interface recipient{
+  user_id : string;
+  username : string;
+  pictureUrl: string;
+}
+
 @Component({
   selector: 'chat-page',
   templateUrl: './chat.page.html',
   styleUrls: ['./chat.page.scss']
 })
+
+
+
 export class ChatPage {
   @Select(ProfileState.profile) profile$!: Observable< user_profile | null > 
   @Select(ChatState.chats) chats$!: Observable< ChatMessage[] | [] >
-  @Select(ChatState.recipient) recipient$!: Observable< string | "" >
+  @Select(ChatState.recipient) recipient$!: Observable< recipient | null >
+ 
 
   chats: ChatMessage[] | []
   chatsCopy: ChatMessage[] | []
   user: user_profile | null
-  recipient: string | ""
+  recipient: recipient | null
   messages: { text: string; sent: boolean; sender: string }[] = [];
-  
+ 
   constructor(private navCtrl: NavController) 
   {
     this.chats = [];
@@ -42,10 +52,15 @@ export class ChatPage {
       if(user){ this.user = user; }
     });
 
-    this.recipient = "";
+    this.recipient = null;
     this.recipient$.forEach((recipient) => {
       if(recipient){ this.recipient = recipient; }
     });
+
+    // this.username = "";
+    // this.username$.forEach((username) => {
+    //   if(username){ this.username = username; }
+    // });
   }
 
   @ViewChild(IonContent, { static: true })
@@ -54,7 +69,7 @@ export class ChatPage {
 
   newMessage = '';
   sender = "Bob" 
-  receiver = 'John';
+  
 
 
   loadMessages(){
@@ -75,7 +90,10 @@ export class ChatPage {
   }
 
   displayReceiver() : string { 
-    return this.receiver; //displays John in ion-title
+    if(this.recipient){
+      return this.recipient?.username;
+    }
+    return "null"; //Error fetching Recipient name
   }
 
   sendMessage(): void {

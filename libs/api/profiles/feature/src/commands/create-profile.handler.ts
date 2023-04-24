@@ -44,7 +44,7 @@ export class CreateProfileHandler
       notPublic: "false",
       username: temp,
       name: temp,
-      profilePicturePath: "",
+      profilePicturePath: "https://ionicframework.com/docs/img/demos/avatar.svg",
       bio: "",
       email: tempEmail,
       password: "",

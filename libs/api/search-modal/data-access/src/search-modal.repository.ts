@@ -29,8 +29,8 @@ export class SearchModalRepository {
             }
 
             const user_id = profiles[i].user_id;
-            //const picture = profiles[i].profilePicturePath
-            const picture = "https://cdn.iconscout.com/icon/premium/png-512-thumb/avatar-95-116461.png?f=avif&w=256" ;
+            const picture = profiles[i].profilePicturePath
+            //const picture = "https://cdn.iconscout.com/icon/premium/png-512-thumb/avatar-95-116461.png?f=avif&w=256" ;
            
 
             const modal:SearchProfileModal = 
