@@ -7,9 +7,10 @@ import { IonContent } from '@ionic/angular';
 import { Select } from '@ngxs/store';
 import { ChatState } from '@mp/app/chat/data-access';
 import { Observable } from 'rxjs';
-import { ChatMessage } from '@mp/api/chat/util';
+import { ChatMessage, CreateChatMessageRequest } from '@mp/api/chat/util';
 import { ProfileState } from '@mp/app/profile/data-access';
 import { user_profile } from '@mp/api/profiles/util';
+import { ChatApi } from '@mp/app/chat/data-access';
 
 export interface recipient{
   user_id : string;
@@ -37,7 +38,7 @@ export class ChatPage {
   recipient: recipient | null
   messages: { text: string; sent: boolean; sender: string }[] = [];
  
-  constructor(private navCtrl: NavController) 
+  constructor(private navCtrl: NavController, private  readonly api: ChatApi) 
   {
     this.chats = [];
     this.chatsCopy = [];
@@ -96,9 +97,23 @@ export class ChatPage {
     return "null"; //Error fetching Recipient name
   }
 
-  sendMessage(): void {
+  async sendMessage() {
     if (this.newMessage.trim() !== '') {
-      this.messages.push({ text: this.newMessage.trim(), sent: true, sender: this.sender });
+      //Lol Maybe could have just pushed it to client side array to make it look like it updates live
+      //this.messages.push({ text: this.newMessage.trim(), sent: true, sender: this.sender });
+      if(this.user && this.recipient){
+      const request: CreateChatMessageRequest = {
+        sender: this.user?.user_id,
+        receiver: this.recipient?.user_id,
+        chat : {
+          sender: this.user?.user_id,
+          receiver: this.recipient?.user_id,
+          timeStamp: "",
+          payload: this.newMessage
+        }
+      }
+      const response = await this.api.sendChatMessage(request);
+    }
       this.newMessage = '';
     } 
   }

@@ -2,13 +2,9 @@ import { Injectable } from '@angular/core';
 import { doc, docData, Firestore , collection, getDocs, query} from '@angular/fire/firestore';
 
 import { Functions, httpsCallable } from '@angular/fire/functions';
-import {  EditProfileRequest, EditProfileResponse, user_profile } from '@mp/api/profiles/util';
-import { post } from '@mp/api/home/util'
-import { AddPhotoRequest, AddPhotoResponse, GetPostsRequest, GetPostsResponse } from '@mp/api/post/util';
+import {   user_profile } from '@mp/api/profiles/util';
 
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
-import { getDoc } from 'firebase/firestore';
-import { GetChatMessagesRequest, GetChatMessagesResponse } from '@mp/api/chat/util';
+import { CreateChatMessageRequest, CreateChatMessageResponse, GetChatMessagesRequest, GetChatMessagesResponse } from '@mp/api/chat/util';
 
 
 @Injectable()
@@ -51,6 +47,10 @@ export class ChatApi {
 
     async getChatMessages(request: GetChatMessagesRequest){
         return await httpsCallable<GetChatMessagesRequest, GetChatMessagesResponse>(this.functions, 'GetChatMessages')(request);
+    }
+
+    async sendChatMessage(request : CreateChatMessageRequest){
+        return await httpsCallable<CreateChatMessageRequest, CreateChatMessageResponse>(this.functions, 'SendChatMessage')(request);
     }
 
 
