@@ -8,7 +8,19 @@ import { ModalController } from '@ionic/angular';
 })
 
 export class BlipComponent {
-  @Input() blip: any = {};
+  @Input() data: any = { //TODO: Change this to `post` type once integrated
+    post_id: "NONE",
+    user_id: "",
+    content: "",
+    caption: "Oops! This post could not be loaded.",
+    likes: [],
+    timeStamp: 0,
+    shares: 0,
+    kronos: 0,
+    comments: [],
+    categories: [],
+    taggedUsers: []
+  }
 
   constructor (
     private modalController: ModalController
