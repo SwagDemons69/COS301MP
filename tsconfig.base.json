@@ -84,6 +84,10 @@
       "@mp/app/profile-other/feature": ["libs/app/profile-other/feature/src/index.ts"],
       "@mp/app/profile-other/util": ["libs/app/profile-other/util/src/index.ts"],
 
+      "@mp/app/blip/data-access": [ "libs/app/blip/data-access/src/index.ts" ],
+      "@mp/app/blip/feature": ["libs/app/blip/feature/src/index.ts"],
+      "@mp/app/blip/util": ["libs/app/blip/util/src/index.ts"],
+
       "@mp/app/errors/data-access": [
         "libs/app/errors/data-access/src/index.ts"
       ],

@@ -1,0 +1,25 @@
+ion-title {
+  display: flex;
+}
+
+ion-card-title {
+  display: flex;
+}
+
+ion-card-title > ion-icon {
+  margin-top: 0px;
+}
+
+ion-icon {
+  padding-left: 5px;
+}
+
+ion-card {
+  background-color: transparent;
+  width: 100%;
+  box-shadow: none;
+}
+
+ion-avatar {
+  margin: auto;
+}
