@@ -2,7 +2,7 @@ import { Component, Renderer2 } from '@angular/core';
 import { IProfile } from '@mp/api/profiles/util';
 import { ProfileState } from '@mp/app/profile/data-access';
 import { ModalController } from '@ionic/angular';
-import { ProfileOtherComponent } from '@mp/app//shared-components';
+import { ProfileOtherComponent } from '@mp/app/profile-other/feature';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 

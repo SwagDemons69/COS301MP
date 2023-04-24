@@ -75,11 +75,15 @@
       "@mp/app/chat/util": ["libs/app/chat/util/src/index.ts"],
       "@mp/app/copyright/ui": ["libs/app/copyright/ui/src/index.ts"],
       "@mp/app/core/feature": ["libs/app/core/feature/src/index.ts"],
-      "@mp/app/dashboard/data-access": [
-        "libs/app/dashboard/data-access/src/index.ts"
-      ],
+
+      "@mp/app/dashboard/data-access": [ "libs/app/dashboard/data-access/src/index.ts" ],
       "@mp/app/dashboard/feature": ["libs/app/dashboard/feature/src/index.ts"],
       "@mp/app/dashboard/util": ["libs/app/dashboard/util/src/index.ts"],
+
+      "@mp/app/profile-other/data-access": [ "libs/app/profile-other/data-access/src/index.ts" ],
+      "@mp/app/profile-other/feature": ["libs/app/profile-other/feature/src/index.ts"],
+      "@mp/app/profile-other/util": ["libs/app/profile-other/util/src/index.ts"],
+
       "@mp/app/errors/data-access": [
         "libs/app/errors/data-access/src/index.ts"
       ],
