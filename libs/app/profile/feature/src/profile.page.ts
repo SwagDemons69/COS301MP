@@ -10,6 +10,11 @@ import { Observable } from 'rxjs';
 import { post } from '@mp/api/home/util';
 import { Store } from '@ngxs/store';
 import { EditProfile, InitForm } from '@mp/app/profile/util';
+import { UpdateFormValue } from '@ngxs/form-plugin';
+import {
+  setTimeout,
+} from 'timers/promises';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'ms-profile-page',
@@ -30,7 +35,8 @@ export class ProfilePage {
     private modalController: ModalController,
     private formBuilder: FormBuilder,
     private readonly store : Store,
-    private readonly api: ProfilesApi
+    private readonly api: ProfilesApi,
+    private readonly navCtrl: NavController
   )
   {
     
@@ -180,5 +186,9 @@ export class ProfilePage {
     this.store.dispatch(new InitForm(newForm));
     this.store.dispatch(new EditProfile());
     this.addedFile = false;
+  }
+
+  goToMessages() {
+    this.navCtrl.navigateForward('/home/chat'); // <-- use NavController to navigate to messages page
   }
 }

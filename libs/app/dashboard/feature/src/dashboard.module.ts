@@ -6,6 +6,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { DashboardPage } from './dashboard.page';
 import { DashboardRouting } from './dashboard.routing';
 
+
 @NgModule({
   imports: [
     CommonModule,

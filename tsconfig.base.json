@@ -60,6 +60,11 @@
       ],
       "@mp/api/profiles/feature": ["libs/api/profiles/feature/src/index.ts"],
       "@mp/api/profiles/util": ["libs/api/profiles/util/src/index.ts"],
+      "@mp/api/search/data-access": [
+        "libs/api/search/data-access/src/index.ts"
+      ],
+      "@mp/api/search/feature": ["libs/api/search/feature/src/index.ts"],
+      "@mp/api/search/util": ["libs/api/search/util/src/index.ts"],
       "@mp/api/search-modal/data-access": [
         "libs/api/search-modal/data-access/src/index.ts"
       ],
@@ -87,6 +92,10 @@
       "@mp/app/profile-other/data-access": [ "libs/app/profile-other/data-access/src/index.ts" ],
       "@mp/app/profile-other/feature": ["libs/app/profile-other/feature/src/index.ts"],
       "@mp/app/profile-other/util": ["libs/app/profile-other/util/src/index.ts"],
+
+      "@mp/app/blip/data-access": [ "libs/app/blip/data-access/src/index.ts" ],
+      "@mp/app/blip/feature": ["libs/app/blip/feature/src/index.ts"],
+      "@mp/app/blip/util": ["libs/app/blip/util/src/index.ts"],
 
       "@mp/app/errors/data-access": [
         "libs/app/errors/data-access/src/index.ts"

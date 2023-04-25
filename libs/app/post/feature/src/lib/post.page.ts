@@ -13,11 +13,15 @@ import { post } from '@mp/api/home/util';
 import { Timestamp } from '@angular/fire/firestore';
 
 
+
 @Component({
   selector: 'post-page',
   templateUrl: './post.page.html',
   styleUrls: ['./post.page.scss']
 })
+
+
+
 export class PostPage {
   @Select(ProfileState.profile) profile$!: Observable<user_profile | null>;
   postForm : FormGroup
@@ -122,38 +126,6 @@ export class PostPage {
     const responseStatus = await this.api.UploadPostToFirestore(request);
   }
 
- // async toBase64(blob: Blob /*, callback: (result: string | ArrayBuffer | null, name: string) => void*/) {
-    //   const reader = new FileReader();
-    //   reader.readAsDataURL(blob);
-    //   reader.onloadend = function() {
-    //    // callback(reader.result, blob.name);
-    //    return reader.result;
-    //   };
-    // }
-
-  // sendToStorage(url : string | ArrayBuffer | null, name: string){
-  //   url = (typeof url === "string") ? url?.toString().substring(url.indexOf(',') + 1) : null;
-  //   if(url){
-  //     const request : AddPhotoRequest = { file : url, fileName : name}
-  //     this.api.UploadPost(request);
-  //   }
-  // }
-
-  // fixUrl(url: string | ArrayBuffer | null){
-  //   if(typeof url === "string"){
-  //     const str = url.substring(url.indexOf(',')+1);
-  //     console.log(str)
-  //   }
-  //   return "ERROR";
-  // }
-
-  //const request: AddPhotoRequest = { file : this.blob, fileName : this.blob.name }
-    //this.api.UploadPhoto(request);
-    //this.toBase64(this.blob)
-    
-   // try{ const response = (await this.api.UploadPost(request)).data; }
-    //catch(error){ console.log("ERROR"); }
-
   caption = ""
   tags = [
     "", "The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"
@@ -191,4 +163,5 @@ export class PostPage {
 
   onCaptionChanged() {
   }
+
 }

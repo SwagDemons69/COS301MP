@@ -2,10 +2,13 @@ import { Component, Renderer2 } from '@angular/core';
 import { user_profile } from '@mp/api/profiles/util';
 import { ProfileState } from '@mp/app/profile/data-access';
 import { ModalController } from '@ionic/angular';
-import { ProfileOtherComponent } from '@mp/app/profile-other/feature';
+import { BlipComponent } from '@mp/app//shared-components';
 import { Select } from '@ngxs/store';
 
 import { Observable } from 'rxjs';
+import { SearchRequest, SearchResponse} from '@mp/api/search/util';
+// import { SearchApi } from '@mp/app/dashboard/data-access';
+import { ProfileOtherComponent } from '@mp/app/profile-other/feature';
 
 @Component({
   selector: 'ms-dashboard-page',
@@ -19,6 +22,7 @@ export class DashboardPage {
   constructor (
     private renderer: Renderer2,
     private modalController: ModalController,
+
   ) {}
 
   // A bunch of dummy recommended posts
@@ -161,10 +165,7 @@ export class DashboardPage {
       }
     });
 
-    modal.onDidDismiss().then((data) => {
-      console.log(data);
-    });
-
     return await modal.present();
   }
 }
+
