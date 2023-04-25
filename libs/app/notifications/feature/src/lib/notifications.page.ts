@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 // import { NavController } from '@ionic/angular/providers/nav-controller';
 
 @Component({
@@ -7,7 +7,11 @@ import { Component } from '@angular/core';
   templateUrl: './notifications.page.html',
   styleUrls: ['./notifications.page.css']
 })
-export class NotificationsPage {
+export class NotificationsPage implements OnInit {
+  ngOnInit(): void {
+    this.getNotifcations();
+  }
+  
   notifications = [
     {text : 'test1'},
     {text : 'test2'},
