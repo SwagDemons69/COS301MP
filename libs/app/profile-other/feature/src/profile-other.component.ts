@@ -1,5 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { BlipComponent } from '@mp/app//shared-components';
+import { CommonModule } from '@angular/common'
+
 
 @Component({
   selector: 'ms-profile-other-component',
@@ -20,6 +23,28 @@ export class ProfileOtherComponent {
 
   async closeModal() {
     await this.modalController.dismiss();
+  }
+
+  getNumFollowers(){
+    return this.profile.user.followers.length;
+  }
+
+  getNumPosts(){
+    return this.profile.posts.length;
+  }
+
+  getNumFollowing(){
+    return this.profile.user.following.length;
+  }
+
+  async openBlip(data: any, name: any) {
+    const modal = await this.modalController.create({
+      component: BlipComponent,
+      componentProps: {
+        data: data,
+        user : name
+      }
+    });
   }
 
   goToMessages() {

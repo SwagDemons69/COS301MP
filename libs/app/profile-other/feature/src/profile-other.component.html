@@ -6,17 +6,17 @@
           <ion-card-header>
 
             <ion-card-subtitle class="kronos">
-                06:09:42
+                {{profile.user.timeOfExpiry}}
             </ion-card-subtitle>
 
             <ng-container>
               <ion-avatar>
-                <img alt="Avatar" src="{{ profile.photoURL }}" />
+                <img alt="Avatar" src="{{ profile.user.profilePicturePath }}" />
               </ion-avatar>
             </ng-container>
 
             <ion-card-subtitle class="username">
-              {{ profile.username }}
+              {{ profile.user.username }}
             </ion-card-subtitle>
 
           </ion-card-header>
@@ -24,9 +24,9 @@
           <ion-card-content>
             <ion-grid class="stats">
               <ion-row class="statsNumber">
-                <ion-col>666</ion-col>
-                <ion-col>69</ion-col>
-                <ion-col>420</ion-col>
+                <ion-col>{{getNumFollowing()}}</ion-col>
+                <ion-col>{{getNumPosts()}}</ion-col>
+                <ion-col>{{getNumFollowers()}}</ion-col>
               </ion-row>
 
               <ion-row class="statsLabel">
@@ -51,12 +51,31 @@
             </ion-row>
 
             <ion-card-subtitle class="bio">
-              Just your local demon posing as a time lord.
-              Nothing to see here, move along.
-              #Swaggity #SwagDemon69
+              {{profile.user.bio}}
             </ion-card-subtitle>
-        
 
+            <ng-container>
+              <ng-template  [ngIf]="(getNumPosts() !== 0)" [ngIfElse]="noPosts">
+                <ion-card class="photos">
+                  <ion-card-content class="ion-text-center">
+                    <!-- <ion-content [fullscreen]="true" [scrollEvents]="true"> -->
+                        <ion-grid [fixed]="true">
+                          <ion-row class="ion-justify-content-center" *ngFor="let i of profile.posts">
+                              <ion-col class="ion-col">
+                                <ion-img src="{{ i.content }}" (click)="openBlip(i,profile.user.username)" alt=""></ion-img>
+                              </ion-col>
+                          </ion-row>
+                        </ion-grid>
+                    <!-- </ion-content> -->
+                  </ion-card-content>
+                </ion-card>
+              </ng-template>
+
+              <ng-template #noPosts>
+                <p>No posts found.</p>
+              </ng-template>
+            </ng-container>
+        
           </ion-card-content>
         </ion-card>
 

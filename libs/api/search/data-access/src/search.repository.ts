@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { getStorage, ref , uploadBytes, connectStorageEmulator, uploadString} from 'firebase/storage';
 import { initializeApp } from '@firebase/app';
 import { user_profile } from '@mp/api/profiles/util'
-import { SearchResponse, Post } from '@mp/api/search/util';
+import { SearchResponse, Post, User } from '@mp/api/search/util';
 import * as admin from 'firebase-admin';
 import { post } from '@mp/api/home/util';
 
@@ -23,19 +23,24 @@ export class SearchRepository {
     
     //will need to change searched for value to displayName to user when merging with completed profile page
     //check what the used name convention is for users/profiles
-    async GetSearchedUsers(query : string) : Promise<user_profile[]> {
-
+    async GetSearchedUsers(query : string) : Promise<User[]> {
       if(query === "") { return []; }
 
       const profilesRef = await admin.firestore().collection('profiles').get();
       const profiles = profilesRef.docs.map((profile) => { return profile.data() as user_profile});
 
-      const validProfiles: user_profile[] = [];
+      const validProfiles: User[] = [];
 
-      profiles.forEach((profile) => {
+      profiles.forEach(async (profile) => {
 
           if(profile.username?.toLowerCase().includes(query.toLowerCase()) || profile.email?.toLowerCase().includes(query.toLowerCase()) ){
-            validProfiles.push(profile);
+            const postsRef = await admin.firestore().collection(`profiles/${profile.user_id}/posts`).get();
+            const posts = postsRef.docs.map((post) => { return post.data() as post });
+            const myUser : User = {
+              user : profile,
+              posts : posts
+            }
+            validProfiles.push(myUser);
           }
       })
 
