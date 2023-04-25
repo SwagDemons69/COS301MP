@@ -23,6 +23,11 @@
       "@mp/api/chat/feature": ["libs/api/chat/feature/src/index.ts"],
       "@mp/api/chat/util": ["libs/api/chat/util/src/index.ts"],
       "@mp/api/core/feature": ["libs/api/core/feature/src/index.ts"],
+      "@mp/api/dashboard/data-access": [
+        "libs/api/dashboard/data-access/src/index.ts"
+      ],
+      "@mp/api/dashboard/feature": ["libs/api/dashboard/feature/src/index.ts"],
+      "@mp/api/dashboard/util": ["libs/api/dashboard/util/src/index.ts"],
       "@mp/api/eventstore/data-access": [
         "libs/api/eventstore/data-access/src/index.ts"
       ],
@@ -35,6 +40,9 @@
       ],
       "@mp/api/history/feature": ["libs/api/history/feature/src/index.ts"],
       "@mp/api/history/util": ["libs/api/history/util/src/index.ts"],
+      "@mp/api/home/data-access": ["libs/api/home/data-access/src/index.ts"],
+      "@mp/api/home/feature": ["libs/api/home/feature/src/index.ts"],
+      "@mp/api/home/util": ["libs/api/home/util/src/index.ts"],
       "@mp/api/messages/data-access": [
         "libs/api/messages/data-access/src/index.ts"
       ],
@@ -52,19 +60,11 @@
       "@mp/api/post/data-access": ["libs/api/post/data-access/src/index.ts"],
       "@mp/api/post/feature": ["libs/api/post/feature/src/index.ts"],
       "@mp/api/post/util": ["libs/api/post/util/src/index.ts"],
-      "@mp/api/home/data-access": ["libs/api/home/data-access/src/index.ts"],
-      "@mp/api/home/feature": ["libs/api/home/feature/src/index.ts"],
-      "@mp/api/home/util": ["libs/api/home/util/src/index.ts"],
       "@mp/api/profiles/data-access": [
         "libs/api/profiles/data-access/src/index.ts"
       ],
       "@mp/api/profiles/feature": ["libs/api/profiles/feature/src/index.ts"],
       "@mp/api/profiles/util": ["libs/api/profiles/util/src/index.ts"],
-      "@mp/api/search/data-access": [
-        "libs/api/search/data-access/src/index.ts"
-      ],
-      "@mp/api/search/feature": ["libs/api/search/feature/src/index.ts"],
-      "@mp/api/search/util": ["libs/api/search/util/src/index.ts"],
       "@mp/api/search-modal/data-access": [
         "libs/api/search-modal/data-access/src/index.ts"
       ],
@@ -72,30 +72,30 @@
         "libs/api/search-modal/feature/src/index.ts"
       ],
       "@mp/api/search-modal/util": ["libs/api/search-modal/util/src/index.ts"],
+      "@mp/api/search/data-access": [
+        "libs/api/search/data-access/src/index.ts"
+      ],
+      "@mp/api/search/feature": ["libs/api/search/feature/src/index.ts"],
+      "@mp/api/search/util": ["libs/api/search/util/src/index.ts"],
       "@mp/api/users/data-access": ["libs/api/users/data-access/src/index.ts"],
       "@mp/api/users/feature": ["libs/api/users/feature/src/index.ts"],
       "@mp/api/users/util": ["libs/api/users/util/src/index.ts"],
       "@mp/app/auth/data-access": ["libs/app/auth/data-access/src/index.ts"],
       "@mp/app/auth/feature": ["libs/app/auth/feature/src/index.ts"],
       "@mp/app/auth/util": ["libs/app/auth/util/src/index.ts"],
+      "@mp/app/blip/data-access": ["libs/app/blip/data-access/src/index.ts"],
+      "@mp/app/blip/feature": ["libs/app/blip/feature/src/index.ts"],
+      "@mp/app/blip/util": ["libs/app/blip/util/src/index.ts"],
       "@mp/app/chat/data-access": ["libs/app/chat/data-access/src/index.ts"],
       "@mp/app/chat/feature": ["libs/app/chat/feature/src/index.ts"],
       "@mp/app/chat/util": ["libs/app/chat/util/src/index.ts"],
       "@mp/app/copyright/ui": ["libs/app/copyright/ui/src/index.ts"],
       "@mp/app/core/feature": ["libs/app/core/feature/src/index.ts"],
-
-      "@mp/app/dashboard/data-access": [ "libs/app/dashboard/data-access/src/index.ts" ],
+      "@mp/app/dashboard/data-access": [
+        "libs/app/dashboard/data-access/src/index.ts"
+      ],
       "@mp/app/dashboard/feature": ["libs/app/dashboard/feature/src/index.ts"],
       "@mp/app/dashboard/util": ["libs/app/dashboard/util/src/index.ts"],
-
-      "@mp/app/profile-other/data-access": [ "libs/app/profile-other/data-access/src/index.ts" ],
-      "@mp/app/profile-other/feature": ["libs/app/profile-other/feature/src/index.ts"],
-      "@mp/app/profile-other/util": ["libs/app/profile-other/util/src/index.ts"],
-
-      "@mp/app/blip/data-access": [ "libs/app/blip/data-access/src/index.ts" ],
-      "@mp/app/blip/feature": ["libs/app/blip/feature/src/index.ts"],
-      "@mp/app/blip/util": ["libs/app/blip/util/src/index.ts"],
-
       "@mp/app/errors/data-access": [
         "libs/app/errors/data-access/src/index.ts"
       ],
@@ -114,6 +114,7 @@
         "libs/app/messages/data-access/src/index.ts"
       ],
       "@mp/app/messages/feature": ["libs/app/messages/feature/src/index.ts"],
+      "@mp/app/messages/ui": ["libs/app/messages/ui/src/index.ts"],
       "@mp/app/messages/util": ["libs/app/messages/util/src/index.ts"],
       "@mp/app/notifications/data-access": [
         "libs/app/notifications/data-access/src/index.ts"
@@ -127,8 +128,16 @@
       "@mp/app/post/data-access": ["libs/app/post/data-access/src/index.ts"],
       "@mp/app/post/feature": ["libs/app/post/feature/src/index.ts"],
       "@mp/app/post/util": ["libs/app/post/util/src/index.ts"],
-      "@mp/app/messages/ui": ["libs/app/messages/ui/src/index.ts"],
       "@mp/app/privacy/feature": ["libs/app/privacy/feature/src/index.ts"],
+      "@mp/app/profile-other/data-access": [
+        "libs/app/profile-other/data-access/src/index.ts"
+      ],
+      "@mp/app/profile-other/feature": [
+        "libs/app/profile-other/feature/src/index.ts"
+      ],
+      "@mp/app/profile-other/util": [
+        "libs/app/profile-other/util/src/index.ts"
+      ],
       "@mp/app/profile/data-access": [
         "libs/app/profile/data-access/src/index.ts"
       ],
