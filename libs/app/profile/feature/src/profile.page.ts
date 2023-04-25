@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { edit_profile, user_profile } from '@mp/api/profiles/util';
 import { AddPhotoRequest } from '@mp/api/post/util';
 import { ModalController } from '@ionic/angular';
-import { BlipComponent } from '@mp/app//shared-components';
+import { BlipComponent } from '@mp/app/blip/feature';
 import { ProfilesApi, ProfileState } from '@mp/app/profile/data-access';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';

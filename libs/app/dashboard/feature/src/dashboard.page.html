@@ -59,7 +59,7 @@
 
       <ion-slide *ngFor="let item of recommended">
         <ion-col>
-          <ion-img [src]="item.img"></ion-img>
+          <ion-img [src]="item.content"></ion-img>
           <div class="overlay">
             <ion-label>{{item.title}}</ion-label>
             <div class="reactions">
@@ -117,8 +117,7 @@
     </ion-infinite-scroll-content>
   </ion-infinite-scroll> -->
 
-  <div class="trendingPost" *ngFor="let item of trending">
-    <!-- (click)="openBlip(item)"> -->
+  <div class="trendingPost" *ngFor="let item of trending" (click)="openBlip(item)">
     <ion-card class="trendingItem">
 
       <div class="image">
@@ -131,7 +130,7 @@
 
             <!-- Title + Description -->
             <ion-col class="subtext" size="9">
-              <h2>{{item.caption}}</h2>
+              <h2>{{item.title}}</h2>
               <br/>
               <h4>{{item.desc}}</h4>
             </ion-col>
@@ -165,7 +164,7 @@
   <div class="searchResult" *ngFor="let post of searchResults">
     <ion-item lines="none">
       <ion-thumbnail slot="start">
-        <img src="{{ post.img }}" alt="{{ post.title }}">
+        <img src="{{ post.content }}" alt="{{ post.title }}">
       </ion-thumbnail>
       <ion-label>
         <h2>{{ post.title }}</h2>
