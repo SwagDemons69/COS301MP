@@ -8,7 +8,6 @@ import { DashboardRouting } from './dashboard.routing';
 import { SearchApi } from '@mp/app/dashboard/data-access';
 
 
-
 @NgModule({
   imports: [
     CommonModule,
