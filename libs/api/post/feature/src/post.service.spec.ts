@@ -1,10 +1,11 @@
 import { Test } from '@nestjs/testing';
 import { PostService } from './post.service';
-import { AddPhotoRequest, CreatePostRequest } from '../../util/src/requests';
+import { AddPhotoRequest, CreatePostLikeRequest, CreatePostRequest } from '../../util/src/requests';
 import { CommandBus } from '@nestjs/cqrs';
-import { AddPhotoResponse, CreatePostResponse } from '../../util/src/responses';
-import { AddPhotoCommand, CreatePostCommand } from '../../util/src/commands';
+import { AddPhotoResponse, CreatePostLikeResponse, CreatePostResponse } from '../../util/src/responses';
+import { AddPhotoCommand, CreatePostCommand, CreatePostLikeCommand } from '../../util/src/commands';
 import { post } from '@mp/api/home/util';
+import { post_like } from '../../util/src/interfaces';
 
 describe('Post feature', () => {
     let postFeature: PostService;
@@ -67,6 +68,25 @@ describe('Post feature', () => {
             expect(commandBus.execute).toHaveBeenCalledWith(new CreatePostCommand(request));
             expect(result).toEqual(response);
         });
-    })
+    });
+
+    describe('createpostlike', () => {
+        it('should add a like by calling commandbus.execute with CreatePostLikeCommand', async () => {
+            const user = '823758';
+            const post = '2579253';
+            const request: CreatePostLikeRequest = {user, post};
+            const likes: post_like[] = [
+                { user: '234234'},
+                { user: '646464'}
+            ]
+            const response: CreatePostLikeResponse = {likes};
+            jest.spyOn(commandBus, 'execute').mockResolvedValue(response);
+
+            const result = await postFeature.CreatePostLike(request);
+
+            expect(commandBus.execute).toHaveBeenCalledWith(new CreatePostLikeCommand(request));
+            expect(result).toEqual(response);
+        });
+    });
     
 });
