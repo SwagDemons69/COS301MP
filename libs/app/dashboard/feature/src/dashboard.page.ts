@@ -158,7 +158,8 @@ export class DashboardPage {
     console.log(postId + " postsed by " + username);
   }
 
-  toUser(user_id : any){
+  toUser(username : any, user_id : any, photoURL : any){
+    this.openProfile({username: username, photoURL: photoURL});
     console.log(user_id);
   }
 
