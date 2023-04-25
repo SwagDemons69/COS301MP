@@ -65,6 +65,13 @@
       ],
       "@mp/api/search/feature": ["libs/api/search/feature/src/index.ts"],
       "@mp/api/search/util": ["libs/api/search/util/src/index.ts"],
+      "@mp/api/search-modal/data-access": [
+        "libs/api/search-modal/data-access/src/index.ts"
+      ],
+      "@mp/api/search-modal/feature": [
+        "libs/api/search-modal/feature/src/index.ts"
+      ],
+      "@mp/api/search-modal/util": ["libs/api/search-modal/util/src/index.ts"],
       "@mp/api/users/data-access": ["libs/api/users/data-access/src/index.ts"],
       "@mp/api/users/feature": ["libs/api/users/feature/src/index.ts"],
       "@mp/api/users/util": ["libs/api/users/util/src/index.ts"],
@@ -77,11 +84,19 @@
       "@mp/app/chat/util": ["libs/app/chat/util/src/index.ts"],
       "@mp/app/copyright/ui": ["libs/app/copyright/ui/src/index.ts"],
       "@mp/app/core/feature": ["libs/app/core/feature/src/index.ts"],
-      "@mp/app/dashboard/data-access": [
-        "libs/app/dashboard/data-access/src/index.ts"
-      ],
+
+      "@mp/app/dashboard/data-access": [ "libs/app/dashboard/data-access/src/index.ts" ],
       "@mp/app/dashboard/feature": ["libs/app/dashboard/feature/src/index.ts"],
       "@mp/app/dashboard/util": ["libs/app/dashboard/util/src/index.ts"],
+
+      "@mp/app/profile-other/data-access": [ "libs/app/profile-other/data-access/src/index.ts" ],
+      "@mp/app/profile-other/feature": ["libs/app/profile-other/feature/src/index.ts"],
+      "@mp/app/profile-other/util": ["libs/app/profile-other/util/src/index.ts"],
+
+      "@mp/app/blip/data-access": [ "libs/app/blip/data-access/src/index.ts" ],
+      "@mp/app/blip/feature": ["libs/app/blip/feature/src/index.ts"],
+      "@mp/app/blip/util": ["libs/app/blip/util/src/index.ts"],
+
       "@mp/app/errors/data-access": [
         "libs/app/errors/data-access/src/index.ts"
       ],
@@ -129,6 +144,13 @@
       "@mp/app/reset/data-access": ["libs/app/reset/data-access/src/index.ts"],
       "@mp/app/reset/feature": ["libs/app/reset/feature/src/index.ts"],
       "@mp/app/reset/util": ["libs/app/reset/util/src/index.ts"],
+      "@mp/app/search-modal/data-access": [
+        "libs/app/search-modal/data-access/src/index.ts"
+      ],
+      "@mp/app/search-modal/feature": [
+        "libs/app/search-modal/feature/src/index.ts"
+      ],
+      "@mp/app/search-modal/util": ["libs/app/search-modal/util/src/index.ts"],
       "@mp/app/tos/feature": ["libs/app/tos/feature/src/index.ts"],
       "@mp/app/updates/data-access": [
         "libs/app/updates/data-access/src/index.ts"

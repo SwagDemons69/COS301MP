@@ -1,34 +1,56 @@
+/* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { Component } from '@angular/core';
-// import { NavController } from '@ionic/angular/providers/nav-controller';
+// import { Component } from '@angular/core';
+import { NavController } from '@ionic/angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonContent } from '@ionic/angular';
 
-interface ChatMessage {
-  message: string;
-  sender: string;
-  timestamp: number;
-  
-}
 
 @Component({
   selector: 'chat-page',
   templateUrl: './chat.page.html',
-  styleUrls: ['./chat.page.css']
+  styleUrls: ['./chat.page.scss']
 })
 export class ChatPage {
 
-  messages: ChatMessage[] = [
-    { message: 'Hello', sender: 'user', timestamp: 123456789 },
-    { message: 'Hi', sender: 'bot', timestamp: 123456789 },
-    { message: 'How are you?', sender: 'user', timestamp: 123456789 },
-    { message: 'I am fine', sender: 'bot', timestamp: 123456789 },
-    { message: 'What about you?', sender: 'user', timestamp: 123456789 },
-    { message: 'I am fine too', sender: 'bot', timestamp: 123456789 },
-    { message: 'What do you do?', sender: 'user', timestamp: 123456789 },
-    { message: 'I am a bot', sender: 'bot', timestamp: 123456789 },
-  ]
-  sendMessage(message: string) {
-    this.messages.push({ message, sender: 'user', timestamp: Date.now() });
-  }
+  constructor(private navCtrl: NavController) {}
+
+  @ViewChild(IonContent, { static: true })
+  content!: IonContent;
+  @ViewChild('messageList', { static: true }) messageList: any;
 
   newMessage = '';
+  sender = 'Me'; 
+  receiver = 'John';
+
+  messages: { text: string; sent: boolean; sender: string }[] = [
+    { text: "Hi, it's John", sent: false, sender: this.receiver },
+    { text: "Hi John, how are you?", sent: true, sender: this.sender },
+    { text: "Hi John, how are you?", sent: true, sender: this.sender },
+    { text: "Hi John, how are you?", sent: true, sender: this.sender },
+    { text: "Hi John, how are you?", sent: true, sender: this.sender },
+    { text: "Hi John, how are you?", sent: true, sender: this.sender },
+    { text: "Hi John, how are you?", sent: true, sender: this.sender },
+    { text: "Hi John, how are you?", sent: true, sender: this.sender },
+    { text: "Hi John, how are you?", sent: true, sender: this.sender },
+    { text: "Hi John, how are you?", sent: true, sender: this.sender },
+    { text: "Hi John, how are you?", sent: true, sender: this.sender },
+    { text: "Hi John, how are you?", sent: true, sender: this.sender },
+    { text: "Hi John, how are you?", sent: true, sender: this.sender },
+  ];
+
+  displayReceiver() : string { 
+    return this.receiver; //displays John in ion-title
+  }
+
+  sendMessage(): void {
+    if (this.newMessage.trim() !== '') {
+      this.messages.push({ text: this.newMessage.trim(), sent: true, sender: this.sender });
+      this.newMessage = '';
+    } 
+  }
+
+  backToMessage() {
+    this.navCtrl.navigateBack('/home/messages');
+  }
 }

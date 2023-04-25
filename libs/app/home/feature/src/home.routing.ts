@@ -39,6 +39,11 @@ const routes: Routes = [
           import('@mp/app/chat/feature').then((m) => m.ChatModule)
       },
       {
+        path: 'search',
+        loadChildren: () =>
+          import('@mp/app/search-modal/feature').then((m) => m.searchmodalModule)
+      },
+      {
         path: '',
         pathMatch: 'full',
         redirectTo: '/home/dashboard',

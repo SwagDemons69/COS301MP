@@ -1,38 +1,4 @@
-<!-- <ion-header [translucent]="true">
-    <ion-toolbar>
-        <ion-title>
-        Post
-        </ion-title>
-    </ion-toolbar>
-    </ion-header>
-    
-<ion-content [fullscreen]="true">
 
-    <ion-content>
-        <div class="centered-box">
-
-            <div id="FileUpload">
-                <form [formGroup]="postForm" (ngSubmit)="uploadPost()">
-                    <input type="file" formControlName="file" accept="image/*, video/*" required (change)="onFileChange($event)"/><br><br>
-                    <input type="text" formControlName="caption" placeholder="Write your post caption" /><br><br>
-                    <input type="submit" value="Upload"/>
-                </form>
-            </div>
-        </div>
-    </ion-content>
-    
-    </ion-content>   -->
-    
-    
-    <!-- 
-        
-    yarn start:api:dev
-    
-    yarn start:emulators
-    
-    yarn start:app:dev 
-    
-    -->
     <ion-header [translucent]="true">
         <ion-toolbar>
             <ion-title>Post</ion-title>
@@ -73,3 +39,38 @@
             </div>             
         </ion-content>
     </ion-content>   
+
+    
+<!-- <ion-header [translucent]="true">
+</ion-header>
+<ion-content [fullscreen]="true">
+    <label for="file-upload">
+        <div class="top-section">              
+            <div id="addMediaIcon">
+                <ion-icon name="camera"></ion-icon>
+                <ion-title>Add Media</ion-title>
+            </div>
+        </div>
+    </label>
+        
+    <div class="bottom-section">
+        <form>
+            <input id="file-upload" type="file" accept="image/*" style="display:none;">
+            
+            <p>Caption:</p>
+            <ion-item>  
+                <ion-textarea
+                    id="caption"
+                    placeholder="Type a caption"
+                    maxlength="1024"
+                    (enter)="onCaptionChanged"
+                ></ion-textarea>
+            </ion-item>
+
+            <ion-list id="tagList">
+            </ion-list>
+
+            <ion-button (click)="updateTagList()" class="glassyButton">POST</ion-button>
+        </form>          
+    </div>             
+</ion-content> -->

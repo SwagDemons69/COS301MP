@@ -1,64 +1,33 @@
 <ion-header>
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <ion-back-button></ion-back-button>
-      </ion-buttons>
-      <ion-title>Text Messaging</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar class="head">
+    <ion-buttons slot="start"> 
+        <ion-icon (click)="backToMessage()" id="back" name="arrow-back"></ion-icon>   
+    </ion-buttons>
+    <ion-avatar slot="start">
+      <img src="https://cdn2.iconfinder.com/data/icons/avatars-99/62/avatar-370-456322-512.png" />
+    </ion-avatar>
+    <ion-title >{{ displayReceiver() }}</ion-title>
+  </ion-toolbar>
+</ion-header>
   
-  <ion-content [fullscreen]="true" >
-    
-    <!-- <div class="top-bar">
-      <button class="back-button">back</button>
-      <div class="profile">
-        <div class="profile-photo"></div>
-        <p class="name">Leo</p>
-      </div>
-    </div> -->
-  
-    <!-- <div class="messages" >
-  
-      <div class="message">
-        <p>Hello, how are you?</p>
-      </div>
-  
-      <div class="message">
-        <p>I'm doing well, thanks for asking. How about you?</p>
-      </div>
-      <div class="message">
-        <p>I'm doing well, thanks for asking. How about you?</p>
-      </div>
-      <div class="message">
-        <p>I'm doing well, thanks for asking. How about you?</p>
-      </div>
-      <div class="message">
-        <p>I'm doing well, thanks for asking. How about you?</p>
-      </div>
-      
-    </div> -->
-        
-      <ion-list>
-        <!-- <a href="../tabs/tab3"> -->
-          <ion-item *ngFor="let message of messages" class="message" id="scroll">
-            <ion-avatar slot="start">
-              <!-- <img [src]="message.avatar" /> -->
-            </ion-avatar>
-            <ion-label>
-              <h2>{{ message.sender }}</h2>
-              <p>{{ message.message }}</p>
-            </ion-label>
-          </ion-item>
-        <!-- </a> -->
-        <!-- <div class="message-input">
-          <ion-input [(ngModel)]="newMessage" placeholder="Type your message..."></ion-input>
-          <ion-button color="primary" (click)="sendMessage(newMessage)">Send</ion-button>
-        </div> -->
-      </ion-list> 
-      
-      <div class="message-input">
-        <input type="text" placeholder="Type your message...">
-        <button> Send</button>
-      </div>
+<ion-content [fullscreen]="true">
+  <ion-list #messageList>
+    <div class="message" *ngFor="let message of messages">
+    <ion-item [class.sent]="message.sent" [class.receiver]="!message.sent" style="margin-bottom: 10px;">
+      <ion-label [innerHTML]="message.text.replace('\n', '&lt;br /&gt;')" style="white-space: pre-wrap;"></ion-label>
+    </ion-item>
+  </div>
+  </ion-list>
 
+  <ion-footer>
+    <ion-row class="send">
+      <ion-textarea
+        placeholder="Type a message"
+        [(ngModel)]="newMessage"
+        maxlength="512"
+      ></ion-textarea>
+      <ion-button (click)="sendMessage()">Send</ion-button>
+    </ion-row>
+  </ion-footer>
+  
 </ion-content>

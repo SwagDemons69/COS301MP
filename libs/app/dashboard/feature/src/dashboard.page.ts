@@ -7,6 +7,7 @@ import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { SearchRequest, SearchResponse} from '@mp/api/search/util';
 // import { SearchApi } from '@mp/app/dashboard/data-access';
+import { ProfileOtherComponent } from '@mp/app/profile-other/feature';
 
 @Component({
   selector: 'ms-dashboard-page',
@@ -116,13 +117,19 @@ export class DashboardPage {
     this.isSearchbarVisible = !this.isSearchbarVisible;
   }
 
+  // Prevent re-setting css properties every scroll event
+  isKronosBarVisible = false;
   onContentScroll(event: any) {
     console.log(event.detail.scrollTop);
-    if (event.detail.scrollTop > 220) {
+
+    if (event.detail.scrollTop > 220 && !this.isKronosBarVisible) {
       this.renderer.setStyle(document.querySelector(".barKronos"), 'opacity', '1');
+      this.isKronosBarVisible = true;
     }
-    else {
+    else if (event.detail.scrollTop <= 220) {
       this.renderer.setStyle(document.querySelector(".barKronos"), 'opacity', '0');
+      this.renderer.setStyle(document.querySelector(".glassyBackground"), 'top', `${0.5*event.detail.scrollTop}px`);
+      this.isKronosBarVisible = false;
     }
   }
 
@@ -138,12 +145,23 @@ export class DashboardPage {
     const modal = await this.modalController.create({
       component: BlipComponent,
       componentProps: {
-        data: data
+        dat: data //TODO: Change `dat` back to `data` once properly integrated
       }
     });
 
-    modal.onDidDismiss().then((data) => {
-      console.log(data);
+    // modal.onDidDismiss().then((data) => {
+    //   console.log(data);
+    // });
+
+    return await modal.present();
+  }
+
+  async openProfile(profileData: any) {
+    const modal = await this.modalController.create({
+      component: ProfileOtherComponent,
+      componentProps: {
+        profile: profileData
+      }
     });
 
     return await modal.present();

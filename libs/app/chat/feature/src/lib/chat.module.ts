@@ -3,9 +3,10 @@ import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { ChatPage } from './chat.page';
 import { ChatRouting } from './chat.routing';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [CommonModule, IonicModule, ChatRouting],
+  imports: [CommonModule, FormsModule, IonicModule, ChatRouting],
   exports: [ChatPage],
   declarations: [ChatPage],
 })

@@ -14,6 +14,7 @@ import { UpdateFormValue } from '@ngxs/form-plugin';
 import {
   setTimeout,
 } from 'timers/promises';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'ms-profile-page',
@@ -34,7 +35,8 @@ export class ProfilePage {
     private modalController: ModalController,
     private formBuilder: FormBuilder,
     private readonly store : Store,
-    private readonly api: ProfilesApi
+    private readonly api: ProfilesApi,
+    private readonly navCtrl: NavController
   )
   {
     
@@ -187,4 +189,7 @@ export class ProfilePage {
     this.addedFile = false;
   }
 
+  goToMessages() {
+    this.navCtrl.navigateForward('/home/chat'); // <-- use NavController to navigate to messages page
+  }
 }

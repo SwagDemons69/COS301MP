@@ -3,8 +3,9 @@
   display: flex;
 }
 
-.logo {
-  padding-bottom: 50px;
+ion-img.logo {
+  max-width: 45vw;
+  margin: auto;
 }
 
 // @media (prefers-color-scheme: light) {

@@ -17,7 +17,7 @@ import { Timestamp } from '@angular/fire/firestore';
 @Component({
   selector: 'post-page',
   templateUrl: './post.page.html',
-  styleUrls: ['./post.page.css']
+  styleUrls: ['./post.page.scss']
 })
 
 
@@ -126,37 +126,42 @@ export class PostPage {
     const responseStatus = await this.api.UploadPostToFirestore(request);
   }
 
+  caption = ""
+  tags = [
+    "", "The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"
+  ]
+
+  updateTagList() {
+    const tagList = document.getElementById("tagList");
+    if(tagList == null) return;
+
+    // Remove previous tags
+    while(tagList.lastChild) {
+      document.removeChild(tagList.lastChild);
+    }
+
+    this.tags.forEach(x => x.toLowerCase().trim());
+    this.tags.sort();
+
+    let prevTag = "";
+    for(let t = 0; t < this.tags.length; t++) {
+      const tag = this.tags[t];
+
+      // Skip duplicates and empty strings
+      if(tag == prevTag) {
+        continue;
+      }
+
+      const el = document.createElement("ion-badge");
+      el.innerText = "#" + tag;
+
+      tagList?.appendChild(el);
+
+      prevTag = tag;
+    }
+  }
+
+  onCaptionChanged() {
+  }
+
 }
-
-
- // async toBase64(blob: Blob /*, callback: (result: string | ArrayBuffer | null, name: string) => void*/) {
-    //   const reader = new FileReader();
-    //   reader.readAsDataURL(blob);
-    //   reader.onloadend = function() {
-    //    // callback(reader.result, blob.name);
-    //    return reader.result;
-    //   };
-    // }
-
-  // sendToStorage(url : string | ArrayBuffer | null, name: string){
-  //   url = (typeof url === "string") ? url?.toString().substring(url.indexOf(',') + 1) : null;
-  //   if(url){
-  //     const request : AddPhotoRequest = { file : url, fileName : name}
-  //     this.api.UploadPost(request);
-  //   }
-  // }
-
-  // fixUrl(url: string | ArrayBuffer | null){
-  //   if(typeof url === "string"){
-  //     const str = url.substring(url.indexOf(',')+1);
-  //     console.log(str)
-  //   }
-  //   return "ERROR";
-  // }
-
-  //const request: AddPhotoRequest = { file : this.blob, fileName : this.blob.name }
-    //this.api.UploadPhoto(request);
-    //this.toBase64(this.blob)
-    
-   // try{ const response = (await this.api.UploadPost(request)).data; }
-    //catch(error){ console.log("ERROR"); }

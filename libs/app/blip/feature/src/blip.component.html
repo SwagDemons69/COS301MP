@@ -1,0 +1,62 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()" class="closeButton">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+
+    <!-- POST CONTENT -->
+    <ion-row>
+      <ion-card class="trendingItem">
+        <div class="image">
+          <ion-img [src]="data.img"></ion-img>
+        </div>
+
+        <ion-label stacked>
+          <ion-grid>
+            <ion-row>
+
+              <!-- Title + Description -->
+              <ion-col class="subtext" size="9">
+                <h2>{{data.title}}</h2>
+                <br/>
+                <h4>{{data.desc}}</h4>
+              </ion-col>
+
+              <!-- Profile, Time posted, Reactions -->
+              <ion-col class="actions">
+                <ion-grid>
+                  <ion-row class="profile">
+                      <span style="padding-right: 0.1em;">Hello world</span> 
+                      <ion-avatar style="display: inline; width: 5vw; height: 5vw">
+                        <img alt="Avatar" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                      </ion-avatar>
+                  </ion-row>
+                </ion-grid>
+              </ion-col>
+
+            </ion-row>
+          </ion-grid>
+        </ion-label>
+      </ion-card>
+    </ion-row>
+
+    <!-- COMMENT SECTION -->
+    <ion-row>
+      <ion-list class="commentSection">
+        <ion-card class="comment" *ngFor="let comm of data.comments">
+          <ion-card-title>{{comm.user_id}}</ion-card-title>
+          <br />
+          <ion-card-subtitle>{{comm.content}}</ion-card-subtitle>
+        </ion-card>
+      </ion-list>
+    </ion-row>
+
+  </ion-grid>
+</ion-content>
