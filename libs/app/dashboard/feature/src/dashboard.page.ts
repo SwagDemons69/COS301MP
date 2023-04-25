@@ -8,7 +8,7 @@ import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { SearchRequest, SearchResponse} from '@mp/api/search/util';
 import { SearchApi } from '@mp/app/dashboard/data-access';
-import { User, Post} from '@mp/api/search/util';
+import { Post } from '@mp/api/search/util';
 import { BlipComponent } from '@mp/app/blip/feature';
 
 @Component({
@@ -51,7 +51,7 @@ export class DashboardPage {
   //Search required variables
   searchResultsPosts: Post[] = []
 
-  searchResultsUsers: User[] = []
+  searchResultsUsers: user_profile[] = []
 
   isSearchbarVisible = false;
   userToggle = true;

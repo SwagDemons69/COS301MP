@@ -4,7 +4,7 @@ export interface user_profile {
     user_id : string;
     timeOfExpiry: number;
     notPublic : string;
-    username : string | null | undefined;
+    username : string;
     name : string | null | undefined;
     profilePicturePath : string;
     bio : string | null | undefined;

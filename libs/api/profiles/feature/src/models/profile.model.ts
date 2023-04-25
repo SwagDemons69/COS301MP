@@ -7,7 +7,7 @@ export class Profile extends AggregateRoot implements user_profile {
     public user_id: string,
     public timeOfExpiry: number,
     public notPublic: string,
-    public username: string | null | undefined,
+    public username: string ,
     public name: string | null | undefined,
     public profilePicturePath: string,
     public bio: string | null | undefined,
