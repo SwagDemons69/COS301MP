@@ -21,6 +21,11 @@ export class NotificationsPage {
 
     //populate notifcations array
   }
+
+  refreshPage() {
+    window.location.reload();
+  }
+  
 }
 
 // {
