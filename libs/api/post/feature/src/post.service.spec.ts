@@ -1,9 +1,10 @@
 import { Test } from '@nestjs/testing';
 import { PostService } from './post.service';
-import { AddPhotoRequest } from '../../util/src/requests';
+import { AddPhotoRequest, CreatePostRequest } from '../../util/src/requests';
 import { CommandBus } from '@nestjs/cqrs';
-import { AddPhotoResponse } from '../../util/src/responses';
-import { AddPhotoCommand } from '../../util/src/commands';
+import { AddPhotoResponse, CreatePostResponse } from '../../util/src/responses';
+import { AddPhotoCommand, CreatePostCommand } from '../../util/src/commands';
+import { post } from '@mp/api/home/util';
 
 describe('Post feature', () => {
     let postFeature: PostService;
@@ -41,5 +42,31 @@ describe('Post feature', () => {
         });
     });
 
+    describe('createpost', () => {
+        it('should create a post by calling commandBus.execute with CreatePostCommand', async () => {
+            const post: post = {
+                post_id: '125252',
+                user_id: '253243',
+                content: 'i\'m not a test post, wdym?',
+                caption: 'nothing to see here',
+                likes: ['23523','64334'],
+                timeStamp: 1624529388,
+                shares: 4,
+                kronos: 234,
+                comments: ['slayy','sureee'],
+                categories: ['fashion','future'],
+                taggedUsers: ['124145','676346'],
+            };
+            const request: CreatePostRequest = {post};
+            const status = 'successful';
+            const response: CreatePostResponse = {status};
+            jest.spyOn(commandBus, 'execute').mockResolvedValue(response);
+
+            const result = await postFeature.CreatePost(request);
+
+            expect(commandBus.execute).toHaveBeenCalledWith(new CreatePostCommand(request));
+            expect(result).toEqual(response);
+        });
+    })
     
 });
