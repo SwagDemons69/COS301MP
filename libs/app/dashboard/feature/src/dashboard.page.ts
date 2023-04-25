@@ -1,10 +1,13 @@
-import { Component, Renderer2 } from '@angular/core';
+import { Component, Renderer2, OnInit } from '@angular/core';
 import { IProfile } from '@mp/api/profiles/util';
 import { ProfileState } from '@mp/app/profile/data-access';
 import { ModalController } from '@ionic/angular';
 import { ProfileOtherComponent } from '@mp/app/profile-other/feature';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
+import { SearchRequest, SearchResponse} from '@mp/api/search/util';
+import { SearchApi } from '@mp/app/dashboard/data-access';
+import { User, Post} from '@mp/api/search/util';
 import { BlipComponent } from '@mp/app/blip/feature';
 
 @Component({
@@ -18,7 +21,8 @@ export class DashboardPage {
 
   constructor (
     private renderer: Renderer2,
-    private modalController: ModalController,
+    private readonly api : SearchApi,
+    private modalController: ModalController
   ) {}
 
   // A bunch of dummy recommended posts
@@ -42,17 +46,15 @@ export class DashboardPage {
     { title: "I'm a 20 year old virgin", desc: "I'm a 20 year old virgin", img: "https://picsum.photos/id/24/300/300" }, // Copilot generated this one lmao
   ]
 
-  searchResults = [
-    { title: "Touching grass for the first time", desc: "Deleted my reddit account to try out this new Twenty4 thing", img: "https://picsum.photos/id/18/300/300" },
-    { title: "Wow look at this cool tree I found", desc: "fren.", img: "https://picsum.photos/id/19/300/300" },
-    { title: "My desk setup! Much wow very neat :)", desc: "Just kidding, this is a stock photo I stole. Please give me time immabouta die :'(", img: "https://picsum.photos/id/20/300/300" },
-    { title: "Selling my shoes as an NFT", desc: "Originally I wanted to sell the actual shoes, but then I realized I like them too much so instead I'll just sell this picture of them which is a very nice picture if I do say so myself. $400", img: "https://picsum.photos/id/21/300/300" },
-    { title: "A girl asked what my favorite position was", desc: "I told her, 'CEO'", img: "https://picsum.photos/id/22/300/300" },
-    { title: "I ONLY KNOW HOW TO USE CHOPSTICKS", desc: "PLEASE HELP I NEED TO USE ONE OF THESE OR IM GONNA STARVE TO DEATH", img: "https://picsum.photos/id/23/300/300" },
-    { title: "I'm a 20 year old virgin", desc: "I'm a 20 year old virgin", img: "https://picsum.photos/id/24/300/300" }, // Copilot generated this one lmao
-  ]
+
+  //Search required variables
+  searchResultsPosts: Post[] = []
+
+  searchResultsUsers: User[] = []
 
   isSearchbarVisible = false;
+  userToggle = true;
+
   // deathTime = 3132079200
   deathTime = Date.now() / 1000 + 10;
   kronos = ""
@@ -135,6 +137,41 @@ export class DashboardPage {
       event.target.complete();
       event.target.disabled = true;
     }, 2000);
+  }
+
+  async search(event: any){
+    this.searchResultsUsers = []; // we should rather keep a state, Tumi will do this. (but this should be fine... for now)
+    this.searchResultsPosts = []; //added this for you - Rob ;)
+    var query = event.detail.value;
+    const request : SearchRequest = {query : query};
+    const response: SearchResponse = await this.api.search(request);
+    for(let i = 0; i < response.profiles.length; i++){
+      this.searchResultsUsers.push(response.profiles[i]);
+    }
+
+    for(let i = 0; i < response.posts.length; i++){
+      this.searchResultsPosts.push(response.posts[i]);
+    }
+  }
+
+  toPost(username : any, postId : any){
+    console.log(postId + " postsed by " + username);
+  }
+
+  toUser(user_id : any){
+    console.log(user_id);
+  }
+
+  toggleToUsers(){
+    if(!this.userToggle){
+      this.userToggle = !this.userToggle;
+    }
+  }
+
+  toggleToPosts(){
+    if(this.userToggle){
+      this.userToggle = !this.userToggle;
+    }
   }
 
   // See [https://stackblitz.com/edit/ionic6-angular13-wnmgmu?file=src/app/app.component.ts] for reference

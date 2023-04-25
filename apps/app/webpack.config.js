@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 
 function getClientEnvironment(configuration) {
   // Grab NODE_ENV and NX_* environment variables and prepare them to be
@@ -28,7 +29,17 @@ function getClientEnvironment(configuration) {
 
 module.exports = (config, options, context) => {
   config.plugins.push(
-    new webpack.DefinePlugin(getClientEnvironment(context.configuration))
+    new webpack.DefinePlugin(getClientEnvironment(context.configuration)),
+    new NodePolyfillPlugin()
   );
+  config.resolve = {
+    ...config.resolve,
+    fallback: {
+      fs: false,
+      net: false,
+      tls: false,
+      child_process: false,
+    },
+  };
   return config;
 };

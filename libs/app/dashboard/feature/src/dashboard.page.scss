@@ -74,8 +74,32 @@ ion-avatar.avatar {
     box-shadow: 0px 0px 4px 0px #00000040;
 }
 
-/* //========== SECTIONS ==========// */
+/* //========== SEARCH BAR ==========// */
+.searchResults{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
 
+.SearchTypeButton{
+    --background: clear;
+    --width: 100%;
+    --color: white;
+}
+
+.SearchTypeButton:hover{
+    background: grey;
+}
+
+ion-thumbnail{
+    --size: 50%;
+}
+
+#goToProfile{
+    --background: #FF00CC;
+    --color: white;
+}
+/* //========== SECTIONS ==========// */
 .sectionTitle {
     font-family: 'Roboto';
     color: #f0f0f0;

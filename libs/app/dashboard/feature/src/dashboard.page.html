@@ -17,7 +17,7 @@
       </ion-button>
     </ion-buttons>
 
-  <ion-searchbar placeholder="Search" *ngIf="isSearchbarVisible"></ion-searchbar>
+  <ion-searchbar (ionChange)="search($event)" showCancelButton search-icon="search" placeholder="Search" *ngIf="isSearchbarVisible"></ion-searchbar>
 
   </ion-toolbar>
 </ion-header>
@@ -160,19 +160,50 @@
 </div>
 
 <div *ngIf="isSearchbarVisible" class="searchResults">
-  <ion-list>
-  <div class="searchResult" *ngFor="let post of searchResults">
-    <ion-item lines="none">
-      <ion-thumbnail slot="start">
-        <img src="{{ post.img }}" alt="{{ post.title }}">
-      </ion-thumbnail>
-      <ion-label>
-        <h2>{{ post.title }}</h2>
-        <p>{{ post.desc }}</p>
-      </ion-label>
-    </ion-item>
-    <hr />
-  </div>
-  </ion-list>
+  <ion-row class="searchType">
+    <ion-col>
+      <ion-button expand="block" color="grey" class="SearchTypeButton" id="SearchUserButton" (click) = "toggleToUsers()">
+        Users
+      </ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button expand="block" class="SearchTypeButton" id="SearchPostButton" (click) = "toggleToPosts()">
+        Posts
+      </ion-button>
+    </ion-col>
+  </ion-row>
+  
+  <ng-template [ngIf]="userToggle" [ngIfElse]="posts">
+    <ion-list class="searchResultsType">
+      <ion-item (click)="toUser(user.profileId)" *ngFor="let user of searchResultsUsers">
+        <ion-avatar class="Profile-Pic">
+          <img src="" alt="">
+        </ion-avatar>
+        &nbsp;
+        &nbsp;
+        <ion-label>
+          <h2>{{ user.name }}</h2>
+          <p>{{ user.email }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ng-template>
+  
+  <ng-template #posts>
+    <ion-list class="searchResultsType">
+      <ion-item (click)="toPost(post.user_id, post.postId)" *ngFor="let post of searchResultsPosts">
+        <ion-label>
+          <ion-thumbnail style="float: right" slot="start">
+            <img src="{{ post.content }}" alt="Img">
+          </ion-thumbnail>
+          <ion-label>
+            <h2>{{ post.caption }}</h2>
+            <p>Posted by: {{ post.username }}</p>
+          </ion-label>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ng-template>
+  
 </div>
 </ion-content>

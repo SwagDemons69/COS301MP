@@ -5,6 +5,9 @@ import { ProfileModule } from '@mp/app/profile/ui';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { DashboardPage } from './dashboard.page';
 import { DashboardRouting } from './dashboard.routing';
+import { SearchApi } from '@mp/app/dashboard/data-access';
+
+
 
 @NgModule({
   imports: [
@@ -14,6 +17,7 @@ import { DashboardRouting } from './dashboard.routing';
     ProfileModule,
     NgxSkeletonLoaderModule,
   ],
+  providers: [SearchApi],
   declarations: [DashboardPage],
 })
 export class DashboardModule {}
