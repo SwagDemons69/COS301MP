@@ -41,7 +41,7 @@ const routes: Routes = [
       {
         path: 'search',
         loadChildren: () =>
-          import('@mp/app/search-modal/feature').then((m) => m.searchmodalModule)
+          import('@mp/app/search-modal/feature').then((m) => m.SearchModalModule)
       },
       {
         path: '',

@@ -52,26 +52,38 @@ ion-avatar {
   font-size: 0.8em;
 }
 
-.follow-btn {
-  background: linear-gradient(218.8deg, rgba(255, 255, 255, 0) -34.64%, rgba(255, 0, 204, 0.86) 22.91%, rgba(255, 0, 204, 0) 109.55%);
-  color: #b3a6a6;
-  // margin-right: 2%;
-  border-radius: 6px;
-  font-size: 14px;
-  cursor: pointer;
-  padding: 4px 6px;
-
+.photos{
+  background-color: black  !important;
+  width: 100%;
+  box-shadow:inset !important;
+  height : 300px;
 }
 
-.message-btn {
-  background: linear-gradient(218.8deg, rgba(255, 255, 255, 0.86) -34.64%, rgba(255, 0, 204, 0.86) 22.91%, rgba(255, 0, 204, 0) 109.55%);
-  color: #bfbdbd;
-  padding: 4px 6px;
-  border-radius: 6px;
-  // margin-left: 2%;
-  font-size: 14px;
-  cursor: pointer;
-  size: 100%;
-  
+.ion-col{
+  background-color: white;
+  border: solid 1px #fff;
+  color: #fff;
+  text-align: center;
 }
 
+.editProfileForm {
+  margin-top: 2em;
+  padding: 0px 5%;
+  color: #606060;
+  font-size: 0.8em;
+}
+
+.editProfileForm ion-button {
+  color: black;
+  margin: auto;
+  margin-top: 3em;
+  max-width: 200px;
+}
+
+.profilePic{
+  text-align: end;
+}
+
+input[type='file']{
+  color:rgba(0,0,0,0)
+}

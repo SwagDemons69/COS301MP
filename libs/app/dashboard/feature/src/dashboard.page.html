@@ -118,10 +118,11 @@
   </ion-infinite-scroll> -->
 
   <div class="trendingPost" *ngFor="let item of trending">
-    <ion-card class="trendingItem" (click)="openBlip(item)">
+    <!-- (click)="openBlip(item)"> -->
+    <ion-card class="trendingItem">
 
       <div class="image">
-        <ion-img [src]="item.img"></ion-img>
+        <ion-img [src]="item.content"></ion-img>
       </div>
 
       <ion-label stacked>
@@ -130,7 +131,7 @@
 
             <!-- Title + Description -->
             <ion-col class="subtext" size="9">
-              <h2>{{item.title}}</h2>
+              <h2>{{item.caption}}</h2>
               <br/>
               <h4>{{item.desc}}</h4>
             </ion-col>

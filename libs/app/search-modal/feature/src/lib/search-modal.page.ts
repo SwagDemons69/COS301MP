@@ -2,86 +2,55 @@
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { NavController } from '@ionic/angular';
+import { SearchModalApi } from '@mp/app/search-modal/data-access';
+import { ProfileState } from '@mp/app/profile/data-access';
+import { user_profile } from '@mp/api/profiles/util';
+import { Observable } from 'rxjs';
+import { Select } from '@ngxs/store';
+import { SearchProfileModal } from '@mp/api/search-modal/util';
+import { Store } from '@ngxs/store';
+import { SetChatMessages, SetRecipient, SetUsername } from '@mp/app/chat/util';
+export interface Ordered{
+  order_id : string;
+  profile : SearchProfileModal;
+}
 
 @Component({
   selector: 'search-modal-page',
   templateUrl: './search-modal.page.html',
   styleUrls: ['./search-modal.page.scss']
 })
-export class searchmodalPage {
+
+
+
+  export class SearchModalPage {
+      @Select(ProfileState.profile) profile$!: Observable<user_profile | null>;
+      users: Ordered[] = [];
+      user : user_profile | undefined
     
-    constructor(private navCtrl: NavController, private modalController: ModalController) {
-        this.initializeUsers();
-      }
-      users: any[] = [];
-    
-      initializeUsers() {
-        this.users = [
-          {
-            "id": 1,
-            "name": "Mia Graham",
-            "username": "Bret",
-            "isFriend": false,
-            "avatar": "https://cdn.iconscout.com/icon/premium/png-512-thumb/avatar-95-116461.png?f=avif&w=256" 
-          },
-          {
-            "id": 2,
-            "name": "Ethan Howell",
-            "username": "Antonette",
-            "isFriend": true,
-            "avatar": "https://cdn.iconscout.com/icon/premium/png-512-thumb/avatar-95-116461.png?f=avif&w=256"
-          },
-          {     
-            "id": 3,
-            "name": "Joy Bauch",
-            "username": "Samantha",
-            "isFriend": false,
-            "avatar": "https://cdn.iconscout.com/icon/premium/png-512-thumb/avatar-95-116461.png?f=avif&w=256"
-          },
-          {
-            "id": 4,
-            "name": "Patricia Lebsack",
-            "username": "Charlotte",
-            "isFriend": true,
-            "avatar": "https://cdn.iconscout.com/icon/premium/png-512-thumb/avatar-133-116499.png?f=avif&w=256"
-          },
-          {
-            "id": 5,
-            "name": "Avery Dietrich",
-            "username": "Kamren",
-            "isFriend": false,
-            "avatar": "https://cdn.iconscout.com/icon/premium/png-512-thumb/avatar-133-116499.png?f=avif&w=256"
-          },
-          {
-            "id": 6,
-            "name": "Bari Schulist",
-            "username": "Jackson",
-            "isFriend": true,
-            "avatar": "https://cdn.iconscout.com/icon/premium/png-512-thumb/avatar-133-116499.png?f=avif&w=256"
-          },
-          {
-            "id": 7,
-            "name": "Emma Weissnat",
-            "username": "Emma",
-            "isFriend": true,
-            "avatar": "https://cdn.iconscout.com/icon/premium/png-512-thumb/avatar-136-116502.png?f=avif&w=256"
-          },
-          {
-            "id": 8,
-            "name": "Isabella Runolfsdottir V",
-            "username": "Isabella",
-            "isFriend": false,
-            "avatar": "https://cdn.iconscout.com/icon/premium/png-512-thumb/avatar-136-116502.png?f=avif&w=256"
-          },
-          {
-            "id": 9,
-            "name": "Olivia Huels",
-            "username": "Olivia",
-            "isFriend": true,
-            "avatar": "https://cdn.iconscout.com/icon/premium/png-512-thumb/avatar-136-116502.png?f=avif&w=256"
-          }  
-        ];}
-    
+  constructor(private navCtrl: NavController,
+     private modalController: ModalController,
+      private readonly api: SearchModalApi,
+      private readonly store: Store )
+    {
+      this.profile$.forEach((user) => {
+        if(user){ this.user = user;
+          this.initializeUsers(); }
+      });
+        
+        
+    }
+    async initializeUsers() {
+        if(typeof this.user != "undefined"){
+            const response = await this.api.retrieveProfiles({ user: this.user.user_id});
+            for(let i = 0; i < response.data.profiles.length; i++){
+              this.users.push({order_id: i.toString(), profile: response.data.profiles[i]});
+            }          
+        } 
+        else{
+          alert("undefined")
+        }
+    }
         getUsers(event: Event) {
           // Reset users back to all of the users
           this.initializeUsers();
@@ -93,13 +62,25 @@ export class searchmodalPage {
           // if the value is an empty string don't filter the users
           if (value && value.trim() !== '') {
             this.users = this.users.filter((user) => {
-              return (user.username.toLowerCase().indexOf(value.toLowerCase()) > -1);
+              return (user.profile.username.toLowerCase().indexOf(value.toLowerCase()) > -1);
             })
           }
         }
     
         goToChats(Selecteduser: string) {
           console.log(Selecteduser);
+          const profile = this.users[parseInt(Selecteduser)];
+          console.log(profile.profile.user_id);
+          //Basic checking for now
+          if(typeof this.user == "undefined"){
+            alert("Search-modal.page.ts - user is undefined")
+          }
+          else {
+              console.log("DISPATCH SETTING ACTION")
+              //this.store.dispatch(new SetUsername(profile.profile.username));
+              this.store.dispatch(new SetRecipient({user_id: profile.profile.user_id, username: profile.profile.username, pictureUrl: profile.profile.pictureUrl}));
+              this.store.dispatch(new SetChatMessages(this.user?.user_id, profile.profile.user_id));
+          }
           //move to the chat page and dismiss the modal using the dismiss method
           this.navCtrl.navigateForward('/home/chat');
          

@@ -3,17 +3,21 @@
 
     <ion-title class="ion-align-items-center">
       Profile
-      <ng-container *ngIf="(profile$ | async) as profile;">
-        <ion-icon
-          *ngIf="profile.status == 'Incomplete'"
-          color="danger"
-          name="alert-circle-outline"></ion-icon>
-        <ion-icon
-          *ngIf="profile.status == 'Complete'"
-          color="success"
-          name="checkmark-circle-outline"></ion-icon>
-      </ng-container>
+      <!-- <ng-container *ngIf="(profile$ | async) as profile;"> -->
+      <!-- </ng-container> -->
     </ion-title>
+
+    <ion-buttons slot="end">
+
+      <ion-button *ngIf="!isEditingProfile" (click)="isEditingProfile = true">
+        <ion-icon name="pencil" style="font-size: 1.5rem; color: white;"></ion-icon>
+      </ion-button>
+
+      <ion-button *ngIf="isEditingProfile" (click)="isEditingProfile = false">
+        <ion-icon name="close" style="font-size: 1.5rem; color: white;"></ion-icon>
+      </ion-button>
+
+    </ion-buttons>
 
   </ion-toolbar>
 </ion-header>
@@ -21,35 +25,44 @@
 
 <ion-content [fullscreen]="true">
 
-  <!-- A basic profile page with the users avatar at the top center, followed by their username, as well as a three-column table showing the no. of people they're following, number of posts, and number of followers -->
+<div *ngIf="!isEditingProfile" class="profile">
   <ion-grid>
     <ion-row>
 
-        <ion-card class="ion-text-center">
-          <ion-card-header>
+      <ion-card class="ion-text-center">
+        <ion-card-header>
 
+          <ng-container *ngIf="(profile$ | async) as profile; else noProfile">
             <ion-card-subtitle class="kronos">
-                06:09:42
+              <ion-input [value]="profile.timeOfExpiry"></ion-input>
             </ion-card-subtitle>
+          </ng-container>
 
-            <ng-container *ngIf="(profile$ | async) as profile; else noProfile">
-              <ion-avatar>
-                <img alt="Avatar" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-              </ion-avatar>
-            </ng-container>
-
+          <ng-container *ngIf="(profile$ | async) as profile; else noProfile">
+            <ion-avatar>
+              <ion-img alt="Avatar" [src]="profileImage" ></ion-img>
+            </ion-avatar>
+          </ng-container>
+          <!-- (profile.profilePicturePath)
+          https://ionicframework.com/docs/img/demos/avatar.svg -->
+          <ng-container *ngIf="(profile$ | async) as profile; else noProfile">
             <ion-card-subtitle class="username">
-              Some schmuck
+              <ion-input [value]="profile.username"> </ion-input>
             </ion-card-subtitle>
+          </ng-container>
 
-          </ion-card-header>
+        </ion-card-header>
 
+
+        <ng-container *ngIf="(profile$ | async) as profile; else noProfile">
           <ion-card-content>
             <ion-grid class="stats">
               <ion-row class="statsNumber">
-                <ion-col>666</ion-col>
-                <ion-col>69</ion-col>
-                <ion-col>420</ion-col>
+
+                <ion-col><ion-input [value]="(profile.following?.length)"></ion-input></ion-col>
+                <ion-col><ion-input [value]="(posts.length)"></ion-input></ion-col>
+                <ion-col><ion-input [value]="(profile.followers?.length)"></ion-input></ion-col>
+
               </ion-row>
 
               <ion-row class="statsLabel">
@@ -59,77 +72,134 @@
               </ion-row>
             </ion-grid>
 
-            <ion-card-subtitle class="bio">
-              Just your local demon posing as a time lord.
-              Nothing to see here, move along.
-              #Swaggity #SwagDemon69
-            </ion-card-subtitle>
-        
+            <ion-card-subtitle class="bio"><ion-input [value]="(profile.bio)"></ion-input></ion-card-subtitle>
 
           </ion-card-content>
-        </ion-card>
+        </ng-container>
+      </ion-card>
 
+    </ion-row>
+    <ion-row>
+      <ng-container *ngIf="(profile$ | async) as profile; else noProfile">
+      <ion-card class="photos">
+        <ion-card-content class="ion-text-center">
+          <ion-content [fullscreen]="true" [scrollEvents]="true">
+              <ion-grid [fixed]="true">
+                <ion-row class="ion-justify-content-center" *ngFor="let i of postIndex">
+                    <ion-col class="ion-col">
+                      <ion-img [src]="(posts[i].content)" (click)="openBlip(posts[i],profile.username)" alt=""></ion-img>
+                    </ion-col>
+                </ion-row>
+              </ion-grid>
+          </ion-content>
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
     </ion-row>
   </ion-grid>
 
-  <ng-container *ngIf="(profile$ | async) as profile; else noProfile">
-    <ms-profile-account-details-component></ms-profile-account-details-component>
+  <!-- http://127.0.0.1:5006/twenty4-f9f8e.appspot.com/photos%2Fblue-arrow-pointing-up.png -->
+
+  <!-- <ng-container *ngIf="(profile$ | async) as profile; else noProfile"> -->
+    <!-- <ms-profile-account-details-component></ms-profile-account-details-component>
     <ms-profile-personal-details-component></ms-profile-personal-details-component>
     <ms-profile-contact-details-component></ms-profile-contact-details-component>
     <ms-profile-address-details-component></ms-profile-address-details-component>
-    <ms-profile-occupation-details-component></ms-profile-occupation-details-component>
-  </ng-container>
+    <ms-profile-occupation-details-component></ms-profile-occupation-details-component> -->
+  <!-- </ng-container> -->
 
-  <ng-template #noProfile>
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-          <ngx-skeleton-loader
-            count="5"
-            [theme]="{height: '150px'}"
-            appearance="line"></ngx-skeleton-loader>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ng-template>
+ 
 
-  <ion-header collapse="condense">
+  <!-- <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large" class="ion-align-items-center">
         Profile
         <ng-container *ngIf="(profile$ | async) as profile;">
-          <ion-icon
-            *ngIf="profile.status == 'Incomplete'"
-            color="danger"
-            name="alert-circle-outline"></ion-icon>
-          <ion-icon
-            *ngIf="profile.status == 'Complete'"
-            color="success"
-            name="checkmark-circle-outline"></ion-icon>
         </ng-container>
       </ion-title>
     </ion-toolbar>
-  </ion-header>
+  </ion-header> -->
 
-  <ng-container *ngIf="(profile$ | async) as profile; else noProfile">
-    <ms-profile-account-details-component></ms-profile-account-details-component>
+  <!-- <ng-container *ngIf="(profile$ | async) as profile; else noProfile"> -->
+    <!-- <ms-profile-account-details-component></ms-profile-account-details-component>
     <ms-profile-personal-details-component></ms-profile-personal-details-component>
     <ms-profile-contact-details-component></ms-profile-contact-details-component>
     <ms-profile-address-details-component></ms-profile-address-details-component>
-    <ms-profile-occupation-details-component></ms-profile-occupation-details-component>
-  </ng-container>
+    <ms-profile-occupation-details-component></ms-profile-occupation-details-component> -->
+  <!-- </ng-container> -->
 
-  <ng-template #noProfile>
+  <!-- <ng-template #noProfile>
     <ion-grid>
       <ion-row>
         <ion-col>
-          <ngx-skeleton-loader
-            count="5"
-            [theme]="{height: '150px'}"
-            appearance="line"></ngx-skeleton-loader>
+          <ngx-skeleton-loader count="5" [theme]="{height: '150px'}" appearance="line"></ngx-skeleton-loader>
         </ion-col>
       </ion-row>
     </ion-grid>
-  </ng-template>
+  </ng-template> -->
+</div>
+<ng-container *ngIf="(form$ | async) as form;">
+<div *ngIf="isEditingProfile">
+    <form [formGroup]="userForm" ngxsForm="form" (ngSubmit)="updateProfile()" class="editProfileForm">
+    <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input type="text" formControlName="name" ></ion-input>
+      <!-- <ion-input [value]="(profile.email)"></ion-input> -->
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Username</ion-label>
+      <ion-input type="text" formControlName="username" ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Bio</ion-label>
+      <ion-input type="text" formControlName="bio" ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Province</ion-label>
+      <ion-input type="text" formControlName="province" ></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Not Public</ion-label>
+      <ion-checkbox slot="end" formControlName="notPublic"></ion-checkbox>
+    </ion-item>
+
+    <ion-item class="profilePic">
+      <!-- <ion-label position="floating">Profile Picture</ion-label> -->
+      <!-- <label for="file"></label> -->
+      <input type="file" id="file" formControlName="file" accept="image/* " (change)="onFileChange($event)" />
+    </ion-item>
+    <!-- style="display:none;" -->
+    <!-- (change)="onFileChange($event)"  -->
+
+    <!-- While storage is not set we use images from internet so we will use link instead of file based images -->
+    <!-- <ion-item>
+      <ion-label position="floating">Profile Picture</ion-label>
+      <ion-input slot="end" type="text" formControlName="profilePicturePath" ></ion-input>
+    </ion-item> -->
+
+    <ion-button type="submit" expand="block">Save</ion-button>
+  </form>
+</div>
+</ng-container>
+
+
+
+
+<!-- No profile -->
+<ng-template #noProfile>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ngx-skeleton-loader count="5" [theme]="{height: '150px'}" appearance="line"></ngx-skeleton-loader>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ng-template>
+
+
 
 </ion-content>

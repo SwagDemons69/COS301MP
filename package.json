@@ -26,7 +26,8 @@
     "shipit:prod": "yarn build:app:prod && yarn build:api:prod && yarn deploy:prod",
     "generate:pwa:assets:icons": "pwa-asset-generator apps/app/src/assets/logos/schadre-logo-only.png apps/app/src/assets/pwa --favicon --icon-only --padding \"20px\" --mstile --maskable --manifest apps/app/src/manifest.webmanifest",
     "generate:pwa:assets:splashes": "pwa-asset-generator apps/app/src/assets/logos/schadre-logo-only.png apps/app/src/assets/pwa --favicon --splash-only --padding \"150px\" --mstile --maskable --manifest apps/app/src/manifest.webmanifest",
-    "host:app": "http-server dist/apps/app"
+    "host:app": "http-server dist/apps/app",
+    "start:everything": "$TERMINAL yarn start:api:dev & $TERMINAL yarn start:app:dev & $TERMINAL yarn start:emulators & "
   },
   "private": true,
   "dependencies": {
@@ -42,6 +43,7 @@
     "@angular/router": "~15.1.0",
     "@angular/service-worker": "~15.1.0",
     "@capacitor/core": "^3.2.5",
+    "@faker-js/faker": "^7.6.0",
     "@google-cloud/firestore": "^6.5.0",
     "@ionic/angular": "^6.1.9",
     "@nestjs/common": "^9.0.0",
@@ -56,6 +58,7 @@
     "@ngxs/router-plugin": "^3.7.6",
     "@ngxs/storage-plugin": "^3.7.6",
     "@ngxs/store": "^3.7.6",
+    "@nrwl/cli": "^15.9.2",
     "@nxtend/capacitor": "^13.0.0",
     "@nxtend/ionic-angular": "13.1.0",
     "axios": "^1.0.0",

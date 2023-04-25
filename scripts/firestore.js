@@ -3,6 +3,7 @@
 //================================================ 
 
 const admin = require('firebase-admin');
+const { resolve } = require('path');
 
 //create connection to firebase app
 admin.initializeApp({ projectId: 'twenty4-f9f8e' });
@@ -23,6 +24,7 @@ db.settings({
 
 const generateProfiles = async () => {
         //try {
+        //try {
           // Create sample data
           const profiles = [
               { id : '4', Name: 'Alice4', Surname: 'A4', Age: 72 },
@@ -34,6 +36,8 @@ const generateProfiles = async () => {
           for (const profile of profiles) {
             await db.collection('profiles').doc(profile.id).set(profile);
           }
+        //} 
+        // finally {
         //} 
         // finally {
         

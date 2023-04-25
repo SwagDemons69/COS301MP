@@ -1,18 +1,22 @@
-<ion-header [translucent]="true">
-</ion-header>
+<ion-header></ion-header>
 <ion-content [fullscreen]="true">
-    <label for="file-upload">
+<!------------------------------------------------------>
+    <label for="file">
         <div class="top-section">              
             <div id="addMediaIcon">
                 <ion-icon name="camera"></ion-icon>
                 <ion-title>Add Media</ion-title>
             </div>
+
+            <div [hidden]="style">         
+                <ion-img [src]="chosenPostBase64Data" alt="" id="preview" #image></ion-img>
+            </div>     
         </div>
     </label>
         
     <div class="bottom-section">
-        <form>
-            <input id="file-upload" type="file" accept="image/*" style="display:none;">
+        <form [formGroup]="postForm" (ngSubmit)="uploadPost()">
+            <input id="file" type="file" formControlName="file" accept="image/*, video/*" required (change)="onFileChange($event)" style="display:none;">
             
             <p>Caption:</p>
             <ion-item>  

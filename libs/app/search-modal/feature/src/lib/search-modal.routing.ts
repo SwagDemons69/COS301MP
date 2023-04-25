@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { searchmodalPage } from './search-modal.page';
+import { SearchModalPage } from './search-modal.page';
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: searchmodalPage
+    component: SearchModalPage
   },
 ];
 
@@ -14,4 +14,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class searchmodalRouting {}
+export class SearchModalRouting {}

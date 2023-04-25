@@ -8,6 +8,7 @@ export class AuthService {
   constructor(private commandBus: CommandBus) {}
 
   onAuthCreate(user: UserRecord) {
+    console.log("AUTH CREATE IN SERVICE")
     const request: ICreateAuthRequest = { userRecord: user };
     return this.commandBus.execute(new CreateAuthCommand(request));
   }
