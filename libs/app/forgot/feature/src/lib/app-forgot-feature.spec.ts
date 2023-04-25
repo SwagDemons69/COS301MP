@@ -1,4 +1,4 @@
-import { appForgot } from './forgot-feature';
+import { appForgot } from './app-forgot-feature';
 
 describe('appForgot', () => {
   it('should work', () => {
