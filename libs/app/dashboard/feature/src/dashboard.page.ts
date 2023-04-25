@@ -142,7 +142,7 @@ export class DashboardPage {
     const modal = await this.modalController.create({
       component: BlipComponent,
       componentProps: {
-        data: data
+        dat: data //TODO: Change `dat` back to `data` once properly integrated
       }
     });
 

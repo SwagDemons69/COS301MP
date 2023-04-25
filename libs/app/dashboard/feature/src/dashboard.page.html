@@ -118,7 +118,7 @@
   </ion-infinite-scroll> -->
 
   <div class="trendingPost" *ngFor="let item of trending">
-    <ion-card class="trendingItem" (click)="openBlip({})">
+    <ion-card class="trendingItem" (click)="openBlip(item)">
 
       <div class="image">
         <ion-img [src]="item.img"></ion-img>
