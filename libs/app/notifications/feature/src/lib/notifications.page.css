@@ -48,3 +48,10 @@
     font-family: "futura-pt", sans-serif;
   }
   
+  ion-fab-button {
+    --ion-color-base: #1f1f1f !important;
+  }
+  
+  ion-fab-button ion-icon{
+    color: rgb(0, 0, 0);
+  }

@@ -1,26 +1,31 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-import { Component } from '@angular/core';
-// import { NavController } from '@ionic/angular/providers/nav-controller';
+import { Component, OnInit } from '@angular/core';
+import { NotificationRepository } from '@mp/api/notifications/data-access';
+import { notification } from '@mp/api/notifications/util';
 
 @Component({
   selector: 'notifications-page',
   templateUrl: './notifications.page.html',
   styleUrls: ['./notifications.page.css']
 })
-export class NotificationsPage {
-  notifications = [
-    {text : 'test1'},
-    {text : 'test2'},
-    {text : 'test3'},
-    {text : 'test4'},
-  ];
+export class NotificationsPage implements OnInit {
+  notifications : notification[] = [];
 
+  constructor(private notificationRepository: NotificationRepository) {}
 
-  async getNotifcations(){
-    //send request to get notifications
-
-    //populate notifcations array
+  ngOnInit(): void {
+    this.getNotifications('user_id_here');
   }
+
+  async getNotifications(userId : string) {
+    const response = await this.notificationRepository.getNotifications(userId);
+    this.notifications = response.notifications;
+  }
+<<<<<<< HEAD
+
+  refreshPage() {
+    window.location.reload();
+  }
+  
 }
 
 // {
@@ -31,3 +36,6 @@ export class NotificationsPage {
 //     notification_id: '1234',
 //     follower_id: '1234',
 // }
+=======
+}
+>>>>>>> 077f8e7 (Added Notification repository logic)
