@@ -4,16 +4,16 @@
 export class NotificationService {
   constructor(private readonly firestoreService: FirestoreService) {}
 
-  async createNotification(userId, displayName, timeStamp): Promise<Notification> {
+  async createNotification(userId, displayName, type): Promise<Notification> {
     const notification = new Notification();
     notification.recipientId = userId;
     notification.text = displayName;
-    notification.type = timeStamp;
+    notification.type = type;
     notification.createdAt = new Date().toISOString();
-    const docRef = await this.firestoreService
+  /*  const docRef = await this.firestoreService
       .collection('notifications')
       .add(Object.assign({}, notification));
-    notification.id = docRef.id;
+    notification.id = docRef.id;*/
     return notification;
   }
 
