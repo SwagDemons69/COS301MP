@@ -1,6 +1,6 @@
 /* eslint-disable */
 export default {
-  displayName: 'app-dashboard-data-access',
+  displayName: 'app-profile-other-data-access',
   preset: '../../../../jest.preset.js',
   globals: {
     'ts-jest': {
@@ -11,5 +11,5 @@ export default {
     '^.+\\.[tj]s$': 'ts-jest',
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
-  coverageDirectory: '../../../../coverage/libs/app/dashboard/data-access',
+  coverageDirectory: '../../../../coverage/libs/app/profile-other/data-access',
 };
