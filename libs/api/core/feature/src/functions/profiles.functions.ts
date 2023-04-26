@@ -74,7 +74,6 @@ export const EditProfile = functions.https.onCall(
 
 export const addFollower = functions.https.onCall(
   async (request : addFollowerRequest): Promise<addFollowerResponse> => {
-    console.log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
     const app = await NestFactory.createApplicationContext(CoreModule);
     const service = app.get(ProfilesService);
     return service.addFollower(request);
