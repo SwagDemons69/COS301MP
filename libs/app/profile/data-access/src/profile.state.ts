@@ -25,7 +25,8 @@ import produce from 'immer';
 import { post } from '@mp/api/home/util';
 import { doc } from '@firebase/firestore';
 import { user } from 'firebase-functions/v1/auth';
-
+import { toastController } from '@ionic/core';
+import { ToastController } from '@ionic/angular';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ProfileStateModel {
@@ -101,6 +102,7 @@ export class ProfileState {
   constructor(
     private readonly profileApi: ProfilesApi,
     private readonly store: Store,
+    private readonly toastCtrlr : ToastController
   ) { }
 
 
@@ -234,7 +236,16 @@ async EditProfile(ctx: StateContext<ProfileStateModel>){
       const responseRef = await this.profileApi.EditProfile(request);
       const response = responseRef.data;
       //Do we want to update profile state
-      return ctx.dispatch(new SetProfile(response.profile));
+      ctx.dispatch(new SetProfile(response.profile));
+
+      const toast = await this.toastCtrlr.create({
+        message: "Profile Updated",
+        color: 'success',
+        duration: 1500,
+        position: 'top',
+      });
+      await toast.present();
+      return;
 
   }
   catch (error) {
