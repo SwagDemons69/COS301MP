@@ -78,6 +78,7 @@ async function seedProfiles(total){
     return profiles;
 }
 
+
 function generateProfiles(total){
     console.log('\x1b[37m%s\x1b[0m', 'Generating Profiles. . . .');
     const profiles = [];
@@ -135,6 +136,12 @@ async function seedPosts(profiles, total){
     return posts;
 }
 
+function generateRandomTimestamp() {
+    const twoWeeksAgo = Date.now() - 1209600000; // 2 weeks in milliseconds trust me bro
+    const randomTimestamp = Math.floor(Math.random() * (Date.now() - twoWeeksAgo) + twoWeeksAgo);
+    return new Timestamp(Math.floor(randomTimestamp / 1000), 0);
+  }
+
 function generatePosts(userIds, total){
     console.log('\x1b[37m%s\x1b[0m', 'Generating Posts. . . .');
     const posts = [];
@@ -146,7 +153,7 @@ function generatePosts(userIds, total){
                 content : faker.image.image(640, 480, true),
                 caption : faker.lorem.words(3),
                 likes : [],
-                timeStamp : Timestamp.now(),
+                timeStamp : generateRandomTimestamp(),
                 shares : 0,
                 kronos : 0,
                 comments : [],
