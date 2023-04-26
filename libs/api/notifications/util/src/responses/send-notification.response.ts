@@ -1,3 +1,3 @@
-export interface SendNotificationReponse {
+export interface SendNotificationResponse {
     success: boolean;
 }

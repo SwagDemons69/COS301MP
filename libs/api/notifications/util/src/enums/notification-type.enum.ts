@@ -1,7 +1,7 @@
 export enum NotificationType {
     PostDislikedNotification = 'Post Disliked Notification',
     PostLikedNotification = 'Post Liked Notification',  // when click you go to the post
-    PostCommentedNotificatoin = 'Post Commented Notification', //go to the post and focus on the comment
+    PostCommentedNotification = 'Post Commented Notification', //go to the post and focus on the comment
     NewFollowerNotification = 'New Follower Notification', // go the profile of the follower
     NewDonationNotification = 'New Donation Notification', //just a message
     CommentLikedNotification = 'Comment Liked Notification', //go to the post and focus on the comment
