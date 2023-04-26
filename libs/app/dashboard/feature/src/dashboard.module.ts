@@ -5,7 +5,7 @@ import { ProfileModule } from '@mp/app/profile/ui';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { DashboardPage } from './dashboard.page';
 import { DashboardRouting } from './dashboard.routing';
-import { SearchApi } from '@mp/app/dashboard/data-access';
+import { DashboardModule as DashboardDataAccessModule } from '@mp/app/dashboard/data-access';
 
 
 @NgModule({
@@ -13,10 +13,10 @@ import { SearchApi } from '@mp/app/dashboard/data-access';
     CommonModule,
     IonicModule,
     DashboardRouting,
+    DashboardDataAccessModule,
     ProfileModule,
     NgxSkeletonLoaderModule,
   ],
-  providers: [SearchApi],
   declarations: [DashboardPage],
 })
 export class DashboardModule {}

@@ -38,15 +38,26 @@
 
             <ion-row class="ion-justify-content-center">
       
-              <ion-button class="connectButton">
-                <ion-icon name="person-add-outline"></ion-icon>
-              </ion-button>
+              <ng-template  [ngIf]="Status === 0">
+                <ion-button class="connectButton">
+                  <ion-icon name="person-outline"></ion-icon></ion-button>
+              </ng-template>
+
+              <ng-template #notFollowed [ngIf]="Status === 1">
+                <ion-button (click)="followUser()" class="connectButton">
+                  <ion-icon name="person-add-outline"></ion-icon></ion-button>
+              </ng-template>
+
+              <ng-template #Requested [ngIf]="Status === 2">
+                <ion-button class="connectButton">
+                  Requested
+                </ion-button>
+              </ng-template>
 
               <div class="rowSpacing"></div>
 
               <ion-button (click)="goToMessages()" class="connectButton">
-                <ion-icon name="chatbox-ellipses-outline"></ion-icon>
-              </ion-button>
+                <ion-icon name="chatbox-ellipses-outline"></ion-icon></ion-button>
 
             </ion-row>
 

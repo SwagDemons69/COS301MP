@@ -1,6 +1,7 @@
 import { user_profile } from '@mp/api/profiles/util';
 import { Injectable } from '@nestjs/common';
 import * as admin from 'firebase-admin';
+import { addFollowerRequest } from '@mp/api/profiles/util';
 
 @Injectable()
 export class ProfilesRepository {
@@ -50,6 +51,33 @@ export class ProfilesRepository {
       .collection('profiles')
       .doc(profile.user_id)
       .set(profile, { merge: true });
+  }
+
+  async addFollower(request : addFollowerRequest){
+    console.log("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+    const requesteeRef = admin.firestore().collection('profiles').doc(request.requestee.user_id); 
+    const requesteeProfile = await requesteeRef.get();
+
+    if(requesteeProfile.data()?.['notPublic']){
+      const followRequests = requesteeProfile.data()?.['followRequests'];
+      followRequests.push(request.requester.user_id);
+      
+      requesteeRef.update({followRequests: followRequests}).catch((error) => {
+        console.error('Error updating document:', error);
+      });
+
+      return {response : true};
+    }
+    else{
+      const followers = requesteeProfile.data()?.['followers'];
+      followers.push(request.requester.user_id);
+      
+      requesteeRef.update({followers: followers}).catch((error) => {
+        console.error('Error updating document:', error);
+      });
+
+      return {response : true};
+    }
   }
 
   // async checkForUser(profile_user_id : string){

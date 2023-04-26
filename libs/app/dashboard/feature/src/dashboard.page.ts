@@ -1,4 +1,4 @@
-import { Component, Renderer2, OnInit } from '@angular/core';
+import { Component, Renderer2 } from '@angular/core';
 import { user_profile } from '@mp/api/profiles/util';
 import { ProfileState } from '@mp/app/profile/data-access';
 import { ModalController } from '@ionic/angular';
@@ -161,7 +161,6 @@ export class DashboardPage {
 
   toUser(user : any){
     this.openProfile(user);
-    // console.log(user_id);
   }
 
   toggleToUsers(){
@@ -195,9 +194,7 @@ export class DashboardPage {
   async openProfile(profileData: any) {
     const modal = await this.modalController.create({
       component: ProfileOtherComponent,
-      componentProps: {
-        profile: profileData
-      }
+      componentProps: {profile: profileData}
     });
 
     return await modal.present();

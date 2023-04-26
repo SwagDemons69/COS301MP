@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { doc, docData, Firestore, snapshotEqual } from '@angular/fire/firestore';
 import { SearchRequest, SearchResponse} from '@mp/api/search/util';
-import { Functions, getFunctions, httpsCallable, HttpsCallableResult } from '@angular/fire/functions';
+import { Functions, httpsCallable } from '@angular/fire/functions';
 
 @Injectable()
 export class SearchApi {
