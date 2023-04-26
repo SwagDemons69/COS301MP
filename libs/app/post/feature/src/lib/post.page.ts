@@ -41,6 +41,7 @@ export class PostPage {
   //Dont think validators needed
   constructor(private readonly api : PostApi, private readonly toastCtrlr: ToastController)
   {
+    this.clearContent()
     this.blob = new Blob();
     this.profile$.forEach((user) => {this.user = user?.user_id;});
     this.chosenPost = new Blob();
@@ -73,6 +74,18 @@ export class PostPage {
   async uploadPost(){
     const path = await this.addToCloudStorage();
     this.addToFirestore(path);
+
+    this.clearContent();
+  }
+  
+  clearContent(){
+    this.blob = new Blob();
+    this.profile$.forEach((user) => {this.user = user?.user_id;});
+    this.chosenPost = new Blob();
+    this.chosenPostBase64Data = "";
+    this.desc = "";
+    this.title = "";
+    this.style = "hidden";
   }
   
   //Convert Image to Base64
