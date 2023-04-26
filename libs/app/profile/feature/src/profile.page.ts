@@ -15,6 +15,7 @@ import {
   setTimeout,
 } from 'timers/promises';
 import { NavController } from '@ionic/angular';
+import { KronosTimer } from '@mp/app/kronos-timer/kronos';
 
 @Component({
   selector: 'ms-profile-page',
@@ -30,6 +31,7 @@ export class ProfilePage {
   profileImage: string;
   user : user_profile
   posts : post[];
+  deathTime: number;
 
   constructor(
     private modalController: ModalController,
@@ -39,6 +41,7 @@ export class ProfilePage {
     private readonly navCtrl: NavController
   )
   {
+    this.deathTime = 0;
     
     this.userForm = this.formBuilder.group({
       notPublic: ['', Validators.required],
@@ -91,7 +94,15 @@ export class ProfilePage {
     this.posts = await this.setPosts();
     //Same functionality as python 'for i in range(len): push(i)'
     this.postIndex = [...Array(this.posts.length).keys()];
+    this.deathTime = (this.user) ? this.user.timeOfExpiry : 1234567;
   }
+
+  kronos = ""
+
+  kronosTimer = setInterval(() => {
+    const counter = this.deathTime - Date.now()/1000;
+    this.kronos = KronosTimer.displayKronos(counter);
+  }, 999)
   
   isEditingProfile = false;
   addedFile = false;

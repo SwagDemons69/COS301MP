@@ -8,6 +8,7 @@ import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 // import { SearchApi } from '@mp/app/dashboard/data-access';
 import { ProfileOtherComponent } from '@mp/app/profile-other/feature';
+import { KronosTimer } from '@mp/app/kronos-timer/kronos';
 
 @Component({
   selector: 'ms-dashboard-page',
@@ -18,11 +19,25 @@ import { ProfileOtherComponent } from '@mp/app/profile-other/feature';
 export class DashboardPage {
   @Select(ProfileState.profile) profile$!: Observable<user_profile | null>;
 
+  profile: user_profile | null
+  deathTime: number
   constructor (
     private renderer: Renderer2,
     private modalController: ModalController,
 
-  ) {}
+  ) 
+  {
+    this.profile = null;
+    this.profile$.forEach((profile) => {
+      this.profile = profile;
+    })
+    this.deathTime = 0;
+  }
+
+  //Load Current Profiles Time when you enter page
+  ionViewWillEnter(){
+    this.deathTime = (this.profile) ? this.profile.timeOfExpiry : 1234567;
+  }
 
   // A bunch of dummy recommended posts
   recommended = [
@@ -57,61 +72,61 @@ export class DashboardPage {
 
   isSearchbarVisible = false;
   // deathTime = 3132079200
-  deathTime = Date.now() / 1000 + 10;
+  //deathTime = this.profile?.timeOfExpiry
   kronos = ""
 
   kronosTimer = setInterval(() => {
     const counter = this.deathTime - Date.now()/1000;
-    this.kronos = this.displayKronos(counter);
+    this.kronos = KronosTimer.displayKronos(counter);
   }, 999)
 
-  pickRandom(arr: any[]) {
-    return arr[Math.floor(Math.random() * arr.length)];
-  }
+  // pickRandom(arr: any[]) {
+  //   return arr[Math.floor(Math.random() * arr.length)];
+  // }
 
-  // Convert a unix timestamp to a kronos string
-  displayKronos(timeDelta : number) {
-    if (timeDelta < 0)
-    {
-      return ([
-        this.pickRandom([ "ELIMINATED", "TERMINATED", ]),
-        this.pickRandom([ "DISBANDED", "DISMISSED", ]),
-        this.pickRandom([ "DECEASED", "DEPLETED", "PERISHED", ]),
-        this.pickRandom([ "EXPIRED", "EXTINCT", ]),
-        this.pickRandom([ "CEASED", "WASTED", ]),
-        this.pickRandom([ "INERT", "ENDED" ]),
-        this.pickRandom([ "DEAD", "LATE", ]),
-      ])[Math.floor(Math.abs(timeDelta))%7] + "💀";
-    }
+  // // Convert a unix timestamp to a kronos string
+  // displayKronos(timeDelta : number) {
+  //   if (timeDelta < 0)
+  //   {
+  //     return ([
+  //       this.pickRandom([ "ELIMINATED", "TERMINATED", ]),
+  //       this.pickRandom([ "DISBANDED", "DISMISSED", ]),
+  //       this.pickRandom([ "DECEASED", "DEPLETED", "PERISHED", ]),
+  //       this.pickRandom([ "EXPIRED", "EXTINCT", ]),
+  //       this.pickRandom([ "CEASED", "WASTED", ]),
+  //       this.pickRandom([ "INERT", "ENDED" ]),
+  //       this.pickRandom([ "DEAD", "LATE", ]),
+  //     ])[Math.floor(Math.abs(timeDelta))%7] + "💀";
+  //   }
 
-    const [years, days, hours, minutes, seconds] = [
-      Math.floor( timeDelta / (60*60*24*365)),
-      Math.floor((timeDelta % (60*60*24*365)) / 86400),
-      Math.floor((timeDelta % (60*60*24)) / 3600),
-      Math.floor((timeDelta % (60*60)) / 60),
-      Math.floor( timeDelta % (60)),
-    ];
-    const [syears, sdays, shours, sminutes, sseconds] = [
-      years.toString(),
-      days.toString().padStart(3, '0'),
-      hours.toString().padStart(2, '0'),
-      minutes.toString().padStart(2, '0'),
-      seconds.toString().padStart(2, '0'),
-    ]
+  //   const [years, days, hours, minutes, seconds] = [
+  //     Math.floor( timeDelta / (60*60*24*365)),
+  //     Math.floor((timeDelta % (60*60*24*365)) / 86400),
+  //     Math.floor((timeDelta % (60*60*24)) / 3600),
+  //     Math.floor((timeDelta % (60*60)) / 60),
+  //     Math.floor( timeDelta % (60)),
+  //   ];
+  //   const [syears, sdays, shours, sminutes, sseconds] = [
+  //     years.toString(),
+  //     days.toString().padStart(1, '0'),
+  //     hours.toString().padStart(2, '0'),
+  //     minutes.toString().padStart(2, '0'),
+  //     seconds.toString().padStart(2, '0'),
+  //   ]
 
-    // HH:MM:SS
-    if (years < 1 && days < 1) {
-      return `${shours}:${sminutes}:${sseconds}`
-    }
-    // DD:HH:MM:SS
-    else if (years < 1) {
-      return `${sdays}:${shours}:${sminutes}:${sseconds}`
-    }
-    // YY:DD:HH:MM:SS
-    else {
-      return `${syears}:${sdays}:${shours}:${sminutes}:${sseconds}`
-    }
-  }
+  //   // HH:MM:SS
+  //   if (years < 1 && days < 1) {
+  //     return `${shours}:${sminutes}:${sseconds}`
+  //   }
+  //   // DD:HH:MM:SS
+  //   else if (years < 1) {
+  //     return `${sdays}:${shours}:${sminutes}:${sseconds}`
+  //   }
+  //   // YY:DD:HH:MM:SS
+  //   else {
+  //     return `${syears}:${sdays}:${shours}:${sminutes}:${sseconds}`
+  //   }
+  // }
 
   toggleSearchbar() {
     this.isSearchbarVisible = !this.isSearchbarVisible;

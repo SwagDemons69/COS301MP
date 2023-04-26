@@ -107,6 +107,9 @@
       "@mp/app/forgot/feature": ["libs/app/forgot/feature/src/index.ts"],
       "@mp/app/forgot/util": ["libs/app/forgot/util/src/index.ts"],
       "@mp/app/home/feature": ["libs/app/home/feature/src/index.ts"],
+      "@mp/app/kronos-timer/kronos": [
+        "libs/app/kronos-timer/kronos/src/index.ts"
+      ],
       "@mp/app/login/data-access": ["libs/app/login/data-access/src/index.ts"],
       "@mp/app/login/feature": ["libs/app/login/feature/src/index.ts"],
       "@mp/app/login/util": ["libs/app/login/util/src/index.ts"],

@@ -87,7 +87,7 @@ function generateProfiles(total){
         const surname = faker.name.lastName();
         const profile = {
             user_id: "",
-            timeOfExpiry: 420,
+            timeOfExpiry: Date.now() / 1000 + 21*24*60*60,
             notPublic: "false",
             username: faker.internet.userName(name, surname),
             name: faker.internet.userName(name, surname),

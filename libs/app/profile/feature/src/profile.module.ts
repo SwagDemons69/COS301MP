@@ -7,7 +7,7 @@ import { ProfileModule as ProfileUiModule } from '@mp/app/profile/ui';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ProfilePage } from './profile.page';
 import { ProfileRouting } from './profile.routing';
-
+import { KronosModule } from '@mp/app/kronos-timer/kronos';
 
 
 
@@ -21,6 +21,7 @@ import { ProfileRouting } from './profile.routing';
     ProfileUiModule,
     ProfileDataAccessModule,
     NgxSkeletonLoaderModule,
+    KronosModule
   ],
   declarations: [ProfilePage],
 })

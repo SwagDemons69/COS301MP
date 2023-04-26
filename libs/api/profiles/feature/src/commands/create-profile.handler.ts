@@ -40,7 +40,7 @@ export class CreateProfileHandler
 
     const data: user_profile = {
       user_id: userId,
-      timeOfExpiry: 420,
+      timeOfExpiry: Date.now() / 1000 + 21*24*60*60,
       notPublic: "false",
       username: temp,
       name: temp,
