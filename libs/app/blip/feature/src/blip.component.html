@@ -21,7 +21,6 @@
         <ion-label stacked>
           <ion-grid>
             <ion-row>
-
               <!-- Title + Description -->
               <ion-col class="subtext" size="9">
                 <h2>{{data.title}}</h2>
@@ -30,18 +29,35 @@
               </ion-col>
 
               <!-- Profile, Time posted, Reactions -->
-              <ion-col class="actions">
-                <ion-grid>
-                  <ion-row class="profile">
-                      <span style="padding-right: 0.1em;">Hello world</span> 
-                      <ion-avatar style="display: inline; width: 5vw; height: 5vw">
-                        <img alt="Avatar" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-                      </ion-avatar>
-                  </ion-row>
-                </ion-grid>
+              <ion-col size="3">
+                <ion-list class="profile">
+                  <span>{{data.username}}</span> 
+                  <ion-avatar style="display: inline; width: 5vw; height: 5vw">
+                    <img alt="Avatar" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                  </ion-avatar>
+                </ion-list>
               </ion-col>
-
             </ion-row>
+
+            <ion-row class="actions">
+              <ion-col size="6"></ion-col>
+              <ion-col size="2">
+                <div>{{formatNumber(data.shares)}} <ion-icon name="share-social-outline"></ion-icon></div>
+              </ion-col>
+              <ion-col size="2">
+                <div>{{formatNumber(data.likes)}} <ion-icon name="thumbs-up-outline"></ion-icon></div>
+              </ion-col>
+              <ion-col size="2">
+                <div>{{formatNumber(data.comments.length)}} <ion-icon name="chatbubble-outline"></ion-icon></div>
+              </ion-col>
+            </ion-row>
+
+            <ion-row>
+              <ion-list id="tagList">
+                <ion-badge *ngFor="let tag of data.tags"> {{tag}} </ion-badge>
+              </ion-list>
+            </ion-row>
+
           </ion-grid>
         </ion-label>
       </ion-card>

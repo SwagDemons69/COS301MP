@@ -64,6 +64,20 @@ ion-grid {
     border-radius: 0px;
 }
 
+// Username + Profile
+.profile {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-items: center;
+}
+.profile span {
+    text-align: right;
+    padding-right: 0.4em;
+    font-weight: lighter;
+}
+
 .trendingItem .image {
     // border: 1px solid red;
     max-height: 100vw;
@@ -95,6 +109,19 @@ ion-grid {
     font-size: 0.9em;
 }
 
+.actions ion-icon {
+    padding: 0px;
+}
+
+.actions div {
+    text-align: center;
+    cursor: pointer;
+}
+
+.actions div:hover {
+    color: #da19a7;
+}
+
 /* // Contains the poster profile, post date, and reactions */
 .trendingItem .action {
     text-align: right;
@@ -109,6 +136,29 @@ h3 {
     font-weight: bolder;
     margin: 0;
     margin-left: 1rem;
+}
+
+#tagList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 60%;
+    margin: auto;
+}
+
+$tag-colors: (
+    #d03895,
+    #4350dd,
+    #2bccbc,
+);
+
+@for $i from 1 through 3 {
+  ion-badge:nth-child(#{$i}n) ::ng-deep {
+    background-color: nth($tag-colors, $i);
+    font-weight: light;
+    margin-right: 0.4em;
+    margin-bottom: 0.4em;
+  }
 }
 
 

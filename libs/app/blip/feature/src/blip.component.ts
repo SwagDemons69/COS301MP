@@ -10,14 +10,15 @@ import { ModalController } from '@ionic/angular';
 export class BlipComponent {
   @Input() dat: any;
   data: any = { //TODO: Change this to `post` type once integrated
+    username: "Greta Thunberg",
     post_id: "NONE",
     user_id: "",
     content: "",
     title: "Sorry! No post found",
     desc: "This post could not be loaded.",
-    likes: [],
+    likes: 420,
     timeStamp: 0,
-    shares: 0,
+    shares: 69,
     kronos: 0,
     comments: [
       {
@@ -39,7 +40,7 @@ export class BlipComponent {
         likes: []
       }
     ],
-    tags: [],
+    tags: ["#the", "#quick", "#brown", "#fox", "#jumped", "#over", "#lazy", "#dog"],
     taggedUsers: []
   }
 
@@ -47,8 +48,22 @@ export class BlipComponent {
     private modalController: ModalController
   ) {
     setTimeout(() => {
-      this.data = { ...this.data, ...this.dat }; //TODO: Remove once integrated
+      // this.data = { ...this.data, ...this.dat }; //TODO: Remove once integrated
     }, 500);
+  }
+
+  formatNumber(num: number) {
+    const ls = ["K", "M", "B", "T"];
+
+    for (let i = ls.length; i >= 0; i--) {
+      const x = 1000**(i+1);
+
+      if(num >= x) {
+        return Math.floor(10*num/x)/10 + ls[i];
+      }
+    }
+
+    return num + "";
   }
 
   async closeModal() {
