@@ -16,6 +16,7 @@ import {
 } from 'timers/promises';
 import { NavController } from '@ionic/angular';
 import { KronosTimer } from '@mp/app/kronos-timer/kronos';
+import { DashboardApi } from '@mp/app/dashboard/data-access';
 
 @Component({
   selector: 'ms-profile-page',
@@ -38,7 +39,8 @@ export class ProfilePage {
     private formBuilder: FormBuilder,
     private readonly store : Store,
     private readonly api: ProfilesApi,
-    private readonly navCtrl: NavController
+    private readonly navCtrl: NavController,
+    private readonly dashApi: DashboardApi
   )
   {
     this.deathTime = 0;
@@ -111,13 +113,13 @@ export class ProfilePage {
   // {title: "...", desc: "...", img: "..."}
   // TODO: Change this to properly reflect a post object
   // See: blip.component.html
-  async openBlip(data: any, name: any, image: any) {
+  async openBlip(data: post) {
+    const blipData = await this.dashApi.GetBlipContent({ user: data.user_id, post: data.post_id});
     const modal = await this.modalController.create({
       component: BlipComponent,
       componentProps: {
         data: data,
-        user : name,
-        image: image
+        blipContent: blipData
       }
     });
 

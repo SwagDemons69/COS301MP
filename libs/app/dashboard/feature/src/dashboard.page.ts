@@ -12,7 +12,7 @@ import { SetDashboardPosts } from '@mp/app/dashboard/util';
 // import { SearchApi } from '@mp/app/dashboard/data-access';
 import { ProfileOtherComponent } from '@mp/app/profile-other/feature';
 import { KronosTimer } from '@mp/app/kronos-timer/kronos';
-
+import { DashboardApi } from '@mp/app/dashboard/data-access';
 
 @Component({
   selector: 'ms-dashboard-page',
@@ -35,6 +35,7 @@ export class DashboardPage {
     private renderer: Renderer2,
     private modalController: ModalController,
     private store : Store,
+    private readonly api: DashboardApi
   ) 
   {
     this.profile = null;
@@ -136,11 +137,22 @@ async getTrending() {
   }
 
   // See [https://stackblitz.com/edit/ionic6-angular13-wnmgmu?file=src/app/app.component.ts] for reference
-  async openBlip(data: any) {
+  async openBlip(data: post) {
+    const blipData = await this.api.GetBlipContent({user: data.user_id, post: data.post_id});
+    
+    //Representation for blipData
+    //{
+      // username: string;
+      // imageURL: string;
+      // likes   : post_like[];
+      // comments : RootComment[];
+    //}
+    //data passed is has all relevant post dat like its image, title, description
     const modal = await this.modalController.create({
       component: BlipComponent,
       componentProps: {
-        dat: data //TODO: Change `dat` back to `data` once properly integrated
+        dat: data,
+        blipContent: blipData //TODO: Change `dat` back to `data` once properly integrated
       }
     });
 

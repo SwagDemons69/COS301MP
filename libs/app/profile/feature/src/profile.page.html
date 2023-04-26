@@ -87,7 +87,7 @@
               <ion-grid [fixed]="true">
                 <ion-row class="ion-justify-content-center" *ngFor="let i of postIndex">
                     <ion-col class="ion-col">
-                      <ion-img [src]="(posts[i].content)" (click)="openBlip(posts[i],profile.username, profile.profilePicturePath)" alt=""></ion-img>
+                      <ion-img [src]="(posts[i].content)" (click)="openBlip(posts[i])" alt=""></ion-img>
                     </ion-col>
                 </ion-row>
               </ion-grid>
