@@ -5,8 +5,7 @@ import { ProfileModule } from '@mp/app/profile/ui';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { DashboardPage } from './dashboard.page';
 import { DashboardRouting } from './dashboard.routing';
-
-
+import { DashboardModule  as DashData } from '@mp/app/dashboard/data-access';
 @NgModule({
   imports: [
     CommonModule,
@@ -14,6 +13,7 @@ import { DashboardRouting } from './dashboard.routing';
     DashboardRouting,
     ProfileModule,
     NgxSkeletonLoaderModule,
+    DashData
   ],
   declarations: [DashboardPage],
 })

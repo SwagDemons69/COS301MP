@@ -7,6 +7,7 @@ import { PostModule } from '@mp/api/post/feature'
 import { Module } from '@nestjs/common';
 import { ChatModule } from '@mp/api/chat/feature'
 import { SearchModalModule } from '@mp/api/search-modal/feature';
+import { DashboardModule } from '@mp/api/dashboard/feature';
 
 @Module({
   imports: [AuthModule,
@@ -16,7 +17,8 @@ import { SearchModalModule } from '@mp/api/search-modal/feature';
         PostModule,
          ChatModule,
           SearchModalModule,
-           SearchModule]
+           SearchModule,
+            DashboardModule]
   //imports: [AuthModule, EventstoreModule, ProfilesModule, UsersModule, PostModule, SearchModule]
 
 })

@@ -1,31 +1,50 @@
 import { Injectable } from '@angular/core';
-import { Selector, State, Store } from '@ngxs/store';
-import { DashboardApi } from './dashboard.api';
 import { post } from '@mp/api/home/util';
+import { Selector, State, Store, Action, StateContext } from '@ngxs/store';
+import { DashboardApi } from './dashboard.api';
+import { SetDashboardPosts } from '@mp/app/dashboard/util';
+import { GetRecommendedPostsRequest, GetTrendingPostsRequest } from '@mp/api/dashboard/util';
 
 export interface DashboardStateModel {
-  posts: post[]
+  recommended_posts: post[] | [];
+  trending_posts: post[] | [];
 }
 
 @State<DashboardStateModel>({
   name: 'posts',
   defaults: {
-    posts: []
+    recommended_posts: [],
+    trending_posts: [],
   }
 })
 @Injectable()
 export class DashboardState {
-  //follower : number;
   constructor(
     private readonly dashboardApi: DashboardApi,
     private readonly store: Store,
   ) { }
 
-
+  @Selector()
+  static recommendedPosts(state: DashboardStateModel) {
+    return state.recommended_posts;
+  }
 
   @Selector()
-  static posts(state: DashboardStateModel) {
-    return state.posts;
+  static trendingPosts(state: DashboardStateModel) {
+    return state.trending_posts;
+  }
+
+  @Action(SetDashboardPosts)
+  async setDashboardPosts(ctx: StateContext<DashboardStateModel>, { profile }: SetDashboardPosts) {
+    console.log("Inside SetPosts");
+    const trendingRequest: GetTrendingPostsRequest = {
+      cutOffTime: 10,
+    }
+    const recommendedRequest: GetRecommendedPostsRequest = {
+      users: profile?.following,
+    }
+    ctx.patchState({ recommended_posts: (await this.dashboardApi.GetRecommendedPosts(recommendedRequest)).data.posts});
+    ctx.patchState({ trending_posts: (await this.dashboardApi.GetTrendingPosts(trendingRequest)).data.posts});
   }
 
   // @Action(Logout)
@@ -39,7 +58,7 @@ export class DashboardState {
   //   if (!user) return ctx.dispatch(new SetError('User not set'));
 
   //   return this.dashboardApi
-  //     .profile$(user.uid)
+  //     .profile$(user.uid)  
   //     .pipe(tap((profile: user_profile) => ctx.dispatch(new SetProfile(profile))));
   // }
 

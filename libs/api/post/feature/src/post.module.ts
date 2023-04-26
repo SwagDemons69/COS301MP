@@ -6,7 +6,8 @@ import { CreatePostCommandHandler } from './commands/create-post.handler';
 import { PostService } from './post.service';
 import { CreatePostEventHandler } from './events';
 import { CreatePostLikeCommandHandler } from './commands/create-post-like.handler';
-export const CommandHandlers = [ AddPhotoCommandHandler,
+export const CommandHandlers = [ 
+  AddPhotoCommandHandler,
   CreatePostCommandHandler,
   CreatePostLikeCommandHandler,
   CreatePostChildCommentCommandHandler,

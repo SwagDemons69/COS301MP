@@ -6,7 +6,7 @@ import { Functions, httpsCallable } from '@angular/fire/functions';
 export class PostApi {
     constructor(private readonly functions: Functions) {}
 
-    async UploadPostToCloudStorage(request: AddPhotoRequest){
+    async UploadPostToCloudStorage(request: AddPhotoRequest) {
         return await httpsCallable<AddPhotoRequest, AddPhotoResponse>(this.functions, 'AddPhotoToCloudStorage')(request);
     }
 
