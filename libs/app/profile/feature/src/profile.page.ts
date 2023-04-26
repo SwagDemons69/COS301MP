@@ -111,12 +111,13 @@ export class ProfilePage {
   // {title: "...", desc: "...", img: "..."}
   // TODO: Change this to properly reflect a post object
   // See: blip.component.html
-  async openBlip(data: any, name: any) {
+  async openBlip(data: any, name: any, image: any) {
     const modal = await this.modalController.create({
       component: BlipComponent,
       componentProps: {
         data: data,
-        user : name
+        user : name,
+        image: image
       }
     });
 

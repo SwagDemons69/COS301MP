@@ -43,7 +43,7 @@
 
   <ng-container *ngIf="(profile$ | async) as profile;">
     <ion-avatar class="avatar">
-      <img alt="Avatar" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      <img alt="Avatar" [src]="profile.profilePicturePath" />
     </ion-avatar>
   </ng-container>
 
