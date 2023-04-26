@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { Component, ElementRef, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, ElementRef, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 // import { NavController } from '@ionic/angular/providers/nav-controller';
 import { PostApi } from '@mp/app/post/data-access';
 import { AddPhotoRequest, AddPhotoResponse, CreatePostRequest } from '@mp/api/post/util';
@@ -11,6 +10,7 @@ import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { post } from '@mp/api/home/util';
 import { Timestamp } from '@angular/fire/firestore';
+import { IonBadge } from '@ionic/angular';
 
 
 
@@ -19,33 +19,37 @@ import { Timestamp } from '@angular/fire/firestore';
   templateUrl: './post.page.html',
   styleUrls: ['./post.page.scss']
 })
-
-
-
 export class PostPage {
   @Select(ProfileState.profile) profile$!: Observable<user_profile | null>;
-  postForm : FormGroup
+  @ViewChild('tagList', { read: ViewContainerRef }) tagListElem!: ViewContainerRef;
+  @ViewChild('tagBadge', { read: TemplateRef }) tagBadgeElem!: TemplateRef<any>;
+
   blob : Blob
+
   user : string | undefined
-  chosenPost: Blob
-  chosenPostBase64Data: string
-  style: string
+
+  chosenPost: Blob;
+  chosenPostBase64Data: string;
+  desc: string;
+  title: string;
+  tags = [
+    "", "The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"
+  ]
+
+  style: string;
   
   //Dont think validators needed
-  constructor(private formBuilder: FormBuilder,
-              private readonly api : PostApi)
+  constructor(private readonly api : PostApi)
   {
-    this.postForm = this.formBuilder.group({
-      file: ['', Validators.required],
-      caption: ['', Validators.required],
-      categories: ['', Validators.required]
-    })
     this.blob = new Blob();
     this.profile$.forEach((user) => {this.user = user?.user_id;});
     this.chosenPost = new Blob();
     this.chosenPostBase64Data = "";
-    this.style = "hidden"
+    this.desc = "";
+    this.title = "";
+    this.style = "hidden";
   }
+
   //Get reference to file uploaded
   async onFileChange(event : any){
     
@@ -67,7 +71,6 @@ export class PostPage {
   
   //Upload Post on Upload Button Click
   async uploadPost(){
-    this.style = "hidden";
     const path = await this.addToCloudStorage();
     this.addToFirestore(path);
   }
@@ -97,48 +100,51 @@ export class PostPage {
   //Add Post to Firestore
   async addToFirestore(pathToImage: string){
     
-    //Ensure caption and userId are available
-    const caption = this.postForm.get("caption")?.value;
-    let fillerCaption = "";
-    if(caption){
-      fillerCaption = caption;
-    }
-    let fillerUserId = "";
-    if(this.user != undefined){
-      fillerUserId = this.user;
-    }
-    
     //Create Post
     const newPost: post = {
-      post_id : "test post",
-      user_id : fillerUserId,
-      content : pathToImage,
-      caption : fillerCaption,
-      likes : [],
-      timeStamp : 696969696,
-      shares : 0,
-      kronos : 0,
-      comments : [],
-      categories : [],
-      taggedUsers : []
+      post_id:      "test post",
+      user_id:      this?.user==undefined?"":this.user,
+      title:        this.title,         
+      content:      pathToImage,
+      desc:         this.desc,
+      likes:        [],
+      timeStamp:    696969696,
+      shares:       0,
+      kronos:       0,
+      comments:     [],
+      tags:         this.tags,
+      taggedUsers:  []
     }
     const request: CreatePostRequest = {post: newPost};
     const responseStatus = await this.api.UploadPostToFirestore(request);
   }
 
-  caption = ""
-  tags = [
-    "", "The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"
-  ]
+  addTagBadge(content: string) {
+    const tagBadge = this.tagBadgeElem.createEmbeddedView({content});
+    this.tagListElem.insert(tagBadge);
+  }
+
+  extractTagsFromDesc() {
+    this.tags = [];
+
+    this.desc.split(/[\n\r\t ,.]+/).forEach(word => {
+        if(word.startsWith("#") && word.length > 1) {
+          word.split("#").forEach(subtag => {
+          this.tags.push(subtag);
+        });
+      }
+    });
+  }
 
   updateTagList() {
+    this.extractTagsFromDesc();
+    console.log(this.tags);
+
     const tagList = document.getElementById("tagList");
     if(tagList == null) return;
 
     // Remove previous tags
-    while(tagList.lastChild) {
-      document.removeChild(tagList.lastChild);
-    }
+    this.tagListElem.clear();
 
     this.tags.forEach(x => x.toLowerCase().trim());
     this.tags.sort();
@@ -152,16 +158,10 @@ export class PostPage {
         continue;
       }
 
-      const el = document.createElement("ion-badge");
-      el.innerText = "#" + tag;
-
-      tagList?.appendChild(el);
+      this.addTagBadge("#" + tag);
 
       prevTag = tag;
     }
-  }
-
-  onCaptionChanged() {
   }
 
 }

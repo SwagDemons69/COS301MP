@@ -6,14 +6,15 @@ export class Post extends AggregateRoot implements post {
   constructor(
     public post_id : string,
     public user_id : string,
+    public title   : string,
     public content : string,
-    public caption : string,
+    public desc : string,
     public likes : string[],
     public timeStamp : number,
     public shares : number,
     public kronos : number,
     public comments : string[],
-    public categories : string[],
+    public tags : string[],
     public taggedUsers : string[]
   ) {
     super();
@@ -23,14 +24,15 @@ export class Post extends AggregateRoot implements post {
     const instance = new Post(
       post.post_id,
       post.user_id,
+      post.title,
       post.content,
-      post.caption,
+      post.desc,
       post.likes,
       post.timeStamp,
       post.shares,
       post.kronos,
       post.comments,
-      post.categories,
+      post.tags,
       post.taggedUsers
     );
     return instance;
@@ -38,6 +40,7 @@ export class Post extends AggregateRoot implements post {
 
   static defaultPost(): Post{
     const instance = new Post(
+        "",
         "",
         "",
         "",
@@ -60,14 +63,15 @@ export class Post extends AggregateRoot implements post {
   managePost(post : post) {
     this.post_id     =  (this.post_id == post.post_id)         ?   this.post_id     :  post.post_id;
     this.user_id     =  (this.user_id == post.user_id)         ?   this.user_id     :  post.user_id;
+    this.title       =  (this.title == post.title)             ?   this.title       :  post.title;
     this.content     =  (this.content == post.content)         ?   this.content     :  post.content;
-    this.caption     =  (this.caption == post.caption)         ?   this.caption     :  post.caption;
+    this.desc        =  (this.desc == post.desc)               ?   this.desc        :  post.desc;
     this.likes       =  (this.likes == post.likes)             ?   this.likes       :  post.likes;
     this.timeStamp   =  (this.timeStamp == post.timeStamp)     ?   this.timeStamp   :  post.timeStamp;
     this.shares      =  (this.shares == post.shares)           ?   this.shares      :  post.shares;
     this.kronos      =  (this.kronos == post.kronos)           ?   this.kronos      :  post.kronos;
     this.comments    =  (this.comments == post.comments)       ?   this.comments    :  post.comments;
-    this.categories  =  (this.categories == post.categories)   ?   this.categories  :  post.categories;
+    this.tags        =  (this.tags == post.tags)               ?   this.tags        :  post.tags;
     this.taggedUsers =  (this.taggedUsers == post.taggedUsers) ?   this.taggedUsers :  post.taggedUsers;
   }
 
@@ -75,14 +79,15 @@ export class Post extends AggregateRoot implements post {
     return {
         post_id     : this.post_id,
         user_id     : this.user_id,
+        title       : this.title,
         content     : this.content,
-        caption     : this.caption,
+        desc     : this.desc,
         likes       : this.likes,
         timeStamp   : this.timeStamp,
         shares      : this.shares,
         kronos      : this.kronos,
         comments    : this.comments,
-        categories  : this.categories,
+        tags        : this.tags,
         taggedUsers : this.taggedUsers
     };
   }

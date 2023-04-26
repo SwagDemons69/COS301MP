@@ -1,81 +1,61 @@
-
-    <ion-header [translucent]="true">
-        <ion-toolbar>
-            <ion-title>Post</ion-title>
-        </ion-toolbar>
-    </ion-header>
-        
-    <ion-content [fullscreen]="true">
-    
-        <ion-content>
-            <div class="top-section" >
-                <div [hidden]="style">         
-                <ion-img [src]="chosenPostBase64Data" alt="" id="preview" #image></ion-img>
-            </div>     
-            </div>
-                
-            <div class="bottom-section">
-                <form [formGroup]="postForm" (ngSubmit)="uploadPost()">
-                    <label for="file">
-                        <div class="camera-icon-container">
-                            <ion-icon name="camera"></ion-icon>
-                        </div>
-                    </label>
-                    <input type="file" id="file" formControlName="file" accept="image/*, video/*" required (change)="onFileChange($event)" style="display:none;"/><br><br>
-                    
-                    <p>Caption:</p><br>
-                    <!-- <ion-item>   -->
-                        <input type="text" formControlName="caption" placeholder="Write your post caption" /><br><br>
-                    <!-- </ion-item> -->
-    
-                    <p>Categoriess:</p><br>
-                    <!-- <ion-item>                        -->
-                        <input type="text" formControlName="categories" placeholder="Write your post caption" /><br><br>
-                    <!-- </ion-item> -->
-    
-                    <input type="submit" value="Upload"/>
-                    
-                </form>          
-            </div>             
-        </ion-content>
-    </ion-content>   
-
-    
-<!-- <ion-header [translucent]="true">
-</ion-header>
+<ion-header [translucent]="true"></ion-header>
 <ion-content [fullscreen]="true">
-    <label for="file-upload">
-        <div class="top-section">              
-            <div id="addMediaIcon">
-                <ion-icon name="camera"></ion-icon>
-                <ion-title>Add Media</ion-title>
-            </div>
 
-            <div [hidden]="style">         
-                <ion-img [src]="chosenPostBase64Data" alt="" id="preview" #image></ion-img>
-            </div>     
-        </div>
-    </label>
-        
-    <div class="bottom-section">
-        <form [formGroup]="postForm" (ngSubmit)="uploadPost()">
-            <input id="file" type="file" formControlName="file" accept="image/*, video/*" required (change)="onFileChange($event)" style="display:none;">
+    <ion-content>
+        <label for="file-upload">
+            <div class="top-section">
+                <div id="addMediaIcon" *ngIf="chosenPostBase64Data == ''">
+                    <ion-icon name="camera"></ion-icon>
+                    <ion-title>Add Media</ion-title>
+                </div>
+                <ion-img *ngIf="chosenPostBase64Data != ''" [src]="chosenPostBase64Data" id="preview"></ion-img>
+            </div>
+        </label>
             
-            <p>Caption:</p>
+        <div class="bottom-section">
+            <input
+                id="file-upload"
+                type="file"
+                accept="image/*"
+                style="display:none;"
+                (change)="onFileChange($event)"
+                required
+            >
+            
+            <p>Title:</p>
+            <ion-item>  
+                <ion-input
+                    id="title"
+                    type="text"
+                    placeholder="Type a title"
+                    maxlength="128"
+                    [(ngModel)]="title"
+                ></ion-input>
+            </ion-item>
+
+            <p>Description:</p>
             <ion-item>  
                 <ion-textarea
-                    id="caption"
-                    placeholder="Type a caption"
+                    id="desc"
+                    type="text"
+                    placeholder="Type a description"
                     maxlength="1024"
-                    (enter)="onCaptionChanged"
+                    [(ngModel)]="desc"
+                    (ngModelChange)="updateTagList()"
                 ></ion-textarea>
             </ion-item>
 
             <ion-list id="tagList">
+                <ng-container #tagList>
+                </ng-container>
+                    <ng-template #tagBadge let-content="content">
+                        <ion-badge>
+                            {{content}}
+                        </ion-badge>
+                    </ng-template>
             </ion-list>
 
-            <ion-button (click)="updateTagList()" class="glassyButton">POST</ion-button>
-        </form>          
-    </div>             
-</ion-content>
-</ion-content> -->
+            <ion-button (click)="uploadPost()" class="glassyButton">POST</ion-button>
+        </div>
+    </ion-content>
+</ion-content>   

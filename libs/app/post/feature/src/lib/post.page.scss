@@ -32,6 +32,11 @@
   padding: 20px; 
 }
 
+ion-img { 
+  height: 100%;
+  width: auto;
+}
+
 ion-item {
   --padding-top: 5px;
 
@@ -41,6 +46,10 @@ ion-item {
 }
 
 ion-textarea {
+  --padding-top: 0px;
+}
+
+ion-input {
   --padding-top: 0px;
 }
 
@@ -78,11 +87,13 @@ p {
 $tag-colors: (
     #d03895,
     #4350dd,
-    #29e5d2,
+    #2bccbc,
 );
 
-ion-badge {
-  background-color: nth($tag-colors, 1);
-  font-weight: light;
-  margin-right: 0.4em;
+@for $i from 1 through 3 {
+  ion-badge:nth-child(#{$i}n) ::ng-deep {
+    background-color: nth($tag-colors, $i);
+    font-weight: light;
+    margin-right: 0.4em;
+  }
 }

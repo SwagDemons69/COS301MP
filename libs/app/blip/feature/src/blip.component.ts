@@ -13,8 +13,8 @@ export class BlipComponent {
     post_id: "NONE",
     user_id: "",
     content: "",
-    title: "Sorry! No post found",  //TODO: Add to firestore
-    desc: "This post could not be loaded.", //TODO: Change `caption` to `desc` in firestore
+    title: "Sorry! No post found",
+    desc: "This post could not be loaded.",
     likes: [],
     timeStamp: 0,
     shares: 0,
@@ -39,7 +39,7 @@ export class BlipComponent {
         likes: []
       }
     ],
-    categories: [],
+    tags: [],
     taggedUsers: []
   }
 

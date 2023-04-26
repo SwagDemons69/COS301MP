@@ -143,14 +143,15 @@ function generatePosts(userIds, total){
             const post = {
                 post_id : "",
                 user_id : userIds[j],
+                title : faker.lorem.words(3),
                 content : faker.image.image(640, 480, true),
-                caption : faker.lorem.words(3),
+                desc : faker.lorem.words(3),
                 likes : [],
                 timeStamp : Timestamp.now(),
                 shares : 0,
                 kronos : 0,
                 comments : [],
-                categories : [],
+                tags : [],
                 taggedUsers : []
             }
             posts.push(post);

@@ -49,13 +49,13 @@ const generatePosts = async () => {
       post_id : "1",
       user_id : "Sg1j9YlEbEbeOeg1Of3Un79W4Lj7",
       content : "https://picsum.photos/id/19/300/300",
-      caption : "Test Post",
+      desc : "Test Post",
       likes : 69,
       timeStamp : 13452824,
       shares : 0,
       kronos : 0,
       comments : [],
-      categories : [],
+      tags : [],
       taggedUsers : []}
     ];
 
@@ -76,26 +76,26 @@ const addPosts = async () => {
           post_id : "1",
           user_id : user_id,
           content : "https://picsum.photos/id/19/300/300",
-          caption : "Test Post 1",
+          desc : "Test Post 1",
           likes : 69,
           timeStamp : 13452824,
           shares : 0,
           kronos : 0,
           comments : [],
-          categories : [],
+          tags : [],
           taggedUsers : []
         },
         { id : "2",
           post_id : "2",
           user_id : user_id,
           content : "https://picsum.photos/id/23/300/300",
-          caption : "Test Post 2",
+          desc : "Test Post 2",
           likes : 69,
           timeStamp : 13452824,
           shares : 0,
           kronos : 0,
           comments : [],
-          categories : [],
+          tags : [],
           taggedUsers : []
         }
       ];
