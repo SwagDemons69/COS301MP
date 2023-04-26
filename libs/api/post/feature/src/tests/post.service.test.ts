@@ -1,11 +1,12 @@
 import { Test } from '@nestjs/testing';
-import { PostService } from './post.service';
-import { AddPhotoRequest, CreatePostLikeRequest, CreatePostRequest } from '../../util/src/requests';
+import { PostService } from '../post.service';
 import { CommandBus } from '@nestjs/cqrs';
-import { AddPhotoResponse, CreatePostLikeResponse, CreatePostResponse } from '../../util/src/responses';
-import { AddPhotoCommand, CreatePostCommand, CreatePostLikeCommand } from '../../util/src/commands';
 import { post } from '@mp/api/home/util';
-import { post_like } from '../../util/src/interfaces';
+import { AddPhotoRequest, CreatePostLikeRequest, CreatePostRequest } from 'libs/api/post/util/src/requests';
+import { AddPhotoResponse, CreatePostLikeResponse, CreatePostResponse } from 'libs/api/post/util/src/responses';
+import { AddPhotoCommand, CreatePostCommand, CreatePostLikeCommand } from 'libs/api/post/util/src/commands';
+import { post_like } from 'libs/api/post/util/src/interfaces';
+
 
 describe('Post feature', () => {
     let postFeature: PostService;
@@ -88,5 +89,7 @@ describe('Post feature', () => {
             expect(result).toEqual(response);
         });
     });
+
+    
     
 });
