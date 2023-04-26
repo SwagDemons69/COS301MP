@@ -106,7 +106,7 @@ export class PostPage {
       user_id:      this?.user==undefined?"":this.user,
       title:        this.title,         
       content:      pathToImage,
-      desc:         this.desc,
+      desc:         this.removeTagsFromDesc(this.desc),
       likes:        [],
       timeStamp:    696969696,
       shares:       0,
@@ -123,35 +123,40 @@ export class PostPage {
     const tagBadge = this.tagBadgeElem.createEmbeddedView({content});
     this.tagListElem.insert(tagBadge);
   }
+  
+  removeTagsFromDesc(desc: string) {
+    return desc.replace(/#[\w]+/g, "");
+  }
 
   extractTagsFromDesc() {
-    this.tags = [];
+    const res: string[] = []
 
     this.desc.split(/[\n\r\t ,.]+/).forEach(word => {
         if(word.startsWith("#") && word.length > 1) {
           word.split("#").forEach(subtag => {
-          this.tags.push(subtag);
+          res.push(subtag);
         });
       }
     });
+
+    return res;
   }
 
   updateTagList() {
-    this.extractTagsFromDesc();
-    console.log(this.tags);
+    const res = this.extractTagsFromDesc();
 
     const tagList = document.getElementById("tagList");
     if(tagList == null) return;
 
-    // Remove previous tags
+    // Remove previous tag elements
     this.tagListElem.clear();
 
-    this.tags.forEach(x => x.toLowerCase().trim());
-    this.tags.sort();
+    res.forEach(x => x.toLowerCase().trim());
+    res.sort();
 
     let prevTag = "";
-    for(let t = 0; t < this.tags.length; t++) {
-      const tag = this.tags[t];
+    for(let t = 0; t < res.length; t++) {
+      const tag = res[t];
 
       // Skip duplicates and empty strings
       if(tag == prevTag) {
@@ -162,6 +167,8 @@ export class PostPage {
 
       prevTag = tag;
     }
+
+    this.tags = res;
   }
 
 }
