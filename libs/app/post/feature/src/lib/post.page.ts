@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 import { post } from '@mp/api/home/util';
 import { Timestamp } from '@angular/fire/firestore';
 import { IonBadge } from '@ionic/angular';
-
+import { ToastController } from '@ionic/angular';
 
 
 @Component({
@@ -39,7 +39,7 @@ export class PostPage {
   style: string;
   
   //Dont think validators needed
-  constructor(private readonly api : PostApi)
+  constructor(private readonly api : PostApi, private readonly toastCtrlr: ToastController)
   {
     this.blob = new Blob();
     this.profile$.forEach((user) => {this.user = user?.user_id;});
@@ -117,6 +117,13 @@ export class PostPage {
     }
     const request: CreatePostRequest = {post: newPost};
     const responseStatus = await this.api.UploadPostToFirestore(request);
+    const toast = await this.toastCtrlr.create({
+      message: "Post Created",
+      color: 'success',
+      duration: 1500,
+      position: 'top',
+    });
+    await toast.present();
   }
 
   addTagBadge(content: string) {
