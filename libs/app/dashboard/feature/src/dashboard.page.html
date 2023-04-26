@@ -61,7 +61,7 @@
         <ion-col>
           <ion-img [src]="item.content"></ion-img>
           <div class="overlay">
-            <ion-label>{{item.title}}</ion-label>
+            <ion-label>{{item.caption}}</ion-label>
             <div class="reactions">
               likes | comments
             </div>
@@ -130,9 +130,9 @@
 
             <!-- Title + Description -->
             <ion-col class="subtext" size="9">
-              <h2>{{item.title}}</h2>
+              <h2>{{item.caption}}</h2>
               <br/>
-              <h4>{{item.desc}}</h4>
+              <h4>{{item.likes.length}}</h4>
             </ion-col>
 
             <!-- Profile, Time posted, Reactions -->

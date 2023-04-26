@@ -17,10 +17,12 @@ import { SubscribeToChat } from '@mp/app/chat/util';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage {
+  //There are useless xD
   @Select(ProfileState.profile) profile$!: Observable<user_profile | null>;
   @Select(MessagesState.headers) headers$!: Observable<ChatHeader[] | []>;
   constructor(private readonly store: Store) { }
 
+  //Each time navbar is used there things "subscribe"
   ionViewWillEnter() {
     this.store.dispatch(new SubscribeToProfile());
     this.store.dispatch(new SubscribeToMessageHeaders());
