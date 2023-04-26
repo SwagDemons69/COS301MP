@@ -17,6 +17,6 @@ export class GetTrendingPostsCommandHandler
     console.log('GetTrendingPostsCommandHandler');
     console.log(`${GetTrendingPostsCommandHandler.name}`);
     const request = command.request;
-    return await this.repository.GetTrendingPosts(request.cutOffTime);
+    return await this.repository.GetTrendingPosts(request.numPosts);
   }
 }

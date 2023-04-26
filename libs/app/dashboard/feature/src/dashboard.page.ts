@@ -46,9 +46,6 @@ export class DashboardPage {
       this.recommended = posts;
     });
     this.recommended = this.recommended.sort((a, b) => (a.timeStamp < b.timeStamp ? 1 : -1));
-    this.recommended = this.recommended.slice(0, 3);
-    console.log("Recommended posts");
-    console.log(this.recommended);
 
     this.trending = [];
     this.trending_posts$.forEach((posts) => {
@@ -56,6 +53,9 @@ export class DashboardPage {
       console.log(posts);
       this.trending = posts;
     })
+    for (let i = 0; i < this.trending.length; i++) {
+      console.log(this.trending[i].timeStamp);
+    }
     this.trending.sort((a, b) => (a.likes.length < b.likes.length ? 1 : -1));
   }
 

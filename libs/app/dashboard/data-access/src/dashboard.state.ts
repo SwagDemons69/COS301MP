@@ -38,11 +38,12 @@ export class DashboardState {
   async setDashboardPosts(ctx: StateContext<DashboardStateModel>, { profile }: SetDashboardPosts) {
     console.log("Inside SetPosts");
     const trendingRequest: GetTrendingPostsRequest = {
-      cutOffTime: 10,
+      numPosts: 10,
     }
     const recommendedRequest: GetRecommendedPostsRequest = {
       users: profile?.following,
     }
+    console.log("Recommended Request: ", recommendedRequest);
     ctx.patchState({ recommended_posts: (await this.dashboardApi.GetRecommendedPosts(recommendedRequest)).data.posts});
     ctx.patchState({ trending_posts: (await this.dashboardApi.GetTrendingPosts(trendingRequest)).data.posts});
   }

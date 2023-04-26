@@ -1,3 +1,3 @@
 export interface GetTrendingPostsRequest {
-    cutOffTime: number;
+    numPosts: number;
 }

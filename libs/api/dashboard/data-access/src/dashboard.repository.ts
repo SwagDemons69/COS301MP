@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import * as admin from 'firebase-admin';
 import { GetRecommendedPostsResponse, GetTrendingPostsResponse } from '@mp/api/dashboard/util';
 import { post } from '@mp/api/home/util';
+import { Timestamp } from '@google-cloud/firestore';
 
 @Injectable()
 export class DashboardRepository {
@@ -25,18 +26,16 @@ export class DashboardRepository {
         }
     }
 
-    async GetTrendingPosts(latest: number): Promise<GetTrendingPostsResponse>{
-        // Return the 10 most liked posts in the last "latest" time span
+    async GetTrendingPosts(numPosts: number): Promise<GetTrendingPostsResponse>{
+        // Return the most liked posts based on the number of likes
         const users = await admin.firestore().collection('profiles').get();
         const posts: post[] = [];
         for (const user of users.docs) {
             const handle = await admin.firestore().collection(`profiles/${user.id}/posts`).get();
             for (const post of handle.docs.map((doc) => { return doc.data() as post; })){
-                if(post.timeStamp > latest){
-                    posts.push(post);
-                }
+                posts.push(post);
             }
         }
-        return { posts: posts.sort((a, b) => (a.likes.length < b.likes.length ? 1 : -1)).slice(0, 20) };
+        return { posts: posts.sort((a, b) => (a.likes.length < b.likes.length ? 1 : -1)).slice(0, numPosts) };
     }
 }
