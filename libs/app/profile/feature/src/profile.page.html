@@ -1,14 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
 
-    <ion-title class="ion-align-items-center">
-      Profile
-      <!-- <ng-container *ngIf="(profile$ | async) as profile;"> -->
-      <!-- </ng-container> -->
-    </ion-title>
+    <!-- <ion-buttons slot="start">
+      <ion-button *ngIf="!isEditingProfile">
+        <ion-icon name="share-outline" style="font-size: 1.5rem; color: white;"></ion-icon>
+      </ion-button>
+    </ion-buttons> -->
 
     <ion-buttons slot="end">
-
       <ion-button *ngIf="!isEditingProfile" (click)="isEditingProfile = true">
         <ion-icon name="pencil" style="font-size: 1.5rem; color: white;"></ion-icon>
       </ion-button>
@@ -16,7 +15,6 @@
       <ion-button *ngIf="isEditingProfile" (click)="isEditingProfile = false">
         <ion-icon name="close" style="font-size: 1.5rem; color: white;"></ion-icon>
       </ion-button>
-
     </ion-buttons>
 
   </ion-toolbar>

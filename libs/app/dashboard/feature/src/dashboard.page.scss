@@ -250,6 +250,21 @@ $stone-positions: (
     font-size: 0.9em;
 }
 
+// Username + Profile
+.profile {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-items: center;
+}
+.profile span {
+    text-align: right;
+    padding-right: 0.4em;
+    font-size: smaller;
+    font-weight: lighter;
+}
+
 /* // Contains the poster profile, post date, and reactions */
 .trendingItem .action {
     text-align: right;

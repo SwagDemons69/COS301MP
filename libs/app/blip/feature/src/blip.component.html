@@ -40,15 +40,15 @@
             </ion-row>
 
             <ion-row class="actions">
-              <ion-col size="6"></ion-col>
-              <ion-col size="2">
-                <div>{{formatNumber(data.shares)}} <ion-icon name="share-social-outline"></ion-icon></div>
+              <ion-col size="7.5"></ion-col>
+              <ion-col size="1.5">
+                <div>{{KronosTimer.formatActionNumber(data.shares)}} <ion-icon name="share-social-outline"></ion-icon></div>
               </ion-col>
-              <ion-col size="2">
-                <div>{{formatNumber(data.likes)}} <ion-icon name="thumbs-up-outline"></ion-icon></div>
+              <ion-col size="1.5">
+                <div>{{KronosTimer.formatActionNumber(data.likes)}} <ion-icon name="thumbs-up-outline"></ion-icon></div>
               </ion-col>
-              <ion-col size="2">
-                <div>{{formatNumber(data.comments.length)}} <ion-icon name="chatbubble-outline"></ion-icon></div>
+              <ion-col size="1.5">
+                <div>{{KronosTimer.formatActionNumber(data.comments.length)}} <ion-icon name="chatbubble-outline"></ion-icon></div>
               </ion-col>
             </ion-row>
 

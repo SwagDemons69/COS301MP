@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { KronosTimer } from '@mp/app/kronos-timer/kronos';
 
 @Component({
   selector: 'ms-blip-component',
@@ -8,6 +9,7 @@ import { ModalController } from '@ionic/angular';
 })
 
 export class BlipComponent {
+  KronosTimer = KronosTimer;
   @Input() dat: any;
   data: any = { //TODO: Change this to `post` type once integrated
     username: "Greta Thunberg",
@@ -50,20 +52,6 @@ export class BlipComponent {
     setTimeout(() => {
       // this.data = { ...this.data, ...this.dat }; //TODO: Remove once integrated
     }, 500);
-  }
-
-  formatNumber(num: number) {
-    const ls = ["K", "M", "B", "T"];
-
-    for (let i = ls.length; i >= 0; i--) {
-      const x = 1000**(i+1);
-
-      if(num >= x) {
-        return Math.floor(10*num/x)/10 + ls[i];
-      }
-    }
-
-    return num + "";
   }
 
   async closeModal() {

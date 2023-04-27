@@ -21,6 +21,7 @@ import { KronosTimer } from '@mp/app/kronos-timer/kronos';
 })
 
 export class DashboardPage { 
+  KronosTimer = KronosTimer;
   @Select(ProfileState.profile) profile$!: Observable<user_profile | null>;
   @Select(DashboardState.recommendedPosts) recommended_posts$!: Observable<post[] | []>;
   @Select(DashboardState.trendingPosts) trending_posts$!: Observable<post[] | []>;

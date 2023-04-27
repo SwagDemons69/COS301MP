@@ -75,6 +75,7 @@ ion-grid {
 .profile span {
     text-align: right;
     padding-right: 0.4em;
+    font-size: smaller;
     font-weight: lighter;
 }
 
@@ -116,10 +117,12 @@ ion-grid {
 .actions div {
     text-align: center;
     cursor: pointer;
+    transition: 0.1s ease-in all;
 }
 
 .actions div:hover {
-    color: #da19a7;
+    color: #fd41cb;
+    transform: scale(1.2);
 }
 
 /* // Contains the poster profile, post date, and reactions */
