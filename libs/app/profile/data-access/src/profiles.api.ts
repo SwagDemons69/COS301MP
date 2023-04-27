@@ -43,6 +43,7 @@ export class ProfilesApi {
   }
 
   async getPosts(request: GetPostsRequest){
+    console.log(request)
    return await httpsCallable<GetPostsRequest, GetPostsResponse>(this.functions, 'GetPosts')(request);
   }
 

@@ -1,10 +1,10 @@
 import { SearchModule as SearchDataAccessModule } from '@mp/api/search/data-access';
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
-import { SearchQueryHandler } from './queries';
+import { SearchQueryHandler, GetProfileStatsQueryHandler } from './queries';
 import { SearchService } from './search.service';
 import { SearchEventHandler } from './events';
-export const QueryHandlers = [ SearchQueryHandler];
+export const QueryHandlers = [ SearchQueryHandler, GetProfileStatsQueryHandler];
 export const EventHandlers = [ SearchEventHandler ];
 
 @Module({

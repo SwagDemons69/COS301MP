@@ -88,7 +88,7 @@ function generateProfiles(total){
         const profile = {
             user_id: "",
             timeOfExpiry: Date.now() / 1000 + 21*24*60*60,
-            notPublic: "false",
+            notPublic: false,
             username: faker.internet.userName(name, surname),
             name: faker.internet.userName(name, surname),
             profilePicturePath: faker.internet.avatar(),
@@ -99,10 +99,10 @@ function generateProfiles(total){
             likesLeft: 10,
             dislikesLeft: 10,
             commentLikesLeft: 10,
-            followers: [], 
-            following: [], 
-            blocked: [],    
-            posts: [],  
+            followers: 0, 
+            following: 0, 
+            blocked: 0,    
+            posts: 3,  
             notifications: []
         }
         profiles.push(profile);
@@ -144,7 +144,7 @@ function generatePosts(userIds, total){
                 post_id : "",
                 user_id : userIds[j],
                 title : faker.lorem.words(3),
-                content : faker.image.food(640, 480, true),
+                content : faker.image.cats(640, 480, true),
                 desc : faker.lorem.words(3),
                 likes : [],
                 timeStamp : Timestamp.now(),
