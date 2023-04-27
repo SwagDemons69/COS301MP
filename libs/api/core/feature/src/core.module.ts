@@ -13,7 +13,7 @@ import { DashboardModule } from '@mp/api/dashboard/feature';
   imports: [AuthModule,
      EventstoreModule,
       ProfilesModule,
-       UsersModule,
+       UsersModule, SearchModule,
         PostModule,
          ChatModule,
           SearchModalModule,

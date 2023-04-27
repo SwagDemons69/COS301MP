@@ -24,5 +24,12 @@ service cloud.firestore {
     match /profiles/{userId}/chats/{chatsId}/chat/{chatId} {
       allow read: if true;
     }
+  match /profiles/{userId}/posts/{postId}{
+    allow read: if true;
+  }
+
+  match /profiles/{userId}{
+    allow read: if true;
+  }
   }
 }

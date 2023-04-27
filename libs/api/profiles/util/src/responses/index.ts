@@ -5,7 +5,7 @@ export * from './update-contact-details.response';
 export * from './update-occupation-details.response';
 export * from './update-personal-details.response';
 export * from './update-profile-status.response';
-
+export * from './other-profile_addFollower.response';
 export * from './display-profile.response'
 export * from './edit-profile.response'
 export * from './edit-profile-photo.response'
