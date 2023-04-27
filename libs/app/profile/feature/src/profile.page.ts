@@ -59,10 +59,10 @@ export class ProfilePage {
       likesLeft: 0,
       dislikesLeft: 0,
       commentLikesLeft: 0,
-      followers:     [],
-      following:     [],
-      blocked:       [],
-      posts:         [],
+      followers:     0,
+      following:     0,
+      blocked:       0,
+      posts:         0,
       notifications: [] 
     }
     this.user = data;
@@ -72,7 +72,7 @@ export class ProfilePage {
         //Default Profile Image
         this.profileImage = (user.profilePicturePath == "")? "https://ionicframework.com/docs/img/demos/avatar.svg" : user.profilePicturePath;
         //console.log(this.profileImage)
-        const len = user.posts.length;
+        const len = user.posts;
         this.user = user;
       }
     })

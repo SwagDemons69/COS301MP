@@ -1,3 +1,5 @@
+
 export interface addFollowerResponse{
-    result : boolean;
+    followingCount : number,
+    followerCount : number
 }

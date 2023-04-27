@@ -17,10 +17,10 @@ export class Profile extends AggregateRoot implements user_profile {
     public likesLeft: number | null | undefined,
     public dislikesLeft: number | null | undefined,
     public commentLikesLeft: number | null | undefined,
-    public followers: string[] | null | undefined, //Array of UserId
-    public following: string[] | null | undefined, //Array of UserId
-    public posts: post[] | null | undefined,  //Array of PostId
-    public blocked: string[] | null | undefined,
+    public followers: number, //Array of UserId
+    public following: number, //Array of UserId
+    public posts: number,  //Array of PostId
+    public blocked: number,
     public notifications: string[] | null | undefined
   ) {
     super();

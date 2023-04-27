@@ -99,10 +99,10 @@ function generateProfiles(total){
             likesLeft: 10,
             dislikesLeft: 10,
             commentLikesLeft: 10,
-            followers: [], 
-            following: [], 
-            blocked: [],    
-            posts: [],  
+            followers: 0, 
+            following: 0, 
+            blocked: 0,    
+            posts: 3,  
             notifications: []
         }
         profiles.push(profile);

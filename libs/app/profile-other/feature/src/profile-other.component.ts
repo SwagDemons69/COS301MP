@@ -9,6 +9,7 @@ import { user_profile } from '@mp/api/profiles/util';
 import { Observable } from 'rxjs';
 import { profileOtherAPI } from '@mp/app/profile-other/data-access';
 import { ToastController } from '@ionic/angular';
+import { Render } from '@nestjs/common';
 
 @Component({
   selector: 'ms-profile-other-component',
@@ -20,6 +21,10 @@ export class ProfileOtherComponent {
   @Select(ProfileState.profile) currentUser$!: Observable<user_profile | null>
   
   currentUser: user_profile | null
+  followingCount: number
+  followerCount: number
+  postCount: number
+
 
   @Input() profile: any = {
     username: "Null username",
@@ -35,16 +40,31 @@ export class ProfileOtherComponent {
     private toastCtrlr: ToastController
   ) 
   {
+    this.followingCount = 1;
+    this.followerCount = 1;
+    this.postCount = 0;  
+
     this.currentUser = null;
     this.currentUser$.forEach((user) => {
       this.currentUser = user;
-    })  
+      if(user){
+        this.followerCount = user?.followers;
+        this.followingCount = user?.following;
+        this.postCount = user?.posts;
+        //this.postCount = user?.posts?.length;
+      }
+    })
+
   }
 
   Status = 1;  
   async ionViewWillEnter(){
   //  console.log(this.profile.user.user_id)
     const response = await this.api.getProfileStats({ user: this.profile.user.user_id });
+    this.followerCount = response.data.followers.length;
+    this.followingCount = response.data.following.length;
+
+    this.postCount = this.profile.posts.length;
     // console.log(response)
     //followers = string[]
     //following = string[]
@@ -72,18 +92,6 @@ export class ProfileOtherComponent {
     await this.modalController.dismiss();
   }
 
-  getNumFollowers(){
-    return this.profile.user.followers.length;
-  }
-
-  getNumPosts(){
-    return this.profile.posts.length;
-  }
-
-  getNumFollowing(){
-    return this.profile.user.following.length;
-  }
-
   async openBlip(data: any, name: any) {
     const modal = await this.modalController.create({
       component: BlipComponent,
@@ -104,26 +112,57 @@ export class ProfileOtherComponent {
   }
 
   async followUser(){
-    console.log("Current user: " + this.currentUser);
-    // this.Status = 2;
     if(this.currentUser !== null){
-      await this.api.addFollower({requester : this.currentUser, requestee : this.profile});
+      const response = await this.api.addFollower({requester : this.currentUser, requestee : this.profile});
 
-      if(this.profile.user.notPublic === false){
-        this.Status = 0;
-      }
-      else{
-        this.Status = 2;
-      }
-      const toast = await this.toastCtrlr.create({
-        message: (this.Status == 0) ? `Now Following ${this.profile.user.username}` : "Follow request sent",
-        color: 'success',
-        duration: 1500,
-        position: 'top',
-      });
-  
-      await toast.present();
-    }
+      if(this.Status == 1){ //follow user
+            
+          if(this.profile.user.notPublic === false){
+            this.Status = 0;
+          }
+          else{
+            this.Status = 2;
+          }
+          const toast = await this.toastCtrlr.create({
+            message: (this.Status == 0) ? `Now Following ${this.profile.user.username}` : "Follow request sent",
+            color: 'success',
+            duration: 1500,
+            position: 'top',
+          });
       
+          await toast.present();
+
+        }
+      else if(this.Status == 0){ //unfollow user
+          
+          this.Status = 1;
+          
+          const toast = await this.toastCtrlr.create({
+            message: (this.Status == 1) ? `Unfollowed ${this.profile.user.username}` : "Stopped Following",
+            color: 'success',
+            duration: 1500,
+            position: 'top',
+          });
+      
+          await toast.present();
+        }
+      else if(this.Status == 2){ //cancel follow request
+    
+          this.Status = 1;
+          
+          const toast = await this.toastCtrlr.create({
+            message: (this.Status == 2) ? `Cancelled follow request` : "Removed Follow Request",
+            color: 'success',
+            duration: 1500,
+            position: 'top',
+          });
+      
+          await toast.present();
+        }
+
+        this.followerCount = response.data.followerCount;
+        this.followingCount = response.data.followingCount
+      }
+    }
   }
-}
+

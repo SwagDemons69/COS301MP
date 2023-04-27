@@ -20,14 +20,16 @@
             </ion-card-subtitle>
 
           </ion-card-header>
-
+          <!-- <ng-container *ngIf="(profile$ | async) as profile; else noProfile"> -->
           <ion-card-content>
             <ion-grid class="stats">
+
               <ion-row class="statsNumber">
-                <ion-col>{{getNumFollowing()}}</ion-col>
-                <ion-col>{{getNumPosts()}}</ion-col>
-                <ion-col>{{getNumFollowers()}}</ion-col>
+                <ion-col id="followingCount">{{followingCount}}</ion-col>
+                <ion-col>{{postCount}}</ion-col>
+                <ion-col>{{followerCount}}</ion-col>
               </ion-row>
+            
 
               <ion-row class="statsLabel">
                 <ion-col>Following</ion-col>
@@ -39,13 +41,15 @@
             <ion-row class="ion-justify-content-center">
       
               <ng-template  [ngIf]="Status === 0">
-                <ion-button class="connectButton">
-                  <ion-icon name="person-outline"></ion-icon></ion-button>
+                <ion-button class="connectButton" (click)="followUser()">
+                  <ion-icon name="person-outline"></ion-icon>
+                </ion-button>
               </ng-template>
 
               <ng-template #notFollowed [ngIf]="Status === 1">
                 <ion-button (click)="followUser()" class="connectButton">
-                  <ion-icon name="person-add-outline"></ion-icon></ion-button>
+                  <ion-icon name="person-add-outline"></ion-icon>
+                </ion-button>
               </ng-template>
 
               <ng-template #Requested [ngIf]="Status === 2">
@@ -66,7 +70,7 @@
             </ion-card-subtitle>
 
             <ng-container>
-              <ng-template  [ngIf]="(getNumPosts() !== 0)" [ngIfElse]="noPosts">
+              <ng-template  [ngIf]="postCount != 0" [ngIfElse]="noPosts">
                 <ion-card class="photos">
                   <ion-card-content class="ion-text-center">
                     <!-- <ion-content [fullscreen]="true" [scrollEvents]="true"> -->
@@ -88,6 +92,7 @@
             </ng-container>
         
           </ion-card-content>
+        <!-- </ng-container> -->
         </ion-card>
 
     </ion-row>

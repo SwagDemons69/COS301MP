@@ -2,6 +2,7 @@ import { user_profile } from '@mp/api/profiles/util';
 import { Injectable } from '@nestjs/common';
 import * as admin from 'firebase-admin';
 import { addFollowerRequest } from '@mp/api/profiles/util';
+import { user } from '@mp/api/search/data-access';
 
 @Injectable()
 export class ProfilesRepository {
@@ -54,22 +55,51 @@ export class ProfilesRepository {
   }
 
   async addFollower(request : addFollowerRequest){
-    console.log(request)
     const requesteeRef = admin.firestore().collection('profiles').doc(request.requestee.user.user_id); 
     const requesteeProfile = await requesteeRef.get();
     const requestee = requesteeProfile.data() as user_profile;
-    console.log(requestee)
 
-    if(requestee.notPublic){
-      const followRequestsRef = admin.firestore().collection(`profiles/${requestee.user_id}/follow-requests`).doc(request.requester.user_id);
-      followRequestsRef.set({user: request.requester.username, image: request.requester.profilePicturePath});
-      return {result : true};
+    const followerRef = await admin.firestore().collection(`profiles/${request.requestee.user.user_id}/followers`).doc(request.requester.user_id).get();
+    const followRequestsRef = await admin.firestore().collection(`profiles/${request.requestee.user.user_id}/follow-requests`).doc(request.requester.user_id).get();
+
+    //Remove Follow
+    if(followerRef.exists){
+        await admin.firestore().collection(`profiles/${request.requestee.user.user_id}/followers`).doc(request.requester.user_id).delete();
+        const requestee2 = admin.firestore().collection("profiles").doc(request.requestee.user.user_id);
+
+        let followerCount = (await requestee2.get()).data()?.['followers'];
+        await requestee2.set({followers: --followerCount}, { merge: true });
+      }
+    //Remove Follow Request
+    else if(followRequestsRef.exists){
+        await admin.firestore().collection(`profiles/${request.requestee.user.user_id}/follow-requests`).doc(request.requester.user_id).delete();
     }
     else{
-      const followersRef = admin.firestore().collection(`profiles/${requestee.user_id}/followers`).doc(request.requester.user_id);
-      followersRef.set({user: request.requester.username, image: request.requester.profilePicturePath});
-      return {result : true};
+      //Add follower
+      if(requestee.notPublic){
+        const followRequestsRef = admin.firestore().collection(`profiles/${requestee.user_id}/follow-requests`).doc(request.requester.user_id);
+        followRequestsRef.set({user: request.requester.username, image: request.requester.profilePicturePath});
+      
+      }
+      else{
+        const followersRef = admin.firestore().collection(`profiles/${requestee.user_id}/followers`).doc(request.requester.user_id);
+        followersRef.set({user: request.requester.username, image: request.requester.profilePicturePath});
+        const requestee2 = admin.firestore().collection("profiles").doc(request.requestee.user.user_id);
+
+        let followerCount = (await requestee2.get()).data()?.['followers'];
+        await requestee2.set({followers: ++followerCount}, { merge: true });
+      }
     }
+
+    const followingRef = admin.firestore().collection(`profiles/${requestee.user_id}/following`).get();
+    const followingCount = (await followingRef).docs.length;
+    
+    const followersRef2 = admin.firestore().collection(`profiles/${requestee.user_id}/followers`).get();
+    const followerCount = (await followersRef2).docs.length;
+
+  
+    
+    return {followingCount : followingCount, followerCount : followerCount};
   }
 
   // async checkForUser(profile_user_id : string){
