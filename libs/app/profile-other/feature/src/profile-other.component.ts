@@ -53,7 +53,6 @@ export class ProfileOtherComponent {
         this.followerCount = user?.followers;
         this.followingCount = user?.following;
         this.postCount = user?.posts;
-        this.deathTime = user.timeOfExpiry
         //this.postCount = user?.posts?.length;
       }
     })
@@ -66,11 +65,13 @@ export class ProfileOtherComponent {
   }, 999)
 
   Status = 1;  
-  async ionViewWillEnter(){
+  async ionViewWillEnter(){ 
+    this.deathTime = this.profile.user.timeOfExpiry //Wrong
   //  console.log(this.profile.user.user_id)
     const response = await this.api.getProfileStats({ user: this.profile.user.user_id });
     this.followerCount = response.data.followers.length;
     this.followingCount = response.data.following.length;
+   
 
     this.postCount = this.profile.posts.length;
     // console.log(response)
@@ -123,7 +124,7 @@ export class ProfileOtherComponent {
 
   async followUser(){
     if(this.currentUser !== null){
-      const response = await this.api.addFollower({requester : this.currentUser, requestee : this.profile});
+      const response = await this.api.addFollower({requester : this.currentUser, requestee : this.profile.user});
 
       if(this.Status == 1){ //follow user
             

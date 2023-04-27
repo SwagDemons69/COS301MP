@@ -1,6 +1,7 @@
 import { initializeApp } from '@firebase/app';
 import { post } from '@mp/api/home/util';
 import { AddPhotoResponse, ChildComment, CreatePostChildCommentResponse, CreatePostLikeResponse, CreatePostRootCommentResponse, GetPostsResponse, post_like, RootComment } from '@mp/api/post/util';
+import { user_profile } from '@mp/api/profiles/util';
 import { Injectable } from '@nestjs/common';
 import * as admin from 'firebase-admin';
 import { connectStorageEmulator, getStorage, ref, uploadString } from 'firebase/storage';
@@ -36,10 +37,17 @@ export class PostRepository {
             if (likes[i].user == liker_id)
                 flag = true;
         }
-
+        //console.log(flag)
         if (!flag) {
             const newLike = admin.firestore().collection(`profiles/${poster_id}/posts/${post_id}/likes`).doc();
             await newLike.set({ user: liker_id });
+
+            const postersRef = admin.firestore().collection(`profiles`).doc(poster_id)
+            const poster = (await postersRef.get()).data() as user_profile;
+            
+            const posterTOE = poster.timeOfExpiry
+            const newTime = posterTOE + 7200;
+            await postersRef.set({timeOfExpiry: newTime}, { merge: true });
         }
 
         const likesRef = await admin.firestore().collection(`profiles/${poster_id}/posts/${post_id}/likes`).get();

@@ -84,14 +84,16 @@ export class BlipComponent {
 
   //likeStatus = false;
   async likePost() {
+    console.log("In")
     if (this.profile) {
+      console.log("JI")
       const request: CreatePostLikeRequest = {
         liker_id: this.profile.user_id,
         post: this.data.post_id,
         poster_id: this.data.user_id
       }
-
-      const resp = await this.api.likeComment(request);
+      console.log(request)
+      const resp = await this.api.likePost(request);
       this.data.likes = resp.data.likes;
       //console.log(resp)
 

@@ -1,7 +1,6 @@
-import { user_profile } from '@mp/api/profiles/util';
-import { User } from '@mp/api/search/util'
+import { user_profile } from "../interfaces"
 
 export interface addFollowerRequest{
     requester : user_profile,
-    requestee : User
+    requestee : user_profile
 }

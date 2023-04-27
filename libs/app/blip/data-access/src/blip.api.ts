@@ -11,7 +11,7 @@ export class blipAPI {
     private readonly functions: Functions
   ) {}
 
-  async likeComment(request: CreatePostLikeRequest){
+  async likePost(request: CreatePostLikeRequest){
     return await httpsCallable<CreatePostLikeRequest, CreatePostLikeResponse>(this.functions, 'CreatePostLike')(request);
   }
 

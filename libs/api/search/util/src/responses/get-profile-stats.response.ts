@@ -1,8 +1,10 @@
-import { user } from '@mp/api/search/data-access'
-
-
-export interface GetProfileStatsResponse{
+export interface GetProfileStatsResponse {
     followers: string[],
     following: string[],
-    followRequests : user[]
+    followRequests: user[]
+}
+
+interface user {
+    user: string;
+    image: string;
 }

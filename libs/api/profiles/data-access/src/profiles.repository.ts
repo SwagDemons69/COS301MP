@@ -55,7 +55,7 @@ export class ProfilesRepository {
   }
 
   async addFollower(request : addFollowerRequest){
-    const requesteeRef = admin.firestore().collection('profiles').doc(request.requestee.user.user_id);
+    const requesteeRef = admin.firestore().collection('profiles').doc(request.requestee.user_id);
     const requesterRef = admin.firestore().collection('profiles').doc(request.requester.user_id)
     const requesteeProfile = await requesteeRef.get();
     const requesterProfile = await requesterRef.get();
@@ -63,20 +63,20 @@ export class ProfilesRepository {
     const requester = requesterProfile.data() as user_profile;
 
 
-    const followerRef = await admin.firestore().collection(`profiles/${request.requestee.user.user_id}/followers`).doc(request.requester.user_id).get();
-    const followRequestsRef = await admin.firestore().collection(`profiles/${request.requestee.user.user_id}/follow-requests`).doc(request.requester.user_id).get();
+    const followerRef = await admin.firestore().collection(`profiles/${request.requestee.user_id}/followers`).doc(request.requester.user_id).get();
+    const followRequestsRef = await admin.firestore().collection(`profiles/${request.requestee.user_id}/follow-requests`).doc(request.requester.user_id).get();
 
     //Remove Follow
     if(followerRef.exists){
         //Remove requester from requestee follower list
-        await admin.firestore().collection(`profiles/${request.requestee.user.user_id}/followers`).doc(request.requester.user_id).delete();
-        const requestee2 = admin.firestore().collection("profiles").doc(request.requestee.user.user_id);
+        await admin.firestore().collection(`profiles/${request.requestee.user_id}/followers`).doc(request.requester.user_id).delete();
+        const requestee2 = admin.firestore().collection("profiles").doc(request.requestee.user_id);
         let followerCount = (await requestee2.get()).data()?.['followers'];
         if(followerCount != 0)
           await requestee2.set({followers: --followerCount}, { merge: true });
        
         //Remove requestee from requester following list
-        await admin.firestore().collection(`profiles/${request.requester.user_id}/following`).doc(request.requestee.user.user_id).delete();
+        await admin.firestore().collection(`profiles/${request.requester.user_id}/following`).doc(request.requestee.user_id).delete();
         const requester2 = admin.firestore().collection("profiles").doc(request.requester.user_id);
         let followingCount = (await requester2.get()).data()?.['following'];
         if(followingCount != 0)
@@ -84,7 +84,7 @@ export class ProfilesRepository {
       }
     //Remove Follow Request
     else if(followRequestsRef.exists){
-        await admin.firestore().collection(`profiles/${request.requestee.user.user_id}/follow-requests`).doc(request.requester.user_id).delete();
+        await admin.firestore().collection(`profiles/${request.requestee.user_id}/follow-requests`).doc(request.requester.user_id).delete();
     }
     else{
       //Add follower
@@ -97,13 +97,13 @@ export class ProfilesRepository {
         //Add requester to followers of requestee
         const followersRef = admin.firestore().collection(`profiles/${requestee.user_id}/followers`).doc(request.requester.user_id);
         followersRef.set({user: request.requester.username, image: request.requester.profilePicturePath});
-        const requestee2 = admin.firestore().collection("profiles").doc(request.requestee.user.user_id);
+        const requestee2 = admin.firestore().collection("profiles").doc(request.requestee.user_id);
         let followerCount = (await requestee2.get()).data()?.['followers'];
         await requestee2.set({followers: ++followerCount}, { merge: true });
 
         //Add requestee to following of requester
-        const followersRefRequester = admin.firestore().collection(`profiles/${requester.user_id}/following`).doc(request.requestee.user.user_id);
-        followersRefRequester.set({user: request.requestee.user.username, image: request.requestee.user.profilePicturePath});
+        const followersRefRequester = admin.firestore().collection(`profiles/${requester.user_id}/following`).doc(request.requestee.user_id);
+        followersRefRequester.set({user: request.requestee.username, image: request.requestee.profilePicturePath});
         const requester2 = admin.firestore().collection("profiles").doc(request.requester.user_id);
         let followingCount = (await requester2.get()).data()?.['following'];
         await requester2.set({following: ++followingCount}, { merge: true });
