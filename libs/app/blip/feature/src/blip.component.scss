@@ -210,3 +210,47 @@ $tag-colors: (
     font-weight: 200;
     color: #b3b3b3;
 }
+
+.commentSection.sub {
+    padding-top: 0px;
+    padding-bottom: 2em;
+}
+
+.comment.sub {
+    background-color: #181818;
+}
+
+.repliesLabel {
+    color: white;
+    cursor: pointer;
+    margin-left: 1em;
+}
+
+.repliesLabel:hover {
+    color: #d7d7d7;
+}
+
+.send {
+  width: 90%;
+  border-radius: 15px;
+  align-items: center;
+  background-color: #1f1f1f;
+  margin: auto;
+
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.send ion-textarea {
+  --padding-start: 10px;
+  --padding-end: 0px;
+  --padding-top: 10px;
+  --padding-bottom: 0px;
+}
+
+ion-button {
+  --background: transparent;
+  --box-shadow: none;
+  width: 50px;
+  font-size: 0.8em;
+}

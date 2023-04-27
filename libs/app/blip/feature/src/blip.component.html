@@ -64,8 +64,22 @@
     </ion-row>
 
     <!-- COMMENT SECTION -->
+    <ion-row class="send">
+      <ion-textarea
+        placeholder="Type a message"
+        [(ngModel)]="newComment"
+        maxlength="512"
+      ></ion-textarea>
+      <ion-button (click)="sendComment()">Send</ion-button>
+    </ion-row>
+
     <ion-row>
-      <ion-list class="commentSection">
+      <ion-list class="commentSection" id="commentSection">
+
+        <span *ngIf="metadata.comments.length == 0"style="width: 100%; text-align: center">
+          No comments yet!
+        </span>
+
         <div *ngFor="let comm of metadata.comments">
         <ion-card class="comment">
           <ion-card-title>{{comm.created_by}}</ion-card-title>
@@ -73,8 +87,10 @@
           <ion-card-subtitle>{{comm.content}}</ion-card-subtitle>
         </ion-card>
 
-        <ion-list class="subCommentSection">
-          <ion-card class="comment" *ngFor="let subcomm of comm.comments">
+        <span (click)="comm.expanded = !comm.expanded" class="repliesLabel">{{comm.expanded?"Hide replies":"Show replies"}}</span>
+
+        <ion-list class="commentSection sub" *ngIf="comm.expanded">
+          <ion-card class="comment sub" *ngFor="let subcomm of comm.comments">
             <ion-card-title>{{subcomm.created_by}}</ion-card-title>
             <br />
             <ion-card-subtitle>{{subcomm.content}}</ion-card-subtitle>

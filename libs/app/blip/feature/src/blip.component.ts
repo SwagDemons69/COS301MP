@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, SimpleChanges } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { KronosTimer } from '@mp/app/kronos-timer/kronos';
 
@@ -11,7 +11,8 @@ import { KronosTimer } from '@mp/app/kronos-timer/kronos';
 export class BlipComponent {
   KronosTimer = KronosTimer;
 
-  JSON = JSON;
+  newComment = "";
+
   @Input() data: any;
   @Input() metadata: any;
 
@@ -30,5 +31,15 @@ export class BlipComponent {
 
   goToMessages() {
     return;
+  }
+
+  sendComment() {
+    this.metadata.comments.push({
+      content: this.newComment,
+      created_by: "Gorgorogorogorgorogge",
+      comments: []
+    });
+
+    this.newComment = "";
   }
 }
