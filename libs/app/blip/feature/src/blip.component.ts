@@ -1,7 +1,13 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { CreatePostLikeRequest } from '@mp/api/post/util';
+import { user_profile } from '@mp/api/profiles/util';
+import { blipAPI } from '@mp/app/blip/data-access';
 import { KronosTimer } from '@mp/app/kronos-timer/kronos';
-// import { blipAPI } from '@mp/app/blip/data-access'
+import { ProfileState } from '@mp/app/profile/data-access';
+import { Select } from '@ngxs/store';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'ms-blip-component',
@@ -11,6 +17,10 @@ import { KronosTimer } from '@mp/app/kronos-timer/kronos';
 
 export class BlipComponent {
   KronosTimer = KronosTimer;
+  @Select(ProfileState.profile) profile$!: Observable<user_profile | null>;
+
+  deathTime: number
+  profile: user_profile | null
 
   newComment = "";
   replyTo: any = null;
@@ -18,15 +28,31 @@ export class BlipComponent {
   @Input() data: any;
   @Input() metadata: any;
 
-  constructor (
+  constructor(
     private modalController: ModalController,
-    // private api: blipAPI
+    private api: blipAPI
   ) {
+    this.deathTime = 0;
     setTimeout(() => {
       console.log(this.data);
       console.log(this.metadata);
     }, 500);
+
+    this.profile = null;
+    this.profile$.forEach((profile) => {
+      this.profile = profile;
+      if (this.profile) {
+        this.deathTime = this.profile?.timeOfExpiry
+      }
+    });
   }
+
+  kronos = ""
+
+  // kronosTimer = setInterval(() => {
+  //   const counter = this.deathTime - Date.now()/1000;
+  //   this.kronos = KronosTimer.displayKronos(counter);
+  // }, 999)
 
   async closeModal() {
     await this.modalController.dismiss();
@@ -45,8 +71,7 @@ export class BlipComponent {
 
       this.replyTo = null;
     }
-    else
-    {
+    else {
       this.metadata.comments.push({
         content: this.newComment,
         created_by: "Gorgorogorogorgorogge",
@@ -57,13 +82,19 @@ export class BlipComponent {
     this.newComment = "";
   }
 
-  // likeStatus = false;
-  // aysnc likePost(){
-  //   if(likeStatus){
-  //     const resp = await this.api.likeComment();
-  //   }
-  //   else{
+  //likeStatus = false;
+  async likePost() {
+    if (this.profile) {
+      const request: CreatePostLikeRequest = {
+        liker_id: this.profile.user_id,
+        post: this.data.post_id,
+        poster_id: this.data.user_id
+      }
 
-  //   }
-  // }
+      const resp = await this.api.likeComment(request);
+      this.data.likes = resp.data.likes;
+      //console.log(resp)
+
+    }
+  }
 }

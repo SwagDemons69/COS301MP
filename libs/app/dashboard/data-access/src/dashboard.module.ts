@@ -6,12 +6,13 @@ import { DashboardState } from './dashboard.state';
 import { DashboardApi } from './dashboard.api';
 import { SearchModule } from './search.module';
 import { profileOtherAPI } from '@mp/app/profile-other/data-access'
+import { blipAPI } from '@mp/app/blip/data-access';
 
 @NgModule({
   imports: [CommonModule,
     NgxsModule.forFeature([DashboardState]),
     SearchModule,
     AuthModule],
-  providers: [DashboardApi, profileOtherAPI],
+  providers: [DashboardApi, profileOtherAPI, blipAPI],
 })
 export class DashboardModule {}

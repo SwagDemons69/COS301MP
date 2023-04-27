@@ -11,7 +11,7 @@ import { profileOtherAPI } from '@mp/app/profile-other/data-access';
 import { ToastController } from '@ionic/angular';
 import { Render } from '@nestjs/common';
 import { ASYNC_METHOD_SUFFIX } from '@nestjs/common/module-utils/constants';
-
+import { KronosTimer } from '@mp/app/kronos-timer/kronos';
 @Component({
   selector: 'ms-profile-other-component',
   templateUrl: './profile-other.component.html',
@@ -25,7 +25,7 @@ export class ProfileOtherComponent {
   followingCount: number
   followerCount: number
   postCount: number
-
+  deathTime: number
 
   @Input() profile: any = {
     username: "Null username",
@@ -43,7 +43,8 @@ export class ProfileOtherComponent {
   {
     this.followingCount = 0;
     this.followerCount = 0;
-    this.postCount = 0;  
+    this.postCount = 0;
+    this.deathTime = 0;  
 
     this.currentUser = null;
     this.currentUser$.forEach((user) => {
@@ -52,11 +53,17 @@ export class ProfileOtherComponent {
         this.followerCount = user?.followers;
         this.followingCount = user?.following;
         this.postCount = user?.posts;
+        this.deathTime = user.timeOfExpiry
         //this.postCount = user?.posts?.length;
       }
     })
 
   }
+  kronos = ""
+  kronosTimer = setInterval(() => {
+    const counter = this.deathTime - Date.now()/1000;
+    this.kronos = KronosTimer.displayKronos(counter);
+  }, 999)
 
   Status = 1;  
   async ionViewWillEnter(){
