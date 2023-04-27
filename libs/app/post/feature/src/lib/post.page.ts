@@ -14,6 +14,8 @@ import { IonBadge } from '@ionic/angular';
 
 
 
+
+
 @Component({
   selector: 'post-page',
   templateUrl: './post.page.html',

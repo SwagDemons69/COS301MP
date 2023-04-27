@@ -2,14 +2,15 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+  <ion-button (click)="getNotifications()">Get User ID</ion-button>
   <ion-list>
-    <div *ngFor="let notif of notifications" class="notif">
+    <!-- <div *ngFor="let notif of notifications" class="notif">
     <ion-item lines="none">
       <ion-icon name="{{ notif.icon }}"></ion-icon>
       <ion-label>{{ notif.message }}</ion-label>
       <ion-badge slot="end">{{ notif.time }}</ion-badge>
     </ion-item>
     <hr />
-  </div>
+  </div> -->
   </ion-list>
 </ion-content>
