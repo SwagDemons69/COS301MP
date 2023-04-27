@@ -93,7 +93,12 @@
           <ion-card-subtitle>{{comm.content}}</ion-card-subtitle>
         </ion-card>
 
-        <span (click)="comm.expanded = !comm.expanded" class="repliesLabel">{{comm.expanded?"Hide replies":"Show replies"}}</span>
+        <span
+          *ngIf="comm.comments.length > 0"
+          (click)="comm.expanded = !comm.expanded"
+          class="repliesLabel"
+        > {{comm.expanded?"Hide replies":"Show replies"}}
+        </span>
         <span (click)="replyTo = (replyTo === comm) ? null : comm" class="repliesLabel" [class.selectedReply]="replyTo === comm">Reply</span>
 
         <ion-list class="commentSection sub" *ngIf="comm.expanded">

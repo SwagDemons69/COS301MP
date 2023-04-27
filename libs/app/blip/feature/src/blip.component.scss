@@ -208,7 +208,9 @@ $tag-colors: (
 .comment ion-card-subtitle {
     font-family: 'Roboto';
     font-weight: 200;
-    color: #b3b3b3;
+    font-size: medium;
+    padding: 0.1em;
+    color: #e1e1e1;
 }
 
 .commentSection.sub {
@@ -227,7 +229,7 @@ $tag-colors: (
 }
 
 .repliesLabel:hover {
-    color: #9f9f9f;
+    color: #858585;
 }
 
 .selectedReply {
