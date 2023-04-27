@@ -104,8 +104,10 @@ export class ProfileOtherComponent {
   }
 
   goToMessages() {
+    //console.log(this.profile.user.user_id + " " + this.profile.user.username, pictureUrl: this.profile.user.profilePicturePath)
     this.store.dispatch(new SetRecipient({user_id: this.profile.user.user_id, username: this.profile.user.username, pictureUrl: this.profile.user.profilePicturePath}))
-    this.store.dispatch(new SetChatMessages(this.profile.user.user_id, this.profile.user.user_id));
+    if(this.currentUser)
+      this.store.dispatch(new SetChatMessages(this.currentUser.user_id, this.profile.user.user_id));
 
     this.modalController.dismiss();
 
