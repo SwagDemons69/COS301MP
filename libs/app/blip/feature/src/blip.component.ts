@@ -12,6 +12,7 @@ export class BlipComponent {
   KronosTimer = KronosTimer;
 
   newComment = "";
+  replyTo: any = null;
 
   @Input() data: any;
   @Input() metadata: any;
@@ -34,11 +35,22 @@ export class BlipComponent {
   }
 
   sendComment() {
-    this.metadata.comments.push({
-      content: this.newComment,
-      created_by: "Gorgorogorogorgorogge",
-      comments: []
-    });
+    if (this.replyTo) {
+      this.replyTo.comments.push({
+        content: this.newComment,
+        created_by: "Gorgorogorogorgorogge",
+      });
+
+      this.replyTo = null;
+    }
+    else
+    {
+      this.metadata.comments.push({
+        content: this.newComment,
+        created_by: "Gorgorogorogorgorogge",
+        comments: []
+      });
+    }
 
     this.newComment = "";
   }

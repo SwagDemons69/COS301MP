@@ -64,6 +64,12 @@
     </ion-row>
 
     <!-- COMMENT SECTION -->
+    <div *ngIf="replyTo !== null" style="margin-left: 1em; margin-bottom: 0.4em">
+      Replying to <b>{{replyTo?.created_by}}</b>
+      <span (click)="replyTo = null" class="repliesLabel" style="font-size: 0.7em">
+        (Cancel)
+      </span>
+    </div>
     <ion-row class="send">
       <ion-textarea
         placeholder="Type a message"
@@ -88,6 +94,7 @@
         </ion-card>
 
         <span (click)="comm.expanded = !comm.expanded" class="repliesLabel">{{comm.expanded?"Hide replies":"Show replies"}}</span>
+        <span (click)="replyTo = (replyTo === comm) ? null : comm" class="repliesLabel" [class.selectedReply]="replyTo === comm">Reply</span>
 
         <ion-list class="commentSection sub" *ngIf="comm.expanded">
           <ion-card class="comment sub" *ngFor="let subcomm of comm.comments">

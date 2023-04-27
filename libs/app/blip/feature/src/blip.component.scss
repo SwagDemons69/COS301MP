@@ -230,6 +230,14 @@ $tag-colors: (
     color: #9f9f9f;
 }
 
+.selectedReply {
+    color: #fd41cb;
+}
+
+.selectedReply:hover {
+    color: #e035b2;
+}
+
 .send {
   width: 90%;
   border-radius: 15px;
