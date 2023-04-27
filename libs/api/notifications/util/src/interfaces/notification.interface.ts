@@ -23,6 +23,9 @@ export interface postCommentedNotification extends notification {
     post_id: string;
 }
 
+// example postCommentNotification
+// 
+
 // this type of notification is used when a user dislikes a post
 export interface newFollowerNotification extends notification {
     type: NotificationType.NewFollowerNotification;
@@ -64,3 +67,20 @@ export interface systemNotification extends notification {
     system_message: string;
 }
 
+export interface followRequestNotification extends notification {
+    type: NotificationType.FollowRequestNotification;
+    follower_id: string;
+    accepted: boolean;
+}
+
+export interface followRequestAcceptedNotification extends notification {
+    type: NotificationType.FollowRequestAcceptedNotification;
+    follower_id: string;
+    accepted: true;
+}
+
+export interface followRequestDeclinedNotification extends notification {
+    type: NotificationType.FollowRequestDeclinedNotification;
+    follower_id: string;
+    accepted: false;
+}
