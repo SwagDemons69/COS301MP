@@ -1,0 +1,85 @@
+{
+  "database": {
+    "rules": "database.rules.json"
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "functions": [
+    {
+      "source": "dist/apps/api",
+      "codebase": "default",
+      "ignore": [
+        "node_modules",
+        ".git",
+        "firebase-debug.log",
+        "firebase-debug.*.log"
+      ],
+      "runtime": "nodejs16",
+      "predeploy": [
+        "npm --prefix \"$RESOURCE_DIR\" run lint",
+        "npm --prefix \"$RESOURCE_DIR\" run build"
+      ]
+    }
+  ],
+  "hosting": {
+    "public": "/apps/app",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/createLike           ---> THESE ARE JUST EXAMPLES",
+        "function": "createLike"
+      },
+      {
+        "source": "/createExample           ---> THESE ARE JUST EXAMPLES",
+        "function": "createExample"
+      }
+    ]
+  },
+  "storage": {
+    "rules": "storage.rules"
+  },
+  "emulators": {
+    "auth": {
+      "port": 5002
+    },
+    "firestore": {
+      "port": 5003
+    },
+    "database": {
+      "port": 5004
+    },
+    "functions": {
+      "port": 5005
+    },
+    "storage": {
+      "port": 5006
+    },
+    "hosting": {
+      "port": 5007
+    },
+    "eventarc": {
+      "port": 5009
+    },
+    "singleProjectMode": true,
+    "ui": {
+<<<<<<<<< Temporary merge branch 1
+=========
+      "port": 5001,
+>>>>>>>>> Temporary merge branch 2
+      "enabled": true
+    }
+  },
+  "remoteconfig": {
+    "template": "remoteconfig.template.json"
+  }
+}
