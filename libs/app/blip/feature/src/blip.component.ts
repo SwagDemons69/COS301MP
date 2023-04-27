@@ -1,6 +1,7 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { KronosTimer } from '@mp/app/kronos-timer/kronos';
+// import { blipAPI } from '@mp/app/blip/data-access'
 
 @Component({
   selector: 'ms-blip-component',
@@ -18,7 +19,8 @@ export class BlipComponent {
   @Input() metadata: any;
 
   constructor (
-    private modalController: ModalController
+    private modalController: ModalController,
+    // private api: blipAPI
   ) {
     setTimeout(() => {
       console.log(this.data);
@@ -54,4 +56,14 @@ export class BlipComponent {
 
     this.newComment = "";
   }
+
+  // likeStatus = false;
+  // aysnc likePost(){
+  //   if(likeStatus){
+  //     const resp = await this.api.likeComment();
+  //   }
+  //   else{
+
+  //   }
+  // }
 }

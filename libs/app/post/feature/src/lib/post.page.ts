@@ -119,11 +119,11 @@ export class PostPage {
       title:        this.title,         
       content:      pathToImage,
       desc:         this.removeTagsFromDesc(this.desc),
-      likes:        [],
+      likes:        0,
       timeStamp:    696969696,
       shares:       0,
       kronos:       0,
-      comments:     [],
+      comments:     0,
       tags:         this.tags,
       taggedUsers:  []
     }

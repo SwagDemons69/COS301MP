@@ -3,11 +3,11 @@ export interface post {
     user_id : string;
     content : string;
     caption : string;
-    likes : string[];
+    likes : number;
     timeStamp : number;
     shares : number;
     kronos : number;
-    comments : string[];
+    comments : number;
     categories : string[];
     taggedUsers : string[]
 }

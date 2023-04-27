@@ -66,9 +66,9 @@
 
       <ion-slide *ngFor="let item of recommended">
         <ion-col>
-          <ion-img [src]="item.content"></ion-img>
+          <ion-img [src]="item.post.content"></ion-img>
           <div class="overlay">
-            <ion-label>{{item.title}}</ion-label>
+            <ion-label>{{item.post.title}}</ion-label>
             <div class="reactions">
               likes | comments
             </div>
@@ -124,12 +124,12 @@
     </ion-infinite-scroll-content>
   </ion-infinite-scroll> -->
 
-  <div class="trendingPost" *ngFor="let item of trending" (click)="openBlip(item)">
+  <div class="trendingPost" *ngFor="let item of trending" (click)="openBlip(item.postData)">
     <hr />
     <ion-card class="trendingItem">
 
       <div class="image">
-        <ion-img [src]="item.content"></ion-img>
+        <ion-img [src]="item.post.content"></ion-img>
       </div>
 
       <ion-label stacked>
@@ -137,9 +137,9 @@
           <ion-row>
             <!-- Title + Description -->
             <ion-col class="subtext" size="9">
-              <h2>{{item.title}}</h2>
+              <h2>{{item.post.title}}</h2>
               <br/>
-              <h4>{{item.desc}}</h4>
+              <h4>{{item.post.desc}}</h4>
             </ion-col>
 
             <!-- Profile, Time posted, Reactions -->
@@ -157,13 +157,13 @@
           <ion-row class="actions">
             <ion-col size="9"></ion-col>
             <ion-col size="1">
-              <div>{{(item.shares)}} <ion-icon name="share-social-outline"></ion-icon></div>
+              <div>{{(item.post.shares)}} <ion-icon name="share-social-outline"></ion-icon></div>
             </ion-col>
             <ion-col size="1">
-              <div>{{(item.likes)}} <ion-icon name="thumbs-up-outline"></ion-icon></div>
+              <div>{{(item.post.likes)}} <ion-icon name="thumbs-up-outline"></ion-icon></div>
             </ion-col>
             <ion-col size="1">
-              <div>{{(item.comments.length)}} <ion-icon name="chatbubble-outline"></ion-icon></div>
+              <div>{{(item.post.comments)}} <ion-icon name="chatbubble-outline"></ion-icon></div>
             </ion-col>
           </ion-row>
 

@@ -15,6 +15,7 @@ import { ProfileOtherComponent } from '@mp/app/profile-other/feature';
 import { SearchRequest, SearchResponse} from '@mp/api/search/util';
 import { SearchApi } from '@mp/app/dashboard/data-access';
 import { Post, User } from '@mp/api/search/util';
+import { PostHeader } from '@mp/api/dashboard/util';
 
 @Component({
   selector: 'ms-dashboard-page',
@@ -25,13 +26,13 @@ import { Post, User } from '@mp/api/search/util';
 export class DashboardPage { 
   KronosTimer = KronosTimer;
   @Select(ProfileState.profile) profile$!: Observable<user_profile | null>;
-  @Select(DashboardState.recommendedPosts) recommended_posts$!: Observable<post[] | []>;
-  @Select(DashboardState.trendingPosts) trending_posts$!: Observable<post[] | []>;
+  @Select(DashboardState.recommendedPosts) recommended_posts$!: Observable<PostHeader[] | []>;
+  @Select(DashboardState.trendingPosts) trending_posts$!: Observable<PostHeader[] | []>;
 
   //Local Vars
   profile: user_profile | null
-  recommended: post[] | []
-  trending: post[] | []
+  recommended: PostHeader[] | []
+  trending: PostHeader[] | []
   //let called = false;
   deathTime: number
   constructor (
@@ -65,7 +66,7 @@ export class DashboardPage {
       // console.log(posts);
       this.trending = posts;
     })
-    this.trending.sort((a, b) => (a.likes.length < b.likes.length ? 1 : -1));
+    this.trending.sort((a, b) => (a.post.likes < b.post.likes ? 1 : -1));
   }
 
   //Load Current Profiles Time when you enter page
@@ -175,7 +176,7 @@ async getTrending() {
   async search(event: any){
     this.searchResultsUsers = []; // we should rather keep a state, Tumi will do this. (but this should be fine... for now)
     this.searchResultsPosts = []; //added this for you - Rob ;)
-    var query = event.detail.value;
+    const query = event.detail.value;
     const request : SearchRequest = {query : query};
     const response: SearchResponse = await this.searchApi.search(request);
     for(let i = 0; i < response.profiles.length; i++){

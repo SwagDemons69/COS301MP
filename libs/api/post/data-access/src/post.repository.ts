@@ -29,21 +29,21 @@ export class PostRepository {
         postRef.set(post);
     }
     
-    async createPostLike(user_id: string, post_id: string): Promise<CreatePostLikeResponse>{
-
-        const handle = await admin.firestore().collection(`profiles/${user_id}/posts/${post_id}/likes`).get();
+    async createPostLike(liker_id: string, post_id: string, poster_id: string): Promise<CreatePostLikeResponse>{
+        console.log("Liking post");
+        const handle = await admin.firestore().collection(`profiles/${poster_id}/posts/${post_id}/likes`).get();
         const likes = handle.docs.map((doc) => { return doc.data() as post_like;});
         let flag = false;
         for(let i = 0;i < likes.length; i++){
-            if(likes[i].user == user_id)
+            if(likes[i].user == poster_id)
                 flag = true;
         }
         
         if(!flag){
-            const newLike = admin.firestore().collection(`profiles/${user_id}/posts/${post_id}/likes`).doc();
-            await newLike.set({user: user_id});
+            const newLike = admin.firestore().collection(`profiles/${poster_id}/posts/${post_id}/likes`).doc();
+            await newLike.set({user: poster_id});
         }
-        const likesRef = await admin.firestore().collection(`profiles/${user_id}/posts/${post_id}/likes`).get();
+        const likesRef = await admin.firestore().collection(`profiles/${poster_id}/posts/${post_id}/likes`).get();
         const allLikes = likesRef.docs.map((doc) => { return doc.data() as post_like;});
         return {likes : allLikes};
     }
