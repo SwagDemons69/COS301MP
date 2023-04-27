@@ -31,9 +31,9 @@
               <!-- Profile, Time posted, Reactions -->
               <ion-col size="3">
                 <ion-list class="profile">
-                  <span>{{data.username}}</span> 
+                  <span>{{metadata.username}}</span> 
                   <ion-avatar style="display: inline; width: 5vw; height: 5vw">
-                    <img alt="Avatar" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                    <img alt="Avatar" [src]="metadata.imageURL" />
                   </ion-avatar>
                 </ion-list>
               </ion-col>
@@ -45,10 +45,10 @@
                 <div>{{KronosTimer.formatActionNumber(data.shares)}} <ion-icon name="share-social-outline"></ion-icon></div>
               </ion-col>
               <ion-col size="1.5">
-                <div>{{KronosTimer.formatActionNumber(data.likes)}} <ion-icon name="thumbs-up-outline"></ion-icon></div>
+                <div>{{KronosTimer.formatActionNumber(data.likes.length)}} <ion-icon name="thumbs-up-outline"></ion-icon></div>
               </ion-col>
               <ion-col size="1.5">
-                <div>{{KronosTimer.formatActionNumber(data.comments.length)}} <ion-icon name="chatbubble-outline"></ion-icon></div>
+                <div>{{KronosTimer.formatActionNumber(metadata.comments?.length)}} <ion-icon name="chatbubble-outline"></ion-icon></div>
               </ion-col>
             </ion-row>
 
@@ -66,11 +66,21 @@
     <!-- COMMENT SECTION -->
     <ion-row>
       <ion-list class="commentSection">
-        <ion-card class="comment" *ngFor="let comm of data.comments">
-          <ion-card-title>{{comm.user_id}}</ion-card-title>
+        <div *ngFor="let comm of metadata.comments">
+        <ion-card class="comment">
+          <ion-card-title>{{comm.created_by}}</ion-card-title>
           <br />
           <ion-card-subtitle>{{comm.content}}</ion-card-subtitle>
         </ion-card>
+
+        <ion-list class="subCommentSection">
+          <ion-card class="comment" *ngFor="let subcomm of comm.comments">
+            <ion-card-title>{{subcomm.created_by}}</ion-card-title>
+            <br />
+            <ion-card-subtitle>{{subcomm.content}}</ion-card-subtitle>
+          </ion-card>
+        </ion-list>
+        </div>
       </ion-list>
     </ion-row>
 

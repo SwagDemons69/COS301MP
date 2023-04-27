@@ -32,9 +32,7 @@ export class PostPage {
   chosenPostBase64Data: string;
   desc: string;
   title: string;
-  tags = [
-    "", "The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"
-  ]
+  tags: string[] = [];
 
   style: string;
   
@@ -49,6 +47,7 @@ export class PostPage {
     this.desc = "";
     this.title = "";
     this.style = "hidden";
+    this.updateTagList();
   }
 
   //Get reference to file uploaded
@@ -164,6 +163,7 @@ export class PostPage {
 
   updateTagList() {
     const res = this.extractTagsFromDesc();
+    this.tags = [];
 
     const tagList = document.getElementById("tagList");
     if(tagList == null) return;
@@ -184,11 +184,12 @@ export class PostPage {
       }
 
       this.addTagBadge("#" + tag);
+      this.tags.push("#" + tag);
 
       prevTag = tag;
     }
 
-    this.tags = res;
+    console.log(this.tags);
   }
 
 }

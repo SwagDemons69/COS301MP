@@ -119,12 +119,19 @@ async getTrending() {
   // Prevent re-setting css properties every scroll event
   isKronosBarVisible = false;
   onContentScroll(event: any) {
+    const barKronos = document.querySelector(".barKronos");
+    const smallAvatar = document.querySelector(".smallAvatar");
+
     if (event.detail.scrollTop > 220 && !this.isKronosBarVisible) {
-      this.renderer.setStyle(document.querySelector(".barKronos"), 'opacity', '1');
+      this.renderer.setStyle(barKronos, 'opacity', '1');
+      this.renderer.setStyle(smallAvatar, 'width', '2em');
+      this.renderer.setStyle(smallAvatar, 'opacity', '1');
       this.isKronosBarVisible = true;
     }
     else if (event.detail.scrollTop <= 220) {
-      this.renderer.setStyle(document.querySelector(".barKronos"), 'opacity', '0');
+      this.renderer.setStyle(barKronos, 'opacity', '0');
+      this.renderer.setStyle(smallAvatar, 'opacity', '0');
+      this.renderer.setStyle(smallAvatar, 'width', '0em');
       this.renderer.setStyle(document.querySelector(".glassyBackground"), 'top', `${0.5*event.detail.scrollTop}px`);
       this.isKronosBarVisible = false;
     }
@@ -139,9 +146,9 @@ async getTrending() {
 
   // See [https://stackblitz.com/edit/ionic6-angular13-wnmgmu?file=src/app/app.component.ts] for reference
   async openBlip(data: post) {
-    const blipData = await this.api.GetBlipContent({user: data.user_id, post: data.post_id});
+    const metadata = await this.api.GetBlipContent({user: data.user_id, post: data.post_id});
     
-    //Representation for blipData
+    //Representation for metadata
     //{
       // username: string;
       // imageURL: string;
@@ -152,8 +159,8 @@ async getTrending() {
     const modal = await this.modalController.create({
       component: BlipComponent,
       componentProps: {
-        dat: data,
-        blipContent: blipData //TODO: Change `dat` back to `data` once properly integrated
+        data: data,
+        metadata: metadata.data //TODO: Change `dat` back to `data` once properly integrated
       }
     });
 

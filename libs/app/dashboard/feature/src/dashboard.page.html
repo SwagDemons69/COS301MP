@@ -1,10 +1,15 @@
 <ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
 
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-icon name="notifications-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
     <div *ngIf="!isSearchbarVisible" class="barKronos">
-        <ion-title class="title">
-          <span>Home</span>
-          <span style="float: right">{{kronos}}</span>
+        <ion-title class="ion-text-center">
+          <span>{{kronos}}</span>
         </ion-title>
     </div>
 
@@ -12,12 +17,15 @@
       <ion-button (click)="toggleSearchbar()">
         <ion-icon name="search-outline"></ion-icon>
       </ion-button>
-      <ion-button>
-        <ion-icon name="notifications-outline"></ion-icon>
-      </ion-button>
     </ion-buttons>
 
-  <ion-searchbar placeholder="Search" *ngIf="isSearchbarVisible"></ion-searchbar>
+    <ion-searchbar placeholder="Search" *ngIf="isSearchbarVisible"></ion-searchbar>
+
+    <ng-container *ngIf="(profile$ | async) as profile;">
+      <ion-avatar class="smallAvatar" slot="end">
+        <img alt="Avatar" [src]="profile.profilePicturePath" />
+      </ion-avatar>
+    </ng-container>
 
   </ion-toolbar>
 </ion-header>

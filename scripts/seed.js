@@ -151,7 +151,7 @@ function generatePosts(userIds, total){
                 shares : 0,
                 kronos : 0,
                 comments : [],
-                tags : [],
+                tags : faker.lorem.words(4).split(" "),
                 taggedUsers : []
             }
             posts.push(post);
