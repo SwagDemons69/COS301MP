@@ -1,6 +1,7 @@
 // write service functions here
 import { SendNotificationRequest, SendNotificationCommand, SendNotificationEvent, SendNotificationReponse } from '@mp/api/notifications/util';
 import { GetNotificationsRequest, GetNotificationsQuery, GetNotificationsResponse, GetNotificationsEvent } from '@mp/api/notifications/util';
+import { ReplyFollowRequest, FollowRequestReponse, RelpyFollowRequestCommand } from '@mp/api/notifications/util';
 import { Injectable } from '@nestjs/common';
 import { QueryBus, CommandBus, EventBus } from '@nestjs/cqrs';
 
@@ -14,5 +15,9 @@ export class NotificationService {
 
   async sendNotification(request: SendNotificationRequest): Promise<SendNotificationReponse> {
     return await this.commandBus.execute<SendNotificationCommand, SendNotificationReponse>(new SendNotificationCommand(request));
+  }
+
+  async replyFollowRequest(request: ReplyFollowRequest): Promise<FollowRequestReponse> {
+    return await this.commandBus.execute<RelpyFollowRequestCommand, FollowRequestReponse>(new RelpyFollowRequestCommand(request));
   }
 }

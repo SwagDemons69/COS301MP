@@ -84,20 +84,19 @@ export interface followRequestDeclinedNotification extends notification {
     follower_id: string;
     accepted: false;
 }
-// export interface followRequestNotification extends notification {
-//     type: NotificationType.FollowRequestNotification;
-//     follower_id: string;
-//     accepted: boolean;
-// }
+export interface followRequestNotification extends notification {
+    type: NotificationType.FollowRequestNotification;
+    follower_id: string;
+}
 
-// export interface followRequestAcceptedNotification extends notification {
-//     type: NotificationType.FollowRequestAcceptedNotification;
-//     follower_id: string;
-//     accepted: true;
-// }
+export interface followRequestAcceptedNotification extends notification {
+    type: NotificationType.FollowRequestAcceptedNotification;
+    follower_id: string;
+    accepted: true;
+}
 
-// export interface followRequestDeclinedNotification extends notification {
-//     type: NotificationType.FollowRequestDeclinedNotification;
-//     follower_id: string;
-//     accepted: false;
-// }
+export interface followRequestDeclinedNotification extends notification {
+    type: NotificationType.FollowRequestDeclinedNotification;
+    follower_id: string;
+    accepted: false;
+}
