@@ -1,15 +1,14 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { edit_profile, user_profile } from '@mp/api/profiles/util';
-import { AddPhotoRequest } from '@mp/api/post/util';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
+import { post } from '@mp/api/home/util';
+import { AddPhotoRequest } from '@mp/api/post/util';
+import { edit_profile, user_profile } from '@mp/api/profiles/util';
 import { BlipComponent } from '@mp/app//shared-components';
 import { ProfilesApi, ProfileState } from '@mp/app/profile/data-access';
-import { Select } from '@ngxs/store';
-import { Observable } from 'rxjs';
-import { post } from '@mp/api/home/util';
-import { Store } from '@ngxs/store';
 import { EditProfile, InitForm } from '@mp/app/profile/util';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ms-profile-page',
@@ -23,17 +22,16 @@ export class ProfilePage {
   postIndex: number[];
   blob: Blob;
   profileImage: string;
-  user : user_profile
-  posts : post[];
+  user: user_profile
+  posts: post[];
 
   constructor(
     private modalController: ModalController,
     private formBuilder: FormBuilder,
-    private readonly store : Store,
+    private readonly store: Store,
     private readonly api: ProfilesApi
-  )
-  {
-    
+  ) {
+
     this.userForm = this.formBuilder.group({
       notPublic: ['', Validators.required],
       name: ['', Validators.required],
@@ -59,21 +57,20 @@ export class ProfilePage {
       likesLeft: 0,
       dislikesLeft: 0,
       commentLikesLeft: 0,
-      followers:     0,
-      following:     0,
-      blocked:       0,
-      posts:         0,
-      notifications: [] 
+      followers: 0,
+      following: 0,
+      blocked: 0,
+      posts: 0,
+      notifications: []
     }
     this.user = data;
 
     this.profile$.forEach((user) => {
-      if(user && user.posts){
+      if (user) {
         //Default Profile Image
-        this.profileImage = (user.profilePicturePath == "")? "https://ionicframework.com/docs/img/demos/avatar.svg" : user.profilePicturePath;
-        //console.log(this.profileImage)
-        const len = user.posts;
+        this.profileImage = (user.profilePicturePath == "") ? "https://ionicframework.com/docs/img/demos/avatar.svg" : user.profilePicturePath;
         this.user = user;
+        console.log(this.user.user_id)
       }
     })
     this.blob = new Blob();
@@ -81,12 +78,13 @@ export class ProfilePage {
     this.postIndex = [];
   }
 
-  async ionViewDidEnter(){
+  async ionViewDidEnter() {
+
     this.posts = await this.setPosts();
     //Same functionality as python 'for i in range(len): push(i)'
     this.postIndex = [...Array(this.posts.length).keys()];
   }
-  
+
   isEditingProfile = false;
   addedFile = false;
 
@@ -99,7 +97,7 @@ export class ProfilePage {
       component: BlipComponent,
       componentProps: {
         data: data,
-        user : name
+        user: name
       }
     });
 
@@ -110,30 +108,32 @@ export class ProfilePage {
     return await modal.present();
   }
 
-  async setPosts(){
-    const posts = await this.api.getPosts({ user: this.user.user_id});
+  async setPosts() {
+    console.log(this.user.user_id);
+    const posts = await this.api.getPosts({ user: this.user.user_id });
+    console.log("POSTS SET")
     return posts.data.posts;
   }
 
 
   //Problem - could updating profile and not adding photo remove link from profile for pold photo
   //"Its a feature"  LOL
-  onFileChange(event: any){
+  onFileChange(event: any) {
     this.blob = event.target.files[0];
     this.addedFile = true;
   }
 
   //Send Profile Image to Cloud Storage an return url
-  async addToCloudStorage(){
+  async addToCloudStorage() {
     //Convert to Base64
     const str: string = await this.blobToDataURL(this.blob);
-    const url: string = str.substring(str.indexOf(',')+1);
+    const url: string = str.substring(str.indexOf(',') + 1);
     //Create Request
-    const request : AddPhotoRequest = { file : url, fileName : this.blob.name};
+    const request: AddPhotoRequest = { file: url, fileName: this.blob.name };
     //Add Image to Google Cloud Storage and return path to image in storage
     const response = await this.api.UploadProfilePhotoToCloudStorage(request);
     return response.data.pathToImage;
-    
+
   }
 
   //Convert Image to Base64
@@ -155,9 +155,9 @@ export class ProfilePage {
     // console.log("LENGTH: " + this.posts.length)
     // console.log(this.posts[0].content);
     // this.postIndex = [...Array(this.posts.length).keys()];
-    
+
     //Parse form is to queryable JSON object
-    const JSONFORM : edit_profile = JSON.parse(JSON.stringify(this.userForm.value, null, 2));
+    const JSONFORM: edit_profile = JSON.parse(JSON.stringify(this.userForm.value, null, 2));
 
     //Data Validation so profile is not overwritten
     const notPublic = (JSONFORM.notPublic == "") ? "DO-NOT-MODFIY" : JSONFORM.notPublic;
@@ -165,15 +165,15 @@ export class ProfilePage {
     const username = (JSONFORM.username == "") ? "DO-NOT-MODFIY" : JSONFORM.username;
     const profilePicturePath = (!this.addedFile) ? "DO-NOT-MODFIY" : (await this.addToCloudStorage());
     const bio = (JSONFORM.bio == "") ? "DO-NOT-MODFIY" : JSONFORM.bio;
-    const province = (JSONFORM.province == "") ? "DO-NOT-MODFIY" : JSONFORM.province; 
-  
+    const province = (JSONFORM.province == "") ? "DO-NOT-MODFIY" : JSONFORM.province;
+
     const newForm: edit_profile = {
-      notPublic : notPublic,
-      name : name,
-      username : username,
-      profilePicturePath : profilePicturePath,
-      bio : bio,
-      province : province
+      notPublic: notPublic,
+      name: name,
+      username: username,
+      profilePicturePath: profilePicturePath,
+      bio: bio,
+      province: province
     };
     //console.log(newForm)
 

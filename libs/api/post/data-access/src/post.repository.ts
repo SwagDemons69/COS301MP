@@ -83,6 +83,8 @@ export class PostRepository {
 
     async getPosts(user: string): Promise<GetPostsResponse>{
         const handle = await admin.firestore().collection(`profiles/${user}/posts`).get();
-        return { posts: handle.docs.map((doc) => { return doc.data() as post; })};
+        const posts = handle.docs.map((doc) => { return doc.data() as post; });
+        console.log(posts)
+        return { posts: posts};
     }
 }
