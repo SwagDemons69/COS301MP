@@ -50,6 +50,7 @@
 
           <ion-card-content>
             <ion-grid class="stats">
+              <ng-container *ngIf="(profile$ | async) as profile; else noProfile">
               <ion-row class="statsNumber">
 
                 <ion-col>{{profile.following}}</ion-col>
@@ -57,6 +58,7 @@
                 <ion-col>{{profile.followers}}</ion-col>
                 
               </ion-row>
+              </ng-container>
 
               <ion-row class="statsLabel">
                 <ion-col>Following</ion-col>
