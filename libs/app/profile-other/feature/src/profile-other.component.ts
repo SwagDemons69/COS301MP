@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { BlipComponent } from '@mp/app//shared-components';
+import { BlipComponent } from '@mp/app/blip/feature';
 import { SetChatMessages, SetRecipient} from '@mp/app/chat/util';
 import { Select, Store } from '@ngxs/store';
 import { NavController } from '@ionic/angular';

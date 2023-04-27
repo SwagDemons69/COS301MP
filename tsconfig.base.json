@@ -77,7 +77,6 @@
         "libs/api/search-modal/feature/src/index.ts"
       ],
       "@mp/api/search-modal/util": ["libs/api/search-modal/util/src/index.ts"],
->>>>>>>>> Temporary merge branch 2
       "@mp/api/users/data-access": ["libs/api/users/data-access/src/index.ts"],
       "@mp/api/users/feature": ["libs/api/users/feature/src/index.ts"],
       "@mp/api/users/util": ["libs/api/users/util/src/index.ts"],

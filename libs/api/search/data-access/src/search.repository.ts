@@ -67,7 +67,7 @@ export class SearchRepository {
           const postsRef = await admin.firestore().collection(`profiles/${profileIds[i]}/posts`).get();
           const posts = postsRef.docs.map((post) => { return post.data() as post });
           for(let j = 0; j < posts.length; j++){
-            if(posts[j].caption.toLowerCase().includes(query.toLowerCase()))
+            if(posts[j].desc.toLowerCase().includes(query.toLowerCase()))
               validPosts.push({ post: posts[j], posted_by: profilesUsernames[i]});
           }
       }

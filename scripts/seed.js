@@ -144,7 +144,7 @@ function generatePosts(userIds, total){
                 post_id : "",
                 user_id : userIds[j],
                 title : faker.lorem.words(3),
-                content : faker.image.food(640, 480, true),
+                content : faker.image.cats(640, 480, true),
                 desc : faker.lorem.words(3),
                 likes : [],
                 timeStamp : Timestamp.now(),

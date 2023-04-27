@@ -4,7 +4,7 @@ import { ModalController } from '@ionic/angular';
 import { post } from '@mp/api/home/util';
 import { AddPhotoRequest } from '@mp/api/post/util';
 import { edit_profile, user_profile } from '@mp/api/profiles/util';
-import { BlipComponent } from '@mp/app//shared-components';
+import { BlipComponent } from '@mp/app/blip/feature';
 import { ProfilesApi, ProfileState } from '@mp/app/profile/data-access';
 import { EditProfile, InitForm } from '@mp/app/profile/util';
 import { UpdateFormValue } from '@ngxs/form-plugin';

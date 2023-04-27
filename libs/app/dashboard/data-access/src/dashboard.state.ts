@@ -41,7 +41,8 @@ export class DashboardState {
       cutOffTime: 10,
     }
     const recommendedRequest: GetRecommendedPostsRequest = {
-      users: profile?.following,
+      // users: profile?.following,
+      users: [] //TODO: check
     }
     ctx.patchState({ recommended_posts: (await this.dashboardApi.GetRecommendedPosts(recommendedRequest)).data.posts});
     ctx.patchState({ trending_posts: (await this.dashboardApi.GetTrendingPosts(trendingRequest)).data.posts});
