@@ -88,7 +88,7 @@ function generateProfiles(total){
         const profile = {
             user_id: "",
             timeOfExpiry: 420,
-            notPublic: "false",
+            notPublic: false,
             username: faker.internet.userName(name, surname),
             name: faker.internet.userName(name, surname),
             profilePicturePath: faker.internet.avatar(),

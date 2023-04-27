@@ -5,6 +5,11 @@ import { user_profile } from '@mp/api/profiles/util'
 import { SearchResponse, Post, User } from '@mp/api/search/util';
 import * as admin from 'firebase-admin';
 import { post } from '@mp/api/home/util';
+import { GetProfileStatsResponse } from '@mp/api/search/util';
+export interface user{
+  user: string;
+  image: string;
+}
 
 @Injectable()
 export class SearchRepository {
@@ -68,4 +73,20 @@ export class SearchRepository {
       }
       return validPosts;
     };
+
+
+
+    async getProfileStats(user: string): Promise<GetProfileStatsResponse>{
+      
+      const followersRef = await admin.firestore().collection(`profiles/${user}/followers`).get();
+      const followers = followersRef.docs.map((profile) => { return profile.id as string});
+
+      const followingRef = await admin.firestore().collection(`profiles/${user}/following`).get();
+      const following = followingRef.docs.map((profile) => { return profile.id as string});
+
+      const followRequestsRef = await admin.firestore().collection(`profiles/${user}/follow-requests`).get();
+      const followRequests = followRequestsRef.docs.map((profile) => { return profile.data() as user;});
+
+      return { followers: followers, following: following, followRequests: followRequests};
+    }
 }

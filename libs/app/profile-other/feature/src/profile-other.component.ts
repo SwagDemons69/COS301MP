@@ -8,7 +8,7 @@ import { ProfileState } from '@mp/app/profile/data-access';
 import { user_profile } from '@mp/api/profiles/util';
 import { Observable } from 'rxjs';
 import { profileOtherAPI } from '@mp/app/profile-other/data-access';
-
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'ms-profile-other-component',
@@ -31,7 +31,8 @@ export class ProfileOtherComponent {
     private modalController: ModalController,
     private readonly store: Store,
     private navCtrl: NavController,
-    private api : profileOtherAPI
+    private api : profileOtherAPI,
+    private toastCtrlr: ToastController
   ) 
   {
     this.currentUser = null;
@@ -41,17 +42,25 @@ export class ProfileOtherComponent {
   }
 
   Status = 1;  
-  onInit(){
-    for(let i = 0; i < this.profile.user.followers.length; i++){
-      if(this.currentUser && this.profile.user.followers[i] === this.currentUser.user_id){
-        this.Status = 0;
+  async ionViewWillEnter(){
+  //  console.log(this.profile.user.user_id)
+    const response = await this.api.getProfileStats({ user: this.profile.user.user_id });
+    // console.log(response)
+    //followers = string[]
+    //following = string[]
+    //followRequests - user[]
+    //user = { user: string, image: string};
 
+    this.Status = 1;
+    for(let i = 0; i < response.data.followers.length ; i++){
+      if(this.currentUser && response.data.followers[i] === this.currentUser.user_id){
+        this.Status = 0;
         return;
       }
     }
 
-    for(let i = 0; i < this.profile.user.followRequests.length; i++){
-      if(this.currentUser && this.profile.user.followRequests[i]=== this.currentUser.user_id){
+    for(let i = 0; i < response.data.followRequests.length; i++){
+      if(this.currentUser && response.data.followRequests[i].user === this.currentUser.user_id){
         this.Status = 2;
         return;
       }
@@ -95,15 +104,26 @@ export class ProfileOtherComponent {
   }
 
   async followUser(){
-    this.Status = 2;
-    if(this.currentUser !== null)
+    console.log("Current user: " + this.currentUser);
+    // this.Status = 2;
+    if(this.currentUser !== null){
       await this.api.addFollower({requester : this.currentUser, requestee : this.profile});
 
-    if(this.profile.user.isPublic === true){
-      this.Status = 0;
+      if(this.profile.user.notPublic === false){
+        this.Status = 0;
+      }
+      else{
+        this.Status = 2;
+      }
+      const toast = await this.toastCtrlr.create({
+        message: (this.Status == 0) ? `Now Following ${this.profile.user.username}` : "Follow request sent",
+        color: 'success',
+        duration: 1500,
+        position: 'top',
+      });
+  
+      await toast.present();
     }
-    else{
-      this.Status = 1;
-    }
+      
   }
 }

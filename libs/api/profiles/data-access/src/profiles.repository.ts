@@ -54,29 +54,21 @@ export class ProfilesRepository {
   }
 
   async addFollower(request : addFollowerRequest){
-    console.log("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
-    const requesteeRef = admin.firestore().collection('profiles').doc(request.requestee.user_id); 
+    console.log(request)
+    const requesteeRef = admin.firestore().collection('profiles').doc(request.requestee.user.user_id); 
     const requesteeProfile = await requesteeRef.get();
+    const requestee = requesteeProfile.data() as user_profile;
+    console.log(requestee)
 
-    if(requesteeProfile.data()?.['notPublic']){
-      const followRequests = requesteeProfile.data()?.['followRequests'];
-      followRequests.push(request.requester.user_id);
-      
-      requesteeRef.update({followRequests: followRequests}).catch((error) => {
-        console.error('Error updating document:', error);
-      });
-
-      return {response : true};
+    if(requestee.notPublic){
+      const followRequestsRef = admin.firestore().collection(`profiles/${requestee.user_id}/follow-requests`).doc(request.requester.user_id);
+      followRequestsRef.set({user: request.requester.username, image: request.requester.profilePicturePath});
+      return {result : true};
     }
     else{
-      const followers = requesteeProfile.data()?.['followers'];
-      followers.push(request.requester.user_id);
-      
-      requesteeRef.update({followers: followers}).catch((error) => {
-        console.error('Error updating document:', error);
-      });
-
-      return {response : true};
+      const followersRef = admin.firestore().collection(`profiles/${requestee.user_id}/followers`).doc(request.requester.user_id);
+      followersRef.set({user: request.requester.username, image: request.requester.profilePicturePath});
+      return {result : true};
     }
   }
 
