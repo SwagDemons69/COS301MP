@@ -6,10 +6,11 @@ import { Select, Store } from '@ngxs/store';
 import { NavController } from '@ionic/angular';
 import { ProfileState } from '@mp/app/profile/data-access';
 import { user_profile } from '@mp/api/profiles/util';
-import { Observable } from 'rxjs';
+import { Observable, delay } from 'rxjs';
 import { profileOtherAPI } from '@mp/app/profile-other/data-access';
 import { ToastController } from '@ionic/angular';
 import { Render } from '@nestjs/common';
+import { ASYNC_METHOD_SUFFIX } from '@nestjs/common/module-utils/constants';
 
 @Component({
   selector: 'ms-profile-other-component',
@@ -40,8 +41,8 @@ export class ProfileOtherComponent {
     private toastCtrlr: ToastController
   ) 
   {
-    this.followingCount = 1;
-    this.followerCount = 1;
+    this.followingCount = 0;
+    this.followerCount = 0;
     this.postCount = 0;  
 
     this.currentUser = null;
@@ -160,9 +161,18 @@ export class ProfileOtherComponent {
           await toast.present();
         }
 
+        delay(500);
         this.followerCount = response.data.followerCount;
-        this.followingCount = response.data.followingCount
+        this.followingCount = response.data.followingCount;
+        this.postCount = this.profile.posts.length;
+
       }
     }
+
+    async delay(ms: number) {
+      return new Promise( resolve => setTimeout(resolve, ms) );
+    }
+
+    
   }
 
