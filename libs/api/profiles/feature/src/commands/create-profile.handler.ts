@@ -52,10 +52,10 @@ export class CreateProfileHandler
       likesLeft: 10,
       dislikesLeft: 10,
       commentLikesLeft: 10,
-      followers: [], //Array of user_id
-      following: [], //Array of user_id
-      blocked: [],    //Array of user_id
-      posts: [],  //Array of post_id
+      followers: 0, //Array of user_id
+      following: 0, //Array of user_id
+      blocked: 0,    //Array of user_id
+      posts: 0,  //Array of post_id
       notifications: [] //Array of notification_id
     }
 

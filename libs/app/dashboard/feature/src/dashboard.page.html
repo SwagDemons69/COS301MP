@@ -19,14 +19,13 @@
       </ion-button>
     </ion-buttons>
 
-    <ion-searchbar placeholder="Search" *ngIf="isSearchbarVisible"></ion-searchbar>
+  <ion-searchbar (ionChange)="search($event)" showCancelButton search-icon="search" placeholder="Search" *ngIf="isSearchbarVisible"></ion-searchbar>
 
     <ng-container *ngIf="(profile$ | async) as profile;">
       <ion-avatar class="smallAvatar" slot="end">
         <img alt="Avatar" [src]="profile.profilePicturePath" />
       </ion-avatar>
     </ng-container>
-
   </ion-toolbar>
 </ion-header>
 
@@ -105,7 +104,7 @@
           </ion-col>
 
           <ion-col size="4">
-            <ion-button class="glassyButton" (click)="openProfile({username:'test', photoURL:'https://picsum.photos/id/20/300/300'})">
+            <ion-button class="glassyButton">
               RESURRECT
             </ion-button>
           </ion-col>
@@ -177,19 +176,50 @@
 </div>
 
 <div *ngIf="isSearchbarVisible" class="searchResults">
-  <ion-list>
-  <div class="searchResult" *ngFor="let post of searchResults">
-    <ion-item lines="none">
-      <ion-thumbnail slot="start">
-        <img src="{{ post.content }}" alt="{{ post.title }}">
-      </ion-thumbnail>
-      <ion-label>
-        <h2>{{ post.title }}</h2>
-        <p>{{ post.desc }}</p>
-      </ion-label>
-    </ion-item>
-    <hr />
-  </div>
-  </ion-list>
+  <ion-row class="searchType">
+    <ion-col>
+      <ion-button expand="block" color="grey" class="SearchTypeButton" id="SearchUserButton" (click) = "toggleToUsers()">
+        Users
+      </ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button expand="block" class="SearchTypeButton" id="SearchPostButton" (click) = "toggleToPosts()">
+        Posts
+      </ion-button>
+    </ion-col>
+  </ion-row>
+  
+  <ng-template [ngIf]="userToggle" [ngIfElse]="posts">
+    <ion-list class="searchResultsType">
+      <ion-item (click)="toUser(user)" *ngFor="let user of searchResultsUsers">
+        <ion-avatar class="Profile-Pic">
+          <img src="{{ user.user.profilePicturePath }}" alt="Img">
+        </ion-avatar>
+        &nbsp;
+        &nbsp;
+        <ion-label>
+          <h2>{{ user.user.username }}</h2>
+          <p>{{ user.user.email }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ng-template>
+  
+  <ng-template #posts>
+    <ion-list class="searchResultsType">
+      <ion-item (click)="toPost(post.post.user_id, post.post.post_id)" *ngFor="let post of searchResultsPosts">
+        <ion-label>
+          <ion-thumbnail style="float: right" slot="start">
+            <img src="{{ post.post.content }}" alt="Img">
+          </ion-thumbnail>
+          <ion-label>
+            <h2>{{ post.post.caption }}</h2>
+            <p>Posted by: {{ post.posted_by }}</p>
+          </ion-label>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ng-template>
+  
 </div>
 </ion-content>

@@ -57,10 +57,10 @@
             <ion-grid class="stats">
               <ion-row class="statsNumber">
 
-                <ion-col><ion-input [value]="(profile.following?.length)"></ion-input></ion-col>
-                <ion-col><ion-input [value]="(posts.length)"></ion-input></ion-col>
-                <ion-col><ion-input [value]="(profile.followers?.length)"></ion-input></ion-col>
-
+                <ion-col>{{profile.following}}</ion-col>
+                <ion-col>{{profile.posts}}</ion-col>
+                <ion-col>{{profile.followers}}</ion-col>
+                
               </ion-row>
 
               <ion-row class="statsLabel">

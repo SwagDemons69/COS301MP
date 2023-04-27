@@ -2,6 +2,7 @@ import {
     EditProfileRequest,
     EditProfileResponse,
     EditProfileCommand,
+    addFollowerCommand,
     //============================
     IUpdateAccountDetailsRequest,
     IUpdateAccountDetailsResponse,
@@ -17,7 +18,9 @@ import {
     UpdateAddressDetailsCommand,
     UpdateContactDetailsCommand,
     UpdateOccupationDetailsCommand,
-    UpdatePersonalDetailsCommand
+    UpdatePersonalDetailsCommand,
+    addFollowerRequest,
+    addFollowerResponse
 } from '@mp/api/profiles/util';
 import { Injectable } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
@@ -29,6 +32,10 @@ export class ProfilesService {
 
   async EditProfile(request: EditProfileRequest): Promise<EditProfileResponse> {
     return await this.commandBus.execute<EditProfileCommand, EditProfileResponse>(new EditProfileCommand(request));
+  }
+
+  async addFollower(request : addFollowerRequest): Promise<addFollowerResponse> {
+    return await this.commandBus.execute<addFollowerCommand, addFollowerResponse>(new addFollowerCommand(request));
   }
  
   

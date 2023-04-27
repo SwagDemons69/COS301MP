@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { AuthModule } from '@mp/app/auth/data-access';
-import { SearchApi } from './search.api';
+// import { profileOtherAPI } from './profile-other.api';
 
 @NgModule({
   imports: [CommonModule, AuthModule],
-  providers: [SearchApi],
+  // providers: [profileOtherAPI]
 })
-export class SearchModule {
-}
+export class ProfileOtherModule {}
