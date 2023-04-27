@@ -2,10 +2,10 @@ import { Test } from '@nestjs/testing';
 import { PostService } from '../post.service';
 import { CommandBus } from '@nestjs/cqrs';
 import { post } from '@mp/api/home/util';
-import { AddPhotoRequest, CreatePostLikeRequest, CreatePostRequest, CreatePostRootCommentRequest } from 'libs/api/post/util/src/requests';
-import { AddPhotoResponse, CreatePostLikeResponse, CreatePostResponse, CreatePostRootCommentResponse } from 'libs/api/post/util/src/responses';
-import { AddPhotoCommand, CreatePostCommand, CreatePostLikeCommand, CreatePostRootCommentCommand } from 'libs/api/post/util/src/commands';
-import { RootComment, post_like } from 'libs/api/post/util/src/interfaces';
+import { AddPhotoRequest, CreatePostLikeRequest, CreatePostRequest, CreatePostRootCommentRequest, CreatePostChildCommentRequest } from 'libs/api/post/util/src/requests';
+import { AddPhotoResponse, CreatePostChildCommentResponse, CreatePostLikeResponse, CreatePostResponse, CreatePostRootCommentResponse } from 'libs/api/post/util/src/responses';
+import { AddPhotoCommand, CreatePostChildCommentCommand, CreatePostCommand, CreatePostLikeCommand, CreatePostRootCommentCommand } from 'libs/api/post/util/src/commands';
+import { ChildComment, RootComment, post_like } from 'libs/api/post/util/src/interfaces';
 import { user_profile } from '@mp/api/profiles/util';
 
 const mockpost: post = {
@@ -114,7 +114,7 @@ describe('Post feature', () => {
     });
 
     describe('createrootcomment', () => {
-        it('should add a root comment to a post - call commandbus.execute with CreateRootCommentCommand', async () => {
+        it('should add a root comment to a post - call commandbus.execute with CreatePostRootCommentCommand', async () => {
             const post_id = mockpost.post_id;
             const user_id = mockuser.user_id;
             const comment: RootComment = {
@@ -136,7 +136,49 @@ describe('Post feature', () => {
 
             expect(commandBus.execute).toHaveBeenCalledWith(new CreatePostRootCommentCommand(request));
             expect(result).toEqual(response);
-        })
-    })
+        });
+    });
+
+    describe('createchildcomment', () => {
+        it('should add a child comment to a root comment - call commandbus.execute with CreatePostChildCommentCommand', async () => {
+            const user_id = mockpost.user_id;
+            const post_id = mockpost.post_id;
+            const root_comment: RootComment = {
+                root_comment_id: '1244',
+                created_by: '253243',
+                content: 'haha rofl',
+                kronos: 24,
+                likes: 2,
+                comments: []
+            }
+            const root_comment_id = root_comment.root_comment_id;
+            const comment: ChildComment = {
+                child_comment_id: '15152',
+                created_by: '42532',
+                content: 'what an angel!',
+                kronos: 0,
+                likes: 0
+            }
+            const request: CreatePostChildCommentRequest = {user_id, post_id, root_comment_id, comment};
+            const response_comment: RootComment = {
+                root_comment_id: '1244',
+                created_by: '253243',
+                content: 'haha rofl',
+                kronos: 24,
+                likes: 2,
+                comments: [comment]
+            }
+            const post_comments: RootComment[] = [
+                 response_comment
+                ]
+            const response: CreatePostChildCommentResponse= {post_comments};
+            jest.spyOn(commandBus, 'execute').mockResolvedValue(response);
+
+            const result = await postFeature.CreateChildComment(request);
+
+            expect(commandBus.execute).toHaveBeenCalledWith(new CreatePostChildCommentCommand(request));
+            expect(result).toEqual(response);
+        });
+    });
     
 });
