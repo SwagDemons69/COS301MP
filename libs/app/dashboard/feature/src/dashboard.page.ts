@@ -127,6 +127,7 @@ async getTrending() {
     if (event.detail.scrollTop > 220 && !this.isKronosBarVisible) {
       this.renderer.setStyle(barKronos, 'opacity', '1');
       this.renderer.setStyle(smallAvatar, 'width', '2em');
+      this.renderer.setStyle(smallAvatar, 'height', '2em');
       this.renderer.setStyle(smallAvatar, 'opacity', '1');
       this.isKronosBarVisible = true;
     }
@@ -134,6 +135,7 @@ async getTrending() {
       this.renderer.setStyle(barKronos, 'opacity', '0');
       this.renderer.setStyle(smallAvatar, 'opacity', '0');
       this.renderer.setStyle(smallAvatar, 'width', '0em');
+      this.renderer.setStyle(smallAvatar, 'height', '0em');
       this.renderer.setStyle(document.querySelector(".glassyBackground"), 'top', `${0.5*event.detail.scrollTop}px`);
       this.isKronosBarVisible = false;
     }
