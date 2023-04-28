@@ -7,7 +7,17 @@ export interface notification {
     seen : boolean; // if the user has seen the notification
     timestamp : Timestamp; // the time the notification was created
     notification_id : string; // the id of the notification on firebase
-}
+    liker_id? : string; // the id of the user that liked the post
+    post_id? : string; // the id of the post that was liked
+    comment_id? : string; // the id of the comment that was liked
+    follower_id? : string; // the id of the user that followed the user
+    doner_id? : string; // the id of the user that donated time to the user
+    amount_donated? : number; // the amount of time that was donated
+    accepted? : boolean; // if the follow request was accepted
+    timeLeft? : Timestamp; // the time left on the user's account
+    system_message? : string; // the message that the system wants to send
+    commenter_id? : string; // the id of the user that commented on the post
+  }
 
 // this type of notification is used when a user likes a post
 export interface postDislikedNotification extends notification {
@@ -26,6 +36,7 @@ export interface postLikedNotification extends notification {
 // this type of notification is used when a user comments on a post
 export interface postCommentedNotification extends notification {
     type: NotificationType.PostCommentedNotificatoin;
+    commenter_id: string;
     comment_id: string;
     post_id: string;
 }

@@ -46,8 +46,8 @@ export class NotificationsPage implements OnInit {
   constructor(private readonly api : NotificationsApi) {}
 
   ngOnInit(): void {
-    console.log("ngOnInit!");
-    // this.getNotifications();
+    // console.log("ngOnInit!");
+    this.getNotifications();
   }
 
   getUserID() : string {
@@ -89,10 +89,10 @@ export class NotificationsPage implements OnInit {
       // const response = await this.notificationRepository.getNotifications(userId);
       // this.notifications = response.notifications;
 
-      console.log('printing');
-      response.notifications.forEach((notif) => {
-        console.log(JSON.stringify(notif));
-      });
+      // console.log('printing');
+      // response.notifications.forEach((notif) => {
+      //   console.log(JSON.stringify(notif));
+      // });
 
       this.notifications = response.notifications;
     }
