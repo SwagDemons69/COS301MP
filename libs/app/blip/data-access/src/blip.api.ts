@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { doc, docData, Firestore } from '@angular/fire/firestore';
 import { Functions, httpsCallable } from '@angular/fire/functions';
-import { CreatePostLikeRequest, CreatePostLikeResponse } from '@mp/api/post/util';
+import { CreatePostLikeRequest, CreatePostLikeResponse, CreatePostRootCommentRequest, CreatePostRootCommentResponse, CreatePostChildCommentRequest, CreatePostChildCommentResponse } from '@mp/api/post/util';
 import { post } from '@mp/api/home/util';
 
 @Injectable()
@@ -13,6 +13,19 @@ export class blipAPI {
 
   async likePost(request: CreatePostLikeRequest){
     return await httpsCallable<CreatePostLikeRequest, CreatePostLikeResponse>(this.functions, 'CreatePostLike')(request);
+  }
+
+  async dislikePost(request: CreatePostLikeRequest){
+    console.log("API")
+    return await httpsCallable<CreatePostLikeRequest, CreatePostLikeResponse>(this.functions, 'CreatePostDislike')(request);
+  }
+
+  async addRootComment(request: CreatePostRootCommentRequest){
+    return await httpsCallable<CreatePostRootCommentRequest, CreatePostRootCommentResponse>(this.functions, 'CreateRootComment')(request);
+  }
+
+  async addChildComment(request: CreatePostChildCommentRequest){
+    return await httpsCallable<CreatePostChildCommentRequest, CreatePostChildCommentResponse>(this.functions, 'CreateChildComment')(request);
   }
 
 }

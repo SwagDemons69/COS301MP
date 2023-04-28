@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { CreatePostLikeRequest } from '@mp/api/post/util';
+import { CreatePostChildCommentRequest, CreatePostLikeRequest, CreatePostRootCommentRequest } from '@mp/api/post/util';
 import { user_profile } from '@mp/api/profiles/util';
+import { RootComment, ChildComment } from '@mp/api/post/util';
 import { blipAPI } from '@mp/app/blip/data-access';
 import { KronosTimer } from '@mp/app/kronos-timer/kronos';
 import { ProfileState } from '@mp/app/profile/data-access';
@@ -62,21 +63,68 @@ export class BlipComponent {
     return;
   }
 
-  sendComment() {
+  rootCom_id = "";
+  async sendComment() {
     if (this.replyTo) {
-      this.replyTo.comments.push({
-        content: this.newComment,
-        created_by: "Gorgorogorogorgorogge",
-      });
+      if(this.profile){
+        let username = "Anonymous";
+        if(this.profile.username !== ""){
+          username = this.profile.username;
+        }
 
-      this.replyTo = null;
+        const child: ChildComment = {
+          child_comment_id: "",
+          created_by: this.profile.user_id,
+          created_by_username: username,
+          content: this.newComment,
+          kronos : 0,
+          likes: 0
+        }
+
+        const request: CreatePostChildCommentRequest = {
+          user_id: this.data.user_id,
+          post_id: this.data.post_id,
+          root_comment_id: this.rootCom_id,
+          comment : child
+        }
+        
+        const resp = await this.api.addChildComment(request);
+        const comms = resp.data;
+        this.metadata = []
+
+        this.metadata.comments = comms.post_comments
+      }
     }
     else {
-      this.metadata.comments.push({
-        content: this.newComment,
-        created_by: "Gorgorogorogorgorogge",
-        comments: []
-      });
+      if(this.profile){
+        let username = "Anonymous";
+        if(this.profile.username !== ""){
+          username = this.profile.username;
+        }
+          
+        const children: ChildComment[] = [];
+        const root: RootComment = {
+          root_comment_id: "",
+          created_by: this.profile.user_id,
+          created_by_username: username,
+          content: this.newComment,
+          kronos : 0,
+          likes: 0,
+          comments: children, 
+        }
+
+        const request: CreatePostRootCommentRequest = {
+          user_id: this.data.user_id,
+          post_id: this.data.post_id,
+          comment: root
+        }
+
+        const resp = await this.api.addRootComment(request);
+        const comms = resp.data;
+        this.metadata = []
+
+        this.metadata.comments = comms.post_comments
+      }
     }
 
     this.newComment = "";
@@ -97,6 +145,20 @@ export class BlipComponent {
       this.data.likes = resp.data.likes;
       //console.log(resp)
 
+    }
+  }
+
+  dislikes: number = 0;
+  async dislikePost() {
+    if (this.profile) {
+      const request: CreatePostLikeRequest = {
+        liker_id: this.profile.user_id,
+        post: this.data.post_id,
+        poster_id: this.data.user_id
+      }
+      console.log(request)
+      const resp = await this.api.dislikePost(request);
+      this.dislikes = resp.data.likes;
     }
   }
 }

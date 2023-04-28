@@ -1,6 +1,7 @@
 import { AddPhotoRequest, 
   AddPhotoResponse, 
-  CreatePostLikeCommand, 
+  CreatePostLikeCommand,
+  CreatePostDislikeCommand,
   CreatePostLikeRequest, 
   CreatePostLikeResponse, 
   CreatePostRequest, 
@@ -32,6 +33,11 @@ export class PostService {
 
     async CreatePostLike(request: CreatePostLikeRequest): Promise<CreatePostLikeResponse> {
         return await this.commandBus.execute<CreatePostLikeCommand, CreatePostLikeResponse>(new CreatePostLikeCommand(request));
+    }
+
+    async CreatePostDislike(request: CreatePostLikeRequest): Promise<CreatePostLikeResponse> {
+      console.log("POST SERVICE");
+      return await this.commandBus.execute<CreatePostDislikeCommand, CreatePostLikeResponse>(new CreatePostDislikeCommand(request));
     }
 
     async CreateRootComment(request: CreatePostRootCommentRequest): Promise<CreatePostRootCommentResponse> {
