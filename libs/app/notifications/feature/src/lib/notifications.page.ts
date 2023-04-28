@@ -3,7 +3,7 @@ import { NotificationRepository } from '@mp/api/notifications/data-access';
 import { notification } from '@mp/api/notifications/util';
 import {NotificationsApi} from '@mp/app/notifications/data-access'// i don't remember NotificationApi being made, did you mean to say ../app/.. I did!!!! Thanks Mito! You even told me. I'm dumb lol. THanks
 //lol we make stupid mistakes. Haha, it was supposed to app, and not api
-// I think it just needs some time to refresh. I don't see anything wrong. 
+// I think it just needs some time to refresh. I don't see anything wrong.
 // import {NotificationsApi} from '../../../data-access/src/notifications.api'
 import { Observable } from 'rxjs';
 import { Select } from '@ngxs/store';
@@ -12,7 +12,9 @@ import {user_profile } from '@mp/api/profiles/util';
 import {GetNotificationsRequest, GetNotificationsResponse } from '@mp/api/notifications/util';
 import {ProfileState } from '@mp/app/profile/data-access';
 import {NotificationType} from "@mp/api/notifications/util"
-
+import {Timestamp } from '@google-cloud/firestore'
+// import {Dayjs} from 'dayjs';
+// import {RelativeTime}
 
 
 
@@ -38,6 +40,9 @@ export class NotificationsPage implements OnInit {
   @Select(ProfileState.profile) profile$!: Observable<user_profile | null>;
   notifications : notification[] = [];
   notificationType = NotificationType;
+  getTime(timestamp : Timestamp){
+    return 1;
+  }
   constructor(private readonly api : NotificationsApi) {}
 
   ngOnInit(): void {
@@ -56,10 +61,22 @@ export class NotificationsPage implements OnInit {
       } else {
         // handle the case where no profile data is available
         console.log("No profile data available");
-        
+
       }
     });
     return myUserID;
+  }
+
+  // Accept the follow request
+  acceptFollowRequest(notif : notification) {
+    // Call the necessary service methods to accept the follow request
+    // Update the necessary properties or data structures to reflect the change
+  }
+
+  // Decline the follow request
+  declineFollowRequest(notif : notification) {
+    // Call the necessary service methods to decline the follow request
+    // Update the necessary properties or data structures to reflect the change
   }
 
   async getNotifications() {
@@ -72,6 +89,10 @@ export class NotificationsPage implements OnInit {
       // const response = await this.notificationRepository.getNotifications(userId);
       // this.notifications = response.notifications;
 
+      console.log('printing');
+      response.notifications.forEach((notif) => {
+        console.log(JSON.stringify(notif));
+      });
 
       this.notifications = response.notifications;
     }
@@ -84,7 +105,7 @@ export class NotificationsPage implements OnInit {
   refreshPage() {
     window.location.reload();
   }
-  
+
 }
 
 // {

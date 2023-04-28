@@ -2,7 +2,8 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-button (click)="getNotifications()">Get User ID</ion-button>
+  <ion-button class="refresh-button" (click)="getNotifications()">Refresh</ion-button>
+
   <ion-list>
     <!-- <div *ngFor="let notif of notifications" class="notif">
     <ion-item lines="none">
@@ -15,41 +16,99 @@
   <div *ngFor="let notif of notifications" class="notif">
     <div [ngSwitch]="notif.type">
 
+      <!-- Dislike -->
       <ion-item lines="none" *ngSwitchCase="notificationType.PostDislikedNotification">
-        <ion-label>PostDislikedNotification</ion-label>
+        <ion-icon name="thumbs-down-outline" color="danger"></ion-icon>
+        <ion-label>{{ notif.type}}</ion-label>
+        <ion-badge slot="end">{{ getTime(notif.timestamp) }}</ion-badge>
       </ion-item>
+
+      <!-- Post Like notification -->
       <ion-item lines="none" *ngSwitchCase="notificationType.PostLikedNotification">
-        <ion-label>PostLikedNotification</ion-label>
-      </ion-item> 
+        <ion-icon name="thumbs-up-outline" color="success"></ion-icon>
+        <ion-label>{{ notif.type }}</ion-label>
+        <ion-badge slot="end">{{ notif.timestamp }}</ion-badge>
+      </ion-item>
+
+      <!-- Post Commented notification -->
       <ion-item lines="none" *ngSwitchCase="notificationType.PostCommentedNotificatoin">
-        <ion-label>PostCommentedNotificatoin</ion-label>
-      </ion-item> 
+        <ion-icon name="chatbubble-outline" color="primary"></ion-icon>
+        <ion-label>{{ notif.type }}</ion-label>
+        <ion-badge slot="end">{{ notif.timestamp }}</ion-badge>
+      </ion-item>
+
+      <!-- New Follower notification -->
       <ion-item lines="none" *ngSwitchCase="notificationType.NewFollowerNotification">
-        <ion-label>NewFollowerNotification</ion-label>
-      </ion-item>
+        <ion-icon name="person-add-outline" color="secondary"></ion-icon>
+        <ion-label>{{ notif.type }}</ion-label>
+        <ion-badge slot="end">{{ notif.timestamp }}</ion-badge>
+        </ion-item>
+
+      <!-- New Donation notification -->
       <ion-item lines="none" *ngSwitchCase="notificationType.NewDonationNotification">
-        <ion-label>NewDonationNotification</ion-label>
+        <ion-icon name="cash-outline" color="warning"></ion-icon>
+        <ion-label>{{ notif.type }}</ion-label>
+        <ion-badge slot="end">{{ notif.timestamp }}</ion-badge>
       </ion-item>
+
+      <!-- Comment Liked notification -->
       <ion-item lines="none" *ngSwitchCase="notificationType.CommentLikedNotification">
-        <ion-label>CommentLikedNotification</ion-label>
+        <ion-icon name="heart-outline" color="danger"></ion-icon>
+        <ion-label>{{ notif.type }}</ion-label>
+        <ion-badge slot="end">{{ notif.timestamp }}</ion-badge>
       </ion-item>
+
+      <!-- New Post Comment Like notification -->
       <ion-item lines="none" *ngSwitchCase="notificationType.NewPostCommentLike">
-        <ion-label>NewPostCommentLike</ion-label>
+        <ion-icon name="heart-outline" color="success"></ion-icon>
+        <ion-label>{{ notif.type }}</ion-label>
+        <ion-badge slot="end">{{ notif.timestamp }}</ion-badge>
       </ion-item>
+
+      <!--Time running out notification -->
       <ion-item lines="none" *ngSwitchCase="notificationType.TimeRunningOutNotification">
-        <ion-label>TimeRunningOutNotification</ion-label>
+        <ion-icon name="time-outline" color="warning"></ion-icon>
+        <ion-label>{{ notif.type }}</ion-label>
+        <ion-badge slot="end">{{ notif.timestamp }}</ion-badge>
       </ion-item>
+
+      <!-- System Notification -->
       <ion-item lines="none" *ngSwitchCase="notificationType.SystemNotification">
-        <ion-label>SystemNotification</ion-label>
+        <ion-icon name="alert-circle-outline" color="medium"></ion-icon>
+        <ion-label>{{ notif.type }}</ion-label>
+        <ion-badge slot="end">{{ notif.timestamp }}</ion-badge>
       </ion-item>
+
       <ion-item lines="none" *ngSwitchCase="notificationType.FollowRequestNotification">
-        <ion-label>FollowRequestNotification</ion-label>
+        <ion-grid>
+          <ion-row>
+            <ion-icon name="person-add-outline" color="secondary"></ion-icon>
+            <ion-label>{{ notif.type }}</ion-label>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <div class="notification-buttons">
+                <ion-button class="refresh-button" (click)="acceptFollowRequest(notif)">Accept</ion-button>
+                <ion-button class="refresh-button" (click)="declineFollowRequest(notif)">Decline</ion-button>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-item>
+
+
+      <!-- Follow Request Accepted Notification -->
       <ion-item lines="none" *ngSwitchCase="notificationType.FollowRequestAcceptedNotification">
-        <ion-label>FollowRequestAcceptedNotification</ion-label>
+        <ion-icon name="person-add-outline" color="success"></ion-icon>
+        <ion-label>{{ notif.type }}</ion-label>
+        <ion-badge slot="end">{{ notif.timestamp }}</ion-badge>
       </ion-item>
+
+      <!-- Follow Request Declined Notification -->
       <ion-item lines="none" *ngSwitchCase="notificationType.FollowRequestDeclinedNotification">
-        <ion-label>FollowRequestDeclinedNotification</ion-label>
+        <ion-icon name="person-remove-outline" color="danger"></ion-icon>
+        <ion-label>{{ notif.type }}</ion-label>
+        <ion-badge slot="end">{{ notif.timestamp }}</ion-badge>
       </ion-item>
     </div>
     <hr />

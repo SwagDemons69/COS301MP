@@ -40,10 +40,37 @@ const NotificationType = {
 const notifications = [
   {
     user_id: 'user_123',
+    type: NotificationType.PostDislikedNotification ,
+    seen: false,
+    timestamp: new Date(),
+    notification_id: 'notification_001',
+    liker_id: 'liker_789',
+    post_id: 'post_123'
+  },
+  {
+    user_id: 'user_123',
+    type: NotificationType.PostDislikedNotification ,
+    seen: false,
+    timestamp: new Date(),
+    notification_id: 'notification_002',
+    liker_id: 'liker_790',
+    post_id: 'post_124'
+  },
+  {
+    user_id: 'user_123',
+    type: NotificationType.PostDislikedNotification ,
+    seen: false,
+    timestamp: new Date(),
+    notification_id: 'notification_003',
+    liker_id: 'liker_791',
+    post_id: 'post_125'
+  },
+  {
+    user_id: 'user_123',
     type: NotificationType.PostLikedNotification,
     seen: false,
     timestamp: new Date(),
-    notification_id: 'notification_216',
+    notification_id: 'notification_004',
     liker_id: 'liker_789',
     post_id: 'post_123'
   },
@@ -52,7 +79,7 @@ const notifications = [
     type: NotificationType.PostLikedNotification,
     seen: false,
     timestamp: new Date(),
-    notification_id: 'notification_215',
+    notification_id: 'notification_005',
     liker_id: 'liker_790',
     post_id: 'post_124'
   },
@@ -61,7 +88,7 @@ const notifications = [
     type: NotificationType.PostLikedNotification,
     seen: false,
     timestamp: new Date(),
-    notification_id: 'notification_214',
+    notification_id: 'notification_006',
     liker_id: 'liker_791',
     post_id: 'post_125'
   },
@@ -70,7 +97,7 @@ const notifications = [
     type: NotificationType.PostCommentedNotificatoin,
     seen: false,
     timestamp: new Date(),
-    notification_id: 'notification_213',
+    notification_id: 'notification_007',
     comment_id: 'comment_456',
     post_id: 'post_123'
   },
@@ -79,7 +106,7 @@ const notifications = [
     type: NotificationType.PostCommentedNotificatoin,
     seen: true,
     timestamp: new Date(),
-    notification_id: 'notification_1011',
+    notification_id: 'notification_008',
     comment_id: 'comment_789',
     post_id: 'post_456'
   },
@@ -88,7 +115,7 @@ const notifications = [
     type: NotificationType.PostCommentedNotificatoin,
     seen: false,
     timestamp: new Date(),
-    notification_id: 'notification_1213',
+    notification_id: 'notification_009',
     comment_id: 'comment_1011',
     post_id: 'post_789'
   },
@@ -97,25 +124,25 @@ const notifications = [
     type: NotificationType.NewFollowerNotification,
     seen: false,
     timestamp: new Date(),
-    notification_id: 'notification_138',
+    notification_id: 'notification_010',
     follower_id: 'follower_789'
   },
-  
+
   {
     user_id: 'user_123',
     type: NotificationType.NewFollowerNotification,
     seen: false,
     timestamp: new Date(),
-    notification_id: 'notification_137',
+    notification_id: 'notification_011',
     follower_id: 'follower_790'
   },
-  
+
   {
     user_id: 'user_123',
     type: NotificationType.NewFollowerNotification,
     seen: false,
     timestamp: new Date(),
-    notification_id: 'notification_136',
+    notification_id: 'notification_012',
     follower_id: 'follower_791'
   },
   {
@@ -123,27 +150,27 @@ const notifications = [
     type: NotificationType.NewDonationNotification,
     seen: false,
     timestamp: new Date(),
-    notification_id: 'notification_135',
+    notification_id: 'notification_013',
     doner_id: 'doner_789',
     amount_donated: 50.0
   },
-  
+
   {
     user_id: 'user_123',
     type: NotificationType.NewDonationNotification,
     seen: true,
     timestamp: new Date(),
-    notification_id: 'notification_134',
+    notification_id: 'notification_014',
     doner_id: 'doner_101',
     amount_donated: 20.0
   },
-  
+
   {
     user_id: 'user_123',
     type: NotificationType.NewDonationNotification,
     seen: false,
     timestamp: new Date(),
-    notification_id: 'notification_862',
+    notification_id: 'notification_015',
     doner_id: 'doner_369',
     amount_donated: 100.0
   },
@@ -152,29 +179,29 @@ const notifications = [
     type: NotificationType.CommentLikedNotification,
     seen: false,
     timestamp: new Date(),
-    notification_id: 'notification_248',
+    notification_id: 'notification_016',
     liker_id: 'liker_789',
     comment_id: 'comment_123',
     post_id: 'post_456'
   },
-  
+
   {
     user_id: 'user_123',
     type: NotificationType.CommentLikedNotification,
     seen: false,
     timestamp: new Date(),
-    notification_id: 'notification_147',
+    notification_id: 'notification_017',
     liker_id: 'liker_456',
     comment_id: 'comment_789',
     post_id: 'post_123'
   },
-  
+
   {
     user_id: 'user_123',
     type: NotificationType.CommentLikedNotification,
     seen: false,
     timestamp: new Date(),
-    notification_id: 'notification_951',
+    notification_id: 'notification_018',
     liker_id: 'liker_012',
     comment_id: 'comment_456',
     post_id: 'post_789'
@@ -184,7 +211,7 @@ const notifications = [
     type: NotificationType.NewPostCommentLike,
     seen: false,
     timestamp: new Date(),
-    notification_id: 'notification_159',
+    notification_id: 'notification_019',
     liker_id: 'liker_789',
     comment_id: 'comment_123',
     post_id: 'post_456'
@@ -194,7 +221,7 @@ const notifications = [
     type: NotificationType.NewPostCommentLike,
     seen: false,
     timestamp: new Date(),
-    notification_id: 'notification_696',
+    notification_id: 'notification_020',
     liker_id: 'liker_012',
     comment_id: 'comment_456',
     post_id: 'post_789'
@@ -204,7 +231,7 @@ const notifications = [
     type: NotificationType.NewPostCommentLike,
     seen: false,
     timestamp: new Date(),
-    notification_id: 'notification_111',
+    notification_id: 'notification_021',
     liker_id: 'liker_345',
     comment_id: 'comment_789',
     post_id: 'post_012'
@@ -214,25 +241,25 @@ const notifications = [
     type: NotificationType.TimeRunningOutNotification,
     seen: false,
     timestamp: new Date(),
-    notification_id: 'notification_555',
+    notification_id: 'notification_022',
     timeLeft: new Timestamp(1644604800, 0) // January 12, 2022 12:00:00 AM GMT+00:00
   },
-  
+
   {
     user_id: 'user_123',
     type: NotificationType.TimeRunningOutNotification,
     seen: false,
     timestamp: new Date(),
-    notification_id: 'notification_910',
+    notification_id: 'notification_023',
     timeLeft: new Timestamp(1661923200, 0) // September 30, 2022 12:00:00 AM GMT+00:00
   },
-  
+
   {
     user_id: 'user_123',
     type: NotificationType.TimeRunningOutNotification,
     seen: false,
     timestamp: new Date(),
-    notification_id: 'notification_1112',
+    notification_id: 'notification_024',
     timeLeft: new Timestamp(1675372800, 0) // February 2, 2023 12:00:00 AM GMT+00:00
   },
   {
@@ -240,25 +267,25 @@ const notifications = [
     type: NotificationType.SystemNotification,
     seen: false,
     timestamp: new Date(),
-    notification_id: 'notification_485',
+    notification_id: 'notification_025',
     system_message: 'Your account has been temporarily suspended'
   },
-  
+
   {
     user_id: 'user_123',
     type: NotificationType.SystemNotification,
     seen: false,
     timestamp: new Date(),
-    notification_id: 'notification_101',
+    notification_id: 'notification_026',
     system_message: 'Scheduled maintenance will be performed on our servers this weekend'
   },
-  
+
   {
     user_id: 'user_123',
     type: NotificationType.SystemNotification,
     seen: false,
     timestamp: new Date(),
-    notification_id: 'notification_112',
+    notification_id: 'notification_027',
     system_message: 'A new version of the app is available, please update to enjoy new features and improvements'
   },
   {
@@ -266,7 +293,7 @@ const notifications = [
     type: NotificationType.FollowRequestNotification,
     seen: false,
     timestamp: new Date(),
-    notification_id: 'notification_456',
+    notification_id: 'notification_028',
     follower_id: 'follower_212',
     accepted: false
   },
@@ -275,7 +302,7 @@ const notifications = [
     type: NotificationType.FollowRequestNotification,
     seen: true,
     timestamp: new Date(),
-    notification_id: 'notification_780',
+    notification_id: 'notification_029',
     follower_id: 'follower_312',
     accepted: true
   },
@@ -284,28 +311,28 @@ const notifications = [
     type: NotificationType.FollowRequestAcceptedNotification,
     seen: true,
     timestamp: new Date('2023-04-28T10:20:30Z'),
-    notification_id: 'notification_300',
+    notification_id: 'notification_030',
     follower_id: 'follower_789',
     accepted: true
   },
-  
+
   {
     user_id: 'user_123',
     type: NotificationType.FollowRequestAcceptedNotification,
     seen: false,
     timestamp: new Date('2023-04-27T12:30:00Z'),
-    notification_id: 'notification_789',
+    notification_id: 'notification_031',
     follower_id: 'follower_123',
     accepted: true
   },
-  
+
   {
     user_id: 'user_123',
     type: NotificationType.FollowRequestAcceptedNotification,
     seen: true,
     timestamp: new Date('2023-04-26T15:45:00Z'),
-    notification_id: 'notification_012',
-    follower_id: 'follower_345',
+    notification_id: 'notification_032',
+    follower_id: 'follower_032',
     accepted: true
   },
   {
@@ -313,7 +340,7 @@ const notifications = [
     type: NotificationType.FollowRequestDeclinedNotification,
     seen: false,
     timestamp: new Date(),
-    notification_id: 'notification_455',
+    notification_id: 'notification_033',
     follower_id: 'follower_456',
     accepted: false
   },
@@ -322,7 +349,7 @@ const notifications = [
     type: NotificationType.FollowRequestDeclinedNotification,
     seen: false,
     timestamp: new Date(),
-    notification_id: 'notification_456',
+    notification_id: 'notification_034',
     follower_id: 'follower_749',
     accepted: false
   },
@@ -331,7 +358,7 @@ const notifications = [
     type: NotificationType.FollowRequestDeclinedNotification,
     seen: false,
     timestamp: new Date(),
-    notification_id: 'notification_457',
+    notification_id: 'notification_035',
     follower_id: 'follower_787',
     accepted: false
   }
@@ -354,10 +381,10 @@ const profile = {
     likesLeft: 10,
     dislikesLeft: 10,
     commentLikesLeft: 10,
-    followers: [], 
-    following: [], 
-    blocked: [],    
-    posts: [],  
+    followers: [],
+    following: [],
+    blocked: [],
+    posts: [],
     notifications: notifications
 }
 

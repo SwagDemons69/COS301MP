@@ -32,11 +32,11 @@ export class NotificationRepository {
 
         try {
           const notificationRef = await admin.firestore().collection('profiles').doc(userId).collection('notifications').add(notification);
-        
+
           await admin.firestore().collection('profiles').doc(userId).update({
             notifications: admin.firestore.FieldValue.arrayUnion(notificationRef.id)
           });
-        
+
           return { success: true };
         } catch (error) {
           console.error('Error sending notification', error);
@@ -44,7 +44,7 @@ export class NotificationRepository {
         }
     }
 
-    
+
     async replyFollowRequest(request : ReplyFollowRequest): Promise<FollowRequestReponse> {
       // create a notification object and add it to the firebase collection for notifications
       // create a document in the firebase collection for notifications in user collection
@@ -59,11 +59,11 @@ export class NotificationRepository {
       // });
 
       console.error('Reply Follow Request not implemented!');
-  
+
       return { success: false };
   }
-  
-    
+
+
     async getNotifications(user_id: string): Promise<GetNotificationsResponse> {
       console.log("trying to find notifications for: " + user_id);
       // const notification : postLikedNotification = {
@@ -82,11 +82,11 @@ export class NotificationRepository {
       try {
         const querySnapshot = await admin.firestore().collection('profiles').doc(user_id).get();
         notifications = querySnapshot.data()?.['notifications'];
-        console.log("querySnapshot: " + querySnapshot.data()?.['notifications']); // an error, .forEach is not a function?Yeah at the bottom, commented it out
-        //it's working now. 
+        console.log("querySnapshot: " + JSON.stringify(querySnapshot)); // an error, .forEach is not a function?Yeah at the bottom, commented it out
+        //it's working now.
 
-        //you wanted to order it by timestamp though 
-        
+        //you wanted to order it by timestamp though
+
         // const querySnapshot = await admin.firestore().collection('profiles').get();
         //I think I know the problem
         // console.log("size: " + querySnapshot.size)//see terminal Mito. it didn't find any. Yeah
@@ -112,7 +112,7 @@ export class NotificationRepository {
         //   console.log("got one!")
         //   notifications.push(doc.data() as notification);
         // });
-      
+
         return { notifications };
       } catch (error) {
         console.error('Error getting notifications', error);

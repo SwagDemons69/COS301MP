@@ -10,6 +10,13 @@ export interface notification {
 }
 
 // this type of notification is used when a user likes a post
+export interface postDislikedNotification extends notification {
+  type: NotificationType.PostLikedNotification;
+  liker_id: string;
+  post_id: string;
+}
+
+// this type of notification is used when a user likes a post
 export interface postLikedNotification extends notification {
     type: NotificationType.PostLikedNotification;
     liker_id: string;
@@ -24,7 +31,7 @@ export interface postCommentedNotification extends notification {
 }
 
 // example postCommentNotification
-// 
+//
 
 // this type of notification is used when a user dislikes a post
 export interface newFollowerNotification extends notification {
