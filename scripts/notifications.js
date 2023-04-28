@@ -361,6 +361,6 @@ const profile = {
     notifications: notifications
 }
 // db.collection('profiles').doc(profile.id).set(profile);
-const profileRef = admin.firestore().collection('profiles').doc();
+const profileRef = admin.firestore().collection('profiles').doc("TEUSY8c3Zwjm74K0XxFvDlaTdvus");
 profile.user_id = profileRef.id;
 profileRef.set(profile);

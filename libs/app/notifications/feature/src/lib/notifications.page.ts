@@ -14,6 +14,8 @@ import {ProfileState } from '@mp/app/profile/data-access';
 import {NotificationType} from "@mp/api/notifications/util"
 
 
+
+
 @Component({
   selector: 'notifications-page',
   templateUrl: './notifications.page.html',
@@ -35,6 +37,7 @@ import {NotificationType} from "@mp/api/notifications/util"
 export class NotificationsPage implements OnInit {
   @Select(ProfileState.profile) profile$!: Observable<user_profile | null>;
   notifications : notification[] = [];
+  notificationType = NotificationType;
   constructor(private readonly api : NotificationsApi) {}
 
   ngOnInit(): void {
@@ -60,6 +63,7 @@ export class NotificationsPage implements OnInit {
   }
 
   async getNotifications() {
+    // this.notifications = [];
     const myUserID = this.getUserID();
     if(myUserID != "") {
       const request : GetNotificationsRequest = {userId : myUserID};
@@ -69,7 +73,7 @@ export class NotificationsPage implements OnInit {
       // this.notifications = response.notifications;
 
 
-        this.notifications = response.notifications;
+      this.notifications = response.notifications;
     }
     else{
       console.log("No user ID found");

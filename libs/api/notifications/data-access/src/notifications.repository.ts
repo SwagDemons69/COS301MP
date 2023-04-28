@@ -8,6 +8,7 @@ import { notification, NotificationType, postLikedNotification } from '@mp/api/n
 import { ReplyFollowRequest, FollowRequestReponse } from '@mp/api/notifications/util';
 import { Timestamp } from 'firebase-admin/firestore';
 import * as admin from 'firebase-admin';
+import { query } from '@firebase/firestore';
 
 @Injectable()
 export class NotificationRepository {
@@ -64,7 +65,7 @@ export class NotificationRepository {
   
     
     async getNotifications(user_id: string): Promise<GetNotificationsResponse> {
- 
+      console.log("trying to find notifications for: " + user_id);
       // const notification : postLikedNotification = {
       //   user_id: "exampleUserId",
       //   type: NotificationType.PostLikedNotification,
@@ -76,14 +77,41 @@ export class NotificationRepository {
       // }
       // const notifications: notification[] = [notification];
       // return { notifications };
-      const notifications: notification[] = [];
+      let notifications: notification[] = [];
 
       try {
-        const querySnapshot = await admin.firestore().collection('profiles').doc(user_id).collection('notifications').orderBy('timestamp', 'desc').get();
-      
-        querySnapshot.forEach((doc) => {
-          notifications.push(doc.data() as notification);
-        });
+        const querySnapshot = await admin.firestore().collection('profiles').doc(user_id).get();
+        notifications = querySnapshot.data()?.['notifications'];
+        console.log("querySnapshot: " + querySnapshot.data()?.['notifications']); // an error, .forEach is not a function?Yeah at the bottom, commented it out
+        //it's working now. 
+
+        //you wanted to order it by timestamp though 
+        
+        // const querySnapshot = await admin.firestore().collection('profiles').get();
+        //I think I know the problem
+        // console.log("size: " + querySnapshot.size)//see terminal Mito. it didn't find any. Yeah
+        // //search for profile
+        // querySnapshot.forEach((doc) => {
+        //     console.log("got one!");//Mito, look at the comment above, looking at terminal
+        //     console.log("user_id is:" + doc.data()?.['user_id']);
+        //     if(doc.data()?.['user_id'] == user_id){
+        //       console.log("found!");// how many terminals do you have up. 3 . Made themall rea wri I was on the wrong terminal, im looking at emulators
+        //      //yeah look at emulators
+        //       notifications = doc.data()?.['notifications'];
+        //       console.log("notifications: " + notifications);
+
+        //       //gonna run thunder client now, im watching closely, thats a lot of notification objects
+        //       // it worked!!! I'll send a screenshot on WhatsApp
+        //     }
+        // });///bruh!!1 the hell is that what is happenning???e I was running it through Thunder client. It seems the user_id is that long string
+      //let's do this step by step got it
+
+
+      //your code was working, it's just the user_id was wrong, in my input, i was scared for a sec
+        // querySnapshot.forEach((doc) => {
+        //   console.log("got one!")
+        //   notifications.push(doc.data() as notification);
+        // });
       
         return { notifications };
       } catch (error) {

@@ -4,20 +4,53 @@
 <ion-content [fullscreen]="true">
   <ion-button (click)="getNotifications()">Get User ID</ion-button>
   <ion-list>
-    <div *ngFor="let notif of notifications" class="notif">
+    <!-- <div *ngFor="let notif of notifications" class="notif">
     <ion-item lines="none">
       <ion-icon name="{{ notif.icon }}"></ion-icon>
       <ion-label>{{ notif.message }}</ion-label>
       <ion-badge slot="end">{{ notif.time }}</ion-badge>
     </ion-item>
     <hr />
-  </div>
+  </div> -->
   <div *ngFor="let notif of notifications" class="notif">
     <div [ngSwitch]="notif.type">
-      <div *ngSwitchCase="Color.Red">Red</div>
-      <div *ngSwitchCase="Color.Blue">Blue</div>
-      <div *ngSwitchCase="Color.Green">Green</div>
-      <div *ngSwitchDefault>Invalid Color</div>
+
+      <ion-item lines="none" *ngSwitchCase="notificationType.PostDislikedNotification">
+        <ion-label>PostDislikedNotification</ion-label>
+      </ion-item>
+      <ion-item lines="none" *ngSwitchCase="notificationType.PostLikedNotification">
+        <ion-label>PostLikedNotification</ion-label>
+      </ion-item> 
+      <ion-item lines="none" *ngSwitchCase="notificationType.PostCommentedNotificatoin">
+        <ion-label>PostCommentedNotificatoin</ion-label>
+      </ion-item> 
+      <ion-item lines="none" *ngSwitchCase="notificationType.NewFollowerNotification">
+        <ion-label>NewFollowerNotification</ion-label>
+      </ion-item>
+      <ion-item lines="none" *ngSwitchCase="notificationType.NewDonationNotification">
+        <ion-label>NewDonationNotification</ion-label>
+      </ion-item>
+      <ion-item lines="none" *ngSwitchCase="notificationType.CommentLikedNotification">
+        <ion-label>CommentLikedNotification</ion-label>
+      </ion-item>
+      <ion-item lines="none" *ngSwitchCase="notificationType.NewPostCommentLike">
+        <ion-label>NewPostCommentLike</ion-label>
+      </ion-item>
+      <ion-item lines="none" *ngSwitchCase="notificationType.TimeRunningOutNotification">
+        <ion-label>TimeRunningOutNotification</ion-label>
+      </ion-item>
+      <ion-item lines="none" *ngSwitchCase="notificationType.SystemNotification">
+        <ion-label>SystemNotification</ion-label>
+      </ion-item>
+      <ion-item lines="none" *ngSwitchCase="notificationType.FollowRequestNotification">
+        <ion-label>FollowRequestNotification</ion-label>
+      </ion-item>
+      <ion-item lines="none" *ngSwitchCase="notificationType.FollowRequestAcceptedNotification">
+        <ion-label>FollowRequestAcceptedNotification</ion-label>
+      </ion-item>
+      <ion-item lines="none" *ngSwitchCase="notificationType.FollowRequestDeclinedNotification">
+        <ion-label>FollowRequestDeclinedNotification</ion-label>
+      </ion-item>
     </div>
     <hr />
   </div>
