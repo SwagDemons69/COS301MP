@@ -360,7 +360,20 @@ const profile = {
     posts: [],  
     notifications: notifications
 }
+
+const readline = require('readline').createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
+readline.question('UserId:', user_id => {
+  console.log(`Inserting notifications for user: ${user_id}`);
+  const profileRef = admin.firestore().collection('profiles').doc(user_id);
+  profile.user_id = profileRef.id;
+  profileRef.set(profile);
+  readline.close();
+});
 // db.collection('profiles').doc(profile.id).set(profile);
-const profileRef = admin.firestore().collection('profiles').doc("TEUSY8c3Zwjm74K0XxFvDlaTdvus");
-profile.user_id = profileRef.id;
-profileRef.set(profile);
+// const profileRef = admin.firestore().collection('profiles').doc("TEUSY8c3Zwjm74K0XxFvDlaTdvus");
+// profile.user_id = profileRef.id;
+// profileRef.set(profile);
