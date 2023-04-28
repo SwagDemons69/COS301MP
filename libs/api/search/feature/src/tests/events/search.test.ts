@@ -1,3 +1,4 @@
+import { Test, TestingModule } from '@nestjs/testing';
 import { SearchRepository } from '@mp/api/search/data-access';
 import { SearchEvent } from '@mp/api/search/util';
 import { SearchEventHandler } from '../../events';
