@@ -14,6 +14,12 @@
   
 <ion-content [fullscreen]="true">
   <ion-list #messageList>
+
+    <div class="noMessages" *ngIf="messages.length == 0">
+      <ion-icon name="ice-cream-outline"></ion-icon> <br /><br /><br />
+      Go on, pop them a message,<br />make their day!<br /><br />
+    </div>
+
     <div class="message" *ngFor="let message of messages">
     <ion-item [class.sent]="message.sent" [class.receiver]="!message.sent" style="margin-bottom: 10px;">
       <ion-label [innerHTML]="message.text.replace('\n', '&lt;br /&gt;')" style="white-space: pre-wrap;"></ion-label>

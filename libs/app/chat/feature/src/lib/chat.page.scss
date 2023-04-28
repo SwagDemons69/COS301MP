@@ -89,3 +89,20 @@ ion-button {
   width: 50px;
   font-size: 0.8em;
 }
+
+.noMessages {
+  margin-top: 10vh;
+  padding-top: 10vh;
+  width: 100%;
+  text-align: center;
+
+  background: radial-gradient(ellipse, #1c293cc0 0%, #25364e40 40%, #17223100 60%);
+
+  color: #858585;
+}
+
+.noMessages ion-icon {
+  font-size: 10em;
+
+  color: #9b9b9b;
+}
