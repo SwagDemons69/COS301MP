@@ -245,7 +245,7 @@ const notifications = [
   },
   
   {
-    user_id: 'user_456',
+    user_id: 'user_123',
     type: NotificationType.SystemNotification,
     seen: false,
     timestamp: new Date(),
@@ -254,7 +254,7 @@ const notifications = [
   },
   
   {
-    user_id: 'user_789',
+    user_id: 'user_123',
     type: NotificationType.SystemNotification,
     seen: false,
     timestamp: new Date(),
@@ -290,7 +290,7 @@ const notifications = [
   },
   
   {
-    user_id: 'user_456',
+    user_id: 'user_123',
     type: NotificationType.FollowRequestAcceptedNotification,
     seen: false,
     timestamp: new Date('2023-04-27T12:30:00Z'),
@@ -300,7 +300,7 @@ const notifications = [
   },
   
   {
-    user_id: 'user_789',
+    user_id: 'user_123',
     type: NotificationType.FollowRequestAcceptedNotification,
     seen: true,
     timestamp: new Date('2023-04-26T15:45:00Z'),
