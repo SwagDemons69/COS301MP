@@ -54,9 +54,10 @@ export class DashboardPage {
     this.recommended_posts$.forEach((posts) => {
       console.log(posts);
       this.recommended = posts;
+      this.recommended = this.recommended.sort((a, b) => (a.timeStamp < b.timeStamp ? 1 : -1));
+      this.recommended = this.recommended.slice(0, 3);
     });
-    this.recommended = this.recommended.sort((a, b) => (a.timeStamp < b.timeStamp ? 1 : -1));
-    this.recommended = this.recommended.slice(0, 3);
+    
     // console.log("Recommended posts");
     // console.log(this.recommended);
 
@@ -65,8 +66,9 @@ export class DashboardPage {
       // console.log("Trending posts");
       // console.log(posts);
       this.trending = posts;
+      this.trending.sort((a, b) => (a.post.likes < b.post.likes ? 1 : -1));
     })
-    this.trending.sort((a, b) => (a.post.likes < b.post.likes ? 1 : -1));
+    
   }
 
   //Load Current Profiles Time when you enter page
