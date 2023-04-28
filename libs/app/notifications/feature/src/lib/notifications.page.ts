@@ -13,6 +13,7 @@ import {GetNotificationsRequest, GetNotificationsResponse } from '@mp/api/notifi
 import {ProfileState } from '@mp/app/profile/data-access';
 import {NotificationType} from "@mp/api/notifications/util"
 import {Timestamp } from '@google-cloud/firestore'
+import {  formatDistance } from 'date-fns'
 // import {Dayjs} from 'dayjs';
 // import {RelativeTime}
 
@@ -40,8 +41,13 @@ export class NotificationsPage implements OnInit {
   @Select(ProfileState.profile) profile$!: Observable<user_profile | null>;
   notifications : notification[] = [];
   notificationType = NotificationType;
-  getTime(timestamp : Timestamp){
-    return 1;
+  getTime(timestamp : any){
+    const total_milliseconds = timestamp._seconds * 1000 + timestamp._nanoseconds / 1000000;
+    const date = new Date(total_milliseconds );
+    console.log(total_milliseconds);
+    console.log(date);
+
+    return formatDistance(date, new Date(), { addSuffix: true });;
   }
   constructor(private readonly api : NotificationsApi) {}
 
