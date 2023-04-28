@@ -2,9 +2,9 @@ import { Test } from '@nestjs/testing';
 import { PostService } from '../post.service';
 import { CommandBus } from '@nestjs/cqrs';
 import { post } from '@mp/api/home/util';
-import { AddPhotoRequest, CreatePostLikeRequest, CreatePostRequest, CreatePostRootCommentRequest, CreatePostChildCommentRequest } from 'libs/api/post/util/src/requests';
-import { AddPhotoResponse, CreatePostChildCommentResponse, CreatePostLikeResponse, CreatePostResponse, CreatePostRootCommentResponse } from 'libs/api/post/util/src/responses';
-import { AddPhotoCommand, CreatePostChildCommentCommand, CreatePostCommand, CreatePostLikeCommand, CreatePostRootCommentCommand } from 'libs/api/post/util/src/commands';
+import { AddPhotoRequest, CreatePostLikeRequest, CreatePostRequest, CreatePostRootCommentRequest, CreatePostChildCommentRequest, GetPostsRequest } from 'libs/api/post/util/src/requests';
+import { AddPhotoResponse, CreatePostChildCommentResponse, CreatePostLikeResponse, CreatePostResponse, CreatePostRootCommentResponse, GetPostsResponse } from 'libs/api/post/util/src/responses';
+import { AddPhotoCommand, CreatePostChildCommentCommand, CreatePostCommand, CreatePostLikeCommand, CreatePostRootCommentCommand, GetPostsCommand } from 'libs/api/post/util/src/commands';
 import { ChildComment, RootComment, post_like } from 'libs/api/post/util/src/interfaces';
 import { user_profile } from '@mp/api/profiles/util';
 
@@ -177,6 +177,21 @@ describe('Post feature', () => {
             const result = await postFeature.CreateChildComment(request);
 
             expect(commandBus.execute).toHaveBeenCalledWith(new CreatePostChildCommentCommand(request));
+            expect(result).toEqual(response);
+        });
+    });
+
+    describe('getposts', () => {
+        it('should get all posts from a user - call commandbus.execute with GetPostsCommand', async () => {
+            const user = mockuser.user_id;
+            const request: GetPostsRequest = {user};
+            const posts = [mockpost];
+            const response: GetPostsResponse = {posts};
+            jest.spyOn(commandBus, 'execute').mockResolvedValue(response);
+
+            const result = await postFeature.GetPosts(request);
+
+            expect(commandBus.execute).toHaveBeenCalledWith(new GetPostsCommand(request));
             expect(result).toEqual(response);
         });
     });
