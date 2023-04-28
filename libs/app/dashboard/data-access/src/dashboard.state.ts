@@ -3,11 +3,11 @@ import { post } from '@mp/api/home/util';
 import { Selector, State, Store, Action, StateContext } from '@ngxs/store';
 import { DashboardApi } from './dashboard.api';
 import { SetDashboardPosts } from '@mp/app/dashboard/util';
-import { GetRecommendedPostsRequest, GetTrendingPostsRequest } from '@mp/api/dashboard/util';
+import { GetRecommendedPostsRequest, GetTrendingPostsRequest, PostHeader } from '@mp/api/dashboard/util';
 
 export interface DashboardStateModel {
-  recommended_posts: post[] | [];
-  trending_posts: post[] | [];
+  recommended_posts: PostHeader[] | [];
+  trending_posts: PostHeader[] | [];
 }
 
 @State<DashboardStateModel>({

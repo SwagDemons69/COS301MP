@@ -5,6 +5,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { BlipComponent } from './blip.component';
 import { BlipRouting } from './blip.routing';
 import { FormsModule } from '@angular/forms';
+import { BlipModule as BlipDataModule } from '@mp/app/blip/data-access'
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import { FormsModule } from '@angular/forms';
     IonicModule,
     BlipRouting,
     NgxSkeletonLoaderModule,
-    FormsModule
+    FormsModule,
+    BlipDataModule
   ],
   declarations: [BlipComponent],
 })

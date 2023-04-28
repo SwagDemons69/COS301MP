@@ -5,7 +5,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ProfileOtherComponent } from './profile-other.component';
 import { ProfileOtherRouting } from './profile-other.routing';
 import { ProfileOtherModule as ProfileOtherDataAccessModule } from '@mp/app/profile-other/data-access';
-
+import { KronosModule } from '@mp/app/kronos-timer/kronos';
 
 @NgModule({
   imports: [
@@ -13,7 +13,8 @@ import { ProfileOtherModule as ProfileOtherDataAccessModule } from '@mp/app/prof
     IonicModule,
     ProfileOtherRouting,
     ProfileOtherDataAccessModule,
-    NgxSkeletonLoaderModule
+    NgxSkeletonLoaderModule,
+    KronosModule
   ],
   declarations: [ProfileOtherComponent],
 })
