@@ -28,12 +28,16 @@ export class NotificationRepository {
         // await userRef.update({
         //   notifications: admin.firestore.FieldValue.arrayUnion(notification),
         // });
-        const { userId, notification } = sendNotificationRequest;
+        const { notification } = sendNotificationRequest;
+
+        notification.seen = false;
+        notification.timestamp = admin.firestore.Timestamp.now();
+        // notification.notification_id = admin.firestore().collection('profiles').doc().id;
 
         try {
-          const notificationRef = await admin.firestore().collection('profiles').doc(userId).collection('notifications').add(notification);
+          const notificationRef = await admin.firestore().collection('profiles').doc(notification.user_id).collection('notifications').add(notification);
 
-          await admin.firestore().collection('profiles').doc(userId).update({
+          await admin.firestore().collection('profiles').doc(notification.user_id).update({
             notifications: admin.firestore.FieldValue.arrayUnion(notificationRef.id)
           });
 

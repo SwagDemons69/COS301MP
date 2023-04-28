@@ -4,9 +4,9 @@ import { NotificationType } from '../enums';
 export interface notification {
     user_id : string; // the user that the notification is for
     type : NotificationType; // the type of notification
-    seen : boolean; // if the user has seen the notification
-    timestamp : Timestamp; // the time the notification was created
-    notification_id : string; // the id of the notification on firebase
+    seen? : boolean; // if the user has seen the notification
+    timestamp? : Timestamp; // the time the notification was created
+    notification_id? : string; // the id of the notification on firebase
     liker_id? : string; // the id of the user that liked the post
     post_id? : string; // the id of the post that was liked
     comment_id? : string; // the id of the comment that was liked

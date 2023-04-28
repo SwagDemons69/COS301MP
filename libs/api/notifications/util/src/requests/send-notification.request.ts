@@ -3,7 +3,6 @@ import { notification } from '../interfaces';
 // this should be used to create a notification and add it to the firebase collection for notifications
 // so when someone likes/follows/comments/etc.. it will create a notification for the user
 export interface SendNotificationRequest {
-    userId: string;
     notification: notification;
 }
 
