@@ -13,7 +13,7 @@ import {GetNotificationsRequest, GetNotificationsResponse } from '@mp/api/notifi
 import {ProfileState } from '@mp/app/profile/data-access';
 import {NotificationType} from "@mp/api/notifications/util"
 import {Timestamp } from '@google-cloud/firestore'
-import {  formatDistance } from 'date-fns'
+import {  formatDistance } from 'date-fns';
 // import {Dayjs} from 'dayjs';
 // import {RelativeTime}
 

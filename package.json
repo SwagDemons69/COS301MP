@@ -66,6 +66,7 @@
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "cuid": "^3.0.0",
+    "date-fns": "^2.29.3",
     "firebase-admin": "^11.5.0",
     "firebase-functions": "^4.2.1",
     "immer": "^9.0.19",
