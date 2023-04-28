@@ -6,6 +6,12 @@
   <br>
 
   <ion-list>
+    <div class="noMessages" *ngIf="headers.length == 0">
+      <ion-icon name="library-outline"></ion-icon> <br /><br /><br />
+      Looks like theres no one here yet. <br /><br />
+      Go make some friends and start a conversation!
+    </div>
+
     <div *ngFor="let item of headers" class="chatItem">
     <ion-item (click)="goToDetails(item)" lines="none">
       <ion-avatar>
