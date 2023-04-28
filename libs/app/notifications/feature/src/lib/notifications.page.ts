@@ -11,6 +11,7 @@ import {user_profile } from '@mp/api/profiles/util';
 // import { user } from 'firebase-functions/v1/auth';
 import {GetNotificationsRequest, GetNotificationsResponse } from '@mp/api/notifications/util';
 import {ProfileState } from '@mp/app/profile/data-access';
+import {NotificationType} from "@mp/api/notifications/util"
 
 
 @Component({

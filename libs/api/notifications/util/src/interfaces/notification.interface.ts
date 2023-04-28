@@ -76,13 +76,13 @@ export interface followRequestNotification extends notification {
 export interface followRequestAcceptedNotification extends notification {
     type: NotificationType.FollowRequestAcceptedNotification;
     follower_id: string;
-    accepted: true;
+    accepted: boolean;
 }
 
 export interface followRequestDeclinedNotification extends notification {
     type: NotificationType.FollowRequestDeclinedNotification;
     follower_id: string;
-    accepted: false;
+    accepted: boolean;
 }
 export interface followRequestNotification extends notification {
     type: NotificationType.FollowRequestNotification;
@@ -92,11 +92,11 @@ export interface followRequestNotification extends notification {
 export interface followRequestAcceptedNotification extends notification {
     type: NotificationType.FollowRequestAcceptedNotification;
     follower_id: string;
-    accepted: true;
+    accepted: boolean;
 }
 
 export interface followRequestDeclinedNotification extends notification {
     type: NotificationType.FollowRequestDeclinedNotification;
     follower_id: string;
-    accepted: false;
+    accepted: boolean;
 }

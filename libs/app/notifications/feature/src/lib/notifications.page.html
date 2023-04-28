@@ -4,13 +4,23 @@
 <ion-content [fullscreen]="true">
   <ion-button (click)="getNotifications()">Get User ID</ion-button>
   <ion-list>
-    <!-- <div *ngFor="let notif of notifications" class="notif">
+    <div *ngFor="let notif of notifications" class="notif">
     <ion-item lines="none">
       <ion-icon name="{{ notif.icon }}"></ion-icon>
       <ion-label>{{ notif.message }}</ion-label>
       <ion-badge slot="end">{{ notif.time }}</ion-badge>
     </ion-item>
     <hr />
-  </div> -->
+  </div>
+  <div *ngFor="let notif of notifications" class="notif">
+    <div [ngSwitch]="notif.type">
+      <div *ngSwitchCase="Color.Red">Red</div>
+      <div *ngSwitchCase="Color.Blue">Blue</div>
+      <div *ngSwitchCase="Color.Green">Green</div>
+      <div *ngSwitchDefault>Invalid Color</div>
+    </div>
+    <hr />
+  </div>
+
   </ion-list>
 </ion-content>
