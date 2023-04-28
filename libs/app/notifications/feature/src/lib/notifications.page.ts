@@ -17,4 +17,8 @@ export class NotificationsPage {
     { icon: 'notifications-outline', time: "12:00", message: 'Dr A has liked your post.' },
     { icon: 'notifications-outline', time: "10:00", message: 'Welcome to Twenty4.' }
   ];
+
+  dismissNotif(notif: any) {
+    this.notifications = this.notifications.filter(n => n !== notif);
+  }
 }

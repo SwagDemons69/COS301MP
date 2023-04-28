@@ -139,6 +139,10 @@ async getTrending() {
       this.renderer.setStyle(document.querySelector(".glassyBackground"), 'top', `${0.5*event.detail.scrollTop}px`);
       this.isKronosBarVisible = false;
     }
+    else if (event.detail.scrollTop <= 690) {
+      this.renderer.setStyle(document.querySelector(".glassyBackground"), 'top', `${0.5*event.detail.scrollTop}px`);
+      this.isKronosBarVisible = false;
+    }
   }
 
   loadData(event: any) {

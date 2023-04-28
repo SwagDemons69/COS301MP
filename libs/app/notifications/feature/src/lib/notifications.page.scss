@@ -70,3 +70,28 @@ ion-title {
   background: transparent;
   font-weight: light;
 }
+
+.dismiss {
+  color: white;
+}
+
+.dismiss:hover {
+  color: #ff0062;
+}
+
+.noNotifications {
+  margin-top: 10vh;
+  padding-top: 10vh;
+  width: 100%;
+  text-align: center;
+
+  background: radial-gradient(ellipse, #1c293cc0 0%, #25364e40 40%, #17223100 60%);
+
+  color: #858585;
+}
+
+.noNotifications ion-icon {
+  font-size: 10em;
+
+  color: #858585;
+}
