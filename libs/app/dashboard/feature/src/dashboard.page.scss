@@ -85,6 +85,14 @@ ion-avatar.avatar {
 }
 
 /* //========== SEARCH BAR ==========// */
+.searchResultsType {
+    cursor: pointer;
+}
+
+.searchResultsType ion-item:hover {
+    background-color: #262626;
+}
+
 .searchResults{
     display: flex;
     justify-content: space-evenly;
@@ -257,6 +265,7 @@ $stone-positions: (
     // border: 1px solid red;
     max-height: 100vw;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .trendingItem ion-img {

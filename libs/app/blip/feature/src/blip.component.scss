@@ -155,6 +155,15 @@ $tag-colors: (
     #2bccbc,
 );
 
+ion-badge {
+    transition: 0.1s ease-in all;
+    cursor: pointer;
+}
+
+ion-badge:hover {
+    transform: scale(1.1);
+}
+
 @for $i from 1 through 3 {
   ion-badge:nth-child(#{$i}n) ::ng-deep {
     background-color: nth($tag-colors, $i);
