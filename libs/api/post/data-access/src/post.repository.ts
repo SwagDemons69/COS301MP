@@ -10,9 +10,12 @@ import { connectStorageEmulator, getStorage, ref, uploadString } from 'firebase/
 export class PostRepository {
 
     async AddPhoto(file: string, fileName: string): Promise<AddPhotoResponse> {
-        const storage = getStorage(initializeApp({ projectId: 'twenty4-f9f8e', storageBucket: 'twenty4-f9f8e.appspot.com' }));
+         //const storage = getStorage(initializeApp({ projectId: 'twenty4-f9f8e', storageBucket: 'twenty4-f9f8e.appspot.com' }));
+        const storage = getStorage(initializeApp({ projectId: 'twenty4-5d227', storageBucket: 'twenty4-5d227.appspot.com' }));
         const bucket = admin.storage().bucket();
-        connectStorageEmulator(storage, "localhost", 5006);
+
+        //connectStorageEmulator(storage, "localhost", 5006);
+
         const photosRef = ref(storage, `photos/${fileName}`);
         const snapshot = await uploadString(photosRef, file, 'base64');
         const file2 = await bucket.file(snapshot.metadata.fullPath).makePublic();

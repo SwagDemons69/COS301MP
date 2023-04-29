@@ -39,6 +39,7 @@ export class ProfilesRepository {
   }
 
   async createProfile(profile: user_profile) {
+    console.log("CREATE PROFILE: " + profile)
     // Remove password field if present
     return await admin
       .firestore()

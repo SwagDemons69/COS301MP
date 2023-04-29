@@ -17,14 +17,13 @@ import { AuthApi } from './auth.api';
 
 export interface AuthStateModel {
   user: User | null;
-  username: string | null;
+  
 }
 
 @State<AuthStateModel>({
   name: 'auth',
   defaults: {
-    user: null,
-    username: ""
+    user: null
   },
 })
 @Injectable()
@@ -51,8 +50,6 @@ export class AuthState {
     //console.log(user)
     ctx.setState(
       produce((draft) => {
-        // console.log(draft.user?.displayName)
-        // console.log(draft.username)
         draft.user = user;
       }))
   }
@@ -70,12 +67,13 @@ export class AuthState {
   @Action(Register)
   async register(
     ctx: StateContext<AuthStateModel>,
-    { email, password, username }: Register
+    { email, password }: Register
   ) {
     try {
       console.log("AUTH STATE")
-      await this.authApi.register(email, password, username);
-      ctx.patchState({username: username});
+      await this.authApi.register(email, password);
+      console.log("AUTH STATE 2")
+      // ctx.patchState({username: username});
       //console.log("SET STATE: " + ctx.getState().username);
       
       return ctx.dispatch(new Navigate(['home']));
