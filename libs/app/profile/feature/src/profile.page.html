@@ -77,24 +77,30 @@
         </ion-card>
 
     </ion-row>
+    <br /><br /><br /><br />
+    <ng-container *ngIf="(profile$ | async) as profile; else noProfile">
+      <h3 class="sectionTitle">{{profile.username==""?"YOUR":profile.username+"'S"}} POSTS</h3>
+      <ion-row>
 
-    <ion-row>
-      <ng-container *ngIf="(profile$ | async) as profile; else noProfile">
-      <ion-card class="photos">
-        <ion-card-content class="ion-text-center">
-          <ion-content [fullscreen]="true" [scrollEvents]="true">
-              <ion-grid [fixed]="true">
-                <ion-row class="ion-justify-content-center" *ngFor="let i of postIndex">
-                    <ion-col class="ion-col">
-                      <ion-img [src]="(posts[i].content)" (click)="openBlip(posts[i])" alt=""></ion-img>
-                    </ion-col>
-                </ion-row>
-              </ion-grid>
-          </ion-content>
-        </ion-card-content>
-      </ion-card>
+        <ion-grid [fixed]="true" class="posts">
+
+          <ion-row class="ion-justify-content-center" *ngFor="let i of postIndex">
+              <ion-col>
+                <ion-img [src]="(posts[i].content)" (click)="openBlip(posts[i])" alt=""></ion-img>
+              </ion-col>
+          </ion-row>
+
+          <ion-row class="ion-justify-content-center noMoreContent">
+            <ion-icon name="telescope-outline"></ion-icon>
+            <br /><br /><br />
+            <span>Nothing{{postIndex.length==0?"":" more"}} to see here!</span>
+          </ion-row>
+
+        </ion-grid>
+
+      </ion-row>
     </ng-container>
-    </ion-row>
+
   </ion-grid>
 </div>
 

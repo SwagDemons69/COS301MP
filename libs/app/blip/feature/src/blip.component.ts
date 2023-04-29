@@ -130,6 +130,8 @@ export class BlipComponent {
     this.newComment = "";
   }
 
+  hasLikedPost = false;
+
   //likeStatus = false;
   async likePost() {
     console.log("In")
@@ -143,6 +145,7 @@ export class BlipComponent {
       console.log(request)
       const resp = await this.api.likePost(request);
       this.data.likes = resp.data.likes;
+      this.hasLikedPost = true;
       //console.log(resp)
 
     }
