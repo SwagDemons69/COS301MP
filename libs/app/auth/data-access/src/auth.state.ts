@@ -60,13 +60,6 @@ export class AuthState {
         else{
          console.log("user or username is null")
         }
-        // console.log(user?.displayName)
-
-        // console.log(user)
-        // if(user && draft.user && draft.user.displayName){
-        //   draft.user.displayName = user.displayName;
-        // }
-        //if(draft.user){ draft.user.displayName = ctx.getState().username; };
       })
     );
   }
