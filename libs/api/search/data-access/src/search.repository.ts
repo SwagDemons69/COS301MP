@@ -64,12 +64,17 @@ export class SearchRepository {
       const validPosts: Post[] = [];
 
       for(let i = 0; i < profileIds.length;i++){
+        const profileRef = admin.firestore().collection(`profiles`).doc(profileIds[i])
+        const profile = (await profileRef.get()).data() as user_profile;
+            
+        if(!profile.notPublic){
           const postsRef = await admin.firestore().collection(`profiles/${profileIds[i]}/posts`).get();
           const posts = postsRef.docs.map((post) => { return post.data() as post });
           for(let j = 0; j < posts.length; j++){
             if(posts[j].desc.toLowerCase().includes(query.toLowerCase()))
               validPosts.push({ post: posts[j], posted_by: profilesUsernames[i]});
           }
+        }
       }
       return validPosts;
     };

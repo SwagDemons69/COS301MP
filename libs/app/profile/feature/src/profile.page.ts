@@ -115,9 +115,6 @@ export class ProfilePage {
     const modal = await this.modalController.create({
       component: BlipComponent,
       componentProps: {
-        // data: data,
-        // blipContent: blipData,
-        // user: name
         data: data,
         metadata: blipData.data
       }
