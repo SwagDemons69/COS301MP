@@ -29,6 +29,15 @@ export const CreatePostLike = functions.https.onCall(
   }
 );
 
+export const CreatePostDislike = functions.https.onCall(
+  async (request: CreatePostLikeRequest): Promise<CreatePostLikeResponse> => {
+    console.log("FUNCTIONS")
+    const app = await NestFactory.createApplicationContext(CoreModule);
+    const service = app.get(PostService);
+    return service.CreatePostDislike(request);
+  }
+);
+
 export const CreateRootComment = functions.https.onCall(
   async (request: CreatePostRootCommentRequest): Promise<CreatePostRootCommentResponse> => {
     const app = await NestFactory.createApplicationContext(CoreModule);

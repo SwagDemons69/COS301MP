@@ -116,8 +116,7 @@ export class ProfilePage {
       component: BlipComponent,
       componentProps: {
         data: data,
-        blipContent: blipData,
-        user: name
+        metadata: blipData.data
       }
     });
 

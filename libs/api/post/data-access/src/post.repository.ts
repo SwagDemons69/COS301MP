@@ -59,7 +59,36 @@ export class PostRepository {
         return { likes: allLikes.length };
     }
 
+    async createPostDislike(disliker_id: string, post_id: string, poster_id: string): Promise<CreatePostLikeResponse>{
+        console.log("Disliking post");
+        const handle = await admin.firestore().collection(`profiles/${poster_id}/posts/${post_id}/dislikes`).get();
+        const dislikes = handle.docs.map((doc) => { return doc.data() as {user: string}; });
+
+        let flag = false;
+        for (let i = 0; i < dislikes.length; i++) {
+            if (dislikes[i].user == disliker_id)
+                flag = true;
+        }
+        //console.log(flag)
+        if (!flag) {
+            const newLike = admin.firestore().collection(`profiles/${poster_id}/posts/${post_id}/dislikes`).doc();
+            await newLike.set({ user: disliker_id });
+
+            const postersRef = admin.firestore().collection(`profiles`).doc(poster_id)
+            const poster = (await postersRef.get()).data() as user_profile;
+            
+            const posterTOE = poster.timeOfExpiry
+            const newTime = posterTOE - 1440        ;
+            await postersRef.set({timeOfExpiry: newTime}, { merge: true });
+        }
+
+        const dislikesRef = await admin.firestore().collection(`profiles/${poster_id}/posts/${post_id}/dislikes`).get();
+        const allDislikes = dislikesRef.docs.map((doc) => { return doc.data() as post_like; });
+        return { likes: allDislikes.length };
+    }
+
     async createPostRootComment(user: string, post: string, comment: RootComment): Promise<CreatePostRootCommentResponse> {
+        console.log(user, post, comment);
         const handle = admin.firestore().collection(`profiles/${user}/posts/${post}/root-comments`).doc();
         comment.root_comment_id = handle.id;
         await handle.set(comment);
@@ -73,7 +102,14 @@ export class PostRepository {
             const ChildComments = commentsRef.docs.map((doc) => { return doc.data() as ChildComment; });
             RootComments[i].comments = ChildComments;
         }
-        return { post_comments: RootComments };
+        const postRef = admin.firestore().collection(`profiles/${user}/posts`).doc(post)
+        const poster = (await postRef.get()).data() as post;
+            
+        const postComments = poster.comments;
+        const newComments = postComments + 1;
+        await postRef.set({comments: newComments}, { merge: true });
+
+        return { post_comments: RootComments};
     }
 
     async createPostChildComment(user: string, post: string, rootComment: string, comment: ChildComment): Promise<CreatePostChildCommentResponse> {
@@ -89,6 +125,14 @@ export class PostRepository {
             const ChildComments = commentsRef.docs.map((doc) => { return doc.data() as ChildComment; });
             RootComments[i].comments = ChildComments;
         }
+
+        const postRef = admin.firestore().collection(`profiles/${user}/posts`).doc(post)
+        const poster = (await postRef.get()).data() as post;
+            
+        const postComments = poster.comments;
+        const newComments = postComments + 1;
+        await postRef.set({comments: newComments}, { merge: true });
+
         return { post_comments: RootComments };
     }
 

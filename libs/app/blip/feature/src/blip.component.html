@@ -40,12 +40,15 @@
             </ion-row>
 
             <ion-row class="actions">
-              <ion-col size="7.5"></ion-col>
+              <ion-col size="6"></ion-col>
               <ion-col size="1.5">
                 <div>{{KronosTimer.formatActionNumber(data.shares)}} <ion-icon name="share-social-outline"></ion-icon></div>
               </ion-col>
               <ion-col size="1.5">
                 <div>{{KronosTimer.formatActionNumber(data.likes)}} <ion-icon (click)="likePost()" name="thumbs-up-outline"></ion-icon></div>
+              </ion-col>
+              <ion-col size="1.5">
+                <div>{{KronosTimer.formatActionNumber(dislikes)}}<ion-icon (click)="dislikePost()" name="thumbs-down-outline"></ion-icon></div>
               </ion-col>
               <ion-col size="1.5">
                 <div>{{KronosTimer.formatActionNumber(metadata.comments?.length)}} <ion-icon name="chatbubble-outline"></ion-icon></div>
@@ -65,7 +68,7 @@
 
     <!-- COMMENT SECTION -->
     <div *ngIf="replyTo !== null" style="margin-left: 1em; margin-bottom: 0.4em">
-      Replying to <b>{{replyTo?.created_by}}</b>
+      Replying to <b>{{replyTo?.created_by_username}}</b>
       <span (click)="replyTo = null" class="repliesLabel" style="font-size: 0.7em">
         (Cancel)
       </span>
@@ -90,7 +93,7 @@
 
         <div *ngFor="let comm of metadata.comments">
         <ion-card class="comment">
-          <ion-card-title>{{comm.created_by}}</ion-card-title>
+          <ion-card-title>{{comm.created_by_username}}</ion-card-title>
           <br />
           <ion-card-subtitle>{{comm.content}}</ion-card-subtitle>
         </ion-card>
@@ -101,11 +104,11 @@
           class="repliesLabel"
         > {{comm.expanded?"Hide replies":"Show replies"}}
         </span>
-        <span (click)="replyTo = (replyTo === comm) ? null : comm" class="repliesLabel" [class.selectedReply]="replyTo === comm">Reply</span>
+        <span (click)="replyTo = (replyTo === comm) ? null : comm; rootCom_id = comm.root_comment_id" class="repliesLabel" [class.selectedReply]="replyTo === comm">Reply</span>
 
         <ion-list class="commentSection sub" *ngIf="comm.expanded">
           <ion-card class="comment sub" *ngFor="let subcomm of comm.comments">
-            <ion-card-title>{{subcomm.created_by}}</ion-card-title>
+            <ion-card-title>{{subcomm.created_by_username}}</ion-card-title>
             <br />
             <ion-card-subtitle>{{subcomm.content}}</ion-card-subtitle>
           </ion-card>

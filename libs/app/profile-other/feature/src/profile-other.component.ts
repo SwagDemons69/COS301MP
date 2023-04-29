@@ -53,7 +53,6 @@ export class ProfileOtherComponent {
         this.followerCount = user?.followers;
         this.followingCount = user?.following;
         this.postCount = user?.posts;
-        //this.postCount = user?.posts?.length;
       }
     })
 
