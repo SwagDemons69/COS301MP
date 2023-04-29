@@ -25,6 +25,10 @@ export class PostRepository {
             .collection(`profiles/${post.user_id}/posts`).doc();
         post.post_id = postRef.id;
         postRef.set(post);
+
+        const poster = admin.firestore().collection("profiles").doc(post.user_id);
+        let postCount = (await poster.get()).data()?.['posts'];
+        await poster.set({posts: ++postCount}, { merge: true });
     }
 
     async createPostLike(liker_id: string, post_id: string, poster_id: string): Promise<CreatePostLikeResponse> {

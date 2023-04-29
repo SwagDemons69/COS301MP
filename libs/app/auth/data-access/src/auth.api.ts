@@ -26,24 +26,6 @@ export class AuthApi {
 
   async register(email: string, password: string, username: string) {
     return await createUserWithEmailAndPassword(this.auth, email, password);
-    // .then( (result) => {
-    //   console.log("USER ID: " + result.user.uid)
-      // const userRef = doc(this.firestore, `users/${result.user.uid}`);
-
-      // updateDoc(userRef, { displayName: username });
-      
-      // const profilesRef = doc(this.firestore, `profiles/${result.user.uid}`);
-      
-      // updateDoc(profilesRef, { username: username });
-      
-    //   return updateProfile(result.user, {
-    //     displayName: username
-    //   });
-      
-      
-    // }).catch(function(error) {
-    //   console.log(error);
-    // });
   }
 
   async continueWithGoogle() {
