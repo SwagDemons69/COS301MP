@@ -38,7 +38,7 @@
       </ion-item>
 
       <!-- New Follower notification -->
-      <ion-item lines="none" *ngSwitchCase="notificationType.NewFollowerNotification">
+      <ion-item (click)="toUser(notif.user_id)" lines="none" *ngSwitchCase="notificationType.NewFollowerNotification">
         <ion-icon name="person-add-outline" color="secondary"></ion-icon>
         <ion-label> {{ notif.follower_id }} is now following you </ion-label>
         <ion-badge slot="end">{{ getTime(notif.timestamp) }}</ion-badge>

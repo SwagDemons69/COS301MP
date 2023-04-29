@@ -14,6 +14,9 @@ import {ProfileState } from '@mp/app/profile/data-access';
 import {NotificationType} from "@mp/api/notifications/util"
 import {Timestamp } from '@google-cloud/firestore'
 import {  formatDistance } from 'date-fns';
+import { ProfileOtherComponent } from '@mp/app/profile-other/feature';
+import { ModalController } from '@ionic/angular';
+
 // import {Dayjs} from 'dayjs';
 // import {RelativeTime}
 
@@ -49,7 +52,10 @@ export class NotificationsPage implements OnInit {
 
     return formatDistance(date, new Date(), { addSuffix: true });;
   }
-  constructor(private readonly api : NotificationsApi) {}
+  constructor(
+    private readonly api : NotificationsApi,
+    private modalController: ModalController,
+    ) {}
 
   ngOnInit(): void {
     // console.log("ngOnInit!");
@@ -86,19 +92,11 @@ export class NotificationsPage implements OnInit {
   }
 
   async getNotifications() {
-    // this.notifications = [];
     const myUserID = this.getUserID();
     if(myUserID != "") {
       const request : GetNotificationsRequest = {userId : myUserID};
       this.api.getNotification(request);
       const response : GetNotificationsResponse = await this.api.getNotification(request);
-      // const response = await this.notificationRepository.getNotifications(userId);
-      // this.notifications = response.notifications;
-
-      // console.log('printing');
-      // response.notifications.forEach((notif) => {
-      //   console.log(JSON.stringify(notif));
-      // });
 
       this.notifications = response.notifications;
     }
@@ -107,19 +105,22 @@ export class NotificationsPage implements OnInit {
     }
   }
 
+  toUser(user : any){
+    // this.openProfile(user);
+    console.log("User to navigate to: " + user);
+  }
+
+  async openProfile(profileData: any) {
+    const modal = await this.modalController.create({
+      component: ProfileOtherComponent,
+      componentProps: {profile: profileData}
+    });
+
+    return await modal.present();
+  }
 
   refreshPage() {
     window.location.reload();
   }
 
 }
-
-// {
-//     user_id: '1234',
-//     type: NotificationType.FollowNotification,
-//     seen: false,
-//     timestamp: Timestamp,
-//     notification_id: '1234',
-//     follower_id: '1234',
-// }
-
