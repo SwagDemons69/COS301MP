@@ -75,7 +75,6 @@
     "singleProjectMode": true,
     "ui": {
       "port" : 5001,
-
       "enabled": true
     }
   },
