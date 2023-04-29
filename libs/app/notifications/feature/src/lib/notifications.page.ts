@@ -47,8 +47,8 @@ export class NotificationsPage implements OnInit {
   getTime(timestamp : any){
     const total_milliseconds = timestamp._seconds * 1000 + timestamp._nanoseconds / 1000000;
     const date = new Date(total_milliseconds );
-    console.log(total_milliseconds);
-    console.log(date);
+    // console.log(total_milliseconds);
+    // console.log(date);
 
     return formatDistance(date, new Date(), { addSuffix: true });;
   }

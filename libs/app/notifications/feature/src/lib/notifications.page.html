@@ -73,7 +73,7 @@
       </ion-item>
 
       <!-- System Notification -->
-      <ion-item lines="none" *ngSwitchCase="notificationType.SystemNotification">
+      <ion-item (click)="toUser(notif.user_id)" lines="none" *ngSwitchCase="notificationType.SystemNotification">
         <ion-icon name="alert-circle-outline" color="medium"></ion-icon>
         <ion-label>{{ notif.system_message }}</ion-label>
         <ion-badge slot="end">{{ getTime(notif.timestamp) }}</ion-badge>
