@@ -19,7 +19,16 @@
         {{ notif.message }}
       </ion-label>
       <ion-badge slot="end">{{ notif.time }}</ion-badge>
-      <ion-icon (click)="dismissNotif(notif)" name="close" class="dismiss" slot="end"></ion-icon>
+
+      <div *ngIf="notif.type !== 'Friend Request'" slot="end">
+        <ion-icon (click)="dismissNotif(notif)" name="close" class="dismiss" slot="end"></ion-icon>
+      </div>
+
+      <div *ngIf="notif.type === 'Friend Request'" slot="end">
+        <ion-icon (click)="handleFriendRequest(true, notif)" name="checkmark-outline" class="accept"></ion-icon>
+        <ion-icon (click)="handleFriendRequest(false, notif)" name="close" class="dismiss"></ion-icon>
+      </div>
+
     </ion-item>
     <hr />
   </div>
