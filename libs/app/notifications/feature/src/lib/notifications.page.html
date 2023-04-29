@@ -10,8 +10,14 @@
 
     <div *ngFor="let notif of displayNotifications" class="notif">
     <ion-item lines="none">
-      <ion-icon name="{{ notif.icon }}"></ion-icon>
-      <ion-label>{{ notif.message }}</ion-label>
+      <ion-icon name="{{ notif.icon }}" slot="start"></ion-icon>
+      <ion-label class="notifMessage">
+        <ion-avatar class="smallAvatar">
+          <img alt="" src="{{notif?.image == undefined || notif?.image == '' ? 'https://ionicframework.com/docs/img/demos/avatar.svg' : notif.image}}" />
+        </ion-avatar>
+        <b>{{ notif.username }}</b>
+        {{ notif.message }}
+      </ion-label>
       <ion-badge slot="end">{{ notif.time }}</ion-badge>
       <ion-icon (click)="dismissNotif(notif)" name="close" class="dismiss" slot="end"></ion-icon>
     </ion-item>
