@@ -6,40 +6,45 @@ import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 // import { NavController } from '@ionic/angular/providers/nav-controller';
 import { ToastController } from '@ionic/angular';
+import { NotificationsApi} from '@mp/app/notifications/data-access'
+import { ProfileState } from '@mp/app/profile/data-access';
+import { user_profile } from '@mp/api/profiles/util';
 @Component({
   selector: 'notifications-page',
   templateUrl: './notifications.page.html',
   styleUrls: ['./notifications.page.scss']
 })
 export class NotificationsPage {
+  @Select(ProfileState.profile) profile$!: Observable< user_profile| null > 
   @Select(NotificationsState.notifications) notifications$!: Observable<notification[] | []>
+
   notifications: notification[] | []
   displayNotifications: any[] = []
-  constructor(private readonly toast: ToastController){
+  profile: user_profile | undefined
+
+  constructor(private readonly toast: ToastController,
+              private readonly api: NotificationsApi){
     this.notifications = []
     this.displayNotifications = []
     this.notifications$.forEach((array) => {
       this.notifications = array;
-      // const toast = await this.toast.create({
-      //   message: "HOLY FUCK",
-      //   color: 'green',
-      //   duration: 1500,
-      //   position: 'bottom',
-      // });
+      
       this.displayNotifications = []
-      this.setNotifications()
-      //console.log(this.notifications)
-      //await toast.present();
+      this.setNotifications();
+
+
+
+      this.profile$.forEach((profile) => {
+        if (profile) {
+          //Default Profile Image
+          this.profile = profile;
+          //console.log(this.profile.user_id)
+        }
+      })
+      
     })
   }
 
-//   export interface notification {
-//     notification_id : string; // the id of the notification on firebase
-//     image : string; // the user that the notification is for
-//     type : string; // the type of notification 
-//     payload: string;
-//     timestamp : Timestamp; // the time the notification was created
-// }
   setNotifications(){
       const copy  = [...this.notifications];
       console.log(copy)
@@ -92,6 +97,7 @@ export class NotificationsPage {
         //console.log(timeString); // Output: "10:50 AM" (or the equivalent for the specified timestamp)
 
         const noti = {
+          id: this.notifications[i].notification_id,
           icon: type,
           time: timeString,
           message: this.notifications[i].payload
@@ -112,7 +118,13 @@ export class NotificationsPage {
     { icon: 'notifications-outline', time: "10:00", message: 'Welcome to Twenty4.' }
   ];
 
-  dismissNotif(notif: any) {
+  async dismissNotif(notif: any) {
+    const notfiToDel  = notif
     this.displayNotifications = this.displayNotifications.filter(n => n !== notif);
+    if(this.profile){
+        console.log(notfiToDel)
+        const response = await this.api.deleteNotification(this.profile?.user_id, notfiToDel.id);
+        console.log(response.data.msg)
+    }
   }
 }
