@@ -97,6 +97,7 @@ export class NotificationsPage {
         //console.log(timeString); // Output: "10:50 AM" (or the equivalent for the specified timestamp)
 
         const noti = {
+          created_by: this.notifications[i].create_by_id,
           id: this.notifications[i].notification_id,
           icon: type,
           time: timeString,
@@ -129,7 +130,10 @@ export class NotificationsPage {
     }
   }
 
-  handleFriendRequest(accepted: boolean, notif: any) {
-    alert("Accepted: " + accepted);
+  async handleFriendRequest(accepted: boolean, notif: any) {
+    if(this.profile){
+      const response = await this.api.handleFollowRequest(accepted, notif.created_by, this.profile?.user_id)
+      console.log(response)
+    }
   }
 }

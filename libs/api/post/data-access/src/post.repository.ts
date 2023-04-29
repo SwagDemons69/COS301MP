@@ -62,6 +62,7 @@ export class PostRepository {
             const notifcationsRef = admin.firestore().collection(`profiles/${poster_id}/notifications`).doc();
         
             const noti: notification = {
+                create_by_id: poster1.user_id,
                 notification_id: "",
                 image: poster1.profilePicturePath,
                 type: "New Like",
@@ -111,6 +112,7 @@ export class PostRepository {
             const notifcationsRef = admin.firestore().collection(`profiles/${poster_id}/notifications`).doc();
         
             const noti: notification = {
+                create_by_id: poster1.user_id,
                 notification_id: "",
                 image: poster1.profilePicturePath,
                 type: "New Dislike",
@@ -163,6 +165,7 @@ export class PostRepository {
         const notifcationsRef = admin.firestore().collection(`profiles/${user}/notifications`).doc();
         
         const noti: notification = {
+        create_by_id: profile.user_id,
           notification_id: "",
           image: profile.profilePicturePath,
           type: "New Comment",
@@ -216,6 +219,7 @@ export class PostRepository {
         const notifcationsRef = admin.firestore().collection(`profiles/${creator}/notifications`).doc();
         
         const noti: notification = {
+          create_by_id: profile.user_id,
           notification_id: "",
           image: profile.profilePicturePath,
           type: "New Reply",

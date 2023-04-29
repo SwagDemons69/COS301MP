@@ -96,6 +96,7 @@ export class ProfilesRepository {
         const notifcationsRef = admin.firestore().collection(`profiles/${requestee.user_id}/notifications`).doc();
         
         const noti: notification = {
+          create_by_id: requester.user_id,
           notification_id: "",
           image: requester.profilePicturePath,
           type: "New Follow Request",
@@ -120,6 +121,7 @@ export class ProfilesRepository {
         const notifcationsRef = admin.firestore().collection(`profiles/${requestee.user_id}/notifications`).doc();
         
         const noti: notification = {
+          create_by_id: requester.user_id,
           notification_id: "",
           image: requester.profilePicturePath,
           type: "New Follower",

@@ -147,6 +147,7 @@ export class ChatRepository {
         const notifcationsRef = admin.firestore().collection(`profiles/${receiver1.user_id}/notifications`).doc();
         
         const noti: notification = {
+          create_by_id: receiver1.user_id,
           notification_id: "",
           image: receiver1.profilePicturePath,
           type: "New Message",
@@ -194,13 +195,14 @@ export class ChatRepository {
         const notifcationsRef = admin.firestore().collection(`profiles/${receiver1.user_id}/notifications`).doc();
         
         const noti: notification = {
-          notification_id: "",
-          image: receiver1.profilePicturePath,
-          type: "New Message",
-          username: receiver1.username,
-          payload: "has sent you a message",
-          timestamp: Timestamp.now(),
-          timeStampOrder: Timestamp.now().seconds.toString()
+            create_by_id: receiver1.user_id,
+            notification_id: "",
+            image: receiver1.profilePicturePath,
+            type: "New Message",
+            username: receiver1.username,
+            payload: "has sent you a message",
+            timestamp: Timestamp.now(),
+            timeStampOrder: Timestamp.now().seconds.toString()
         }
 
         noti.notification_id = notifcationsRef.id;
