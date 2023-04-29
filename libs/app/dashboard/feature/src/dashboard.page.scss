@@ -79,12 +79,20 @@ ion-avatar.avatar {
     margin: auto;
     display: block;
     margin-top: 1em;
-    width: 10%;
-    height: auto;
+    width: 10vw;
+    height: 10vw;
     box-shadow: 0px 0px 4px 0px #00000040;
 }
 
 /* //========== SEARCH BAR ==========// */
+.searchResultsType {
+    cursor: pointer;
+}
+
+.searchResultsType ion-item:hover {
+    background-color: #262626;
+}
+
 .searchResults{
     display: flex;
     justify-content: space-evenly;
@@ -257,6 +265,7 @@ $stone-positions: (
     // border: 1px solid red;
     max-height: 100vw;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .trendingItem ion-img {

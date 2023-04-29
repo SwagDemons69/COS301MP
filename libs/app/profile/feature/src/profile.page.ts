@@ -56,7 +56,7 @@ export class ProfilePage {
     const data: user_profile = {
       user_id: "",
       timeOfExpiry: 0,
-      notPublic: "",
+      notPublic: false,
       username: "",
       name: "",
       profilePicturePath: "",
@@ -179,7 +179,7 @@ export class ProfilePage {
     const JSONFORM: edit_profile = JSON.parse(JSON.stringify(this.userForm.value, null, 2));
 
     //Data Validation so profile is not overwritten
-    const notPublic = (JSONFORM.notPublic == "") ? "DO-NOT-MODFIY" : JSONFORM.notPublic;
+    const notPublic = (JSONFORM.notPublic == false) ? false : true;
     const name = (JSONFORM.name == "") ? "DO-NOT-MODFIY" : JSONFORM.name;
     const username = (JSONFORM.username == "") ? "DO-NOT-MODFIY" : JSONFORM.username;
     const profilePicturePath = (!this.addedFile) ? "DO-NOT-MODFIY" : (await this.addToCloudStorage());

@@ -46,6 +46,7 @@ export class DashboardPage {
     this.profile = null;
     this.profile$.forEach((profile)=> {
       this.profile = profile;
+      this.deathTime = (this.profile) ? this.profile.timeOfExpiry : 1234567;
     });
 
     this.deathTime = 0;
@@ -54,9 +55,10 @@ export class DashboardPage {
     this.recommended_posts$.forEach((posts) => {
       console.log(posts);
       this.recommended = posts;
+      this.recommended = this.recommended.sort((a, b) => (a.timeStamp < b.timeStamp ? 1 : -1));
+      this.recommended = this.recommended.slice(0, 3);
     });
-    this.recommended = this.recommended.sort((a, b) => (a.timeStamp < b.timeStamp ? 1 : -1));
-    this.recommended = this.recommended.slice(0, 3);
+    
     // console.log("Recommended posts");
     // console.log(this.recommended);
 
@@ -65,14 +67,15 @@ export class DashboardPage {
       // console.log("Trending posts");
       // console.log(posts);
       this.trending = posts;
+      this.trending.sort((a, b) => (a.post.likes < b.post.likes ? 1 : -1));
     })
-    this.trending.sort((a, b) => (a.post.likes < b.post.likes ? 1 : -1));
+    
   }
 
   //Load Current Profiles Time when you enter page
-  ionViewWillEnter(){
-    this.deathTime = (this.profile) ? this.profile.timeOfExpiry : 1234567;
-  }
+  // ionViewWillEnter(){
+  //   this.deathTime = (this.profile) ? this.profile.timeOfExpiry : 1234567;
+  // }
 
   ionViewDidEnter(){
     this.store.dispatch(new SetDashboardPosts(this.profile)); 
@@ -127,6 +130,7 @@ async getTrending() {
     if (event.detail.scrollTop > 220 && !this.isKronosBarVisible) {
       this.renderer.setStyle(barKronos, 'opacity', '1');
       this.renderer.setStyle(smallAvatar, 'width', '2em');
+      this.renderer.setStyle(smallAvatar, 'height', '2em');
       this.renderer.setStyle(smallAvatar, 'opacity', '1');
       this.isKronosBarVisible = true;
     }
@@ -134,6 +138,11 @@ async getTrending() {
       this.renderer.setStyle(barKronos, 'opacity', '0');
       this.renderer.setStyle(smallAvatar, 'opacity', '0');
       this.renderer.setStyle(smallAvatar, 'width', '0em');
+      this.renderer.setStyle(smallAvatar, 'height', '0em');
+      this.renderer.setStyle(document.querySelector(".glassyBackground"), 'top', `${0.5*event.detail.scrollTop}px`);
+      this.isKronosBarVisible = false;
+    }
+    else if (event.detail.scrollTop <= 690) {
       this.renderer.setStyle(document.querySelector(".glassyBackground"), 'top', `${0.5*event.detail.scrollTop}px`);
       this.isKronosBarVisible = false;
     }

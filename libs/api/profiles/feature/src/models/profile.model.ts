@@ -6,7 +6,7 @@ export class Profile extends AggregateRoot implements user_profile {
   constructor(
     public user_id: string,
     public timeOfExpiry: number,
-    public notPublic: string,
+    public notPublic: boolean,
     public username: string ,
     public name: string | null | undefined,
     public profilePicturePath: string,
@@ -59,7 +59,7 @@ export class Profile extends AggregateRoot implements user_profile {
   }
 
   EditProfile(profile : edit_profile) {
-    this.notPublic = (profile.notPublic == "DO-NOT-MODFIY") ? this.notPublic : profile.notPublic;
+    this.notPublic = (profile.notPublic == false) ? this.notPublic : profile.notPublic;
     this.name = (profile.name == "DO-NOT-MODFIY") ? this.name : profile.name;
     this.username = (profile.username == "DO-NOT-MODFIY") ? this.username : profile.username;
     this.profilePicturePath = (profile.profilePicturePath == "DO-NOT-MODFIY") ? this.profilePicturePath : profile.profilePicturePath;

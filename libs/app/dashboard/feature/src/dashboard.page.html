@@ -15,11 +15,11 @@
 
     <ion-buttons slot="end">
       <ion-button (click)="toggleSearchbar()">
-        <ion-icon name="search-outline"></ion-icon>
+        <ion-icon [name]="isSearchbarVisible ? 'close' : 'search-outline'"></ion-icon>
       </ion-button>
     </ion-buttons>
 
-  <ion-searchbar (ionChange)="search($event)" showCancelButton search-icon="search" placeholder="Search" *ngIf="isSearchbarVisible"></ion-searchbar>
+  <ion-searchbar (ionChange)="search($event)" show-clear-button="never" search-icon="search" placeholder="Search" *ngIf="isSearchbarVisible"></ion-searchbar>
 
     <ng-container *ngIf="(profile$ | async) as profile;">
       <ion-avatar class="smallAvatar" slot="end">
@@ -207,14 +207,14 @@
   
   <ng-template #posts>
     <ion-list class="searchResultsType">
-      <ion-item (click)="toPost(post.post.user_id, post.post.post_id)" *ngFor="let post of searchResultsPosts">
+      <ion-item *ngFor="let post of searchResultsPosts" (click)="openBlip(post.post)">
         <ion-label>
           <ion-thumbnail style="float: right" slot="start">
             <img src="{{ post.post.content }}" alt="Img">
           </ion-thumbnail>
           <ion-label>
             <h2>{{ post.post.desc }}</h2>
-            <p>Posted by: {{ post.posted_by }}</p>
+            <p>{{ post.posted_by }}</p>
           </ion-label>
         </ion-label>
       </ion-item>

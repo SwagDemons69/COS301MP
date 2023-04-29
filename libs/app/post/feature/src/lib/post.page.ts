@@ -85,6 +85,8 @@ export class PostPage {
     this.desc = "";
     this.title = "";
     this.style = "hidden";
+    this.tags = [];
+    this.updateTagList();
   }
   
   //Convert Image to Base64

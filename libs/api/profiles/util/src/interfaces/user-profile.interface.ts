@@ -3,7 +3,7 @@ import { post } from '@mp/api/home/util'
 export interface user_profile {
     user_id : string;
     timeOfExpiry: number;
-    notPublic : string;
+    notPublic : boolean;
     username : string;
     name : string | null | undefined;
     profilePicturePath : string;
