@@ -4,7 +4,7 @@ export interface user_profile {
     user_id : string;
     timeOfExpiry: number;
     notPublic : string;
-    username : string | null | undefined;
+    username : string;
     name : string | null | undefined;
     profilePicturePath : string;
     bio : string | null | undefined;
@@ -14,10 +14,10 @@ export interface user_profile {
     likesLeft : number | null | undefined;
     dislikesLeft : number | null | undefined;
     commentLikesLeft : number | null | undefined;
-    followers :  string[] | null | undefined; //Array of UserId
-    following : string[] | null | undefined; //Array of UserId
-    posts : post[] | null | undefined;  //Array of Posts
-    blocked : string[] | null | undefined;
+    followers :  number; //Array of UserId
+    following : number; //Array of UserId
+    posts : number;  //Array of Posts
+    blocked : number;
     notifications : string[] | null | undefined;
 };
 

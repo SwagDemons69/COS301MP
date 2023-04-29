@@ -59,4 +59,18 @@ export class KronosTimer {
         }
     }
 
+  public static formatActionNumber(num: number) {
+    const ls = ["K", "M", "B", "T"];
+
+    for (let i = ls.length; i >= 0; i--) {
+      const x = 1000**(i+1);
+
+      if(num >= x) {
+        return Math.floor(10*num/x)/10 + ls[i];
+      }
+    }
+
+    return num + "";
+  }
+
 }

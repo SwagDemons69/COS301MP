@@ -13,7 +13,7 @@ import { NotificationModule } from '@mp/api/notifications/feature';
   imports: [AuthModule,
      EventstoreModule,
       ProfilesModule,
-       UsersModule,
+       UsersModule, SearchModule,
         PostModule,
          ChatModule,
           SearchModalModule,

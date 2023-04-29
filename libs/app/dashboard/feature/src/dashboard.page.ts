@@ -9,10 +9,13 @@ import { post } from '@mp/api/home/util';
 import { Observable } from 'rxjs';
 import { DashboardState} from '@mp/app/dashboard/data-access';
 import { SetDashboardPosts } from '@mp/app/dashboard/util';
-// import { SearchApi } from '@mp/app/dashboard/data-access';
-import { ProfileOtherComponent } from '@mp/app/profile-other/feature';
 import { KronosTimer } from '@mp/app/kronos-timer/kronos';
-
+import { DashboardApi } from '@mp/app/dashboard/data-access';
+import { ProfileOtherComponent } from '@mp/app/profile-other/feature';
+import { SearchRequest, SearchResponse} from '@mp/api/search/util';
+import { SearchApi } from '@mp/app/dashboard/data-access';
+import { Post, User } from '@mp/api/search/util';
+import { PostHeader } from '@mp/api/dashboard/util';
 
 @Component({
   selector: 'ms-dashboard-page',
@@ -21,20 +24,23 @@ import { KronosTimer } from '@mp/app/kronos-timer/kronos';
 })
 
 export class DashboardPage { 
+  KronosTimer = KronosTimer;
   @Select(ProfileState.profile) profile$!: Observable<user_profile | null>;
-  @Select(DashboardState.recommendedPosts) recommended_posts$!: Observable<post[] | []>;
-  @Select(DashboardState.trendingPosts) trending_posts$!: Observable<post[] | []>;
+  @Select(DashboardState.recommendedPosts) recommended_posts$!: Observable<PostHeader[] | []>;
+  @Select(DashboardState.trendingPosts) trending_posts$!: Observable<PostHeader[] | []>;
 
   //Local Vars
   profile: user_profile | null
-  recommended: post[] | []
-  trending: post[] | []
+  recommended: PostHeader[] | []
+  trending: PostHeader[] | []
   //let called = false;
   deathTime: number
   constructor (
     private renderer: Renderer2,
     private modalController: ModalController,
     private store : Store,
+    private readonly searchApi : SearchApi,
+    private readonly api: DashboardApi
   ) 
   {
     this.profile = null;
@@ -60,9 +66,9 @@ export class DashboardPage {
       // console.log("Trending posts");
       // console.log(posts);
       this.trending = posts;
-      this.trending.sort((a, b) => (a.likes.length < b.likes.length ? 1 : -1));
+      // this.trending.sort((a, b) => (a.likes.length < b.likes.length ? 1 : -1));
     })
-    
+    this.trending.sort((a, b) => (a.post.likes < b.post.likes ? 1 : -1));
   }
 
   //Load Current Profiles Time when you enter page
@@ -94,17 +100,15 @@ async getTrending() {
  // this.trending.sort((a, b) => (a.likes.length < b.likes.length ? 1 : -1));
 }
 
-  searchResults = [
-    { title: "Touching grass for the first time", desc: "Deleted my reddit account to try out this new Twenty4 thing", content: "https://picsum.photos/id/18/300/300" },
-    { title: "Wow look at this cool tree I found", desc: "fren.", content: "https://picsum.photos/id/19/300/300" },
-    { title: "My desk setup! Much wow very neat :)", desc: "Just kidding, this is a stock photo I stole. Please give me time immabouta die :'(", content: "https://picsum.photos/id/20/300/300" },
-    { title: "Selling my shoes as an NFT", desc: "Originally I wanted to sell the actual shoes, but then I realized I like them too much so instead I'll just sell this picture of them which is a very nice picture if I do say so myself. $400", content: "https://picsum.photos/id/21/300/300" },
-    { title: "A girl asked what my favorite position was", desc: "I told her, 'CEO'", content: "https://picsum.photos/id/22/300/300" },
-    { title: "I ONLY KNOW HOW TO USE CHOPSTICKS", desc: "PLEASE HELP I NEED TO USE ONE OF THESE OR IM GONNA STARVE TO DEATH", content: "https://picsum.photos/id/23/300/300" },
-    { title: "I'm a 20 year old virgin", desc: "I'm a 20 year old virgin", content: "https://picsum.photos/id/24/300/300" }, // Copilot generated this one lmao
-  ]
+
+  //Search required variables
+  searchResultsPosts: Post[] = []
+
+  searchResultsUsers: User[] = []
 
   isSearchbarVisible = false;
+  userToggle = true;
+
   kronos = ""
 
   kronosTimer = setInterval(() => {
@@ -119,12 +123,19 @@ async getTrending() {
   // Prevent re-setting css properties every scroll event
   isKronosBarVisible = false;
   onContentScroll(event: any) {
+    const barKronos = document.querySelector(".barKronos");
+    const smallAvatar = document.querySelector(".smallAvatar");
+
     if (event.detail.scrollTop > 220 && !this.isKronosBarVisible) {
-      this.renderer.setStyle(document.querySelector(".barKronos"), 'opacity', '1');
+      this.renderer.setStyle(barKronos, 'opacity', '1');
+      this.renderer.setStyle(smallAvatar, 'width', '2em');
+      this.renderer.setStyle(smallAvatar, 'opacity', '1');
       this.isKronosBarVisible = true;
     }
     else if (event.detail.scrollTop <= 220) {
-      this.renderer.setStyle(document.querySelector(".barKronos"), 'opacity', '0');
+      this.renderer.setStyle(barKronos, 'opacity', '0');
+      this.renderer.setStyle(smallAvatar, 'opacity', '0');
+      this.renderer.setStyle(smallAvatar, 'width', '0em');
       this.renderer.setStyle(document.querySelector(".glassyBackground"), 'top', `${0.5*event.detail.scrollTop}px`);
       this.isKronosBarVisible = false;
     }
@@ -138,11 +149,22 @@ async getTrending() {
   }
 
   // See [https://stackblitz.com/edit/ionic6-angular13-wnmgmu?file=src/app/app.component.ts] for reference
-  async openBlip(data: any) {
+  async openBlip(data: post) {
+    const metadata = await this.api.GetBlipContent({user: data.user_id, post: data.post_id});
+    
+    //Representation for metadata
+    //{
+      // username: string;
+      // imageURL: string;
+      // likes   : post_like[];
+      // comments : RootComment[];
+    //}
+    //data passed is has all relevant post dat like its image, title, description
     const modal = await this.modalController.create({
       component: BlipComponent,
       componentProps: {
-        dat: data //TODO: Change `dat` back to `data` once properly integrated
+        data: data,
+        metadata: metadata.data //TODO: Change `dat` back to `data` once properly integrated
       }
     });
 
@@ -152,16 +174,48 @@ async getTrending() {
 
     return await modal.present();
   }
+  
+  async search(event: any){
+    this.searchResultsUsers = []; // we should rather keep a state, Tumi will do this. (but this should be fine... for now)
+    this.searchResultsPosts = []; //added this for you - Rob ;)
+    const query = event.detail.value;
+    const request : SearchRequest = {query : query};
+    const response: SearchResponse = await this.searchApi.search(request);
+    for(let i = 0; i < response.profiles.length; i++){
+      this.searchResultsUsers.push(response.profiles[i]);
+    }
+
+    for(let i = 0; i < response.posts.length; i++){
+      this.searchResultsPosts.push(response.posts[i]);
+    }
+  }
+
+  toPost(username : any, postId : any){
+    console.log(postId + " postsed by " + username);
+  }
+
+  toUser(user : any){
+    this.openProfile(user);
+  }
+
+  toggleToUsers(){
+    if(!this.userToggle){
+      this.userToggle = !this.userToggle;
+    }
+  }
+
+  toggleToPosts(){
+    if(this.userToggle){
+      this.userToggle = !this.userToggle;
+    }
+  }
 
   async openProfile(profileData: any) {
     const modal = await this.modalController.create({
       component: ProfileOtherComponent,
-      componentProps: {
-        profile: profileData
-      }
+      componentProps: {profile: profileData}
     });
 
     return await modal.present();
   }
 }
-

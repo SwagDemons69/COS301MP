@@ -9,11 +9,11 @@ export class Post extends AggregateRoot implements post {
     public title   : string,
     public content : string,
     public desc : string,
-    public likes : string[],
+    public likes : number,
     public timeStamp : number,
     public shares : number,
     public kronos : number,
-    public comments : string[],
+    public comments : number,
     public tags : string[],
     public taggedUsers : string[]
   ) {
@@ -45,11 +45,11 @@ export class Post extends AggregateRoot implements post {
         "",
         "",
         "",
-        [],
         0,
         0,
         0,
-        [],
+        0,
+        0,
         [],
         []
     )
@@ -81,7 +81,7 @@ export class Post extends AggregateRoot implements post {
         user_id     : this.user_id,
         title       : this.title,
         content     : this.content,
-        desc     : this.desc,
+        desc        : this.desc,
         likes       : this.likes,
         timeStamp   : this.timeStamp,
         shares      : this.shares,

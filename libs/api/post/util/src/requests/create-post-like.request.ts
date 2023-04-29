@@ -1,4 +1,5 @@
 export interface CreatePostLikeRequest{
-    user: string;
+    liker_id: string;
     post: string;
+    poster_id: string;
 }

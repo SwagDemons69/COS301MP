@@ -16,7 +16,11 @@ export class CreatePostLikeCommandHandler
   async execute(command: CreatePostLikeCommand) {
     console.log(`${CreatePostLikeCommandHandler.name}`);
     const request = command.request;
-    console.log("Handler")
-    return  await this.repository.createPostLike(request.user, request.post);
+    console.log(request)
+    // request.commit();
+
+    // const response: CreatePostLikeResponse = { status : "200 OK" };
+    // return response;
+    return  await this.repository.createPostLike(request.liker_id, request.post, request.poster_id);
   }
 }

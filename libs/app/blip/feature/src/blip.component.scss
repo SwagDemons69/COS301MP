@@ -64,6 +64,21 @@ ion-grid {
     border-radius: 0px;
 }
 
+// Username + Profile
+.profile {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-items: center;
+}
+.profile span {
+    text-align: right;
+    padding-right: 0.4em;
+    font-size: smaller;
+    font-weight: lighter;
+}
+
 .trendingItem .image {
     // border: 1px solid red;
     max-height: 100vw;
@@ -95,6 +110,21 @@ ion-grid {
     font-size: 0.9em;
 }
 
+.actions ion-icon {
+    padding: 0px;
+}
+
+.actions div {
+    text-align: center;
+    cursor: pointer;
+    transition: 0.1s ease-in all;
+}
+
+.actions div:hover {
+    color: #fd41cb;
+    transform: scale(1.2);
+}
+
 /* // Contains the poster profile, post date, and reactions */
 .trendingItem .action {
     text-align: right;
@@ -109,6 +139,29 @@ h3 {
     font-weight: bolder;
     margin: 0;
     margin-left: 1rem;
+}
+
+#tagList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 60%;
+    margin: auto;
+}
+
+$tag-colors: (
+    #d03895,
+    #4350dd,
+    #2bccbc,
+);
+
+@for $i from 1 through 3 {
+  ion-badge:nth-child(#{$i}n) ::ng-deep {
+    background-color: nth($tag-colors, $i);
+    font-weight: light;
+    margin-right: 0.4em;
+    margin-bottom: 0.4em;
+  }
 }
 
 
@@ -155,5 +208,59 @@ h3 {
 .comment ion-card-subtitle {
     font-family: 'Roboto';
     font-weight: 200;
-    color: #b3b3b3;
+    font-size: medium;
+    padding: 0.1em;
+    color: #e1e1e1;
+}
+
+.commentSection.sub {
+    padding-top: 0px;
+    padding-bottom: 2em;
+}
+
+.comment.sub {
+    background-color: #181818;
+}
+
+.repliesLabel {
+    color: #acacac;
+    cursor: pointer;
+    margin-left: 1em;
+}
+
+.repliesLabel:hover {
+    color: #858585;
+}
+
+.selectedReply {
+    color: #fd41cb;
+}
+
+.selectedReply:hover {
+    color: #e035b2;
+}
+
+.send {
+  width: 90%;
+  border-radius: 15px;
+  align-items: center;
+  background-color: #1f1f1f;
+  margin: auto;
+
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.send ion-textarea {
+  --padding-start: 10px;
+  --padding-end: 0px;
+  --padding-top: 10px;
+  --padding-bottom: 0px;
+}
+
+ion-button {
+  --background: transparent;
+  --box-shadow: none;
+  width: 50px;
+  font-size: 0.8em;
 }

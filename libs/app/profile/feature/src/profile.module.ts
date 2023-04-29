@@ -8,8 +8,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ProfilePage } from './profile.page';
 import { ProfileRouting } from './profile.routing';
 import { KronosModule } from '@mp/app/kronos-timer/kronos';
-
-
+import { DashboardModule  as DashData } from '@mp/app/dashboard/data-access';
 
 @NgModule({
   imports: [
@@ -21,7 +20,8 @@ import { KronosModule } from '@mp/app/kronos-timer/kronos';
     ProfileUiModule,
     ProfileDataAccessModule,
     NgxSkeletonLoaderModule,
-    KronosModule
+    KronosModule,
+    DashData
   ],
   declarations: [ProfilePage],
 })

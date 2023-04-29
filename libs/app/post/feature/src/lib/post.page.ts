@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 import { post } from '@mp/api/home/util';
 import { Timestamp } from '@angular/fire/firestore';
 import { IonBadge } from '@ionic/angular';
-
+import { ToastController } from '@ionic/angular';
 
 
 
@@ -34,15 +34,14 @@ export class PostPage {
   chosenPostBase64Data: string;
   desc: string;
   title: string;
-  tags = [
-    "", "The", "quick", "brown", "fox", "jumps", "over", "the", "lazy", "dog"
-  ]
+  tags: string[] = [];
 
   style: string;
   
   //Dont think validators needed
-  constructor(private readonly api : PostApi)
+  constructor(private readonly api : PostApi, private readonly toastCtrlr: ToastController)
   {
+    this.clearContent()
     this.blob = new Blob();
     this.profile$.forEach((user) => {this.user = user?.user_id;});
     this.chosenPost = new Blob();
@@ -50,6 +49,7 @@ export class PostPage {
     this.desc = "";
     this.title = "";
     this.style = "hidden";
+    this.updateTagList();
   }
 
   //Get reference to file uploaded
@@ -75,6 +75,18 @@ export class PostPage {
   async uploadPost(){
     const path = await this.addToCloudStorage();
     this.addToFirestore(path);
+
+    this.clearContent();
+  }
+  
+  clearContent(){
+    this.blob = new Blob();
+    this.profile$.forEach((user) => {this.user = user?.user_id;});
+    this.chosenPost = new Blob();
+    this.chosenPostBase64Data = "";
+    this.desc = "";
+    this.title = "";
+    this.style = "hidden";
   }
   
   //Convert Image to Base64
@@ -109,16 +121,23 @@ export class PostPage {
       title:        this.title,         
       content:      pathToImage,
       desc:         this.removeTagsFromDesc(this.desc),
-      likes:        [],
+      likes:        0,
       timeStamp:    696969696,
       shares:       0,
       kronos:       0,
-      comments:     [],
+      comments:     0,
       tags:         this.tags,
       taggedUsers:  []
     }
     const request: CreatePostRequest = {post: newPost};
     const responseStatus = await this.api.UploadPostToFirestore(request);
+    const toast = await this.toastCtrlr.create({
+      message: "Post Created",
+      color: 'success',
+      duration: 1500,
+      position: 'top',
+    });
+    await toast.present();
   }
 
   addTagBadge(content: string) {
@@ -146,6 +165,7 @@ export class PostPage {
 
   updateTagList() {
     const res = this.extractTagsFromDesc();
+    this.tags = [];
 
     const tagList = document.getElementById("tagList");
     if(tagList == null) return;
@@ -166,11 +186,12 @@ export class PostPage {
       }
 
       this.addTagBadge("#" + tag);
+      this.tags.push("#" + tag);
 
       prevTag = tag;
     }
 
-    this.tags = res;
+    console.log(this.tags);
   }
 
 }
