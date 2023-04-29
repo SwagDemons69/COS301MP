@@ -24,7 +24,7 @@ export class AuthApi {
     return await signInWithEmailAndPassword(this.auth, email, password)
   }
 
-  async register(email: string, password: string, username: string) {
+  async register(email: string, password: string) {
     return await createUserWithEmailAndPassword(this.auth, email, password);
   }
 
@@ -35,11 +35,5 @@ export class AuthApi {
 
   async logout() {
     return await signOut(this.auth);
-  }
-
-  async setUsername(uid:string | undefined, username: string){
-    const profilesRef = doc(this.firestore, `profiles/${uid}`);
-    if(profilesRef)
-    updateDoc(profilesRef, { username: username });
   }
 }
