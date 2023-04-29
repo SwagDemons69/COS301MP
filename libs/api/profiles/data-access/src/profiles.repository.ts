@@ -99,7 +99,8 @@ export class ProfilesRepository {
           notification_id: "",
           image: requester.profilePicturePath,
           type: "New Follow Request",
-          payload: requester.username + " has requested to follow you",
+          username: requester.username,
+          payload: "has requested to follow you",
           timestamp: Timestamp.now(),
           timeStampOrder: Timestamp.now().seconds.toString()
         }
@@ -122,7 +123,8 @@ export class ProfilesRepository {
           notification_id: "",
           image: requester.profilePicturePath,
           type: "New Follower",
-          payload: requester.username + " is now following you",
+          username: requester.username,
+          payload: "is now following you",
           timestamp: Timestamp.now(),
           timeStampOrder: Timestamp.now().seconds.toString()
         }

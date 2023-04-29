@@ -4,6 +4,7 @@ export interface notification {
     notification_id : string; // the id of the notification on firebase
     image : string; // the user that the notification is for
     type : string; // the type of notification 
+    username: string;
     payload: string;
     timestamp : Timestamp; // the time the notification was created
     timeStampOrder: string;
