@@ -3,7 +3,8 @@ import { Injectable } from '@nestjs/common';
 import * as admin from 'firebase-admin';
 import { addFollowerRequest } from '@mp/api/profiles/util';
 import { user } from '@mp/api/search/data-access';
-
+import { notification } from '@mp/api/notifications/util'
+import { Timestamp } from 'firebase-admin/firestore';
 @Injectable()
 export class ProfilesRepository {
 
@@ -91,6 +92,19 @@ export class ProfilesRepository {
       if(requestee.notPublic){
         const followRequestsRef = admin.firestore().collection(`profiles/${requestee.user_id}/follow-requests`).doc(request.requester.user_id);
         followRequestsRef.set({user: request.requester.username, image: request.requester.profilePicturePath});
+
+        const notifcationsRef = admin.firestore().collection(`profiles/${requestee.user_id}/notifications`).doc();
+        
+        const noti: notification = {
+          notification_id: "",
+          image: requester.profilePicturePath,
+          type: "New Follow Request",
+          payload: requester.username + " has requested to follow you",
+          timestamp: Timestamp.now(),
+          timeStampOrder: Timestamp.now().seconds.toString()
+        }
+
+        noti.notification_id = notifcationsRef.id;
       
       }
       else{
@@ -100,6 +114,20 @@ export class ProfilesRepository {
         const requestee2 = admin.firestore().collection("profiles").doc(request.requestee.user_id);
         let followerCount = (await requestee2.get()).data()?.['followers'];
         await requestee2.set({followers: ++followerCount}, { merge: true });
+
+        const notifcationsRef = admin.firestore().collection(`profiles/${requestee.user_id}/notifications`).doc();
+        
+        const noti: notification = {
+          notification_id: "",
+          image: requester.profilePicturePath,
+          type: "New Follower",
+          payload: requester.username + " is now following you",
+          timestamp: Timestamp.now(),
+          timeStampOrder: Timestamp.now().seconds.toString()
+        }
+
+        noti.notification_id = notifcationsRef.id;
+        notifcationsRef.set(noti);
 
         //Add requestee to following of requester
         const followersRefRequester = admin.firestore().collection(`profiles/${requester.user_id}/following`).doc(request.requestee.user_id);

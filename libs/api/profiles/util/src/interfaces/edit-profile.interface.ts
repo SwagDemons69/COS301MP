@@ -1,5 +1,5 @@
 export interface edit_profile {
-    notPublic : string;
+    notPublic : boolean;
     name : string | null;
     username : string;
     profilePicturePath : string;

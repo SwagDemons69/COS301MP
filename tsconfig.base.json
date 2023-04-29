@@ -183,7 +183,10 @@
       "@mp/app/welcome/feature": ["libs/app/welcome/feature/src/index.ts"],
       "@mp/app/welcome/util": ["libs/app/welcome/util/src/index.ts"],
       "@mp/cli/core/feature": ["libs/cli/core/feature/src/index.ts"],
-      "@np.app/post/feauture": ["libs/app/post/feature/src/index.ts"]
+      "@np.app/post/feauture": ["libs/app/post/feature/src/index.ts"],
+      "mp/app/notifications/data-access" : ["libs/app/notifications/data-access/src/index.ts"],
+      "mp/app/notifications/feature" : ["libs/app/notifications/feature/src/index.ts"],
+      "mp/app/notifications/util" : ["libs/app/notifications/util/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
