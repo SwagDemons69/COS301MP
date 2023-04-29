@@ -64,7 +64,7 @@
     <!-- <ion-slides [options]="{ slidesPerView: 'auto', zoom: true, grabCursor: true }"> -->
     <ion-slides [options]="{ slidesPerView: 1.5, freeMode: true }">
 
-      <ion-slide *ngFor="let item of recommended">
+      <ion-slide *ngFor="let item of recommended" (click)="openBlip(item.postData)">
         <ion-col>
           <ion-img [src]="item.post.content"></ion-img>
           <div class="overlay">
