@@ -1,8 +1,9 @@
-https://raw.githubusercontent.com/SwagDemons69/COS301MP/main/screenshots/profile.png<img src="https://raw.githubusercontent.com/SwagDemons69/COS301MP/feature-integration/apps/app/src/assets/logos/logo.svg" alt="Twenty4" style="display: block; margin: auto; width: 50%" />
-
-<div style="text-align: center">
+<p align="center">
+<img src="https://raw.githubusercontent.com/SwagDemons69/COS301MP/feature-integration/apps/app/src/assets/logos/logo.svg" alt="Twenty4" style="width: 50%" />
+</p>
+<p align="center">
 by SwagDemons69 👿
-</div>
+</p>
 
 ## Setup
 1. Clone the repo
@@ -25,21 +26,21 @@ yarn start:emulators
 yarn start:app:dev
 ```
 ## Team Members
-| Member    | Student No. |
-|-----------|-------------|
-| Conrad    | u04483716
-| Dino      | u21630276
-| Mduduzi   |
-| Jake      | u21692492
-| Karel     | u20447932
-| Leo       | u20505656
-| Lukas     | u21434345
-| Matjere   | u21609633
-| Emito     | u20665777
-| Rob       | u20431122
-| Ruan      | u21459640
-| Tumi      | u21452832
-| Wian      | u21433748
+| Member    | Student No.   |
+|-----------|---------------|
+| Conrad    | u04483716     |
+| Dino      | u21630276     |
+| Mduduzi   | u19262452     |
+| Jake      | u21692492     |
+| Karel     | u20447932     |
+| Leo       | u20505656     |
+| Lukas     | u21434345     |
+| Matjere   | u21609633     |
+| Emito     | u20665777     |
+| Rob       | u20431122     |
+| Ruan      | u21459640     |
+| Tumi      | u21452832     |
+| Wian      | u21433748     |
 
 ## Roles
 | Role                              | Members               |
@@ -66,7 +67,15 @@ yarn start:app:dev
 
 ## Screenshots
 
-
-<img src="https://raw.githubusercontent.com/SwagDemons69/COS301MP/main/screenshots/dashboard.png" alt="Twenty4" width="32%">
-<img src="https://raw.githubusercontent.com/SwagDemons69/COS301MP/main/screenshots/post.png" alt="Twenty4" width="32%">
-<img src="https://raw.githubusercontent.com/SwagDemons69/COS301MP/main/screenshots/profile.png" alt="Twenty4" width="32%">
+<table>
+<tr>
+<tr>
+<td>Dashboard</td>
+<td>Post</td>
+<td>Profile</td>
+<tr>
+<td><img src="https://raw.githubusercontent.com/SwagDemons69/COS301MP/main/screenshots/dashboard.png" alt="Dashboard" width="275px"></td>
+<td><img src="https://raw.githubusercontent.com/SwagDemons69/COS301MP/main/screenshots/post.png" alt="Post" width="275px"></td>
+<td><img src="https://raw.githubusercontent.com/SwagDemons69/COS301MP/main/screenshots/profile.png" alt="Profile" width="275px"></td>
+</tr>
+</table>
