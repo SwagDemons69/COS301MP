@@ -95,3 +95,12 @@ ion-title {
 
   color: #858585;
 }
+
+ion-avatar.smallAvatar {
+  display: inline-block;
+  width: 1em;
+  height: auto;
+  padding: 0px;
+  margin: 0px;
+  margin-right: 0.5em;
+}
