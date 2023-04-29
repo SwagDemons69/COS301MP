@@ -9,7 +9,7 @@ import { user } from 'firebase-functions/v1/auth';
 import { CreateChatMessageResponse, ChatMessage, ChatMessages, ChatHeadersResponse, ChatHeader, ChatHeaders, GetChatMessagesResponse } from '@mp/api/chat/util';
 import { Timestamp } from 'firebase-admin/firestore';
 import { user_profile } from '@mp/api/profiles/util';
-
+import { notification } from '@mp/api/notifications/util';
 export interface recip {
     recipient: string;
 };
@@ -139,6 +139,24 @@ export class ChatRepository {
         };
         await senderChatRef.set(message);
         await recieveChatRef.set(message);
+
+        const receiverRef3 = admin.firestore().collection('profiles').doc(receiver);
+        const receiverProfile = await receiverRef3.get();
+        const receiver1 = receiverProfile.data() as user_profile;
+
+        const notifcationsRef = admin.firestore().collection(`profiles/${receiver1.user_id}/notifications`).doc();
+        
+        const noti: notification = {
+          notification_id: "",
+          image: receiver1.profilePicturePath,
+          type: "New Message",
+          payload: receiver1.username + " has sent you a message",
+          timestamp: Timestamp.now(),
+          timeStampOrder: Timestamp.now().seconds.toString()
+        }
+
+        noti.notification_id = notifcationsRef.id;
+        notifcationsRef.set(noti);
     }
 
     async addChatMessage(sender: string, receiver: string, timeStamp: string, payload: string){
@@ -167,6 +185,24 @@ export class ChatRepository {
 
         await senderRef.set(message);
         await recieveRef.set(message);
+
+        const receiverRef3 = admin.firestore().collection('profiles').doc(receiver);
+        const receiverProfile = await receiverRef3.get();
+        const receiver1 = receiverProfile.data() as user_profile;
+
+        const notifcationsRef = admin.firestore().collection(`profiles/${receiver1.user_id}/notifications`).doc();
+        
+        const noti: notification = {
+          notification_id: "",
+          image: receiver1.profilePicturePath,
+          type: "New Message",
+          payload: receiver1.username + " has sent you a message",
+          timestamp: Timestamp.now(),
+          timeStampOrder: Timestamp.now().seconds.toString()
+        }
+
+        noti.notification_id = notifcationsRef.id;
+        notifcationsRef.set(noti);
     }
 
 
