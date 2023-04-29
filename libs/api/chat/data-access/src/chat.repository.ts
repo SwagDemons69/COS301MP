@@ -150,7 +150,8 @@ export class ChatRepository {
           notification_id: "",
           image: receiver1.profilePicturePath,
           type: "New Message",
-          payload: receiver1.username + " has sent you a message",
+          username: receiver1.username,
+          payload: "has sent you a message",
           timestamp: Timestamp.now(),
           timeStampOrder: Timestamp.now().seconds.toString()
         }
@@ -196,7 +197,8 @@ export class ChatRepository {
           notification_id: "",
           image: receiver1.profilePicturePath,
           type: "New Message",
-          payload: receiver1.username + " has sent you a message",
+          username: receiver1.username,
+          payload: "has sent you a message",
           timestamp: Timestamp.now(),
           timeStampOrder: Timestamp.now().seconds.toString()
         }

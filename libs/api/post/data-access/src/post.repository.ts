@@ -65,7 +65,8 @@ export class PostRepository {
                 notification_id: "",
                 image: poster1.profilePicturePath,
                 type: "New Like",
-                payload: poster1.username + " liked a post",
+                username: poster1.username,
+                payload: "liked a post",
                 timestamp: Timestamp.now(),
                 timeStampOrder: Timestamp.now().seconds.toString()
             }
@@ -113,7 +114,8 @@ export class PostRepository {
                 notification_id: "",
                 image: poster1.profilePicturePath,
                 type: "New Dislike",
-                payload: poster1.username + " disliked a post",
+                username: poster1.username,
+                payload: "disliked a post",
                 timestamp: Timestamp.now(),
                 timeStampOrder: Timestamp.now().seconds.toString()
             }
@@ -164,7 +166,8 @@ export class PostRepository {
           notification_id: "",
           image: profile.profilePicturePath,
           type: "New Comment",
-          payload: profile.username + " commented on a post",
+          username: profile.username,
+          payload: "commented on a post",
           timestamp: Timestamp.now(),
           timeStampOrder: Timestamp.now().seconds.toString()
         }
@@ -216,7 +219,8 @@ export class PostRepository {
           notification_id: "",
           image: profile.profilePicturePath,
           type: "New Reply",
-          payload: profile.username + " replied to your comment",
+          username: profile.username,
+          payload: "replied to your comment",
           timestamp: Timestamp.now(),
           timeStampOrder: Timestamp.now().seconds.toString()
         }

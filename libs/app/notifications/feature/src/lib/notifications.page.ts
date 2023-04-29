@@ -100,6 +100,7 @@ export class NotificationsPage {
           id: this.notifications[i].notification_id,
           icon: type,
           time: timeString,
+          username: this.notifications[i].username,
           message: this.notifications[i].payload
         }
         this.displayNotifications.push(noti)
