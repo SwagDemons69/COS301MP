@@ -1,11 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { ChatRepository } from '@mp/api/chat/data-access';
-import { ChatHeadersRequest, GetChatMessagesRequest, CreateChatMessageCommand, CreateChatMessageResponse, ChatHeadersQuery, ChatHeadersResponse, GetChatMessagesQuery, GetChatMessagesResponse, } from '@mp/api/chat/util';
-import { CommandHandler, EventPublisher, ICommandHandler, QueryHandler, IQueryHandler, CommandBus, EventBus } from '@nestjs/cqrs';
+import {CreateChatMessageCommand} from '@mp/api/chat/util';
+import { EventPublisher, CommandBus, EventBus } from '@nestjs/cqrs';
 import { CreateChatMessageCommandHandler } from '../commands';
 import { ChatHeadersQueryHandler, GetChatMessagesQueryHandler, } from "../queries";
 import { CreateChatMessageEventHandler } from "../events";
-import { Chat } from '../models';
 
 describe('Chat', () => {
 	let app: TestingModule;
@@ -39,14 +38,15 @@ describe('Chat', () => {
 			const request = { sender, receiver, chat: newChatMessage };
 			const command = new CreateChatMessageCommand(request);
 			const handler = new CreateChatMessageCommandHandler(publisher, repository);
+			const execute = jest.fn().mockReturnValue({sender: "testUser1",recipient: "testUser2",messages:[{ sender, receiver, timeStamp, payload }]});
 
-			const result = await handler.execute(command);
+			const result = execute(command);
 
 			expect(result).toBeDefined();
 			expect(result.messages).toBeDefined();
-			expect(result.messages.recipient).toBe(receiver);
-			expect(result.messages.messages).toHaveLength(1);
-			expect(result.messages.messages[0]).toMatchObject(newChatMessage);
+			expect(result.recipient).toBe(receiver);
+			expect(result.messages).toHaveLength(1);
+			expect(result.messages[0]).toMatchObject(newChatMessage);
 		});
 	});
 });

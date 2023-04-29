@@ -72,7 +72,7 @@ describe('CreateProfileHandler', () => {
       notPublic: 'false',
       username: 'testuser',
       name: 'testuser',
-      profilePicturePath: '',
+      profilePicturePath: 'https://ionicframework.com/docs/img/demos/avatar.svg',
       bio: '',
       email: 'testuser@example.com',
       password: '',

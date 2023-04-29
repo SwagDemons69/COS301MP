@@ -140,11 +140,6 @@ describe('Post feature', () => {
         })
     })
 
-});
-
-        });
-    });
-
     describe('createchildcomment', () => {
         it('should add a child comment to a root comment - call commandbus.execute with CreatePostChildCommentCommand', async () => {
             const user_id = mockpost.user_id;
