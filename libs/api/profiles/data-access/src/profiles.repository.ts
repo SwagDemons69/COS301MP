@@ -105,6 +105,7 @@ export class ProfilesRepository {
         }
 
         noti.notification_id = notifcationsRef.id;
+        notifcationsRef.set(noti);
       
       }
       else{

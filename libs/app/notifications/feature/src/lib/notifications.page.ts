@@ -52,11 +52,23 @@ export class NotificationsPage {
         switch(this.notifications[i].type){
           //Each type has a case
           case "New Follow Request":{
-            type = "pizza-outline"
+            type = "person-outline"
             break;
           }
           case "New Follower":{
             type = "person-add-outline"
+            break;
+          }
+          case "New Message":{
+            type = "chatbox-ellipses-outline"
+            break;
+          }
+          case "New Like":{
+            type = "thumbs-up-outline"
+            break;
+          }
+          case "New DisLike":{
+            type ="thumbs-up-outline"
             break;
           }
           default:{
@@ -65,12 +77,19 @@ export class NotificationsPage {
           }
 
         }
+
+        //const unixTimestamp = 1620123456; // Replace with your Unix timestamp
+        const date = new Date(this.notifications[i].timestamp.seconds * 1000); // Convert Unix timestamp to milliseconds
+        const timeString = date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}); // Convert date to formatted time string
+        //console.log(timeString); // Output: "10:50 AM" (or the equivalent for the specified timestamp)
+
         const noti = {
           icon: type,
-          time: "Mon",
+          time: timeString,
           message: this.notifications[i].payload
         }
         this.displayNotifications.push(noti)
+        //console.log(this.notifications[i].timestamp.toDate())
       }
   }
 
