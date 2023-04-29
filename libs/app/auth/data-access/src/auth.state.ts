@@ -54,14 +54,7 @@ export class AuthState {
         // console.log(draft.user?.displayName)
         // console.log(draft.username)
         draft.user = user;
-        if(draft.user && draft.username){
-          this.authApi.setUsername(draft.user.uid, draft.username);
-        }
-        else{
-         console.log("user or username is null")
-        }
-      })
-    );
+      }))
   }
 
   @Action(Login)
