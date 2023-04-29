@@ -70,3 +70,11 @@ ion-title {
   background: transparent;
   font-weight: light;
 }
+
+ion-fab-button {
+  --ion-color-base: #1f1f1f !important;
+}
+
+ion-fab-button ion-icon{
+  color: white !important;
+}
