@@ -51,7 +51,7 @@ export interface EditProfileModel{
     profile: {
       user_id: "",
       timeOfExpiry: 0,
-      notPublic: "",
+      notPublic: false,
       username: "",
       name: "",
       profilePicturePath: "",
@@ -69,7 +69,7 @@ export interface EditProfileModel{
       notifications: [], //Array of notification_id
     },
     form : {
-      notPublic : "",
+      notPublic : false,
       name : "",
       username : "",
       profilePicturePath : "",
@@ -132,7 +132,7 @@ export class ProfileState {
     const user = this.store.selectSnapshot(AuthState.user);
     if (!user) return ctx.dispatch(new SetError('User not set'));
     const defaultForm: edit_profile = {
-      notPublic : "",
+      notPublic : false,
       name : "",
       username : "",
       profilePicturePath : "",

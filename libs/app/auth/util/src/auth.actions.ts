@@ -21,7 +21,8 @@ export class Register {
   static readonly type = '[Auth] Register';
   constructor(
     public readonly email: string,
-    public readonly password: string
+    public readonly password: string,
+    public readonly username: string
   ) {}
 }
 

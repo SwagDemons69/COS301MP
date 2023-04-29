@@ -17,12 +17,14 @@ import { AuthApi } from './auth.api';
 
 export interface AuthStateModel {
   user: User | null;
+  username: string | null;
 }
 
 @State<AuthStateModel>({
   name: 'auth',
   defaults: {
     user: null,
+    username: ""
   },
 })
 @Injectable()
@@ -49,7 +51,22 @@ export class AuthState {
     //console.log(user)
     ctx.setState(
       produce((draft) => {
+        // console.log(draft.user?.displayName)
+        // console.log(draft.username)
         draft.user = user;
+        if(draft.user && draft.username){
+          this.authApi.setUsername(draft.user.uid, draft.username);
+        }
+        else{
+         console.log("user or username is null")
+        }
+        // console.log(user?.displayName)
+
+        // console.log(user)
+        // if(user && draft.user && draft.user.displayName){
+        //   draft.user.displayName = user.displayName;
+        // }
+        //if(draft.user){ draft.user.displayName = ctx.getState().username; };
       })
     );
   }
@@ -67,11 +84,14 @@ export class AuthState {
   @Action(Register)
   async register(
     ctx: StateContext<AuthStateModel>,
-    { email, password }: Register
+    { email, password, username }: Register
   ) {
     try {
       console.log("AUTH STATE")
-      await this.authApi.register(email, password);
+      await this.authApi.register(email, password, username);
+      ctx.patchState({username: username});
+      //console.log("SET STATE: " + ctx.getState().username);
+      
       return ctx.dispatch(new Navigate(['home']));
     } catch (error) {
       return ctx.dispatch(new SetError((error as Error).message));

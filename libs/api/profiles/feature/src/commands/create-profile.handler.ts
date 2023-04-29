@@ -41,7 +41,7 @@ export class CreateProfileHandler
     const data: user_profile = {
       user_id: userId,
       timeOfExpiry: Date.now() / 1000 + 21*24*60*60,
-      notPublic: "false",
+      notPublic: false,
       username: temp,
       name: temp,
       profilePicturePath: "https://ionicframework.com/docs/img/demos/avatar.svg",
