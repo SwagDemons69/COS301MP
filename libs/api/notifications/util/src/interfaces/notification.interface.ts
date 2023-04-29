@@ -1,6 +1,7 @@
 import { Timestamp } from 'firebase-admin/firestore';
 
 export interface notification {
+    create_by_id: string;
     notification_id : string; // the id of the notification on firebase
     image : string; // the user that the notification is for
     type : string; // the type of notification 

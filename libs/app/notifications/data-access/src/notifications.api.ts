@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { collection, collectionData, Firestore } from '@angular/fire/firestore';
-import { Functions, httpsCallable } from '@angular/fire/functions';
-import { DeleteNotificationRequest, DeleteNotificationResponse, notification } from '@mp/api/notifications/util';
+import { Functions, HttpsCallable, httpsCallable } from '@angular/fire/functions';
+import { DeleteNotificationRequest, DeleteNotificationResponse, HandleFollowRequest, HandlerFollowResponse, notification } from '@mp/api/notifications/util';
 import { map, Observable } from 'rxjs';
 
 @Injectable()
@@ -19,5 +19,10 @@ export class NotificationsApi {
     async deleteNotification(user_id: string, notification_id: string){
         const request: DeleteNotificationRequest = { user_id: user_id, notification_id: notification_id };
         return await httpsCallable<DeleteNotificationRequest, DeleteNotificationResponse>(this.functions, 'DeleteNotification')(request);
+    }
+
+    async handleFollowRequest(flag: boolean, requester: string, requestee: string){
+        const request: HandleFollowRequest = { flag: flag, requester: requester, requestee: requestee};
+        return await httpsCallable<HandleFollowRequest, HandlerFollowResponse>(this.functions, 'HandleFollow')(request);
     }
 }
