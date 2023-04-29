@@ -138,5 +138,5 @@ describe('Post feature', () => {
             expect(result).toEqual(response);
         })
     })
-
+    
 });

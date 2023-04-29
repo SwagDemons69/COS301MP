@@ -1,5 +1,5 @@
-import { notificationInterface } from "../interfaces/notification";
+import { IGetTimeElapsingNotificationRequest } from "../requests/time-received-notification.request";
 
-export class TimeElapsingNotificationCommand {
-    constructor(public readonly request: notificationInterface) {}
+export class NewFollowerNotificationCommand {
+    constructor(public readonly request: IGetTimeElapsingNotificationRequest) {}
 }

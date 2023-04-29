@@ -1,5 +1,5 @@
-import { notificationInterface } from "../interfaces/notification";
+import { IGetSystemWelcomeNotificationRequest } from "../requests/time-received-notification.request";
 
 export class SystemWelcomeNotificationCommand {
-    constructor(public readonly request: notificationInterface) {}
+    constructor(public readonly request: IGetSystemWelcomeNotificationRequest) {}
 }

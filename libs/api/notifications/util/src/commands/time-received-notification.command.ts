@@ -1,5 +1,5 @@
-import { notificationInterface } from "../interfaces/notification";
+import { IGetTimeReceivedNotificationRequest } from "../requests/time-received-notification.request";
 
-export class TimeReceivedNotificationCommand {
-    constructor(public readonly request: notificationInterface) {}
+export class NewFollowerNotificationCommand {
+    constructor(public readonly request: IGetTimeReceivedNotificationRequest) {}
 }

@@ -1,8 +1,8 @@
 import { Timestamp } from 'firebase-admin/firestore';
 
-export interface userDetails {
+export interface followerDetails {
     userId : string;
     displayName?: string | null | undefined;
-    timeLeft: Timestamp | null | undefined;
-    timeStamp: Timestamp | null | undefined;
+    photoURL?: string | null | undefined;
+    created?: Timestamp | null | undefined;
 }
