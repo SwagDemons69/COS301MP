@@ -67,8 +67,16 @@ export class NotificationsPage {
             type = "thumbs-up-outline"
             break;
           }
-          case "New DisLike":{
-            type ="thumbs-up-outline"
+          case "New Dislike":{
+            type ="thumbs-down-outline"
+            break;
+          }
+          case "New Comment":{
+            type ="chatbubble-outline"
+            break;
+          }
+          case "New Reply":{
+            type ="chatbubbles-outline"
             break;
           }
           default:{

@@ -5,7 +5,8 @@ import { user_profile } from '@mp/api/profiles/util';
 import { Injectable } from '@nestjs/common';
 import * as admin from 'firebase-admin';
 import { connectStorageEmulator, getStorage, ref, uploadString } from 'firebase/storage';
-
+import { notification } from '@mp/api/notifications/util';
+import { Timestamp } from 'firebase-admin/firestore';
 @Injectable()
 export class PostRepository {
 
@@ -52,6 +53,26 @@ export class PostRepository {
             const posterTOE = poster.timeOfExpiry
             const newTime = posterTOE + 7200;
             await postersRef.set({timeOfExpiry: newTime}, { merge: true });
+
+
+            const posterRef = admin.firestore().collection('profiles').doc(poster_id);
+            const posterProfile = await posterRef.get();
+            const poster1 = posterProfile.data() as user_profile;
+
+            const notifcationsRef = admin.firestore().collection(`profiles/${poster_id}/notifications`).doc();
+        
+            const noti: notification = {
+                notification_id: "",
+                image: poster1.profilePicturePath,
+                type: "New Like",
+                payload: poster1.username + " liked a post",
+                timestamp: Timestamp.now(),
+                timeStampOrder: Timestamp.now().seconds.toString()
+            }
+
+            noti.notification_id = notifcationsRef.id;
+            notifcationsRef.set(noti);
+
         }
 
         const likesRef = await admin.firestore().collection(`profiles/${poster_id}/posts/${post_id}/likes`).get();
@@ -80,6 +101,25 @@ export class PostRepository {
             const posterTOE = poster.timeOfExpiry
             const newTime = posterTOE - 1440        ;
             await postersRef.set({timeOfExpiry: newTime}, { merge: true });
+
+
+            const posterRef = admin.firestore().collection('profiles').doc(poster_id);
+            const posterProfile = await posterRef.get();
+            const poster1 = posterProfile.data() as user_profile;
+
+            const notifcationsRef = admin.firestore().collection(`profiles/${poster_id}/notifications`).doc();
+        
+            const noti: notification = {
+                notification_id: "",
+                image: poster1.profilePicturePath,
+                type: "New Dislike",
+                payload: poster1.username + " disliked a post",
+                timestamp: Timestamp.now(),
+                timeStampOrder: Timestamp.now().seconds.toString()
+            }
+
+            noti.notification_id = notifcationsRef.id;
+            notifcationsRef.set(noti);
         }
 
         const dislikesRef = await admin.firestore().collection(`profiles/${poster_id}/posts/${post_id}/dislikes`).get();
@@ -88,7 +128,7 @@ export class PostRepository {
     }
 
     async createPostRootComment(user: string, post: string, comment: RootComment): Promise<CreatePostRootCommentResponse> {
-        console.log(user, post, comment);
+
         const handle = admin.firestore().collection(`profiles/${user}/posts/${post}/root-comments`).doc();
         comment.root_comment_id = handle.id;
         await handle.set(comment);
@@ -108,6 +148,29 @@ export class PostRepository {
         const postComments = poster.comments;
         const newComments = postComments + 1;
         await postRef.set({comments: newComments}, { merge: true });
+
+        //=============================================================
+        // SEND NOTIFICATION
+        //=============================================================
+
+
+        const profileRef = admin.firestore().collection('profiles').doc(poster.user_id);
+        const profileData = await profileRef.get();
+        const profile = profileData.data() as user_profile;
+
+        const notifcationsRef = admin.firestore().collection(`profiles/${user}/notifications`).doc();
+        
+        const noti: notification = {
+          notification_id: "",
+          image: profile.profilePicturePath,
+          type: "New Comment",
+          payload: profile.username + " commented on a post",
+          timestamp: Timestamp.now(),
+          timeStampOrder: Timestamp.now().seconds.toString()
+        }
+
+        noti.notification_id = notifcationsRef.id;
+        notifcationsRef.set(noti);
 
         return { post_comments: RootComments};
     }
@@ -132,6 +195,34 @@ export class PostRepository {
         const postComments = poster.comments;
         const newComments = postComments + 1;
         await postRef.set({comments: newComments}, { merge: true });
+
+
+        //=============================================================
+        // SEND NOTIFICATION
+        //=============================================================
+
+
+        const profileRef = admin.firestore().collection('profiles').doc(poster.user_id);
+        const profileData = await profileRef.get();
+        const profile = profileData.data() as user_profile;
+
+        const posterRef = admin.firestore().collection(`profiles/${user}/posts/${post}/root-comments`).doc(rootComment);
+        const posterData = (await posterRef.get()).data() as RootComment;
+        const creator = posterData.created_by;
+
+        const notifcationsRef = admin.firestore().collection(`profiles/${creator}/notifications`).doc();
+        
+        const noti: notification = {
+          notification_id: "",
+          image: profile.profilePicturePath,
+          type: "New Reply",
+          payload: profile.username + " replied to your comment",
+          timestamp: Timestamp.now(),
+          timeStampOrder: Timestamp.now().seconds.toString()
+        }
+
+        noti.notification_id = notifcationsRef.id;
+        notifcationsRef.set(noti);
 
         return { post_comments: RootComments };
     }
