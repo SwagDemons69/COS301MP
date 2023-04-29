@@ -46,6 +46,7 @@ export class DashboardPage {
     this.profile = null;
     this.profile$.forEach((profile)=> {
       this.profile = profile;
+      this.deathTime = (this.profile) ? this.profile.timeOfExpiry : 1234567;
     });
 
     this.deathTime = 0;
@@ -72,9 +73,9 @@ export class DashboardPage {
   }
 
   //Load Current Profiles Time when you enter page
-  ionViewWillEnter(){
-    this.deathTime = (this.profile) ? this.profile.timeOfExpiry : 1234567;
-  }
+  // ionViewWillEnter(){
+  //   this.deathTime = (this.profile) ? this.profile.timeOfExpiry : 1234567;
+  // }
 
   ionViewDidEnter(){
     this.store.dispatch(new SetDashboardPosts(this.profile)); 
