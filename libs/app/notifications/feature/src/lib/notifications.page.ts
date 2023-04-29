@@ -128,4 +128,8 @@ export class NotificationsPage {
         console.log(response.data.msg)
     }
   }
+
+  handleFriendRequest(accepted: boolean, notif: any) {
+    alert("Accepted: " + accepted);
+  }
 }

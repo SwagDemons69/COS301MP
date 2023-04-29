@@ -73,10 +73,20 @@ ion-title {
 
 .dismiss {
   color: white;
+  margin-right: 1em;
 }
 
 .dismiss:hover {
   color: #ff0062;
+}
+
+.accept {
+  color: white;
+  margin-right: 1em;
+}
+
+.accept:hover {
+  color: #22ff00;
 }
 
 .noNotifications {
