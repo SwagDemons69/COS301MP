@@ -1,5 +1,4 @@
 import { Timestamp } from 'firebase-admin/firestore';
-import { NotificationType } from '../enums';
 
 export interface notification {
     notification_id : string; // the id of the notification on firebase
