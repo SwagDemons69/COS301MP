@@ -26,33 +26,22 @@ yarn start:emulators
 yarn start:app:dev
 ```
 ## Team Members
-| Member    | Student No.   |
-|-----------|---------------|
-| Conrad    | u04483716     |
-| Dino      | u21630276     |
-| Mduduzi   | u19262452     |
-| Jake      | u21692492     |
-| Karel     | u20447932     |
-| Leo       | u20505656     |
-| Lukas     | u21434345     |
-| Matjere   | u21609633     |
-| Emito     | u20665777     |
-| Rob       | u20431122     |
-| Ruan      | u21459640     |
-| Tumi      | u21452832     |
-| Wian      | u21433748     |
-
-## Roles
-| Role                              | Members               |
-|-----------------------------------|-----------------------|
-| Data Engineer                     | Lukas, Ruan           |
-| Designer                          | Conrad, Mduduzi, Dino |
-| Devops                            | Karel, Rob            |
-| Integration engineer              | Tumi, Emito, Wian     |
-| Project manager/Business analyst  | Conrad, Rob           |
-| Services Engineer                 | Matjere, Emito, Jake  |
-| Tester                            | Karel, Leo            |
-| UI Engineer                       | Mduduzi, Dino, Leo    |
+| Member        | Student No.   | Roles                                         |
+|---------------|---------------|-----------------------------------------------|
+|               |               |                                               |
+| **Conrad**    | *u04483716*   | Designer, Project manager/Business analyst    |
+| **Dino**      | *u21630276*   | Designer, UI Engineer                         |
+| **Emito**     | *u20665777*   | Integration engineer, Services Engineer       |
+| **Jake**      | *u21692492*   | Services Engineer, Full Stack                 |
+| **Karel**     | *u20447932*   | Devops, Tester                                |
+| **Leo**       | *u20505656*   | Tester, UI Engineer                           |
+| **Lukas**     | *u21434345*   | Data Engineer                                 |
+| **Matjere**   | *u21609633*   | Services Engineer                             |
+| **Mduduzi**   | *u19262452*   | Designer, UI Engineer                         |
+| **Rob**       | *u20431122*   | Devops, Project manager/Business analyst      |
+| **Ruan**      | *u21459640*   | Data Engineer                                 |
+| **Tumi**      | *u21452832*   | Integration engineer                          |
+| **Wian**      | *u21433748*   | Integration engineer                          |
 
 ## Links
 | Link | Description |
