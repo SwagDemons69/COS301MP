@@ -100,9 +100,17 @@
             [src]="gs?.profilePicturePath == undefined || gs?.profilePicturePath == '' ? 'https://ionicframework.com/docs/img/demos/avatar.svg' : gs.profilePicturePath"
           />
         </ion-avatar>
+
+        <div class="noGravestones" *ngIf="graveyard.length == 0">
+          <ion-icon name="happy-outline" style="font-size: 4em; padding-bottom: 0.1em">
+          </ion-icon><br />
+          <span>Looks like no one's died today!</span><br />
+          <span style="font-size: 0.6em; color: #cdcdcd;">(yet)</span>
+        </div>
+
     </div>
 
-    <div class="feelingBad">
+    <div class="feelingBad" *ngIf="graveyard.length != 0">
       <ion-grid>
         <ion-row>
           <ion-col size="8">
@@ -157,10 +165,13 @@
             <ion-col size="3">
               <ion-list class="profile">
                 <!-- <span>{{item.username}}</span>  -->
-                <span>Username TODO</span> 
                 <ion-avatar style="display: inline; width: 5vw; height: 5vw">
-                  <img alt="Avatar" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+                  <img
+                    alt="Avatar"
+                    [src]="item.user.image == '' ? 'https://ionicframework.com/docs/img/demos/avatar.svg' : item.user.image "
+                  />
                 </ion-avatar>
+                <span> {{item.user.username}}</span> 
               </ion-list>
             </ion-col>
           </ion-row>
