@@ -36,6 +36,7 @@ export class DashboardPage {
   trending: PostHeader[] | []
   //let called = false;
   deathTime: number
+  graveYard: user_profile[]
   constructor (
     private renderer: Renderer2,
     private modalController: ModalController,
@@ -45,17 +46,16 @@ export class DashboardPage {
     private readonly nav: NavController
   ) 
   {
+    this.deathTime = 0;
+    this.graveYard = []
     this.profile = null;
     this.profile$.forEach((profile)=> {
       this.profile = profile;
       this.deathTime = (this.profile) ? this.profile.timeOfExpiry : 1234567;
+      
     });
-
-    this.deathTime = 0;
-  
     this.recommended = [];
     this.recommended_posts$.forEach((posts) => {
-      console.log(posts);
       this.recommended = posts;
       this.recommended = this.recommended.sort((a, b) => (a.timeStamp < b.timeStamp ? 1 : -1));
       this.recommended = this.recommended.slice(0, 3);
@@ -79,8 +79,9 @@ export class DashboardPage {
   //   this.deathTime = (this.profile) ? this.profile.timeOfExpiry : 1234567;
   // }
 
-  ionViewDidEnter(){
-    this.store.dispatch(new SetDashboardPosts(this.profile)); 
+  async ionViewDidEnter(){
+    this.store.dispatch(new SetDashboardPosts(this.profile));
+    this.graveYard = await this.api.GetGraveyard();
   }
 
 // async dispatchProfile() {

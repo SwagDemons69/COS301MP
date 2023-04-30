@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { doc, docData, Firestore } from '@angular/fire/firestore';
 import { Functions, httpsCallable } from '@angular/fire/functions';
-import { GetBlipContentRequest, GetBlipContentResponse, GetRecommendedPostsRequest, GetRecommendedPostsResponse, GetTrendingPostsRequest, GetTrendingPostsResponse } from '@mp/api/dashboard/util';
+import { GetBlipContentRequest, GetBlipContentResponse, GetGraveyardResponse, GetRecommendedPostsRequest, GetRecommendedPostsResponse, GetTrendingPostsRequest, GetTrendingPostsResponse } from '@mp/api/dashboard/util';
 import { post } from '@mp/api/home/util';
+import { user_profile } from '@mp/api/profiles/util';
 
 @Injectable()
 export class DashboardApi {
@@ -38,6 +39,10 @@ export class DashboardApi {
 
   async GetBlipContent(request: GetBlipContentRequest){
     return await httpsCallable<GetBlipContentRequest, GetBlipContentResponse>(this.functions, 'GetBlipContent')(request);
+  }
+
+  async GetGraveyard(){
+    return (await httpsCallable<void, GetGraveyardResponse>(this.functions, 'GetGraveyard')()).data.profiles;
   }
 
 }
