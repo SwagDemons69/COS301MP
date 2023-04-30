@@ -14,6 +14,7 @@ jobs:
       - uses: actions/checkout@v1
       - name: Run Tests
         run: |
+          yarn add jest
           yarn jest libs/api/chat/feature/src/tests/create-chat-message.test.ts
           yarn jest libs/api/post/feature/src/tests/events/create-post.test.ts
           yarn jest libs/api/post/feature/src/tests/post-service.test.ts
