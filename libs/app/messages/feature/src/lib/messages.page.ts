@@ -43,6 +43,8 @@ export class MessagesPage {
     this.headers$.forEach((headers)=>{
       if(headers){
         this.headers = headers;
+        this.chats = this.headers;
+        console.log(this.headers)
       }
     })
     //this.user = undefined;
