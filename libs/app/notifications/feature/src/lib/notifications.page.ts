@@ -96,6 +96,7 @@ export class NotificationsPage {
           created_by: this.notifications[i].create_by_id,
           id: this.notifications[i].notification_id,
           icon: type,
+          type: this.notifications[i].type,
           time: timeString,
           image: this.notifications[i].image,
           username: this.notifications[i].username,
@@ -127,7 +128,17 @@ export class NotificationsPage {
 
   async handleFriendRequest(accepted: boolean, notif: any) {
     if(this.profile){
-      const response = await this.api.handleFollowRequest(accepted, notif.created_by, this.profile?.user_id)
+      const response = await this.api.handleFollowRequest(accepted, notif.created_by, this.profile?.user_id, notif.id)
+    
+      const toast = await this.toast.create({
+        message: response.data.msg,
+        color: 'success',
+        duration: 1500,
+        position: 'top',
+      });
+  
+      await toast.present();
+    
     }
   }
 }

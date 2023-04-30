@@ -1,10 +1,12 @@
-import { DeleteNotificationRequest, DeleteNotificationResponse, HandleFollowRequest, HandlerFollowResponse } from '@mp/api/notifications/util';
+import { DeleteNotificationRequest, DeleteNotificationResponse, HandleFollowRequest, HandlerFollowResponse, notification } from '@mp/api/notifications/util';
 import * as admin from 'firebase-admin';
 import { NestFactory } from '@nestjs/core';
 import * as functions from 'firebase-functions';
 import { CoreModule } from '../core.module';
 import { user_profile } from '@mp/api/profiles/util';
-//Im lazy
+import { Timestamp } from 'firebase-admin/firestore';
+
+//Due to other groups not using CQRS, i have been lazy for this last functionality :)
 
 export const DeleteNotification = functions.https.onCall(
     async (request: DeleteNotificationRequest):   Promise<DeleteNotificationResponse> => {
@@ -40,7 +42,23 @@ export const HandleFollow = functions.https.onCall(
         }
                 //Delete Follow Request
                 await admin.firestore().collection(`profiles/${requestee.user_id}/follow-requests`).doc(requester.user_id).delete();
-        
+                await admin.firestore().collection(`profiles/${requestee.user_id}/notifications`).doc(request.noti_id).delete();
+            
+                const notifcationsRef1 = admin.firestore().collection(`profiles/${requestee.user_id}/notifications`).doc();
+                
+                const noti1: notification = {
+                    create_by_id: requester.user_id,
+                    notification_id: "",
+                    image: requester.profilePicturePath,
+                    type: "New Follower",
+                    username: requester.username,
+                    payload: "is now following you",
+                    timestamp: Timestamp.now(),
+                    timeStampOrder: Timestamp.now().seconds.toString()
+                }
+
+                noti1.notification_id = notifcationsRef1.id;
+                notifcationsRef1.set(noti1);
         return { msg : "Follow Request " + ((request.flag) ? "Accepted": "Denied")};
         
     }
