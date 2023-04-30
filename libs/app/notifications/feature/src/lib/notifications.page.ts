@@ -128,7 +128,17 @@ export class NotificationsPage {
 
   async handleFriendRequest(accepted: boolean, notif: any) {
     if(this.profile){
-      const response = await this.api.handleFollowRequest(accepted, notif.created_by, this.profile?.user_id)
+      const response = await this.api.handleFollowRequest(accepted, notif.created_by, this.profile?.user_id, notif.id)
+    
+      const toast = await this.toast.create({
+        message: response.data.msg,
+        color: 'success',
+        duration: 1500,
+        position: 'top',
+      });
+  
+      await toast.present();
+    
     }
   }
 }
