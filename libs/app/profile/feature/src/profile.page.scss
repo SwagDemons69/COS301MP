@@ -1,3 +1,28 @@
+.spacer2 {
+  display:inline-block;
+  width: 3.1em;
+  height: 1em;
+}
+
+
+.center {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.glassyButton {
+  --background: linear-gradient(45deg, #8c8a9920 20%, #ffffff00 100%);
+  --color: #ffffff;
+  --shadow: none;
+  --box-shadow: none;
+  --border-radius: 6px 6px 6px 6px;
+  border-radius: 6px 6px 6px 6px;
+  border: 1px solid #ffffff20;
+}
+
+
+
 ion-toolbar {
   --background: none;
 }

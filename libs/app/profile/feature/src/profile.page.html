@@ -1,11 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <div class="spacer2" slot="start">
 
-    <!-- <ion-buttons slot="start">
-      <ion-button *ngIf="!isEditingProfile">
-        <ion-icon name="share-outline" style="font-size: 1.5rem; color: white;"></ion-icon>
-      </ion-button>
-    </ion-buttons> -->
+    </div>
+    <div class="center">
+      <ion-buttons slot="start">
+          <ion-button class="glassyButton" (click)="logout()">Logout</ion-button>
+      </ion-buttons>
+    </div>
 
     <ion-buttons slot="end">
       <ion-button *ngIf="!isEditingProfile" (click)="isEditingProfile = true">

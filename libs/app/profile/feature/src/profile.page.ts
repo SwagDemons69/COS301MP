@@ -14,6 +14,7 @@ import { KronosTimer } from '@mp/app/kronos-timer/kronos';
 import { DashboardApi } from '@mp/app/dashboard/data-access';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
+import { Logout } from '@mp/app/profile/util';
 
 @Component({
   selector: 'ms-profile-page',
@@ -203,5 +204,10 @@ export class ProfilePage {
 
   goToMessages() {
     this.navCtrl.navigateForward('/home/chat'); // <-- use NavController to navigate to messages page
+  }
+
+
+  logout(){
+    this.store.dispatch(new Logout());
   }
 }
