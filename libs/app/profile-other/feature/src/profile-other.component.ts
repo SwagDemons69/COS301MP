@@ -9,9 +9,11 @@ import { user_profile } from '@mp/api/profiles/util';
 import { Observable, delay } from 'rxjs';
 import { profileOtherAPI } from '@mp/app/profile-other/data-access';
 import { ToastController } from '@ionic/angular';
+import { DashboardApi } from '@mp/app/dashboard/data-access';
 import { Render } from '@nestjs/common';
 import { ASYNC_METHOD_SUFFIX } from '@nestjs/common/module-utils/constants';
 import { KronosTimer } from '@mp/app/kronos-timer/kronos';
+import { post } from '@mp/api/home/util';
 @Component({
   selector: 'ms-profile-other-component',
   templateUrl: './profile-other.component.html',
@@ -21,10 +23,11 @@ import { KronosTimer } from '@mp/app/kronos-timer/kronos';
 export class ProfileOtherComponent {
   @Select(ProfileState.profile) currentUser$!: Observable<user_profile | null>
   
+  JSON = JSON;
+  
   currentUser: user_profile | null
   followingCount: number
   followerCount: number
-  postCount: number
   deathTime: number
   currentNotifIf: string
 
@@ -39,12 +42,12 @@ export class ProfileOtherComponent {
     private readonly store: Store,
     private navCtrl: NavController,
     private api : profileOtherAPI,
-    private toastCtrlr: ToastController
+    private toastCtrlr: ToastController,
+    private readonly dashApi: DashboardApi
   ) 
   {
     this.followingCount = 0;
     this.followerCount = 0;
-    this.postCount = 0;
     this.deathTime = 0;  
     this. currentNotifIf = ""
 
@@ -54,7 +57,6 @@ export class ProfileOtherComponent {
       if(user){
         this.followerCount = user?.followers;
         this.followingCount = user?.following;
-        this.postCount = user?.posts;
       }
     })
 
@@ -74,7 +76,6 @@ export class ProfileOtherComponent {
     this.followingCount = response.data.following.length;
    
 
-    this.postCount = this.profile.posts.length;
     // console.log(response)
     //followers = string[]
     //following = string[]
@@ -102,15 +103,33 @@ export class ProfileOtherComponent {
     await this.modalController.dismiss();
   }
 
-  async openBlip(data: any, name: any) {
+  async openBlip(data: post) {
+    const blipData = await this.dashApi.GetBlipContent({ user: data.user_id, post: data.post_id});
+
     const modal = await this.modalController.create({
       component: BlipComponent,
       componentProps: {
         data: data,
-        user : name
+        metadata: blipData.data
       }
     });
+
+    modal.onDidDismiss().then((data) => {
+      //console.log(data);
+    });
+
+    return await modal.present();
   }
+
+  // async openBlip(data: any, name: any) {
+  //   const modal = await this.modalController.create({
+  //     component: BlipComponent,
+  //     componentProps: {
+  //       data: data,
+  //       user : name
+  //     }
+  //   });
+  // }
 
   goToMessages() {
     //console.log(this.profile.user.user_id + " " + this.profile.user.username, pictureUrl: this.profile.user.profilePicturePath)
@@ -185,8 +204,6 @@ export class ProfileOtherComponent {
         delay(500);
         this.followerCount = REP.data.followerCount;
         this.followingCount = REP.data.followingCount;
-        this.postCount = this.profile.posts.length;
-
       }
     }
 

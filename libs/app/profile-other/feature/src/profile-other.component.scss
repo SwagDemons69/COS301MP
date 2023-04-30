@@ -69,3 +69,36 @@ ion-avatar {
 .rowSpacing {
   margin-left: 2em;
 }
+
+.sectionTitle {
+  font-family: 'Roboto';
+  color: #f0f0f0;
+  font-size: 1.2em;
+  margin: 0px 1em 0px 1em ;
+}
+
+h3 {
+  text-align: left;
+  font-size: 1.5rem;
+  font-weight: bolder;
+  margin: 0;
+  margin-left: 1rem;
+}
+
+.noMoreContent {
+  display: block;
+  margin-top: 5vh;
+  padding-top: vhvh;
+  width: 100%;
+  text-align: center;
+
+  background: radial-gradient(ellipse, #1c293cc0 0%, #25364e40 40%, #17223100 60%);
+
+  color: #858585;
+}
+
+.noMoreContent ion-icon {
+  font-size: 6em;
+
+  color: #858585;
+}
