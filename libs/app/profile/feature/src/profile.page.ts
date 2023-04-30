@@ -166,7 +166,7 @@ export class ProfilePage {
   }
 
   async updateProfile() {
-    //alert(JSON.stringify(this.userForm.value, null, 2));
+    alert(JSON.stringify(this.userForm.value, null, 2));
     this.isEditingProfile = false;
     // const postsTemp = await this.api.getPosts({ user: this.user.user_id});
     // const posts = postsTemp.data.posts;
@@ -177,7 +177,7 @@ export class ProfilePage {
 
     //Parse form is to queryable JSON object
     const JSONFORM: edit_profile = JSON.parse(JSON.stringify(this.userForm.value, null, 2));
-
+    //alert(JSONFORM)
     //Data Validation so profile is not overwritten
     const notPublic = (JSONFORM.notPublic == false) ? false : true;
     const name = (JSONFORM.name == "") ? "DO-NOT-MODFIY" : JSONFORM.name;
