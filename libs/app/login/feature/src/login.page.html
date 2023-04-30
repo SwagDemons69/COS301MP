@@ -10,7 +10,6 @@
   <form [formGroup]="loginForm" ngxsForm="login.loginForm" (submit)="login()">
     <ion-list class="ion-padding-vertical">
       <ion-item>
-        <!-- <ion-label position="floating" class="required">Email</ion-label> -->
         <ion-input
           class="custom" 
           type="email"
@@ -20,7 +19,10 @@
           required="true"
           autocomplete="email"
           formControlName="email"></ion-input>
-          <ion-icon name="perm_identity"></ion-icon>
+          <ion-icon
+          name='person-outline'
+          slot="end"
+          class="ion-align-self-center"></ion-icon>
       </ion-item>
       <ion-text
         *ngIf="email?.invalid && (email?.dirty || email?.touched)"
@@ -29,7 +31,6 @@
         <small>{{ emailError }}</small>
       </ion-text>
       <ion-item>
-        <!-- <ion-la/bel position="floating" class="required">Password</ion-label> -->
         <ion-input
         class = "custom"
           [type]="showPassword ? 'text' : 'password'"
@@ -39,8 +40,8 @@
           required="true"
           autocomplete="password"
           formControlName="password"></ion-input>
-        <ion-icon
-          [name]="showPassword ? 'lock-open-outline' : 'lock-outline'"
+          <ion-icon
+          [name]="showPassword ? 'lock-open-outline' : 'lock-closed-outline'"
           slot="end"
           class="ion-align-self-center"
           (click)="toggleShowPassword()"></ion-icon>
@@ -68,9 +69,9 @@
 
       <ion-row>
         <ion-col class="ion-text-center">
-          <p>Don't have an account?</p>
+          
           <ion-nav-link routerLink="/register">
-            <ion-text color="primary">Register</ion-text>
+            <p>Don't have an account?<ion-text color="medium" > Register</ion-text></p> 
           </ion-nav-link>
         </ion-col>
       </ion-row>

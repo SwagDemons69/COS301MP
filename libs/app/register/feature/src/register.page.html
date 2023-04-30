@@ -22,6 +22,10 @@
           placeholder="Username"
           required="true"
           formControlName="username"></ion-input>
+          <ion-icon
+          name='person-outline'
+          slot="end"
+          class="ion-align-self-center"></ion-icon>
       </ion-item>
       <ion-text
         *ngIf="username?.invalid && (username?.dirty || username?.touched)"
@@ -40,6 +44,10 @@
           required="true"
           autocomplete="email"
           formControlName="email"></ion-input>
+          <ion-icon
+          name='mail-outline'
+          slot="end"
+          class="ion-align-self-center"></ion-icon>
       </ion-item>
       <ion-text
         *ngIf="email?.invalid && (email?.dirty || email?.touched)"
@@ -48,7 +56,7 @@
         <small>{{ emailError }}</small>
       </ion-text>
       <ion-item>
-        <!-- <ion-label position="floating" class="required">Password</ion-label> -->
+
         <ion-input
         class="custom"
           [type]="showPassword ? 'text' : 'password'"
@@ -59,7 +67,7 @@
           autocomplete="password"
           formControlName="password"></ion-input>
         <ion-icon
-          [name]="showPassword ? 'eye-outline' : 'eye-off-outline'"
+          [name]="showPassword ? 'lock-open-outline' : 'lock-closed-outline'"
           slot="end"
           class="ion-align-self-center"
           (click)="toggleShowPassword()"></ion-icon>
@@ -82,7 +90,7 @@
           autocomplete="password"
           formControlName="confirmPassword"></ion-input>
         <ion-icon
-          [name]="showPassword ? 'eye-outline' : 'eye-off-outline'"
+          [name]="showPassword ? 'lock-open-outline' : 'lock-closed-outline'"
           slot="end"
           class="ion-align-self-center"
           (click)="toggleShowPassword()"></ion-icon>
@@ -111,20 +119,11 @@
       </ion-row>
       <ion-row class="ion-padding-top">
         <ion-col class="ion-text-center">
-          <p>  have an account? </p>
           <ion-nav-link routerLink="/login">
-            <ion-text color="primary">Login</ion-text>
+            <p>have an account?<ion-text color="medium" > Login</ion-text></p> 
           </ion-nav-link>
         </ion-col>
       </ion-row>
-      <!-- <ion-row>
-        <ion-col class="ion-text-center">
-          Having trouble?
-          <ion-nav-link routerLink="/forgot">
-            <ion-text color="primary">Forgot Password</ion-text>
-          </ion-nav-link>
-        </ion-col>
-      </ion-row> -->
     </ion-grid>
   </form>
 </ion-content>
