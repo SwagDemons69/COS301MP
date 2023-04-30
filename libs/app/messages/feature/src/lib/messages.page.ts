@@ -26,8 +26,8 @@ export class MessagesPage {
   @Select(MessagesState.headers) headers$! : Observable<ChatHeader[] | [] > 
   @Select(ProfileState.profile) profile$!: Observable<user_profile | null>;
   headers : ChatHeader[]
+  chats : ChatHeader[]
   user : user_profile | undefined
-  searchTerm = '';
 
   items: any[] = [
     { avatar: "https://shorturl.at/qtGLZ", name: 'Will Turner', time: 'Mon', snippet: "The problem is not the problem. The problem is your attitude about the problem." },
@@ -35,12 +35,10 @@ export class MessagesPage {
     { avatar: "https://shorturl.at/yHJMR", name: 'Jack Sparrow', time: 'Wed', snippet: "I'm Captain Jack Sparrow, savvy?"},
     { avatar: "https://shorturl.at/osyUY", name: 'Amber Head', time: 'Sat', snippet: "Why is the rum always gone? I need a huge pint of it, or I'll stab you." }
   ];
-  filteredItems: any[] = [];
 
   constructor(private navCtrl: NavController,
               private modalController: ModalController,
               private readonly store: Store) {
-    this.initializeItems();
     this.headers = [];
     this.headers$.forEach((headers)=>{
       if(headers){
@@ -51,6 +49,7 @@ export class MessagesPage {
     this.profile$.forEach((user) => {
       if(user){ this.user = user; }
     });
+    this.chats = this.headers;
   }
 
   async openSearchModal(){
@@ -58,22 +57,6 @@ export class MessagesPage {
       component: SearchModalPage,
     });
     return await modal.present();
-  }
-
-  initializeItems() {
-    this.filteredItems = this.headers;
-  }
-
-  getItems() {
-    // Reset items back to all of the items
-    this.filteredItems = this.items;
-
-    // if the search term is not empty, filter the items
-    if (this.searchTerm.trim() !== '') {
-      this.filteredItems = this.filteredItems.filter((item) => {
-        return (item.name.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1);
-      })
-    }
   }
 
   goToDetails(item: ChatHeader) {
@@ -88,6 +71,18 @@ export class MessagesPage {
     }
       // Navigate to details page with item as a parameter
     this.navCtrl.navigateForward('/home/chat');
+  }
+
+  async search(event: any){
+    this.chats = this.headers;
+
+    const query = event.detail.value.trim().toLowerCase();
+    if (query !== '') {
+      this.chats = this.chats.filter((chat) => {
+        return  chat.username.toLowerCase().indexOf(query) > -1 ||
+                chat.lastMessage.toLowerCase().indexOf(query) > -1;
+      })
+    }
   }
 
 }
