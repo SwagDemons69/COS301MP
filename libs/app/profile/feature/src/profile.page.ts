@@ -164,7 +164,7 @@ export class ProfilePage {
   }
 
   async updateProfile() {
-    alert(JSON.stringify(this.userForm.value, null, 2));
+    // alert(JSON.stringify(this.userForm.value, null, 2));
     this.isEditingProfile = false;
     // const postsTemp = await this.api.getPosts({ user: this.user.user_id});
     // const posts = postsTemp.data.posts;
