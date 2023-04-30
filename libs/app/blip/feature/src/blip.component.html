@@ -48,7 +48,7 @@
                 <div [class.liked]="hasLikedPost">{{KronosTimer.formatActionNumber(data.likes)}} <ion-icon (click)="likePost()" name="thumbs-up-outline"></ion-icon></div>
               </ion-col>
               <ion-col size="1.5">
-                <div>{{KronosTimer.formatActionNumber(dislikes)}}<ion-icon (click)="dislikePost()" name="thumbs-down-outline"></ion-icon></div>
+                <div>{{KronosTimer.formatActionNumber(dislikes)}} <ion-icon (click)="dislikePost()" name="thumbs-down-outline"></ion-icon></div>
               </ion-col>
               <ion-col size="1.5">
                 <div>{{KronosTimer.formatActionNumber(metadata.comments?.length)}} <ion-icon name="chatbubble-outline"></ion-icon></div>

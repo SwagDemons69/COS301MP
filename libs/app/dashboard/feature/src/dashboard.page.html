@@ -70,7 +70,14 @@
           <div class="overlay">
             <ion-label>{{item.post.title}}</ion-label>
             <div class="reactions">
-              likes | comments
+              <ion-row class="actions">
+                <ion-col size="6">
+                  {{(item.post.likes)}} <ion-icon name="thumbs-up-outline"></ion-icon>
+                </ion-col>
+                <ion-col size="6">
+                  {{(item.post.comments)}} <ion-icon name="chatbubble-outline"></ion-icon>
+                </ion-col>
+              </ion-row>
             </div>
           </div>
         </ion-col>
