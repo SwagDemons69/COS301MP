@@ -20,8 +20,8 @@ export class NotificationsApi {
         return await httpsCallable<DeleteNotificationRequest, DeleteNotificationResponse>(this.functions, 'DeleteNotification')(request);
     }
 
-    async handleFollowRequest(flag: boolean, requester: string, requestee: string){
-        const request: HandleFollowRequest = { flag: flag, requester: requester, requestee: requestee};
+    async handleFollowRequest(flag: boolean, requester: string, requestee: string, id: string){
+        const request: HandleFollowRequest = { flag: flag, requester: requester, requestee: requestee, noti_id: id};
         return await httpsCallable<HandleFollowRequest, HandlerFollowResponse>(this.functions, 'HandleFollow')(request);
     }
 }
