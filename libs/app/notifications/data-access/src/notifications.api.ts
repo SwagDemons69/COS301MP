@@ -11,7 +11,6 @@ export class NotificationsApi {
 
 
     notifications$(userId: string): Observable<notification[]>{ 
-        console.log(userId)
         const notificationsRef = collection(this.firestore, `profiles/${userId}/notifications`);
         return collectionData(notificationsRef).pipe(map((data) => data as notification[]));
     }

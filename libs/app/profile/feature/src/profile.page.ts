@@ -81,7 +81,6 @@ export class ProfilePage {
         //Default Profile Image
         this.profileImage = (user.profilePicturePath == "") ? "https://ionicframework.com/docs/img/demos/avatar.svg" : user.profilePicturePath;
         this.user = user;
-        console.log(this.user.user_id)
       }
     })
     this.blob = new Blob();
@@ -122,16 +121,14 @@ export class ProfilePage {
     });
 
     modal.onDidDismiss().then((data) => {
-      console.log(data);
+      //console.log(data);
     });
 
     return await modal.present();
   }
 
   async setPosts() {
-    console.log(this.user.user_id);
     const posts = await this.api.getPosts({ user: this.user.user_id });
-    console.log("POSTS SET")
     return posts.data.posts;
   }
 

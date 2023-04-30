@@ -64,9 +64,7 @@ export class MessagesState {
 
   @Action(SetHeaders)
   async SetHeaders(ctx: StateContext<MessagesStateModel>, { user }: SetHeaders) {
-    //console.log("PROFILE CHANGED");
     const headers = await this.messagesApi.headers(user);
-    //console.log(headers[0].lastMessage);
     return ctx.setState(
         produce((draft) =>{
             draft.headers = headers;

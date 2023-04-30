@@ -68,15 +68,12 @@ export interface Ordered{
         }
     
         goToChats(Selecteduser: string) {
-          console.log(Selecteduser);
           const profile = this.users[parseInt(Selecteduser)];
-          console.log(profile.profile.user_id);
           //Basic checking for now
           if(typeof this.user == "undefined"){
             alert("Search-modal.page.ts - user is undefined")
           }
           else {
-              console.log("DISPATCH SETTING ACTION")
               //this.store.dispatch(new SetUsername(profile.profile.username));
               this.store.dispatch(new SetRecipient({user_id: profile.profile.user_id, username: profile.profile.username, pictureUrl: profile.profile.pictureUrl}));
               this.store.dispatch(new SetChatMessages(this.user?.user_id, profile.profile.user_id));

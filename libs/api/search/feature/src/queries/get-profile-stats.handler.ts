@@ -18,7 +18,6 @@ export class GetProfileStatsQueryHandler
  
     const request = query.request;
     const response  = await this.repository.getProfileStats(request.user);
-    console.log(response)
     return response;
   }
 }

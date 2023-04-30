@@ -90,12 +90,9 @@ export class ChatState {
 
   @Action(SetChatMessages)
   async SetChatMessages(ctx: StateContext<ChatStateModel>, { sender, receiver }: SetChatMessages){
-     console.log("IT SHOULD BE CHANGING WTF")
      //const headers = await this.messagesApi.headers(user);
-     console.log(sender + " " + receiver);
      //"k1BcHMYPHPBOa3Kokj7KYwke9VBF"
      const chats = await this.chatApi.getChatMessages({ sender: sender, reciever: receiver });
-     console.log(chats.data.messages);
      return ctx.setState(
          produce((draft) =>{
              draft.chats = chats.data.messages;

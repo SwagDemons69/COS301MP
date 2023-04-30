@@ -36,9 +36,7 @@ export class NotificationsPage {
 
       this.profile$.forEach((profile) => {
         if (profile) {
-          //Default Profile Image
           this.profile = profile;
-          //console.log(this.profile.user_id)
         }
       })
       
@@ -47,10 +45,8 @@ export class NotificationsPage {
 
   setNotifications(){
       const copy  = [...this.notifications];
-      console.log(copy)
       copy.sort((a, b) => Math.sign(parseInt(a.timeStampOrder) - parseInt(b.timeStampOrder)));
       this.notifications = copy;
-      console.log(copy)
       
       for(let i = 0; i < this.notifications.length; i++){
         let type = "";
@@ -105,7 +101,6 @@ export class NotificationsPage {
           username: this.notifications[i].username,
           message: this.notifications[i].payload
         }
-        console.log(noti)
         this.displayNotifications.push(noti)
         //console.log(this.notifications[i].timestamp.toDate())
       }
@@ -126,16 +121,13 @@ export class NotificationsPage {
     const notfiToDel  = notif
     this.displayNotifications = this.displayNotifications.filter(n => n !== notif);
     if(this.profile){
-        console.log(notfiToDel)
         const response = await this.api.deleteNotification(this.profile?.user_id, notfiToDel.id);
-        console.log(response.data.msg)
     }
   }
 
   async handleFriendRequest(accepted: boolean, notif: any) {
     if(this.profile){
       const response = await this.api.handleFollowRequest(accepted, notif.created_by, this.profile?.user_id)
-      console.log(response)
     }
   }
 }

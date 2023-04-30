@@ -191,7 +191,6 @@ export class PostPage {
       prevTag = tag;
     }
 
-    console.log(this.tags);
   }
 
 }

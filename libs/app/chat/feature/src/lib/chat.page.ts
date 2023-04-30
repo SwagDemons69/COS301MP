@@ -44,7 +44,6 @@ export class ChatPage {
     this.chatsCopy = [];
     this.chats$.forEach((chats2)=>{
       this.chats = chats2;
-      console.log(chats2);
       this.messages = this.loadMessages();
     })
     

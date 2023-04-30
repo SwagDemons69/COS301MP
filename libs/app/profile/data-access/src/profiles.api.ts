@@ -35,7 +35,6 @@ export class ProfilesApi {
 
 
   posts$(id: string) {
-    console.log("FIRESTORE POST")
     const docRef = doc(this.firestore,`posts/${pId}`).withConverter<post>({
       fromFirestore: (snapshot) => { return snapshot.data() as post; },
       toFirestore: (it: post) => it,});
@@ -43,7 +42,6 @@ export class ProfilesApi {
   }
 
   async getPosts(request: GetPostsRequest){
-    console.log(request)
    return await httpsCallable<GetPostsRequest, GetPostsResponse>(this.functions, 'GetPosts')(request);
   }
 

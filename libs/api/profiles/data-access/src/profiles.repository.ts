@@ -11,7 +11,6 @@ export class ProfilesRepository {
   notification_id = ""
 
   async findOne(profile: user_profile) {
-    console.log(profile.user_id)
     return await admin
       .firestore()
       .collection('profiles')
@@ -26,7 +25,6 @@ export class ProfilesRepository {
   }
 
   async findUser(user_id : string) {
-    console.log("USER ID: " + user_id)
     return await admin
     .firestore()
     .collection('profiles')

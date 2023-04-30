@@ -13,7 +13,6 @@ export class CreateProfileHandler
 
   async execute(command: CreateProfileCommand) {
     console.log(`${CreateProfileHandler.name}`);
-    //console.log("@@@@@@@@@@@@@@@@@@@@@@@@")
 
 
     const request = command.request;

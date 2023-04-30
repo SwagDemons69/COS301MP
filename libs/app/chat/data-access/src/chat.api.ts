@@ -27,20 +27,6 @@ export class ChatApi {
     return docData(docRef, { idField: 'id' });
 }
 
-
-
-//   posts$(id: string) {
-//     console.log("FIRESTORE POST")
-//     const docRef = doc(this.firestore,`posts/${pId}`).withConverter<post>({
-//       fromFirestore: (snapshot) => { return snapshot.data() as post; },
-//       toFirestore: (it: post) => it,});
-//     return docData(docRef, { idField: 'id' });
-//   }
-
-
-
-  
-
 //==========================================================================
 // CLOUD FUNCTIONS
 //==========================================================================

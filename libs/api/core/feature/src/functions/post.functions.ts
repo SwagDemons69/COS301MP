@@ -31,7 +31,6 @@ export const CreatePostLike = functions.https.onCall(
 
 export const CreatePostDislike = functions.https.onCall(
   async (request: CreatePostLikeRequest): Promise<CreatePostLikeResponse> => {
-    console.log("FUNCTIONS")
     const app = await NestFactory.createApplicationContext(CoreModule);
     const service = app.get(PostService);
     return service.CreatePostDislike(request);
@@ -56,8 +55,6 @@ export const CreateChildComment = functions.https.onCall(
 
 export const GetPosts = functions.https.onCall(
   async (request: GetPostsRequest): Promise<GetPostsResponse> => {
-    console.log("Soooo posts does worksss");
-
     const app = await NestFactory.createApplicationContext(CoreModule);
     const service = app.get(PostService);
     return await service.GetPosts(request);
