@@ -36,7 +36,7 @@ export class DashboardPage {
   trending: PostHeader[] | []
   //let called = false;
   deathTime: number
-  graveYard: user_profile[]
+  graveyard: user_profile[]
   constructor (
     private renderer: Renderer2,
     private modalController: ModalController,
@@ -47,7 +47,7 @@ export class DashboardPage {
   ) 
   {
     this.deathTime = 0;
-    this.graveYard = []
+    this.graveyard = []
     this.profile = null;
     this.profile$.forEach((profile)=> {
       this.profile = profile;
@@ -81,7 +81,7 @@ export class DashboardPage {
 
   async ionViewDidEnter(){
     this.store.dispatch(new SetDashboardPosts(this.profile));
-    this.graveYard = await this.api.GetGraveyard();
+    this.graveyard = await this.api.GetGraveyard();
   }
 
 // async dispatchProfile() {

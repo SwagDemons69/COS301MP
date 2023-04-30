@@ -194,12 +194,12 @@ ion-img {
 }
 
 $stone-positions: (
-    1:  (0.0,   0.5,    0.25),
-    2:  (0.1,   0.7,    0.2),
-    3:  (0.25,  0.4,    0.4),
-    4:  (0.4,   0.8,    0.6),
-    5:  (0.45,  0.0,    0.9),
-    6:  (0.65,  0.8,    0.4),
+    1:  (0.4,   0.8,    0.6),
+    2:  (0.25,  0.4,    0.4),
+    3:  (0.45,  0.0,    0.9),
+    4:  (0.1,   0.7,    0.2),
+    5:  (0.65,  0.8,    0.4),
+    6:  (0.0,   0.5,    0.25),
     7:  (0.75,  0.2,    0.75),
     8:  (1.0,   0.7,    0.3),
 );
@@ -208,6 +208,23 @@ $stone-positions: (
     --border-radius: 50% 50% 10% 10%;
     position: absolute;
     box-shadow: 0px 3px 5px 0px #00000080;
+    filter: grayscale(40%);
+
+    cursor: pointer;
+
+    transition: 0.1s all ease-in;
+}
+
+.gravestones .gravestone:hover {
+    transform: scale(1.1);
+}
+
+.gradientOverlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #00000000 0%, #00000080 60%, #000000C0 100%);
+    border-radius: 50% 50% 10% 10%;
 }
 
 @each $i, $pos in $stone-positions {
