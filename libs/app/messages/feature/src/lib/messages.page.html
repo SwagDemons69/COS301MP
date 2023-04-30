@@ -1,7 +1,12 @@
 <ion-header [translucent]="true">
 </ion-header>
 <ion-content [fullscreen]="true">
-  <ion-searchbar [(ngModel)]="searchTerm" (ionChange)="getItems()"></ion-searchbar>
+  <ion-searchbar
+      (ionChange)="search($event)"
+      show-clear-button="never"
+      search-icon="search"
+      placeholder="Search"
+    ></ion-searchbar>
 
   <br>
 
@@ -12,7 +17,7 @@
       Go make some friends and start a conversation!
     </div>
 
-    <div *ngFor="let item of headers" class="chatItem">
+    <div *ngFor="let item of chats" class="chatItem">
     <ion-item (click)="goToDetails(item)" lines="none">
       <ion-avatar>
         <img [src]="item.picture">
