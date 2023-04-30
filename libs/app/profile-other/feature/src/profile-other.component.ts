@@ -26,6 +26,7 @@ export class ProfileOtherComponent {
   followerCount: number
   postCount: number
   deathTime: number
+  currentNotifIf: string
 
   @Input() profile: any = {
     username: "Null username",
@@ -45,6 +46,7 @@ export class ProfileOtherComponent {
     this.followerCount = 0;
     this.postCount = 0;
     this.deathTime = 0;  
+    this. currentNotifIf = ""
 
     this.currentUser = null;
     this.currentUser$.forEach((user) => {
@@ -122,9 +124,18 @@ export class ProfileOtherComponent {
   }
 
   async followUser(){
+    let REP = null;
     if(this.currentUser !== null){
-      const response = await this.api.addFollower({requester : this.currentUser, requestee : this.profile.user});
-      console.log(response + " " + this.Status)
+      if(this.Status == 2){
+        const response = await this.api.addFollower({ notification_id: this.currentNotifIf, requester : this.currentUser, requestee : this.profile.user});
+        REP = response;
+      }
+      else{
+        const response = await this.api.addFollower({requester : this.currentUser, requestee : this.profile.user});
+        this.currentNotifIf = (response.data.notification_id) ? (response.data.notification_id) : "";
+        REP = response
+      }
+      //onsole.log(response + " " + this.Status)
       if(this.Status == 1){ //follow user
             
           if(this.profile.user.notPublic === false){
@@ -172,8 +183,8 @@ export class ProfileOtherComponent {
         }
 
         delay(500);
-        this.followerCount = response.data.followerCount;
-        this.followingCount = response.data.followingCount;
+        this.followerCount = REP.data.followerCount;
+        this.followingCount = REP.data.followingCount;
         this.postCount = this.profile.posts.length;
 
       }

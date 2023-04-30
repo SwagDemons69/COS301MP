@@ -8,6 +8,8 @@ import { Timestamp } from 'firebase-admin/firestore';
 @Injectable()
 export class ProfilesRepository {
 
+  notification_id = ""
+
   async findOne(profile: user_profile) {
     console.log(profile.user_id)
     return await admin
@@ -56,6 +58,7 @@ export class ProfilesRepository {
   }
 
   async addFollower(request : addFollowerRequest){
+    this.notification_id = ""
     const requesteeRef = admin.firestore().collection('profiles').doc(request.requestee.user_id);
     const requesterRef = admin.firestore().collection('profiles').doc(request.requester.user_id)
     const requesteeProfile = await requesteeRef.get();
@@ -86,6 +89,9 @@ export class ProfilesRepository {
     //Remove Follow Request
     else if(followRequestsRef.exists){
         await admin.firestore().collection(`profiles/${request.requestee.user_id}/follow-requests`).doc(request.requester.user_id).delete();
+        //console.log(this.notification_id + " @@@@")
+        if(request.notification_id)
+          await admin.firestore().collection(`profiles/${request.requestee.user_id}/notifications`).doc(request.notification_id).delete();
     }
     else{
       //Add follower
@@ -107,6 +113,7 @@ export class ProfilesRepository {
         }
 
         noti.notification_id = notifcationsRef.id;
+        this.notification_id = noti.notification_id
         notifcationsRef.set(noti);
       
       }
@@ -132,6 +139,7 @@ export class ProfilesRepository {
         }
 
         noti.notification_id = notifcationsRef.id;
+        this.notification_id = noti.notification_id
         notifcationsRef.set(noti);
 
         //Add requestee to following of requester
@@ -151,7 +159,7 @@ export class ProfilesRepository {
     const followerCount = (await followersRef2).docs.length;
 
     
-    return {followingCount : followingCount, followerCount : followerCount};
+    return {notification_id: this.notification_id, followingCount : followingCount, followerCount : followerCount};
   }
 
   // async checkForUser(profile_user_id : string){
