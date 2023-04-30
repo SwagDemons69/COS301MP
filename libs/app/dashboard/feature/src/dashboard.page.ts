@@ -16,6 +16,7 @@ import { SearchRequest, SearchResponse} from '@mp/api/search/util';
 import { SearchApi } from '@mp/app/dashboard/data-access';
 import { Post, User } from '@mp/api/search/util';
 import { PostHeader } from '@mp/api/dashboard/util';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'ms-dashboard-page',
@@ -40,7 +41,8 @@ export class DashboardPage {
     private modalController: ModalController,
     private store : Store,
     private readonly searchApi : SearchApi,
-    private readonly api: DashboardApi
+    private readonly api: DashboardApi,
+    private readonly nav: NavController
   ) 
   {
     this.profile = null;
@@ -224,5 +226,9 @@ async getTrending() {
     });
 
     return await modal.present();
+  }
+
+  viewNotifications(){
+    this.nav.navigateForward('/home/notification');
   }
 }
