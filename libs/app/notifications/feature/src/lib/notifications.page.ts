@@ -96,6 +96,7 @@ export class NotificationsPage {
           created_by: this.notifications[i].create_by_id,
           id: this.notifications[i].notification_id,
           icon: type,
+          type: this.notifications[i].type,
           time: timeString,
           image: this.notifications[i].image,
           username: this.notifications[i].username,
