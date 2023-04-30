@@ -124,7 +124,7 @@ export class ProfileOtherComponent {
   async followUser(){
     if(this.currentUser !== null){
       const response = await this.api.addFollower({requester : this.currentUser, requestee : this.profile.user});
-
+      console.log(response + " " + this.Status)
       if(this.Status == 1){ //follow user
             
           if(this.profile.user.notPublic === false){
@@ -158,7 +158,7 @@ export class ProfileOtherComponent {
         }
       else if(this.Status == 2){ //cancel follow request
     
-          this.Status = 1;
+          
           
           const toast = await this.toastCtrlr.create({
             message: (this.Status == 2) ? `Cancelled follow request` : "Removed Follow Request",
@@ -168,6 +168,7 @@ export class ProfileOtherComponent {
           });
       
           await toast.present();
+          this.Status = 1;
         }
 
         delay(500);
