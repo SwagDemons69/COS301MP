@@ -45,7 +45,6 @@ export class MessagesPage {
     this.headers$.forEach((headers)=>{
       if(headers){
         this.headers = headers;
-        console.log(headers)
       }
     })
     //this.user = undefined;

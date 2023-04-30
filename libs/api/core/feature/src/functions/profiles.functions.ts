@@ -67,7 +67,6 @@ export const EditProfile = functions.https.onCall(
   async (request : EditProfileRequest): Promise<EditProfileResponse> => {
     const app = await NestFactory.createApplicationContext(CoreModule);
     const service = app.get(ProfilesService);
-    console.log(request)
     return service.EditProfile(request);
   },
 );

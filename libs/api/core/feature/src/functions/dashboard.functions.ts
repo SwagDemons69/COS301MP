@@ -38,7 +38,6 @@ export const GetGraveyard = functions.https.onCall(
 
         const deadProfiles = [];
         for(let i = 0;i < profiles.length; i++){
-            console.log(profiles[i].timeOfExpiry + " " + Timestamp.now().seconds );
             if(profiles[i].timeOfExpiry < Timestamp.now().seconds ){
                 deadProfiles.push(profiles[i]);
             }

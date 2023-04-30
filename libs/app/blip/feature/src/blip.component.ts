@@ -34,10 +34,6 @@ export class BlipComponent {
     private api: blipAPI
   ) {
     this.deathTime = 0;
-    setTimeout(() => {
-      console.log(this.data);
-      console.log(this.metadata);
-    }, 500);
 
     this.profile = null;
     this.profile$.forEach((profile) => {
@@ -134,24 +130,20 @@ export class BlipComponent {
 
   //likeStatus = false;
   async likePost() {
-    console.log("In")
     if (this.profile) {
-      console.log("JI")
       const request: CreatePostLikeRequest = {
         liker_id: this.profile.user_id,
         post: this.data.post_id,
         poster_id: this.data.user_id
       }
-      console.log(request)
       const resp = await this.api.likePost(request);
       this.data.likes = resp.data.likes;
       this.hasLikedPost = true;
-      //console.log(resp)
 
     }
   }
 
-  dislikes: number = 0;
+  dislikes = 0;
   async dislikePost() {
     if (this.profile) {
       const request: CreatePostLikeRequest = {
@@ -159,7 +151,6 @@ export class BlipComponent {
         post: this.data.post_id,
         poster_id: this.data.user_id
       }
-      console.log(request)
       const resp = await this.api.dislikePost(request);
       this.dislikes = resp.data.likes;
     }

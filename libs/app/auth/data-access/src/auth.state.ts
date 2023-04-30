@@ -45,7 +45,6 @@ export class AuthState {
 
   @Action(SetUser)
   async setUser(ctx: StateContext<AuthStateModel>, { user }: SetUser) {
-    console.log("SETTTING USER")
     ctx.setState(
       produce((draft) => {
         draft.user = user;
@@ -68,7 +67,6 @@ export class AuthState {
     { email, password}: Register
   ) {
     try {
-      console.log("AUTH STATE")
       await this.authApi.register(email, password);
       
       return ctx.dispatch(new Navigate(['home']));

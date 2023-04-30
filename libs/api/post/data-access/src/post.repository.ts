@@ -33,7 +33,6 @@ export class PostRepository {
     }
 
     async createPostLike(liker_id: string, post_id: string, poster_id: string): Promise<CreatePostLikeResponse> {
-        console.log("Liking post");
         const handle = await admin.firestore().collection(`profiles/${poster_id}/posts/${post_id}/likes`).get();
         const likes = handle.docs.map((doc) => { return doc.data() as {user: string}; });
 
@@ -42,7 +41,6 @@ export class PostRepository {
             if (likes[i].user == liker_id)
                 flag = true;
         }
-        //console.log(flag)
         if (!flag) {
             const newLike = admin.firestore().collection(`profiles/${poster_id}/posts/${post_id}/likes`).doc();
             await newLike.set({ user: liker_id });
@@ -83,7 +81,6 @@ export class PostRepository {
     }
 
     async createPostDislike(disliker_id: string, post_id: string, poster_id: string): Promise<CreatePostLikeResponse>{
-        console.log("Disliking post");
         const handle = await admin.firestore().collection(`profiles/${poster_id}/posts/${post_id}/dislikes`).get();
         const dislikes = handle.docs.map((doc) => { return doc.data() as {user: string}; });
 
@@ -92,7 +89,6 @@ export class PostRepository {
             if (dislikes[i].user == disliker_id)
                 flag = true;
         }
-        //console.log(flag)
         if (!flag) {
             const newLike = admin.firestore().collection(`profiles/${poster_id}/posts/${post_id}/dislikes`).doc();
             await newLike.set({ user: disliker_id });
@@ -238,7 +234,6 @@ export class PostRepository {
     async getPosts(user: string): Promise<GetPostsResponse> {
         const handle = await admin.firestore().collection(`profiles/${user}/posts`).get();
         const posts = handle.docs.map((doc) => { return doc.data() as post; });
-        console.log(posts)
         return { posts: posts };
     }
 }

@@ -16,7 +16,6 @@ export class CreatePostRootCommentCommandHandler
   async execute(command: CreatePostRootCommentCommand) {
     console.log(`${CreatePostRootCommentCommandHandler.name}`);
     const request = command.request;
-    console.log("Handler")
     return  await this.repository.createPostRootComment(
         request.user_id, 
         request.post_id, 

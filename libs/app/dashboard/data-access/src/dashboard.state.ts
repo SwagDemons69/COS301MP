@@ -36,7 +36,6 @@ export class DashboardState {
 
   @Action(SetDashboardPosts)
   async setDashboardPosts(ctx: StateContext<DashboardStateModel>, { profile }: SetDashboardPosts) {
-    console.log("Inside SetPosts");
     const trendingRequest: GetTrendingPostsRequest = {
       cutOffTime: 10,
     }

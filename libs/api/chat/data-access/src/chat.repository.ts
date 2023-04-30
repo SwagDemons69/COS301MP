@@ -30,7 +30,6 @@ export class ChatRepository {
             const profileData = profile.data() as user_profile;
             
             //If username not set then get email
-            // console.log(profileData)
             let username = profileData.username;
             if(typeof username != "string" || ( (typeof username == "string") && (username == "") )){
                 username = profileData.email

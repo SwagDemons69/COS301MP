@@ -9,11 +9,8 @@ export class CreateAuthHandler implements ICommandHandler<CreateAuthCommand> {
 
   async execute(command: CreateAuthCommand) {
     console.log(`${CreateAuthHandler.name}`);
-    console.log("INSIDE CREATE AUTH HANDLER")
 
     const request = command.request;
-    console.log("#############################")
-    console.log(request.userRecord.displayName);
     const data: IAuth = {
       id: request.userRecord.uid,
       email: request.userRecord.email,

@@ -161,8 +161,6 @@ export class ProfileState {
 
   @Action(InitForm)
   InitForm(ctx: StateContext<ProfileStateModel>, { form }: InitForm){
-  console.log("INIT FORM")
-  console.log(ctx.getState().form)
   return ctx.setState(
     produce((draft) => {
       draft.form=form;
@@ -185,7 +183,6 @@ export class ProfileState {
 
   @Action(SetPosts)
   setPosts(ctx: StateContext<PostStateModel>, { posts }: SetPosts) {
-    console.log("SET POST")
     return ctx.setState(
       produce((draft) => {
         draft.posts = posts;

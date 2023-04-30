@@ -28,7 +28,6 @@ export class CoreShell implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    console.log("@@@@@@#########")
     this.store.dispatch(new SubscribeToAuthState());
     this.updateAvailable$.subscribe();
   }

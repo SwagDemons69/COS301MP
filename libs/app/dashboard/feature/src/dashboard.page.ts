@@ -200,9 +200,7 @@ async getTrending() {
     }
   }
 
-  toPost(username : any, postId : any){
-    console.log(postId + " postsed by " + username);
-  }
+ 
 
   toUser(user : any){
     this.openProfile(user);

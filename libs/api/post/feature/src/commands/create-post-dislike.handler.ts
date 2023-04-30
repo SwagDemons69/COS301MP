@@ -14,14 +14,8 @@ export class CreatePostDislikeCommandHandler
   ) {}
 
   async execute(command: CreatePostDislikeCommand) {
-    console.log("HANDLER");
     console.log(`${CreatePostDislikeCommandHandler.name}`);
     const request = command.request;
-    console.log(request)
-    // request.commit();
-
-    // const response: CreatePostLikeResponse = { status : "200 OK" };
-    // return response;
     return  await this.repository.createPostDislike(request.liker_id, request.post, request.poster_id);
   }
 }

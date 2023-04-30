@@ -12,8 +12,7 @@ export class SearchApi {
     });
 
     if(ret && typeof ret.data !== 'undefined'){
-      var test = ret.data as SearchResponse
-      console.log(test);
+      const test = ret.data as SearchResponse
       return ret.data as SearchResponse
     }
     else{
