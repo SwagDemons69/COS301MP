@@ -81,7 +81,7 @@
     </ion-row>
     <br /><br /><br /><br />
     <ng-container *ngIf="(profile$ | async) as profile; else noProfile">
-      <h3 class="sectionTitle">{{profile.username==""?"YOUR":profile.username+"'S"}} POSTS</h3>
+      <h3 class="sectionTitle">{{profile.username==""?"YOUR":profile.username.toUpperCase()+"'S"}} POSTS</h3>
       <ion-row>
 
         <ion-grid [fixed]="true" class="posts">

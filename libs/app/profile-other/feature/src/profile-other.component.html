@@ -20,16 +20,16 @@
             </ion-card-subtitle>
 
           </ion-card-header>
+
           <!-- <ng-container *ngIf="(profile$ | async) as profile; else noProfile"> -->
           <ion-card-content>
             <ion-grid class="stats">
 
               <ion-row class="statsNumber">
                 <ion-col id="followingCount">{{followingCount}}</ion-col>
-                <ion-col>{{postCount}}</ion-col>
+                <ion-col>{{profile.posts.length}}</ion-col>
                 <ion-col>{{followerCount}}</ion-col>
               </ion-row>
-            
 
               <ion-row class="statsLabel">
                 <ion-col>Following</ion-col>
@@ -39,7 +39,6 @@
             </ion-grid>
 
             <ion-row class="ion-justify-content-center">
-      
               <ng-template [ngIf]="profile.user.user_id !== currentUser?.user_id">
                 <ng-template  [ngIf]="Status === 0">
                   <ion-button class="connectButton" (click)="followUser()">
@@ -64,41 +63,37 @@
                 <ion-button (click)="goToMessages()" class="connectButton">
                   <ion-icon name="chatbox-ellipses-outline"></ion-icon></ion-button>
               </ng-template>
-
             </ion-row>
 
             <ion-card-subtitle class="bio">
               {{profile.user.bio}}
             </ion-card-subtitle>
-            <ng-container>
-              <ng-template [ngIf]=" profile.user.user_id == currentUser?.user_id || (!profile.user.notPublic && Status == 1 || !profile.user.notPublic && Status == 0)" [ngIfElse]="Private">
-                <ng-template  [ngIf]="postCount != 0" [ngIfElse]="noPosts">
-                  <ion-card class="photos">
-                    <ion-card-content class="ion-text-center">
-                      <!-- <ion-content [fullscreen]="true" [scrollEvents]="true"> -->
-                          <ion-grid [fixed]="true">
-                            <ion-row class="ion-justify-content-center" *ngFor="let i of profile.posts">
-                                <ion-col class="ion-col">
-                                  <ion-img src="{{ i.content }}" (click)="openBlip(i,profile.user.username)" alt=""></ion-img>
-                                </ion-col>
-                            </ion-row>
-                          </ion-grid>
-                      <!-- </ion-content> -->
-                    </ion-card-content>
-                  </ion-card>
-                </ng-template>
 
-                <ng-template #noPosts>
-                  <p>No posts found.</p>
-                </ng-template>
+              <ng-template  [ngIf]="profile.posts.length != 0">
+                <br /><br /><br /><br />
+                <h3 class="sectionTitle">{{profile.user.username==""?"YOUR":profile.user.username.toUpperCase()+"'S"}} POSTS</h3>
+                <ion-row>
+
+                  <ion-grid [fixed]="true" class="posts">
+
+                    <ion-row class="ion-justify-content-center" *ngFor="let post of profile.posts">
+                        <ion-col>
+                          <!-- <p style="color: red;">{{JSON.stringify(post)}}<p> -->
+                          <ion-img [src]="(post.content)" (click)="openBlip(post)" alt=""></ion-img>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row class="ion-justify-content-center noMoreContent">
+                      <ion-icon name="telescope-outline"></ion-icon>
+                      <br /><br /><br />
+                      <span>Nothing{{profile.posts.length==0?"":" more"}} to see here!</span>
+                    </ion-row>
+
+                  </ion-grid>
+                </ion-row>
               </ng-template>
-              <ng-template #Private>
-                <h2>Request to follow to see {{profile.user.username}}'s posts</h2>
-              </ng-template>
-            </ng-container>
         
           </ion-card-content>
-        <!-- </ng-container> -->
         </ion-card>
 
     </ion-row>
