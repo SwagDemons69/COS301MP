@@ -1,0 +1,84 @@
+ion-title{
+  max-width: 42;
+
+}
+ion-button{
+  --border-image-source: linear-gradient(191.6deg, rgba(255, 255, 255, 0.8) 4.34%, rgba(255, 255, 255, 0) 91.49%);
+  --background: linear-gradient(61.14deg, rgba(140, 138, 153, 0.1159) 22.61%, rgba(255, 255, 255, 0) 83.69%);
+  --filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  border-radius: 5px;
+  border: 1px solid rgba(55, 55, 55, 1);
+  margin-top: 1%;
+  margin-bottom: 1%;
+  // margin: auto;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+ion-img.logo {
+  max-width: 30vw;
+  margin: auto;
+  
+}
+ion-item{
+  border-radius: 7px;
+  margin-top: 2%;
+  margin-left: auto;
+  margin-right: auto;
+  color: #f8f8f8;
+  border: 1px solid rgb(61, 61, 61);
+  width: 83%;
+  //////////////////
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 200;
+  font-size: 18px;
+  line-height: 22px;
+  /* identical to box height */
+  color: #907d7d;
+
+  --color: #000000;
+  --placeholder-color: #f8f8f8;
+  --highlight-background: #ffffff;
+  --background: #202020;
+  --border: 1px solid #373737;
+
+
+  
+
+}
+
+ion-input.custom {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 200;
+  font-size: 18px;
+  line-height: 22px;
+  /* identical to box height */
+  color: #ffffff;
+}
+
+ion-input.custom .helper-text,
+ion-input.custom .counter {
+  color: var(--ion-color-step-700, #373737);
+}
+ion-content{
+  --background: linear-gradient(0deg, #0A0A0A 31.5%, rgba(4, 4, 4, 0.431579) 78.32%, rgba(0, 0, 0, 0) 87.1%);
+  --filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+
+  #header{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 45px;
+     
+  }
+
+  #form{
+     margin: 15px;
+     margin-left: 30px;
+     margin-right: 30px;
+
+  }
+}

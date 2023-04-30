@@ -1,3 +1,32 @@
+.spacer2 {
+  display:inline-block;
+  width: 3.1em;
+  height: 1em;
+}
+
+
+.center {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.glassyButton {
+  --background: linear-gradient(45deg, #8c8a9920 20%, #ffffff00 100%);
+  --color: #ffffff;
+  --shadow: none;
+  --box-shadow: none;
+  --border-radius: 6px 6px 6px 6px;
+  border-radius: 6px 6px 6px 6px;
+  border: 1px solid #ffffff20;
+}
+
+
+
+ion-toolbar {
+  --background: none;
+}
+
 ion-title {
   display: flex;
 }
@@ -12,4 +41,130 @@ ion-card-title > ion-icon {
 
 ion-icon {
   padding-left: 5px;
+}
+
+ion-card {
+  background-color: transparent;
+  width: 100%;
+  box-shadow: none;
+}
+
+ion-avatar {
+  margin: auto;
+}
+
+.kronos {
+  color: #606060;
+  margin-bottom: 0.8em;
+}
+
+.username {
+  color: white;
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-top: 0.6em;
+}
+
+.statsNumber {
+  font-size: 1.4em;
+  font-weight: bold;
+}
+
+.statsTitle {
+  font-size: 0.8em; 
+}
+
+.bio {
+  margin-top: 2em;
+  padding: 0px 5%;
+  color: #606060;
+  font-size: 0.8em;
+}
+
+.follow-btn {
+  background: linear-gradient(218.8deg, rgba(255, 255, 255, 0) -34.64%, rgba(255, 0, 204, 0.86) 22.91%, rgba(255, 0, 204, 0) 109.55%);
+  color: #b3a6a6;
+  // margin-right: 2%;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px 6px;
+
+}
+
+.message-btn {
+  background: linear-gradient(218.8deg, rgba(255, 255, 255, 0.86) -34.64%, rgba(255, 0, 204, 0.86) 22.91%, rgba(255, 0, 204, 0) 109.55%);
+  color: #bfbdbd;
+  padding: 4px 6px;
+  border-radius: 6px;
+  // margin-left: 2%;
+  font-size: 14px;
+  cursor: pointer;
+  size: 100%;
+  
+}
+
+.photos{
+  background-color: black  !important;
+  width: 100%;
+  box-shadow:inset !important;
+  height : 300px;
+}
+
+ion-grid.posts {
+  // border: 1px solid green;
+}
+
+.editProfileForm {
+  margin-top: 2em;
+  padding: 0px 5%;
+  color: #606060;
+  font-size: 0.8em;
+}
+
+.editProfileForm ion-button {
+  color: black;
+  margin: auto;
+  margin-top: 3em;
+  max-width: 200px;
+}
+
+.profilePic{
+  text-align: end;
+}
+
+input[type='file']{
+  color:rgba(0,0,0,0)
+}
+
+.sectionTitle {
+    font-family: 'Roboto';
+    color: #f0f0f0;
+    font-size: 1.2em;
+    margin: 0px 1em 0px 1em ;
+}
+
+h3 {
+    font-size: 1.5rem;
+    font-weight: bolder;
+    margin: 0;
+    margin-left: 1rem;
+}
+
+.noMoreContent {
+  display: block;
+  margin-top: 5vh;
+  padding-top: vhvh;
+  width: 100%;
+  text-align: center;
+
+  background: radial-gradient(ellipse, #1c293cc0 0%, #25364e40 40%, #17223100 60%);
+
+  color: #858585;
+}
+
+.noMoreContent ion-icon {
+  font-size: 6em;
+
+  color: #858585;
 }

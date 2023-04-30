@@ -18,6 +18,32 @@ const routes: Routes = [
           import('@mp/app/profile/feature').then((m) => m.ProfileModule),
       },
       {
+        path: 'messages',
+        loadChildren: () =>
+          import('@mp/app/messages/feature').then((m) => m.MessagesModule)
+      },
+      {
+        path: 'post',
+        loadChildren: () =>
+          import('@mp/app/post/feature').then((m) => m.PostModule)
+         
+      },
+      {
+        path: 'notification',
+        loadChildren: () =>
+          import('@mp/app/notifications/feature').then((m) => m.NotificationsModule)
+      },
+      {
+        path: 'chat',
+        loadChildren: () =>
+          import('@mp/app/chat/feature').then((m) => m.ChatModule)
+      },
+      {
+        path: 'search',
+        loadChildren: () =>
+          import('@mp/app/search-modal/feature').then((m) => m.SearchModalModule)
+      },
+      {
         path: '',
         pathMatch: 'full',
         redirectTo: '/home/dashboard',

@@ -1,0 +1,110 @@
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeModal()" class="closeButton">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+
+        <ion-card class="ion-text-center">
+          <ion-card-header>
+
+            <ion-card-subtitle class="kronos">
+                {{kronos}}
+            </ion-card-subtitle>
+
+            <ng-container>
+              <ion-avatar>
+                <img alt="Avatar" src="{{ profile.user.profilePicturePath }}" />
+              </ion-avatar>
+            </ng-container>
+
+            <ion-card-subtitle class="username">
+              {{ profile.user.username }}
+            </ion-card-subtitle>
+
+          </ion-card-header>
+
+          <!-- <ng-container *ngIf="(profile$ | async) as profile; else noProfile"> -->
+          <ion-card-content>
+            <ion-grid class="stats">
+
+              <ion-row class="statsNumber">
+                <ion-col id="followingCount">{{followingCount}}</ion-col>
+                <ion-col>{{profile.posts.length}}</ion-col>
+                <ion-col>{{followerCount}}</ion-col>
+              </ion-row>
+
+              <ion-row class="statsLabel">
+                <ion-col>Following</ion-col>
+                <ion-col>Posts</ion-col>
+                <ion-col>Followers</ion-col>
+              </ion-row>
+            </ion-grid>
+
+            <ion-row class="ion-justify-content-center">
+              <ng-template [ngIf]="profile.user.user_id !== currentUser?.user_id">
+                <ng-template  [ngIf]="Status === 0">
+                  <ion-button class="connectButton" (click)="followUser()">
+                    <ion-icon name="person-outline"></ion-icon>
+                  </ion-button>
+                </ng-template>
+
+                <ng-template #notFollowed [ngIf]="Status === 1">
+                  <ion-button (click)="followUser()" class="connectButton">
+                    <ion-icon name="person-add-outline"></ion-icon>
+                  </ion-button>
+                </ng-template>
+
+                <ng-template #Requested [ngIf]="Status === 2">
+                  <ion-button (click)="followUser()" class="connectButton">
+                    Requested
+                  </ion-button>
+                </ng-template>
+
+                <div class="rowSpacing"></div>
+
+                <ion-button (click)="goToMessages()" class="connectButton">
+                  <ion-icon name="chatbox-ellipses-outline"></ion-icon></ion-button>
+              </ng-template>
+            </ion-row>
+
+            <ion-card-subtitle class="bio">
+              {{profile.user.bio}}
+            </ion-card-subtitle>
+
+              <ng-template  [ngIf]="profile.posts.length != 0">
+                <br /><br /><br /><br />
+                <h3 class="sectionTitle">{{profile.user.username==""?"YOUR":profile.user.username.toUpperCase()+"'S"}} POSTS</h3>
+                <ion-row>
+
+                  <ion-grid [fixed]="true" class="posts">
+
+                    <ion-row class="ion-justify-content-center" *ngFor="let post of profile.posts">
+                        <ion-col>
+                          <!-- <p style="color: red;">{{JSON.stringify(post)}}<p> -->
+                          <ion-img [src]="(post.content)" (click)="openBlip(post)" alt=""></ion-img>
+                        </ion-col>
+                    </ion-row>
+
+                  </ion-grid>
+                </ion-row>
+              </ng-template>
+
+              <ion-row class="ion-justify-content-center noMoreContent">
+                <ion-icon name="telescope-outline"></ion-icon>
+                <br /><br /><br />
+                <span>Nothing{{profile.posts.length==0?"":" more"}} to see here!</span>
+              </ion-row>
+        
+          </ion-card-content>
+        </ion-card>
+
+    </ion-row>
+  </ion-grid>

@@ -1,0 +1,355 @@
+/* //=========== TOOLBAR ===========// */
+
+ion-toolbar {
+    --background: linear-gradient(180deg, #000000c0 0%, #00000080 40%, #00000000 100%);
+    --color: #ffffff;
+    --shadow: none;
+    --box-shadow: none;
+    filter: none;
+}
+
+ion-searchbar {
+    --ion-background-color: transparent;
+}
+
+.searchResult hr {
+    height: 1.2px;
+    background-image: linear-gradient(90deg, transparent 0%, #ffffff40 20%, transparent 100%);
+}
+
+.barKronos {
+    opacity: 0;
+    transition: all 0.1s ease-in;
+}
+
+ion-avatar.smallAvatar {
+    display: block;
+    opacity: 0;
+    width: 0em;
+    margin-right: 1.2em;
+    margin-left: 0.6em;
+    height: auto;
+    transition: all 0.1s ease-in;
+}
+
+/* //========== BANNER ==========// */
+
+.glassyBackground {
+    position: absolute;
+    top: 0px;
+}
+
+.glassyBackground img {
+    position: relative;
+    width: 100%;
+    height: auto;
+    z-index: -1000;
+}
+
+// Controls fade to black for background image
+.glassyBackgroundFade {
+    position: absolute;
+    bottom: 0px;
+    background-image: linear-gradient(180deg, transparent 0%, #000000c0 40%, black 100%);
+    // background-image: linear-gradient(180deg, #ff000088 0%, #ff000088 100%);
+    width: 100%;
+    height: 800px;
+    z-index: -999;
+}
+
+ion-img.logo {
+    max-width: 30vw;
+    margin: auto;
+}
+
+ion-card-subtitle.kronos {
+    margin: auto;
+    display: block;
+    text-align: center;
+    padding-top: 0.4em;
+    padding-bottom: 0.4em;
+
+    font-family: 'Inter';
+    font-size: 3em;
+    font-weight: bold;
+    color: white;
+}
+
+ion-avatar.avatar {
+    margin: auto;
+    display: block;
+    margin-top: 1em;
+    width: 10vw;
+    height: 10vw;
+    box-shadow: 0px 0px 4px 0px #00000040;
+}
+
+/* //========== SEARCH BAR ==========// */
+.searchResultsType {
+    cursor: pointer;
+}
+
+.searchResultsType ion-item:hover {
+    background-color: #262626;
+}
+
+.searchResults{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+.SearchTypeButton{
+    --background: clear;
+    --width: 100%;
+    --color: white;
+}
+
+.SearchTypeButton:hover{
+    background: grey;
+}
+
+ion-thumbnail{
+    --size: 50%;
+}
+
+#goToProfile{
+    --background: #FF00CC;
+    --color: white;
+}
+/* //========== SECTIONS ==========// */
+.sectionTitle {
+    font-family: 'Roboto';
+    color: #f0f0f0;
+    font-size: 1.2em;
+    margin: 0px 1em 0px 1em ;
+}
+
+.sectionTitle#graveyardTitle {
+    text-align: center;
+}
+
+.glassyButton {
+    --background: linear-gradient(45deg, #8c8a9920 20%, #ffffff00 100%);
+    --color: #ffffff;
+    --shadow: none;
+    --box-shadow: none;
+    --border-radius: 6px 6px 6px 6px;
+    border: 1px solid #ffffff20;
+}
+
+/* //========== RECOMMENDED ==========// */
+
+ion-slide ion-col {
+    // height: 61.8vw; // phi^-1
+    height: 41.2022vw; // (phi^-1) / 1.5
+}
+
+ion-slide {
+    cursor: pointer;
+}
+
+ion-img {
+    pointer-events: none; // prevent image being dragged
+}
+
+.overlay {
+    position: absolute;
+    z-index: 100;
+    width: 100%;
+    height: 40px;
+
+    bottom: 0px;
+    background: linear-gradient(180deg, #00000000 0%, #00000080 60%, #000000C0 100%);
+}
+
+.overlay ion-label {
+    color: white;
+    float: left;
+    text-align: left;
+    font-size: 0.7em;
+    padding-left: 1em;
+    max-width: 65%;
+}
+
+.overlay .reactions {
+    color: white;
+    float: right;
+    text-align: right;
+    font-size: 0.7em;
+    padding-right: 1.2em;
+    max-width: 30%;
+}
+
+/* //=========== GRAVEYARD ==========// */
+
+.gravestones {
+    position: relative;
+    height: 200px;
+    // background: radial-gradient(ellipse, #101823 0%, #101823 59%, #17223100 80%);
+    background: radial-gradient(ellipse, #101823c0 0%, #10182340 60%, #17223100 80%);
+    background-size: 100% 60%;
+    background-repeat: no-repeat;
+    background-position-y: 64%;
+}
+
+$stone-positions: (
+    1:  (0.45,  0.0,    0.9),
+    2:  (0.4,   0.8,    0.6),
+    3:  (0.25,  0.4,    0.4),
+    4:  (0.65,  0.8,    0.4),
+    5:  (0.75,  0.2,    0.75),
+    6:  (1.0,   0.7,    0.3),
+    7:  (0.0,   0.5,    0.25),
+    8:  (0.1,   0.7,    0.2),
+);
+
+.gravestones .gravestone {
+    --border-radius: 50% 50% 10% 10%;
+    position: absolute;
+    box-shadow: 0px 3px 5px 0px #00000080;
+    filter: grayscale(40%);
+
+    cursor: pointer;
+
+    transition: 0.1s all ease-in;
+}
+
+.gravestones .gravestone:hover {
+    transform: scale(1.1);
+}
+
+.gradientOverlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #00000000 0%, #00000080 60%, #000000C0 100%);
+    border-radius: 50% 50% 10% 10%;
+}
+
+@each $i, $pos in $stone-positions {
+    .gravestones .gravestone:nth-child(#{$i}) {
+        $x: nth($pos, 1);
+        $y: nth($pos, 2);
+        $size: nth($pos, 3);
+
+        left: #{10 + $x*70}vw; //10-80
+        top: #{20 + $y*130}px; //20-150
+        width: #{80*$size}px;
+        height: auto;
+    }
+}
+
+.noGravestones {
+    display: block;
+    position: absolute;
+    top: 2em;
+
+    width: 100%;
+    text-align: center;
+}
+
+.feelingBad {
+    padding: 1em;
+}
+.feelingBad ion-card-title {
+    font-weight: light;
+    color: #f0f0f0;
+    margin-bottom: 0.3em;
+}
+.feelingBad ion-card-subtitle {
+    font-size: 0.6em;
+    font-weight: lighter;
+    color: #f0f0f0;
+    display: inline-block;
+}
+
+.feelingBad ion-button {
+    --border-radius: 14px 14px 6px 6px;
+    border-radius: 14px 14px 6px 6px;
+}
+
+/* //========== TRENDING POSTS ==========// */
+
+.trendingPost hr {
+    background-image: linear-gradient(90deg, transparent 0%, #ffffff 20%, transparent 100%);
+    height: 1.2px; // The .2 helps prevent the line not being rendered at certain zoom levels
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.trendingItem {
+    padding: 0px;
+    margin: 0px;
+    width: 100vw;
+    height: 40%;
+
+    background-color: transparent;
+    box-shadow: none;
+
+    color: white;
+    border-radius: 0px;
+}
+
+.trendingItem .image {
+    // border: 1px solid red;
+    max-height: 100vw;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.trendingItem ion-img {
+    width: 100vw;
+    max-width: 100%;
+    max-height: 100%; 
+    margin: auto;
+}
+
+.trendingItem .subtext {
+    padding: 0px;
+    margin: 0px;
+    padding-left: 1em;
+    text-align: left;
+}
+
+// Post title
+.trendingItem h2 {
+    font-size: 1.2em;
+}
+
+// Post description
+.trendingItem h4 {
+    font-weight: 0;
+    font-size: 0.9em;
+}
+
+// Username + Profile
+.profile {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-items: center;
+}
+.profile span {
+    text-align: right;
+    padding-right: 0.4em;
+    font-size: smaller;
+    font-weight: lighter;
+}
+
+/* // Contains the poster profile, post date, and reactions */
+.trendingItem .action {
+    text-align: right;
+}
+
+.trendingItem ion-label {
+    padding: 10px;
+}
+
+h3 {
+    font-size: 1.5rem;
+    font-weight: bolder;
+    margin: 0;
+    margin-left: 1rem;
+}

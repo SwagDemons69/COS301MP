@@ -6,6 +6,9 @@
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
   },
+  "storage" : {
+    "rules" : "storage.rules"
+  },
   "functions": [
     {
       "source": "dist/apps/api",
@@ -24,21 +27,28 @@
     }
   ],
   "hosting": {
-    "public": "public",
+    "public": "/apps/app",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      },
+      {
+        "source": "/createLike           ---> THESE ARE JUST EXAMPLES",
+        "function": "createLike"
+      },
+      {
+        "source": "/createExample           ---> THESE ARE JUST EXAMPLES",
+        "function": "createExample"
+      }
     ]
   },
-  "storage": {
-    "rules": "storage.rules"
-  },
   "emulators": {
-    "ui": {
-      "port": 5001,
-      "enabled": true
-    },
     "auth": {
       "port": 5002
     },
@@ -52,18 +62,21 @@
       "port": 5005
     },
     "storage": {
-      "port": 5006
+      "port": 5006,
+      "host" : "0.0.0.0",
+      "rules" : "storage.rules"
     },
     "hosting": {
       "port": 5007
     },
-    "pubsub": {
-      "port": 5008
-    },
     "eventarc": {
       "port": 5009
     },
-    "singleProjectMode": true
+    "singleProjectMode": true,
+    "ui": {
+      "port" : 5001,
+      "enabled": true
+    }
   },
   "remoteconfig": {
     "template": "remoteconfig.template.json"

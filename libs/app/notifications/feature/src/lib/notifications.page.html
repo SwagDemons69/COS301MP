@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <div class="noNotifications" *ngIf="displayNotifications.length == 0">
+      <ion-icon name="glasses-outline"></ion-icon> <br /><br /><br />
+      All caught up!<br /><br />
+    </div>
+
+    <div *ngFor="let notif of displayNotifications" class="notif">
+    <ion-item lines="none">
+      <ion-icon name="{{ notif.icon }}" slot="start"></ion-icon>
+      <ion-label class="notifMessage">
+        <ion-avatar class="smallAvatar">
+          <img alt="" src="{{notif?.image == undefined || notif?.image == '' ? 'https://ionicframework.com/docs/img/demos/avatar.svg' : notif.image}}" />
+        </ion-avatar>
+        <b>{{ notif.username }}</b>
+        {{ notif.message }}
+      </ion-label>
+      <ion-badge slot="end">{{ notif.time }}</ion-badge>
+
+      <div *ngIf="notif.type !== 'New Follow Request'" slot="end">
+        <ion-icon (click)="dismissNotif(notif)" name="close" class="dismiss" slot="end"></ion-icon>
+      </div>
+
+      <div *ngIf="notif.type === 'New Follow Request'" slot="end">
+        <ion-icon (click)="handleFriendRequest(true, notif)" name="checkmark-outline" class="accept"></ion-icon>
+        <ion-icon (click)="handleFriendRequest(false, notif)" name="close" class="dismiss"></ion-icon>
+      </div>
+
+    </ion-item>
+    <hr />
+  </div>
+  </ion-list>
+</ion-content>

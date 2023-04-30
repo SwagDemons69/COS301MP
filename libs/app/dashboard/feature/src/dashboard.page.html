@@ -1,29 +1,247 @@
-<ion-header [translucent]="true">
+<ion-header [translucent]="true" class="ion-no-border">
   <ion-toolbar>
-    <ion-title>Dashboard</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-button (click)="viewNotifications()">
+        <ion-icon name="notifications-outline" ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <div *ngIf="!isSearchbarVisible" class="barKronos">
+        <ion-title class="ion-text-center">
+          <span>{{kronos}}</span>
+        </ion-title>
+    </div>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleSearchbar()">
+        <ion-icon [name]="isSearchbarVisible ? 'close' : 'search-outline'"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  <ion-searchbar (ionChange)="search($event)" show-clear-button="never" search-icon="search" placeholder="Search" *ngIf="isSearchbarVisible"></ion-searchbar>
+
+    <ng-container *ngIf="(profile$ | async) as profile;">
+      <ion-avatar class="smallAvatar" slot="end">
+        <img alt="Avatar" [src]="profile.profilePicturePath" />
+      </ion-avatar>
+    </ng-container>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Dashboard</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <ng-container *ngIf="(profile$ | async) as profile; else noProfile">
-    <ms-profile-status-component></ms-profile-status-component>
+<ion-content [fullscreen]="true" [scrollEvents]="true" (ionScroll)="onContentScroll($event)">
+<div *ngIf="!isSearchbarVisible" class="homePage">
+<!-- Background image overlay -->
+<div class="glassyBackground">
+  <img src="assets/images/glassy_lights.jpg" />
+  <div class="glassyBackgroundFade"></div>
+</div>
+
+  <br /><br />
+  <!-- HOME BANNER -->
+<div>
+  <!-- App logo -->
+  <ion-img class="logo" src="assets/logos/logo.svg"></ion-img>
+
+  <ion-card-subtitle class="kronos">
+    {{kronos}}
+  </ion-card-subtitle>
+
+  <ng-container *ngIf="(profile$ | async) as profile;">
+    <ion-avatar class="avatar">
+      <img alt="Avatar" [src]="profile.profilePicturePath" />
+    </ion-avatar>
   </ng-container>
-  <ng-template #noProfile>
-    <ion-grid>
-      <ion-row>
+
+</div>
+
+
+  <br /><br />
+  <!-- RECOMMENDED -->
+  <h3 class="sectionTitle">RECOMMENDED FOR YOU</h3>
+  <div>
+    <!-- <ion-slides [options]="{ slidesPerView: 'auto', zoom: true, grabCursor: true }"> -->
+    <ion-slides [options]="{ slidesPerView: 1.5, freeMode: true }">
+
+      <ion-slide *ngFor="let item of recommended" (click)="openBlip(item.postData)">
         <ion-col>
-          <ngx-skeleton-loader
-            count="1"
-            [theme]="{height: '150px'}"
-            appearance="line"></ngx-skeleton-loader>
+          <ion-img [src]="item.post.content"></ion-img>
+          <div class="overlay">
+            <ion-label>{{item.post.title}}</ion-label>
+            <div class="reactions">
+              <ion-row class="actions">
+                <ion-col size="6">
+                  {{(item.post.likes)}} <ion-icon name="thumbs-up-outline"></ion-icon>
+                </ion-col>
+                <ion-col size="6">
+                  {{(item.post.comments)}} <ion-icon name="chatbubble-outline"></ion-icon>
+                </ion-col>
+              </ion-row>
+            </div>
+          </div>
         </ion-col>
+      </ion-slide>
+
+    </ion-slides>
+  </div>
+
+  <br /><br />
+
+  <!-- GRAVEYARD -->
+  <h3 id="graveyardTitle" class="sectionTitle">TODAY'S GRAVEYARD</h3>
+  <div class="graveyard">
+
+    <div class="gravestones">
+        <ion-avatar class="gravestone" *ngFor="let gs of graveyard.slice(0, 8)" (click)="openProfile({posts:[], user: gs})">
+          <div class="gradientOverlay"></div>
+          <img
+            alt="Avatar"
+            [src]="gs?.profilePicturePath == undefined || gs?.profilePicturePath == '' ? 'https://ionicframework.com/docs/img/demos/avatar.svg' : gs.profilePicturePath"
+          />
+        </ion-avatar>
+
+        <div class="noGravestones" *ngIf="graveyard.length == 0">
+          <ion-icon name="happy-outline" style="font-size: 4em; padding-bottom: 0.1em">
+          </ion-icon><br />
+          <span>Looks like no one's died today!</span><br />
+          <span style="font-size: 0.6em; color: #cdcdcd;">(yet)</span>
+        </div>
+
+    </div>
+
+    <div class="feelingBad" *ngIf="graveyard.length != 0">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="8">
+            <ion-card-title>
+              Feeling bad?
+            </ion-card-title>
+            <ion-card-subtitle>
+              Look at all these plebs.<br />Someone ought to give them a second chance.
+            </ion-card-subtitle>
+          </ion-col>
+
+          <ion-col size="4">
+            <ion-button class="glassyButton">
+              RESURRECT
+            </ion-button>
+          </ion-col>
       </ion-row>
-    </ion-grid>
+      </ion-grid>
+    </div>
+  </div>
+
+  <br /><br />
+
+  <!-- TRENDING list -->
+  <h3 class="sectionTitle">TRENDING</h3>
+  <ion-list>
+
+  <!-- <ion-infinite-scroll (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="circular" loadingText="Foraging...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll> -->
+
+  <div class="trendingPost" *ngFor="let item of trending" (click)="openBlip(item.postData)">
+    <hr />
+    <ion-card class="trendingItem">
+
+      <div class="image">
+        <ion-img [src]="item.post.content"></ion-img>
+      </div>
+
+      <ion-label stacked>
+        <ion-grid>
+          <ion-row>
+            <!-- Title + Description -->
+            <ion-col class="subtext" size="9">
+              <h2>{{item.post.title}}</h2>
+              <br/>
+              <h4>{{item.post.desc}}</h4>
+            </ion-col>
+
+            <!-- Profile, Time posted, Reactions -->
+            <ion-col size="3">
+              <ion-list class="profile">
+                <!-- <span>{{item.username}}</span>  -->
+                <ion-avatar style="display: inline; width: 5vw; height: 5vw">
+                  <img
+                    alt="Avatar"
+                    [src]="item.user.image == '' ? 'https://ionicframework.com/docs/img/demos/avatar.svg' : item.user.image "
+                  />
+                </ion-avatar>
+                <span> {{item.user.username}}</span> 
+              </ion-list>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="actions">
+            <ion-col size="9"></ion-col>
+            <ion-col size="1">
+              <div>{{(item.post.shares)}} <ion-icon name="share-social-outline"></ion-icon></div>
+            </ion-col>
+            <ion-col size="1">
+              <div>{{(item.post.likes)}} <ion-icon name="thumbs-up-outline"></ion-icon></div>
+            </ion-col>
+            <ion-col size="1">
+              <div>{{(item.post.comments)}} <ion-icon name="chatbubble-outline"></ion-icon></div>
+            </ion-col>
+          </ion-row>
+
+        </ion-grid>
+      </ion-label>
+    </ion-card>
+  </div>
+
+  </ion-list>
+</div>
+
+<div *ngIf="isSearchbarVisible" class="searchResults">
+  <ion-row class="searchType">
+    <ion-col>
+      <ion-button expand="block" color="grey" class="SearchTypeButton" id="SearchUserButton" (click) = "toggleToUsers()">
+        Users
+      </ion-button>
+    </ion-col>
+    <ion-col>
+      <ion-button expand="block" class="SearchTypeButton" id="SearchPostButton" (click) = "toggleToPosts()">
+        Posts
+      </ion-button>
+    </ion-col>
+  </ion-row>
+  
+  <ng-template [ngIf]="userToggle" [ngIfElse]="posts">
+    <ion-list class="searchResultsType">
+      <ion-item (click)="toUser(user)" *ngFor="let user of searchResultsUsers">
+        <ion-avatar class="Profile-Pic">
+          <img src="{{ user.user.profilePicturePath }}" alt="Img">
+        </ion-avatar>
+        &nbsp;
+        &nbsp;
+        <ion-label>
+          <h2>{{ user.user.username }}</h2>
+          <p>{{ user.user.email }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
   </ng-template>
+  
+  <ng-template #posts>
+    <ion-list class="searchResultsType">
+      <ion-item *ngFor="let post of searchResultsPosts" (click)="openBlip(post.post)">
+        <ion-label>
+          <ion-thumbnail style="float: right" slot="start">
+            <img src="{{ post.post.content }}" alt="Img">
+          </ion-thumbnail>
+          <ion-label>
+            <h2>{{ post.post.desc }}</h2>
+            <p>{{ post.posted_by }}</p>
+          </ion-label>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ng-template>
+  
+</div>
 </ion-content>

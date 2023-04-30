@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar class="head">
+    <ion-buttons slot="start"> 
+        <ion-icon (click)="backToMessage()" id="back" name="arrow-back"></ion-icon>   
+    </ion-buttons>
+    <ng-container *ngIf="(recipient$ | async) as recipient;">
+        <ion-avatar slot="start">
+          <img [src]="(recipient.pictureUrl)" />
+        </ion-avatar>
+    </ng-container>
+    <ion-title >{{ displayReceiver() }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+  
+<ion-content [fullscreen]="true">
+  <ion-list #messageList>
+
+    <div class="noMessages" *ngIf="messages.length == 0">
+      <ion-icon name="ice-cream-outline"></ion-icon> <br /><br /><br />
+      Go on, pop them a message,<br />make their day!<br /><br />
+    </div>
+
+    <div class="message" *ngFor="let message of messages">
+    <ion-item [class.sent]="message.sent" [class.receiver]="!message.sent" style="margin-bottom: 10px;">
+      <ion-label [innerHTML]="message.text.replace('\n', '&lt;br /&gt;')" style="white-space: pre-wrap;"></ion-label>
+    </ion-item>
+    </div>
+    <div class="spacer"></div>
+  </ion-list>
+
+  <ion-footer>
+    <ion-row class="send">
+      <ion-textarea
+        placeholder="Type a message"
+        [(ngModel)]="newMessage"
+        maxlength="512"
+      ></ion-textarea>
+      <ion-button (click)="sendMessage()">Send</ion-button>
+    </ion-row>
+  </ion-footer>
+  
+</ion-content>

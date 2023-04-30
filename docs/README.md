@@ -10,13 +10,9 @@ by SwagDemons69 👿
 ```bash
 git clone https://github.com/SwagDemons69/COS301MP`
 ```
-2. Run the dev container in VSCode (`Ctrl+P > Start Dev Container`) or install the dependencies manually:
-- Node 16
-- Java
-- Firebase CLI
-
-2. Install dependencies
-```bash
+3. Install dependencies
+```sh
+cd path/to/project
 yarn install
 ```
 3. Run the project:

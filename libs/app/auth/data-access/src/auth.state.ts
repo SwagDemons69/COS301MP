@@ -22,7 +22,7 @@ export interface AuthStateModel {
 @State<AuthStateModel>({
   name: 'auth',
   defaults: {
-    user: null,
+    user: null
   },
 })
 @Injectable()
@@ -48,8 +48,7 @@ export class AuthState {
     ctx.setState(
       produce((draft) => {
         draft.user = user;
-      })
-    );
+      }))
   }
 
   @Action(Login)
@@ -65,10 +64,11 @@ export class AuthState {
   @Action(Register)
   async register(
     ctx: StateContext<AuthStateModel>,
-    { email, password }: Register
+    { email, password}: Register
   ) {
     try {
       await this.authApi.register(email, password);
+      
       return ctx.dispatch(new Navigate(['home']));
     } catch (error) {
       return ctx.dispatch(new SetError((error as Error).message));

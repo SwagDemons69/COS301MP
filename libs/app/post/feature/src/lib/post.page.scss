@@ -1,0 +1,99 @@
+.top-section {
+  height: 50%;
+  background: radial-gradient(ellipse, #101823c0 0%, #10182340 40%, #17223100 60%);
+  border: 1px solid black;
+
+  cursor: pointer;
+}
+
+#addMediaIcon {
+  display: flex;
+  width: 100%;
+
+  flex-direction: column;
+  align-items: center;
+
+  margin-top: 20vh;
+}
+
+#addMediaIcon ion-icon {
+  font-size: 2em;
+  color: #ffffff;
+}
+
+#addMediaIcon ion-title {
+  padding-top: 0.2em;
+  font-size: 0.8em;
+  color: #ffffff;
+}
+
+.bottom-section {
+  height: 50%;
+  padding: 20px; 
+}
+
+ion-img { 
+  height: 100%;
+  width: auto;
+}
+
+ion-item {
+  --padding-top: 5px;
+
+  margin-bottom: 10px; 
+  border: 1px solid #a6a6a6;
+  border-radius: 10px;
+}
+
+ion-textarea {
+  --padding-top: 0px;
+}
+
+ion-input {
+  --padding-top: 0px;
+}
+
+.glassyButton {
+    --background: linear-gradient(45deg, #8c8a9920 20%, #ffffff00 100%);
+    --color: #ffffff;
+    --shadow: none;
+    --box-shadow: none;
+    --border-radius: 6px 6px 6px 6px;
+    border-radius: 6px 6px 6px 6px;
+    border: 1px solid #ffffff20;
+
+    float: right;
+}
+
+ion-label {
+  font-size: 1.5em;
+  color: white;
+  position: absolute;
+  cursor: pointer;
+}
+
+p {
+  font-size: 1em;
+  color: white;
+  position: relative;
+
+  margin: auto;
+  margin-bottom: 0.4em;
+
+  font-weight: 400;
+  left: 5px;
+}
+
+$tag-colors: (
+    #d03895,
+    #4350dd,
+    #2bccbc,
+);
+
+@for $i from 1 through 3 {
+  ion-badge:nth-child(#{$i}n) ::ng-deep {
+    background-color: nth($tag-colors, $i);
+    font-weight: light;
+    margin-right: 0.4em;
+  }
+}

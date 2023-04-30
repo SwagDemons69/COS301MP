@@ -1,37 +1,42 @@
+
 <ion-content [fullscreen]="true">
   <div class="center-container ion-align-items-center">
     <ion-grid>
       <ion-row>
         <ion-col offset="2" size="8">
-          <!-- <img
-            class="logo logo-light"
-            src="/assets/logos/schadre-logo-full.png" /> -->
-          <!-- <img
-            class="logo logo-dark"
-            src="/assets/logos/schadre-logo-full-white.png"
-          /> -->
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col>
-          <ion-nav-link [routerLink]="['login']">
-            <ion-button expand="block">Login</ion-button>
-          </ion-nav-link>
+          <ion-img size="small" class="logo" src="assets/logos/logo.svg"></ion-img>
+          <br>
+          <br>
         </ion-col>
       </ion-row>
       <ion-row>
         <ion-col>
           <ion-nav-link [routerLink]="['register']">
-            <ion-button expand="block">Register</ion-button>
+            
+              <ion-button  expand="block" class="custom" >SIGN UP</ion-button>
+            
           </ion-nav-link>
         </ion-col>
       </ion-row>
+       <ion-row>
+        <ion-col class="ion-text-center">
+          <ion-text color="medium">Already have an account?</ion-text>
+        </ion-col>
+      </ion-row>
+      
       <ion-row>
+        <ion-col>
+            <ion-nav-link [routerLink]="['login']">
+              <ion-button expand="block" class="my-class">LOGIN</ion-button>
+            </ion-nav-link>
+        </ion-col>
+      </ion-row>
+      <!-- <ion-row>
         <ion-col class="ion-text-center">
           <ion-text color="medium">or</ion-text>
         </ion-col>
-      </ion-row>
-      <ion-row>
+      </ion-row> -->
+      <!-- <ion-row>
         <ion-col>
           <ion-nav-link>
             <ion-button
@@ -46,8 +51,8 @@
             </ion-button>
           </ion-nav-link>
         </ion-col>
-      </ion-row>
-      <ion-row class="ion-padding-top">
+      </ion-row> -->
+      <!-- <ion-row class="ion-padding-top">
         <ion-col style="display: flex" class="ion-justify-content-center">
           <ion-nav-link [routerLink]="['tos']">
             <ion-button fill="clear"> Terms of Service </ion-button>
@@ -56,7 +61,7 @@
             <ion-button fill="clear"> Privacy Policy </ion-button>
           </ion-nav-link>
         </ion-col>
-      </ion-row>
+      </ion-row> -->
     </ion-grid>
   </div>
 </ion-content>

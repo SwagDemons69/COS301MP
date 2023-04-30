@@ -7,7 +7,7 @@ import { Action, State, StateContext } from '@ngxs/store';
 export interface RegisterStateModel {
   registerForm: {
     model: {
-      displayName: string | null;
+      username: string | null;
       email: string | null;
       password: string | null;
     };
@@ -22,7 +22,7 @@ export interface RegisterStateModel {
   defaults: {
     registerForm: {
       model: {
-        displayName: null,
+        username: null,
         email: null,
         password: null,
       },
@@ -38,13 +38,14 @@ export class RegisterState {
   async register(ctx: StateContext<RegisterStateModel>) {
     try {
       const state = ctx.getState();
+      const username = state.registerForm.model.username;
       const email = state.registerForm.model.email;
       const password = state.registerForm.model.password;
-
+      //console.log(ctx.getState().registerForm.model.username)
       if (email && password) {
         return ctx.dispatch(new AuthRegister(email, password));
       }
-      return ctx.dispatch(new SetError('Email or password not set'));
+      return ctx.dispatch(new SetError('Email, password or username not set'));
     } catch (error) {
       return ctx.dispatch(new SetError((error as Error).message));
     }

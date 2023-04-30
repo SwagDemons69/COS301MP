@@ -1,5 +1,5 @@
-import { IProfile } from '../interfaces';
+import { user_profile } from '../interfaces';
 
 export interface ICreateProfileResponse {
-  profile: IProfile;
+  profile: user_profile;
 }

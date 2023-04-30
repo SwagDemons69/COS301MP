@@ -1,0 +1,61 @@
+<ion-header [translucent]="true"></ion-header>
+<ion-content [fullscreen]="true">
+
+    <ion-content>
+        <label for="file-upload">
+            <div class="top-section">
+                <div id="addMediaIcon" *ngIf="chosenPostBase64Data == ''">
+                    <ion-icon name="camera"></ion-icon>
+                    <ion-title>Add Media</ion-title>
+                </div>
+                <ion-img *ngIf="chosenPostBase64Data != ''" [src]="chosenPostBase64Data" id="preview"></ion-img>
+            </div>
+        </label>
+            
+        <div class="bottom-section">
+            <input
+                id="file-upload"
+                type="file"
+                accept="image/*"
+                style="display:none;"
+                (change)="onFileChange($event)"
+                required
+            >
+            
+            <p>Title:</p>
+            <ion-item>  
+                <ion-input
+                    id="title"
+                    type="text"
+                    placeholder="Type a title"
+                    maxlength="128"
+                    [(ngModel)]="title"
+                ></ion-input>
+            </ion-item>
+
+            <p>Description:</p>
+            <ion-item>  
+                <ion-textarea
+                    id="desc"
+                    type="text"
+                    placeholder="Type a description"
+                    maxlength="1024"
+                    [(ngModel)]="desc"
+                    (ngModelChange)="updateTagList()"
+                ></ion-textarea>
+            </ion-item>
+
+            <ion-list id="tagList">
+                <ng-container #tagList>
+                </ng-container>
+                    <ng-template #tagBadge let-content="content">
+                        <ion-badge>
+                            {{content}}
+                        </ion-badge>
+                    </ng-template>
+            </ion-list>
+
+            <ion-button (click)="uploadPost()" class="glassyButton">POST</ion-button>
+        </div>
+    </ion-content>
+</ion-content>   
