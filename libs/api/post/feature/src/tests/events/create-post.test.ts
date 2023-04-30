@@ -15,16 +15,17 @@ describe('CreatePostEventHandler', () => {
   describe('handle', () => {
     it('should call repository.createPost with the post from the event', async () => {
       const post = {
+		title: "myTestTitle",
         post_id : "1234",
+		desc: "I am testing description",
         user_id : "string",
         content : "string",
-        caption : "string",
-        likes : ["string1", "string2"],
+        likes : 3,
         timeStamp : 12,
         shares : 12,
         kronos : 12,
-        comments : ["string1", "string2"],
-        categories : ["string1", "string2"],
+        comments : 2,
+        tags : ["string1", "string2"],
         taggedUsers : ["string1", "string2"]
       };
       const event = new CreatePostEvent(post);

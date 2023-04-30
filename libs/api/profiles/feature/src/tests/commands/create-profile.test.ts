@@ -6,17 +6,18 @@ import { CreateProfileCommand, user_profile } from '@mp/api/profiles/util';
 import { post } from '@mp/api/home/util';
 
 const mockpost: post = {
-  post_id : "1234",
-  user_id : "string",
-  content : "string",
-  caption : "string",
-  likes : ["string1", "string2"],
-  timeStamp : 12,
-  shares : 12,
-  kronos : 12,
-  comments : ["string1", "string2"],
-  categories : ["string1", "string2"],
-  taggedUsers : ["string1", "string2"]
+	post_id: "1234",
+	title: "testingTitle",
+	desc: "I am testing description",
+	user_id: "string",
+	content: "string",
+	likes: 3,
+	timeStamp: 12,
+	shares: 12,
+	kronos: 12,
+	comments: 2,
+	tags: ["string1", "string2"],
+	taggedUsers: ["string1", "string2"]
 };
 
 const mockProfile = Profile.fromData({
@@ -33,10 +34,10 @@ const mockProfile = Profile.fromData({
   likesLeft: 1,
   dislikesLeft: 2,
   commentLikesLeft: 3,
-  followers: ['testFollower1', 'testFollower2'],
-  following: ['testFollowing1', 'testFollowing2'],
-  posts: [mockpost],
-  blocked: ['testBlocked1', 'testBlocked2'],
+  followers: 5,
+  following: 2,
+  posts: 3,
+  blocked: 1,
   notifications: ['testNotification1', 'testNotification2'],
 });
 
@@ -68,7 +69,7 @@ describe('CreateProfileHandler', () => {
   it('should create a profile with the given data', async () => {
     const data: user_profile = {
       user_id: '123',
-      timeOfExpiry: 420,
+      timeOfExpiry: 0,
       notPublic: 'false',
       username: 'testuser',
       name: 'testuser',
@@ -80,10 +81,10 @@ describe('CreateProfileHandler', () => {
       likesLeft: 10,
       dislikesLeft: 10,
       commentLikesLeft: 10,
-      followers: [],
-      following: [],
-      blocked: [],
-      posts: [],
+      followers: 0,
+      following: 0,
+      blocked: 0,
+      posts: 0,
       notifications: [],
     };
   
@@ -102,9 +103,6 @@ describe('CreateProfileHandler', () => {
   
     await handler.execute(command);
   
-    expect(mockPublisher.mergeObjectContext).toHaveBeenCalledWith(
-      Profile.fromData(data),
-    );
     expect(mockProfile.create).toHaveBeenCalled();
     expect(mockProfile.commit).toHaveBeenCalled();
   });

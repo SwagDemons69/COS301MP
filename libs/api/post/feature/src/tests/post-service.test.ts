@@ -9,17 +9,18 @@ import { ChildComment, RootComment, post_like } from 'libs/api/post/util/src/int
 import { user_profile } from '@mp/api/profiles/util';
 
 const mockpost: post = {
-    post_id: '125252',
-    user_id: '253243',
-    content: 'i\'m not a test post, wdym?',
-    caption: 'nothing to see here',
-    likes: ['23523','64334'],
-    timeStamp: 1624529388,
-    shares: 4,
-    kronos: 234,
-    comments: ['slayy','sureee'],
-    categories: ['fashion','future'],
-    taggedUsers: ['124145','676346'],
+    title: "myTestTitle",
+        post_id : "1234",
+		desc: "I am testing description",
+        user_id : "string",
+        content : "string",
+        likes : 3,
+        timeStamp : 12,
+        shares : 12,
+        kronos : 12,
+        comments : 2,
+        tags : ["string1", "string2"],
+        taggedUsers : ["string1", "string2"]
 };
 
 const mockuser: user_profile = {
@@ -29,17 +30,17 @@ const mockuser: user_profile = {
     profilePicturePath: './testphoto.jpg',
     email: 'test@gmail.com',
     password: 'iamkwl',
-    username: undefined,
+    username: 'testUsername',
     name: undefined,
     bio: undefined,
     province: undefined,
     likesLeft: undefined,
     dislikesLeft: undefined,
     commentLikesLeft: undefined,
-    followers: undefined,
-    following: undefined,
-    posts: undefined,
-    blocked: undefined,
+    followers: 3,
+    following: 4,
+    posts: 5,
+    blocked: 6,
     notifications: undefined
 };
 
@@ -96,20 +97,16 @@ describe('Post feature', () => {
 
     describe('createpostlike', () => {
         it('should add a like by calling commandbus.execute with CreatePostLikeCommand', async () => {
-            const user = '823758';
+            const liker_id = '823758';
             const post = '2579253';
-            const request: CreatePostLikeRequest = {user, post};
-            const likes: post_like[] = [
-                { user: '234234'},
-                { user: '646464'}
-            ]
-            const response: CreatePostLikeResponse = {likes};
-            jest.spyOn(commandBus, 'execute').mockResolvedValue(response);
+			const poster_id = '12312';
+            const request: CreatePostLikeRequest = {liker_id, post,poster_id};
+            jest.spyOn(commandBus, 'execute').mockResolvedValue(request);
 
             const result = await postFeature.CreatePostLike(request);
 
             expect(commandBus.execute).toHaveBeenCalledWith(new CreatePostLikeCommand(request));
-            expect(result).toEqual(response);
+            expect(result).toEqual(request);
         });
     });
 
@@ -120,6 +117,7 @@ describe('Post feature', () => {
             const comment: RootComment = {
                 root_comment_id: '1244',
                 created_by: '253243',
+				created_by_username: 'testUsername',
                 content: 'haha rofl',
                 kronos: 24,
                 likes: 2,
@@ -147,6 +145,7 @@ describe('Post feature', () => {
             const root_comment: RootComment = {
                 root_comment_id: '1244',
                 created_by: '253243',
+				created_by_username: 'testUsername',
                 content: 'haha rofl',
                 kronos: 24,
                 likes: 2,
@@ -156,6 +155,7 @@ describe('Post feature', () => {
             const comment: ChildComment = {
                 child_comment_id: '15152',
                 created_by: '42532',
+				created_by_username: 'anotherTestUsername',
                 content: 'what an angel!',
                 kronos: 0,
                 likes: 0
@@ -164,6 +164,7 @@ describe('Post feature', () => {
             const response_comment: RootComment = {
                 root_comment_id: '1244',
                 created_by: '253243',
+				created_by_username : 'testUsernameAgain',
                 content: 'haha rofl',
                 kronos: 24,
                 likes: 2,

@@ -8,37 +8,18 @@ describe('SearchEventHandler', () => {
 	let repo: SearchRepository;
 	let handler: SearchEventHandler;
 	const mock_post : post = {
+		title: "testTitle",
 		post_id : "12345",
         user_id : "testID",
         content : "testContent",
-        caption : "testCaption",
-        likes : ["fakeUser1", "fakeUser2"],
+        desc : "testCaption",
+        likes : 4,
         timeStamp : 123,
         shares : 123,
         kronos : 123,
-        comments : ["testComment1", "testComment2"],
-        categories : ["Testing", "AlsoTesting"],
+		comments: 2,
+        tags : ["Testing", "AlsoTesting"],
         taggedUsers : ["fakeUser1", "fakeUser2"]
-	};
-	const mock_user_profile: user_profile = {
-		user_id: '123456789',
-		timeOfExpiry: 1234567890,
-		notPublic: 'test',
-		username: 'testUser',
-		name: 'myName',
-		profilePicturePath: '/my/photo',
-		bio: 'this is a bio',
-		email: 'test@user',
-		password: 'myTestPassword',
-		province: 'TestingProvince',
-		likesLeft: 123,
-		dislikesLeft: 123,
-		commentLikesLeft: 123,
-		followers: ['fakeUser1', 'fakeUser2'],
-		following: ['fakeUser1', 'fakeUser2'],
-		posts: [],
-		blocked: ['fakeBlocked1', 'fakeBlocked2'],
-		notifications: ['testNotification1', 'testNotification2'],
 	};
 	beforeEach(() => {
 		repo = new SearchRepository();

@@ -22,10 +22,10 @@ describe('EditProfileHandler', () =>{
       likesLeft: 1,
       dislikesLeft: 2,
       commentLikesLeft: 3,
-      followers: ['testFollower1', 'testFollower2'],
-      following: ['testFollowing1', 'testFollowing2'],
-      posts: [],
-      blocked: ['testBlocked1', 'testBlocked2'],
+      followers: 2,
+      following: 3,
+      posts: 1,
+      blocked: 0,
       notifications: ['testNotification1', 'testNotification2'],
     };
     const mockEdit: EditProfileEvent = {
