@@ -86,9 +86,13 @@
   <div class="graveyard">
 
     <div class="gravestones">
-      <ion-avatar class="gravestone" *ngFor="let gs of [1, 2, 3, 4, 5, 6, 7, 8]">
-        <img alt="Avatar" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
-      </ion-avatar>
+        <ion-avatar class="gravestone" *ngFor="let gs of graveyard.slice(0, 8)" (click)="openProfile({posts:[], user: gs})">
+          <div class="gradientOverlay"></div>
+          <img
+            alt="Avatar"
+            [src]="gs?.profilePicturePath == undefined || gs?.profilePicturePath == '' ? 'https://ionicframework.com/docs/img/demos/avatar.svg' : gs.profilePicturePath"
+          />
+        </ion-avatar>
     </div>
 
     <div class="feelingBad">
