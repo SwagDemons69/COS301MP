@@ -54,7 +54,7 @@
                 </ng-template>
 
                 <ng-template #Requested [ngIf]="Status === 2">
-                  <ion-button class="connectButton">
+                  <ion-button (click)="followUser()" class="connectButton">
                     Requested
                   </ion-button>
                 </ng-template>

@@ -101,9 +101,11 @@ export class NotificationsPage {
           id: this.notifications[i].notification_id,
           icon: type,
           time: timeString,
+          image: this.notifications[i].image,
           username: this.notifications[i].username,
           message: this.notifications[i].payload
         }
+        console.log(noti)
         this.displayNotifications.push(noti)
         //console.log(this.notifications[i].timestamp.toDate())
       }
