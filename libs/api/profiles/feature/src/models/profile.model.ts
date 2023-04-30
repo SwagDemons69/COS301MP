@@ -59,7 +59,7 @@ export class Profile extends AggregateRoot implements user_profile {
   }
 
   EditProfile(profile : edit_profile) {
-    this.notPublic = (profile.notPublic == false) ? this.notPublic : profile.notPublic;
+    this.notPublic = (profile.notPublic == false) ? false: true;
     this.name = (profile.name == "DO-NOT-MODFIY") ? this.name : profile.name;
     this.username = (profile.username == "DO-NOT-MODFIY") ? this.username : profile.username;
     this.profilePicturePath = (profile.profilePicturePath == "DO-NOT-MODFIY") ? this.profilePicturePath : profile.profilePicturePath;
