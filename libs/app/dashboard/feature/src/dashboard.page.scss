@@ -240,6 +240,15 @@ $stone-positions: (
     }
 }
 
+.noGravestones {
+    display: block;
+    position: absolute;
+    top: 2em;
+
+    width: 100%;
+    text-align: center;
+}
+
 .feelingBad {
     padding: 1em;
 }
