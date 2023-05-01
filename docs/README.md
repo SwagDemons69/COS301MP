@@ -1,3 +1,19 @@
+[![Contributors][contributors-shield]][contributors-url]
+  [![Forks][forks-shield]][forks-url]
+  [![Stargazers][stars-shield]][stars-url]
+  [![Issues][issues-shield]][issues-url]
+  [![GitHub commit activity](https://img.shields.io/github/commit-activity/y/SwagDemons69/COS301MP.svg?style=for-the-badge)](https://github.com/SwagDemons69/COS301MP/commits/main)
+
+
+[contributors-shield]: https://img.shields.io/github/contributors/SwagDemons69/COS301MP.svg?style=for-the-badge
+[contributors-url]: https://github.com/SwagDemons69/COS301MP/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/SwagDemons69/COS301MP.svg?style=for-the-badge
+[forks-url]: https://github.com/SwagDemons69/COS301MP/network/members
+[stars-shield]: https://img.shields.io/github/stars/SwagDemons69/COS301MP.svg?style=for-the-badge
+[stars-url]: https://github.com/SwagDemons69/COS301MP.svg/stargazers
+[issues-shield]: https://img.shields.io/github/issues/SwagDemons69/COS301MP.svg?style=for-the-badge
+[issues-url]: https://github.com/SwagDemons69/COS301MP.svg/issues
+---
 <p align="center">
 <img src="https://raw.githubusercontent.com/SwagDemons69/COS301MP/feature-integration/apps/app/src/assets/logos/logo.svg" alt="Twenty4" style="width: 50%" />
 </p>
