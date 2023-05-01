@@ -10,9 +10,13 @@ by SwagDemons69 👿
 ```bash
 git clone https://github.com/SwagDemons69/COS301MP`
 ```
-3. Install dependencies
-```sh
-cd path/to/project
+2. Run the dev container in VSCode (`Ctrl+P > Start Dev Container`) or install the dependencies manually:
+- Node 16
+- Java
+- Firebase CLI
+
+2. Install dependencies
+```bash
 yarn install
 ```
 3. Run the project:
@@ -49,8 +53,6 @@ yarn start:app:dev
 | <a href="https://docs.google.com/document/d/1Jb89vzjve9yljm7qrY22VPvmronUo7wemvsFSBtab-Q"><img src="https://upload.wikimedia.org/wikipedia/commons/6/66/Google_Docs_2020_Logo.svg" width="30px"/></a> | Minutes of Meeting 4 |
 | <a href="https://demo.hedgedoc.org/s/aox_Ex3e7"><img src="https://avatars.githubusercontent.com/u/67865462" width="40px"/></a> | API Definition |
 | <a href="https://demo.hedgedoc.org/s/k1sW17k9t"><img src="https://avatars.githubusercontent.com/u/67865462" width="40px"/></a> | Pipeline Docs |
-
-The above links have also been documented in the wiki in github. We included these links to serve as reference to our development process as it occured in-situ.
 
 ## Screenshots
 

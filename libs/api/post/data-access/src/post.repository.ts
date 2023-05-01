@@ -57,14 +57,18 @@ export class PostRepository {
             const posterProfile = await posterRef.get();
             const poster1 = posterProfile.data() as user_profile;
 
+            const likerRef = admin.firestore().collection('profiles').doc(liker_id);
+            const likerProfile = await likerRef.get();
+            const liker1 = likerProfile.data() as user_profile;
+
             const notifcationsRef = admin.firestore().collection(`profiles/${poster_id}/notifications`).doc();
-        
+            
             const noti: notification = {
-                create_by_id: poster1.user_id,
+                create_by_id: liker1.user_id,
                 notification_id: "",
-                image: poster1.profilePicturePath,
+                image: liker1.profilePicturePath,
                 type: "New Like",
-                username: poster1.username,
+                username: liker1.username,
                 payload: "liked a post",
                 timestamp: Timestamp.now(),
                 timeStampOrder: Timestamp.now().seconds.toString()
@@ -105,14 +109,18 @@ export class PostRepository {
             const posterProfile = await posterRef.get();
             const poster1 = posterProfile.data() as user_profile;
 
+            const likerRef = admin.firestore().collection('profiles').doc(disliker_id);
+            const likerProfile = await likerRef.get();
+            const liker1 = likerProfile.data() as user_profile;
+
             const notifcationsRef = admin.firestore().collection(`profiles/${poster_id}/notifications`).doc();
         
             const noti: notification = {
-                create_by_id: poster1.user_id,
+                create_by_id: liker1.user_id,
                 notification_id: "",
-                image: poster1.profilePicturePath,
+                image: liker1.profilePicturePath,
                 type: "New Dislike",
-                username: poster1.username,
+                username: liker1.username,
                 payload: "disliked a post",
                 timestamp: Timestamp.now(),
                 timeStampOrder: Timestamp.now().seconds.toString()
@@ -159,13 +167,17 @@ export class PostRepository {
         const profile = profileData.data() as user_profile;
 
         const notifcationsRef = admin.firestore().collection(`profiles/${user}/notifications`).doc();
+
+        const commenterRef = admin.firestore().collection(`profiles`).doc(comment.created_by)
+        const commentData = await commenterRef.get();
+        const comment1 = commentData.data() as user_profile;
         
         const noti: notification = {
-        create_by_id: profile.user_id,
+        create_by_id: comment1.user_id,
           notification_id: "",
-          image: profile.profilePicturePath,
+          image: comment1.profilePicturePath,
           type: "New Comment",
-          username: profile.username,
+          username: comment1.username,
           payload: "commented on a post",
           timestamp: Timestamp.now(),
           timeStampOrder: Timestamp.now().seconds.toString()
@@ -213,13 +225,17 @@ export class PostRepository {
         const creator = posterData.created_by;
 
         const notifcationsRef = admin.firestore().collection(`profiles/${creator}/notifications`).doc();
+
+        const commenterRef = admin.firestore().collection(`profiles`).doc(comment.created_by)
+        const commentData = await commenterRef.get();
+        const comment1 = commentData.data() as user_profile;
         
         const noti: notification = {
-          create_by_id: profile.user_id,
+          create_by_id: comment1.user_id,
           notification_id: "",
-          image: profile.profilePicturePath,
+          image: comment1.profilePicturePath,
           type: "New Reply",
-          username: profile.username,
+          username: comment1.username,
           payload: "replied to your comment",
           timestamp: Timestamp.now(),
           timeStampOrder: Timestamp.now().seconds.toString()

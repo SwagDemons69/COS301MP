@@ -1,0 +1,25 @@
+name: Unit Tests
+
+on:
+  push:
+    branches:
+      - 'dev-feature-testing'
+  pull_request:
+    branches: [dev-feature-testing]
+
+jobs:
+  Jest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Run Tests
+        run: |
+          yarn add jest
+          yarn jest libs/api/chat/feature/src/tests/create-chat-message.test.ts
+          yarn jest libs/api/post/feature/src/tests/events/create-post.test.ts
+          yarn jest libs/api/post/feature/src/tests/post-service.test.ts
+          yarn jest libs/api/profiles/feature/src/tests/commands/create-profile.test.ts
+          yarn jest libs/api/profiles/feature/src/tests/commands/edit-profile.test.ts
+          yarn jest libs/api/profiles/feature/src/tests/events/edit-profile.test.ts
+          yarn jest libs/api/profiles/feature/src/tests/events/profile-created.test.ts
+          yarn jest libs/api/search/feature/src/tests/events/search.test.ts
