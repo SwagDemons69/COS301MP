@@ -2,10 +2,10 @@ import { Test } from '@nestjs/testing';
 import { PostService } from '../post.service';
 import { CommandBus } from '@nestjs/cqrs';
 import { post } from '@mp/api/home/util';
-import { AddPhotoRequest, CreatePostLikeRequest, CreatePostRequest, CreatePostRootCommentRequest, CreatePostChildCommentRequest, GetPostsRequest } from 'libs/api/post/util/src/requests';
-import { AddPhotoResponse, CreatePostChildCommentResponse, CreatePostLikeResponse, CreatePostResponse, CreatePostRootCommentResponse, GetPostsResponse } from 'libs/api/post/util/src/responses';
-import { AddPhotoCommand, CreatePostChildCommentCommand, CreatePostCommand, CreatePostLikeCommand, CreatePostRootCommentCommand, GetPostsCommand } from 'libs/api/post/util/src/commands';
-import { ChildComment, RootComment, post_like } from 'libs/api/post/util/src/interfaces';
+import { AddPhotoRequest, CreatePostLikeRequest, CreatePostRequest, CreatePostRootCommentRequest, CreatePostChildCommentRequest, GetPostsRequest } from '@mp/api/post/util';
+import { AddPhotoResponse, CreatePostChildCommentResponse, CreatePostResponse, CreatePostRootCommentResponse, GetPostsResponse } from '@mp/api/post/util';
+import { AddPhotoCommand, CreatePostChildCommentCommand, CreatePostCommand, CreatePostLikeCommand, CreatePostRootCommentCommand, GetPostsCommand } from '@mp/api/post/util';
+import { ChildComment, RootComment } from '@mp/api/post/util';
 import { user_profile } from '@mp/api/profiles/util';
 
 const mockpost: post = {
