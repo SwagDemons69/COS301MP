@@ -50,4 +50,3 @@ jobs:
           DEFAULT_BRANCH: master
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RUN_JSCPD: true
-          
