@@ -14,7 +14,7 @@
 [stars-url]: https://github.com/SwagDemons69/COS301MP.svg/stargazers
 [issues-shield]: https://img.shields.io/github/issues/SwagDemons69/COS301MP.svg?style=for-the-badge
 [issues-url]: https://github.com/SwagDemons69/COS301MP.svg/issues
------
+<hr></hr>
 <p align="center">
 <img src="https://raw.githubusercontent.com/SwagDemons69/COS301MP/feature-integration/apps/app/src/assets/logos/logo.svg" alt="Twenty4" style="width: 50%" />
 </p>
