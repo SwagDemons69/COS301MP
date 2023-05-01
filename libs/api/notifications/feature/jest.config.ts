@@ -1,3 +1,4 @@
+/* eslint-disable */
 export default {
 	displayName: 'api-notifications-feature',
 	preset: '../../../../jest.preset.js',

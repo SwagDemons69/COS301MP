@@ -1,3 +1,4 @@
+/* eslint-disable */
 export default {
 	displayName: 'api-notifications-data-access',
 	preset: '../../../../jest.preset.js',
@@ -11,4 +12,4 @@ export default {
 	},
 	moduleFileExtensions: ['ts', 'js', 'html'],
 	coverageDirectory: '../../../../coverage/libs/api/notifications/data-access',
-  };
+};

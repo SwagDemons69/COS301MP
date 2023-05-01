@@ -1,26 +1,23 @@
+import { post } from '@mp/api/home/util';
+import { AddPhotoCommand, AddPhotoRequest, AddPhotoResponse, ChildComment, CreatePostChildCommentCommand, CreatePostChildCommentRequest, CreatePostChildCommentResponse, CreatePostCommand, CreatePostLikeCommand, CreatePostLikeRequest, CreatePostRequest, CreatePostResponse, CreatePostRootCommentCommand, CreatePostRootCommentRequest, CreatePostRootCommentResponse, GetPostsCommand, GetPostsRequest, GetPostsResponse, RootComment } from '@mp/api/post/util';
+import { user_profile } from '@mp/api/profiles/util';
+import { CommandBus } from '@nestjs/cqrs';
 import { Test } from '@nestjs/testing';
 import { PostService } from '../post.service';
-import { CommandBus } from '@nestjs/cqrs';
-import { post } from '@mp/api/home/util';
-import { AddPhotoRequest, CreatePostLikeRequest, CreatePostRequest, CreatePostRootCommentRequest, CreatePostChildCommentRequest, GetPostsRequest } from '@mp/api/post/util';
-import { AddPhotoResponse, CreatePostChildCommentResponse, CreatePostResponse, CreatePostRootCommentResponse, GetPostsResponse } from '@mp/api/post/util';
-import { AddPhotoCommand, CreatePostChildCommentCommand, CreatePostCommand, CreatePostLikeCommand, CreatePostRootCommentCommand, GetPostsCommand } from '@mp/api/post/util';
-import { ChildComment, RootComment } from '@mp/api/post/util';
-import { user_profile } from '@mp/api/profiles/util';
 
 const mockpost: post = {
     title: "myTestTitle",
-        post_id : "1234",
-		desc: "I am testing description",
-        user_id : "string",
-        content : "string",
-        likes : 3,
-        timeStamp : 12,
-        shares : 12,
-        kronos : 12,
-        comments : 2,
-        tags : ["string1", "string2"],
-        taggedUsers : ["string1", "string2"]
+    post_id: "1234",
+    desc: "I am testing description",
+    user_id: "string",
+    content: "string",
+    likes: 3,
+    timeStamp: 12,
+    shares: 12,
+    kronos: 12,
+    comments: 2,
+    tags: ["string1", "string2"],
+    taggedUsers: ["string1", "string2"]
 };
 
 const mockuser: user_profile = {
@@ -52,12 +49,12 @@ describe('Post feature', () => {
         const moduleRef = await Test.createTestingModule({
             providers: [
                 PostService,
-            {
-                provide: CommandBus,
-                useValue: {
-                    execute: jest.fn(),
-                },
-            }],
+                {
+                    provide: CommandBus,
+                    useValue: {
+                        execute: jest.fn(),
+                    },
+                }],
         }).compile();
 
         postFeature = moduleRef.get<PostService>(PostService);
@@ -68,9 +65,9 @@ describe('Post feature', () => {
         it('should add a photo by calling commandBus.execute with AddPhotoCommand', async () => {
             const file = './testphoto.jpg';
             const fileName = 'testphoto.jpg';
-            const request: AddPhotoRequest = {file, fileName};
+            const request: AddPhotoRequest = { file, fileName };
             const pathToImage = './testphoto.jpg';
-            const response: AddPhotoResponse = {pathToImage};
+            const response: AddPhotoResponse = { pathToImage };
             jest.spyOn(commandBus, 'execute').mockResolvedValue(response);
 
             const result = await postFeature.AddPhoto(request);
@@ -83,9 +80,9 @@ describe('Post feature', () => {
     describe('createpost', () => {
         it('should create a post by calling commandBus.execute with CreatePostCommand', async () => {
             const post: post = mockpost;
-            const request: CreatePostRequest = {post};
+            const request: CreatePostRequest = { post };
             const status = 'successful';
-            const response: CreatePostResponse = {status};
+            const response: CreatePostResponse = { status };
             jest.spyOn(commandBus, 'execute').mockResolvedValue(response);
 
             const result = await postFeature.CreatePost(request);
@@ -99,8 +96,8 @@ describe('Post feature', () => {
         it('should add a like by calling commandbus.execute with CreatePostLikeCommand', async () => {
             const liker_id = '823758';
             const post = '2579253';
-			const poster_id = '12312';
-            const request: CreatePostLikeRequest = {liker_id, post,poster_id};
+            const poster_id = '12312';
+            const request: CreatePostLikeRequest = { liker_id, post, poster_id };
             jest.spyOn(commandBus, 'execute').mockResolvedValue(request);
 
             const result = await postFeature.CreatePostLike(request);
@@ -117,17 +114,17 @@ describe('Post feature', () => {
             const comment: RootComment = {
                 root_comment_id: '1244',
                 created_by: '253243',
-				created_by_username: 'testUsername',
+                created_by_username: 'testUsername',
                 content: 'haha rofl',
                 kronos: 24,
                 likes: 2,
                 comments: []
             }
-            const request: CreatePostRootCommentRequest = {post_id, user_id, comment};
+            const request: CreatePostRootCommentRequest = { post_id, user_id, comment };
             const post_comments: RootComment[] = [
                 comment
             ];
-            const response: CreatePostRootCommentResponse = {post_comments};
+            const response: CreatePostRootCommentResponse = { post_comments };
             jest.spyOn(commandBus, 'execute').mockResolvedValue(response);
 
             const result = await postFeature.CreateRootComment(request);
@@ -145,7 +142,7 @@ describe('Post feature', () => {
             const root_comment: RootComment = {
                 root_comment_id: '1244',
                 created_by: '253243',
-				created_by_username: 'testUsername',
+                created_by_username: 'testUsername',
                 content: 'haha rofl',
                 kronos: 24,
                 likes: 2,
@@ -155,25 +152,25 @@ describe('Post feature', () => {
             const comment: ChildComment = {
                 child_comment_id: '15152',
                 created_by: '42532',
-				created_by_username: 'anotherTestUsername',
+                created_by_username: 'anotherTestUsername',
                 content: 'what an angel!',
                 kronos: 0,
                 likes: 0
             }
-            const request: CreatePostChildCommentRequest = {user_id, post_id, root_comment_id, comment};
+            const request: CreatePostChildCommentRequest = { user_id, post_id, root_comment_id, comment };
             const response_comment: RootComment = {
                 root_comment_id: '1244',
                 created_by: '253243',
-				created_by_username : 'testUsernameAgain',
+                created_by_username: 'testUsernameAgain',
                 content: 'haha rofl',
                 kronos: 24,
                 likes: 2,
                 comments: [comment]
             }
             const post_comments: RootComment[] = [
-                 response_comment
-                ]
-            const response: CreatePostChildCommentResponse= {post_comments};
+                response_comment
+            ]
+            const response: CreatePostChildCommentResponse = { post_comments };
             jest.spyOn(commandBus, 'execute').mockResolvedValue(response);
 
             const result = await postFeature.CreateChildComment(request);
@@ -186,9 +183,9 @@ describe('Post feature', () => {
     describe('getposts', () => {
         it('should get all posts from a user - call commandbus.execute with GetPostsCommand', async () => {
             const user = mockuser.user_id;
-            const request: GetPostsRequest = {user};
+            const request: GetPostsRequest = { user };
             const posts = [mockpost];
-            const response: GetPostsResponse = {posts};
+            const response: GetPostsResponse = { posts };
             jest.spyOn(commandBus, 'execute').mockResolvedValue(response);
 
             const result = await postFeature.GetPosts(request);
