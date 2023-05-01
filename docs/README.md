@@ -1,7 +1,8 @@
 [![Stargazers][stars-shield]][stars-url]
   [![Forks][forks-shield]][forks-url]
+  [![Contributors][contributors-shield]][contributors-url]
   [![GitHub commit activity](https://img.shields.io/github/commit-activity/y/SwagDemons69/COS301MP.svg?style=for-the-badge)](https://github.com/SwagDemons69/COS301MP/commits/main)
-[![Contributors][contributors-shield]][contributors-url]
+
   [![Issues][issues-shield]][issues-url]
   
 
