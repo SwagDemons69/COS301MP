@@ -8,7 +8,7 @@ import { post } from '@mp/api/home/util';
 import { ProfilesRepository } from '@mp/api/profiles/data-access';
 const profile = Profile.fromData({user_id: 'testUserId',
         timeOfExpiry: 1234567890,
-        notPublic: 'testNotPublic',
+        notPublic: false,
         username: 'testUsername',
         name: 'testName',
         profilePicturePath: 'testProfilePicturePath',
@@ -54,7 +54,7 @@ describe('EditProfileHandler', () => {
         const edited_profile: user_profile = {
         user_id: 'testUserId',
         timeOfExpiry: 1234567890,
-        notPublic: 'false',
+        notPublic: false,
         username: 'a new name',
         name: 'a new name',
         profilePicturePath: 'a new path',
@@ -72,7 +72,7 @@ describe('EditProfileHandler', () => {
         notifications: ['testNotification1', 'testNotification2'],
         } 
         const edit_profile : edit_profile ={
-            notPublic: 'false',
+            notPublic: false,
             bio: 'a different bio',
             name: 'a new name',
             profilePicturePath: 'a new path',

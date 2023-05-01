@@ -23,7 +23,7 @@ const mockpost: post = {
 const mockProfile = Profile.fromData({
   user_id: 'testUserId',
   timeOfExpiry: 1234567890,
-  notPublic: 'testNotPublic',
+  notPublic: false,
   username: 'testUsername',
   name: 'testName',
   profilePicturePath: 'testProfilePicturePath',
@@ -70,7 +70,7 @@ describe('CreateProfileHandler', () => {
     const data: user_profile = {
       user_id: '123',
       timeOfExpiry: 0,
-      notPublic: 'false',
+      notPublic: false,
       username: 'testuser',
       name: 'testuser',
       profilePicturePath: 'https://ionicframework.com/docs/img/demos/avatar.svg',

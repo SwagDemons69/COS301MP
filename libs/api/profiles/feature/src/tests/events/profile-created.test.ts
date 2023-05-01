@@ -32,7 +32,7 @@ describe('ProfileCreatedHandler', () => {
 		const profile : user_profile = {
 			user_id: 'testUserId',
 			timeOfExpiry: 1234567890,
-			notPublic: 'testNotPublic',
+			notPublic: false,
 			username: 'testUsername',
 			name: 'testName',
 			profilePicturePath: 'testProfilePicturePath',

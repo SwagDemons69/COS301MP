@@ -26,7 +26,7 @@ const mockpost: post = {
 const mockuser: user_profile = {
     user_id: '77472',
     timeOfExpiry: 214124,
-    notPublic: 'false',
+    notPublic: false,
     profilePicturePath: './testphoto.jpg',
     email: 'test@gmail.com',
     password: 'iamkwl',
