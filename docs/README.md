@@ -50,6 +50,8 @@ yarn start:app:dev
 | <a href="https://demo.hedgedoc.org/s/aox_Ex3e7"><img src="https://avatars.githubusercontent.com/u/67865462" width="40px"/></a> | API Definition |
 | <a href="https://demo.hedgedoc.org/s/k1sW17k9t"><img src="https://avatars.githubusercontent.com/u/67865462" width="40px"/></a> | Pipeline Docs |
 
+The above links have also been documented in the wiki in the github. We included these links to serve as reference to our development process as it occured in-situ.
+
 ## Screenshots
 
 <table>
