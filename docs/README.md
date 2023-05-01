@@ -21,6 +21,8 @@ yarn start:api:dev
 yarn start:emulators
 yarn start:app:dev
 ```
+
+4. Open a browser and navigate to http://localhost:4200, the Login/Signup page of the application
 ## Team Members
 |     | Member        | Student No.   | Roles                                         |
 |-----|---------------|---------------|-----------------------------------------------|
