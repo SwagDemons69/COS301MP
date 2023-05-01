@@ -147,6 +147,7 @@ function generatePosts(userIds, total){
                 content : faker.image.cats(640, 480, true),
                 desc : faker.random.words(3),
                 likes : 0,
+                dislikes: 0,
                 timeStamp : Timestamp.now(),
                 shares : 0,
                 kronos : 0,

@@ -8,7 +8,7 @@ import { firstValueFrom } from 'rxjs';
 import { post } from '@mp/api/home/util';
 import { Observable } from 'rxjs';
 import { DashboardState} from '@mp/app/dashboard/data-access';
-import { SetDashboardPosts } from '@mp/app/dashboard/util';
+import { SetDashboardPosts, SubscribeToDashboardPosts } from '@mp/app/dashboard/util';
 import { KronosTimer } from '@mp/app/kronos-timer/kronos';
 import { DashboardApi } from '@mp/app/dashboard/data-access';
 import { ProfileOtherComponent } from '@mp/app/profile-other/feature';
@@ -80,7 +80,7 @@ export class DashboardPage {
   // }
 
   async ionViewDidEnter(){
-    this.store.dispatch(new SetDashboardPosts(this.profile));
+    this.store.dispatch(new SubscribeToDashboardPosts());
     this.graveyard = await this.api.GetGraveyard();
   }
 

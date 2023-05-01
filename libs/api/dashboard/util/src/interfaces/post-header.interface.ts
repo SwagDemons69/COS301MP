@@ -12,6 +12,7 @@ export interface postData{
     content: string;
     desc: string; 
     likes: number;
+    dislikes: number;
     shares: number;
     comments: number;
 }

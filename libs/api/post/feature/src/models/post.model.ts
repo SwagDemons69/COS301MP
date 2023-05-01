@@ -10,6 +10,7 @@ export class Post extends AggregateRoot implements post {
     public content : string,
     public desc : string,
     public likes : number,
+    public dislikes: number,
     public timeStamp : number,
     public shares : number,
     public kronos : number,
@@ -28,6 +29,7 @@ export class Post extends AggregateRoot implements post {
       post.content,
       post.desc,
       post.likes,
+      post.dislikes,
       post.timeStamp,
       post.shares,
       post.kronos,
@@ -50,6 +52,7 @@ export class Post extends AggregateRoot implements post {
         0,
         0,
         0,
+        0,
         [],
         []
     )
@@ -67,6 +70,7 @@ export class Post extends AggregateRoot implements post {
     this.content     =  (this.content == post.content)         ?   this.content     :  post.content;
     this.desc        =  (this.desc == post.desc)               ?   this.desc        :  post.desc;
     this.likes       =  (this.likes == post.likes)             ?   this.likes       :  post.likes;
+    this.dislikes    =  (this.dislikes == post.dislikes)       ?   this.dislikes    :  post.dislikes;
     this.timeStamp   =  (this.timeStamp == post.timeStamp)     ?   this.timeStamp   :  post.timeStamp;
     this.shares      =  (this.shares == post.shares)           ?   this.shares      :  post.shares;
     this.kronos      =  (this.kronos == post.kronos)           ?   this.kronos      :  post.kronos;
@@ -83,6 +87,7 @@ export class Post extends AggregateRoot implements post {
         content     : this.content,
         desc        : this.desc,
         likes       : this.likes,
+        dislikes    : this.dislikes,
         timeStamp   : this.timeStamp,
         shares      : this.shares,
         kronos      : this.kronos,

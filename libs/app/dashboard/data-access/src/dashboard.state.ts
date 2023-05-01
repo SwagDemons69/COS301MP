@@ -2,8 +2,12 @@ import { Injectable } from '@angular/core';
 import { post } from '@mp/api/home/util';
 import { Selector, State, Store, Action, StateContext } from '@ngxs/store';
 import { DashboardApi } from './dashboard.api';
-import { SetDashboardPosts } from '@mp/app/dashboard/util';
+import { SetDashboardPosts, SubscribeToDashboardPosts } from '@mp/app/dashboard/util';
 import { GetRecommendedPostsRequest, GetTrendingPostsRequest, PostHeader } from '@mp/api/dashboard/util';
+import { AuthState } from '@mp/app/auth/data-access';
+import { SetError } from '@mp/app/errors/util';
+import { user_profile } from '@mp/api/profiles/util';
+import { tap } from 'rxjs';
 
 export interface DashboardStateModel {
   recommended_posts: PostHeader[] | [];
@@ -34,8 +38,16 @@ export class DashboardState {
     return state.trending_posts;
   }
 
+  @Action(SubscribeToDashboardPosts)
+  SubscribeToDashboardPosts(ctx: StateContext<DashboardStateModel>){
+    const user = this.store.selectSnapshot(AuthState.user);
+    if (!user) return ctx.dispatch(new SetError('User not set'));
+    return this.dashboardApi.profiles$(user.uid)  
+    .pipe(tap((profile: user_profile) => ctx.dispatch(new SetDashboardPosts())));
+  }
+
   @Action(SetDashboardPosts)
-  async setDashboardPosts(ctx: StateContext<DashboardStateModel>, { profile }: SetDashboardPosts) {
+  async setDashboardPosts(ctx: StateContext<DashboardStateModel>) {
     const trendingRequest: GetTrendingPostsRequest = {
       cutOffTime: 10,
     }
@@ -43,8 +55,9 @@ export class DashboardState {
       // users: profile?.following,
       users: [] //TODO: check
     }
+    console.log("setting posts")
     ctx.patchState({ recommended_posts: (await this.dashboardApi.GetRecommendedPosts(recommendedRequest)).data.posts});
-    ctx.patchState({ trending_posts: (await this.dashboardApi.GetTrendingPosts(trendingRequest)).data.posts});
+    ctx.patchState({ trending_posts: (await this.dashboardApi.GetTrendingPosts(trendingRequest)).data.posts});  
   }
 
   // @Action(Logout)

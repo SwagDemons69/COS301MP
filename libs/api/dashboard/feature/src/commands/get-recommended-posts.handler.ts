@@ -16,6 +16,10 @@ export class GetRecommendedPostsCommandHandler
   async execute(command: GetRecommendedPostsCommand) {
     console.log(`${GetRecommendedPostsCommandHandler.name}`);
     const request = command.request;
-    return await this.repository.GetRecommendedPosts(request.users);
+    console.log("HERE")
+    const response = await this.repository.GetRecommendedPosts(request.users);
+    console.log("RESPONSE1")
+    //console.log(response)
+    return response;
   }
 }

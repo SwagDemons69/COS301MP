@@ -138,6 +138,8 @@ export class BlipComponent {
       }
       const resp = await this.api.likePost(request);
       this.data.likes = resp.data.likes;
+      console.log(resp.data.likes);
+      console.log(this.data.likes)
       this.hasLikedPost = true;
 
     }
@@ -152,6 +154,7 @@ export class BlipComponent {
         poster_id: this.data.user_id
       }
       const resp = await this.api.dislikePost(request);
+      console.log(resp.data.likes)
       this.dislikes = resp.data.likes;
     }
   }

@@ -12,15 +12,15 @@ export class DashboardApi {
     private readonly functions: Functions
   ) {}
 
-  post$(id: string) {
+  profiles$(id: string) {
     const docRef = doc(
       this.firestore,
-      `posts/${id}`
-    ).withConverter<post>({
+      `profiles/${id}`
+    ).withConverter<user_profile>({
       fromFirestore: (snapshot) => {
-        return snapshot.data() as post;
+        return snapshot.data() as user_profile;
       },
-      toFirestore: (it: post) => it,
+      toFirestore: (it: user_profile) => it,
     });
     return docData(docRef, { idField: 'id' });
   }
@@ -30,7 +30,10 @@ export class DashboardApi {
   //===========================================================
 
   async GetRecommendedPosts(request: GetRecommendedPostsRequest){
-    return await httpsCallable<GetRecommendedPostsRequest, GetRecommendedPostsResponse>(this.functions, 'GetRecommendedPosts')(request);
+    console.log(request.users + " @@@@")
+    const response = await httpsCallable<GetRecommendedPostsRequest, GetRecommendedPostsResponse>(this.functions, 'GetRecommendedPosts')(request);
+    console.log("RESPONSE2")
+    return response;
   }
 
   async GetTrendingPosts(request: GetTrendingPostsRequest) {

@@ -122,6 +122,7 @@ export class PostPage {
       content:      pathToImage,
       desc:         this.removeTagsFromDesc(this.desc),
       likes:        0,
+      dislikes:     0,
       timeStamp:    696969696,
       shares:       0,
       kronos:       0,

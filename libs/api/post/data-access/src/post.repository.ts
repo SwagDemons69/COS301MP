@@ -73,6 +73,19 @@ export class PostRepository {
             noti.notification_id = notifcationsRef.id;
             notifcationsRef.set(noti);
 
+            const postRef = admin.firestore().collection(`profiles/${poster_id}/posts`).doc(post_id);
+            const post = (await postRef.get()).data() as post;
+            
+            const postLikes = post.likes;
+            const newLikes = postLikes + 1;
+            await postRef.set({likes: newLikes}, { merge: true });
+
+            const senderRef2 = admin.firestore().collection(`profiles`).doc(liker_id);
+            const receiveRef2 = admin.firestore().collection(`profiles`).doc(poster_id);
+
+            await senderRef2.set({ lastEdited: Timestamp.now().seconds.toString() }, { merge: true });
+            await receiveRef2.set({ lastEdited: Timestamp.now().seconds.toString() }, { merge: true });
+
         }
 
         const likesRef = await admin.firestore().collection(`profiles/${poster_id}/posts/${post_id}/likes`).get();
@@ -120,7 +133,22 @@ export class PostRepository {
 
             noti.notification_id = notifcationsRef.id;
             notifcationsRef.set(noti);
+
+            const postRef = admin.firestore().collection(`profiles/${poster_id}/posts`).doc(post_id);
+            const post = (await postRef.get()).data() as post;
+                
+            const postDislikes = post.dislikes;
+            const newDislikes = postDislikes + 1;
+            await postRef.set({dislikes: newDislikes}, { merge: true });
+
+            const senderRef2 = admin.firestore().collection(`profiles`).doc(disliker_id);
+            const receiveRef2 = admin.firestore().collection(`profiles`).doc(poster_id);
+
+            await senderRef2.set({ lastEdited: Timestamp.now().seconds.toString() }, { merge: true });
+            await receiveRef2.set({ lastEdited: Timestamp.now().seconds.toString() }, { merge: true });
         }
+
+        
 
         const dislikesRef = await admin.firestore().collection(`profiles/${poster_id}/posts/${post_id}/dislikes`).get();
         const allDislikes = dislikesRef.docs.map((doc) => { return doc.data() as post_like; });
@@ -148,6 +176,12 @@ export class PostRepository {
         const postComments = poster.comments;
         const newComments = postComments + 1;
         await postRef.set({comments: newComments}, { merge: true });
+
+        const senderRef2 = admin.firestore().collection(`profiles`).doc(user);
+        const receiveRef2 = admin.firestore().collection(`profiles`).doc(poster.user_id);
+
+        await senderRef2.set({ lastEdited: Timestamp.now().seconds.toString() }, { merge: true });
+        await receiveRef2.set({ lastEdited: Timestamp.now().seconds.toString() }, { merge: true });
 
         //=============================================================
         // SEND NOTIFICATION
@@ -197,6 +231,12 @@ export class PostRepository {
         const postComments = poster.comments;
         const newComments = postComments + 1;
         await postRef.set({comments: newComments}, { merge: true });
+
+        const senderRef2 = admin.firestore().collection(`profiles`).doc(user);
+        const receiveRef2 = admin.firestore().collection(`profiles`).doc(poster.user_id);
+
+        await senderRef2.set({ lastEdited: Timestamp.now().seconds.toString() }, { merge: true });
+        await receiveRef2.set({ lastEdited: Timestamp.now().seconds.toString() }, { merge: true });
 
 
         //=============================================================

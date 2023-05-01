@@ -11,6 +11,7 @@ export const GetRecommendedPosts = functions.https.onCall(
     async (request : GetRecommendedPostsRequest): Promise<GetRecommendedPostsResponse> => {
         const app = await NestFactory.createApplicationContext(CoreModule);
         const service = app.get(DashboardServices);
+        console.log("FUNCTIONS")
         return service.GetRecommendedPosts(request);
     }
 );

@@ -9,12 +9,17 @@ import { PostHeader, postData, userData } from '@mp/api/dashboard/util';
 
 @Injectable()
 export class DashboardRepository {
-    async GetRecommendedPosts(users: string[] | null | undefined): Promise<GetRecommendedPostsResponse> {
+    async GetRecommendedPosts(users2: string[] | null | undefined): Promise<GetRecommendedPostsResponse> {
+        console.log("GET REC POSTS")
+        let cnt = 0;
         const posts: PostHeader[] = [];
-        if (users == null || users == undefined || users.length == 0) {
+        if (users2 == null || users2 == undefined || users2.length == 0) {
             //Select 10 random posts if you aren't following anyone
             const users = await admin.firestore().collection('profiles').get();
+            console.log("here1")
             for (const user of users.docs) {
+                cnt++;
+                console.log(user.id)
                 const handle = await admin.firestore().collection(`profiles/${user.id}/posts`).get();
                 const postTemp = []; postTemp.push(...handle.docs.map((doc) => { return doc.data() as post; }));
                 
@@ -34,12 +39,17 @@ export class DashboardRepository {
                             content: postTemp[i].content,
                             desc: postTemp[i].desc,
                             likes: postTemp[i].likes,
+                            dislikes: postTemp[i].dislikes,
                             comments: postTemp[i].comments,
                             shares: postTemp[i].shares
 
                         },
                         timeStamp: postTemp[i].timeStamp,
                         postData: postTemp[i]
+                    }
+
+                    if(cnt == 1){
+                        console.log(postH)
                     }
                     posts.push(postH);
                 }
@@ -48,7 +58,7 @@ export class DashboardRepository {
             return { posts: posts.sort(() => { return Math.random() - 0.5; }).slice(0, 10) };
         } else {
             //Else return the 10 most recent posts from the people you follow
-            for (const user of users) {
+            for (const user of users2) {
                 const handle = await admin.firestore().collection(`profiles/${user}/posts`).get();
                 const postTemp = []; postTemp.push(...handle.docs.map((doc) => { return doc.data() as post; }));
                 
@@ -68,6 +78,7 @@ export class DashboardRepository {
                             content: postTemp[i].content,
                             desc: postTemp[i].desc,
                             likes: postTemp[i].likes,
+                            dislikes: postTemp[i].dislikes,
                             comments: postTemp[i].comments,
                             shares: postTemp[i].shares
 
@@ -106,6 +117,7 @@ export class DashboardRepository {
                             content: post.content,
                             desc: post.desc,
                             likes: post.likes,
+                            dislikes: post.dislikes,
                             comments: post.comments,
                             shares: post.shares
 

@@ -5,6 +5,7 @@ export interface post {
     content: string;
     desc: string;
     likes: number;
+    dislikes: number;
     timeStamp: number;
     shares: number;
     kronos: number;
