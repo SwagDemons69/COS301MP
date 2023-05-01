@@ -28,16 +28,15 @@ export class ChatRepository {
             const profilesRef = admin.firestore().collection(`profiles`).doc(chats[i].recipient);
             const profile = await profilesRef.get();
             const profileData = profile.data() as user_profile;
-            
-            //If username not set then get email
+
             let username = profileData.username;
             if(typeof username != "string" || ( (typeof username == "string") && (username == "") )){
                 username = profileData.email
             }
             const picture  = profileData.profilePicturePath;
-            
+
             const messagesRef = await admin.firestore().collection(`profiles/${user}/chats/${chats[i].recipient}/chat`).get();
-            const messages    = messagesRef.docs.map((doc) => { return doc.data() as ChatMessage;});
+            const messages  = messagesRef.docs.map((doc) => { return doc.data() as ChatMessage;});
 
             let index = 0;
             let max = "0";
@@ -48,7 +47,7 @@ export class ChatRepository {
                 }
             }
             const sentBy = messages[index].sender;
-            
+
             const lastMessage = (sentBy == user) ? ("You: " + messages[index].payload) : (username + ": " + messages[index].payload) ;
 
             const user_id = profileData.user_id;
@@ -62,7 +61,7 @@ export class ChatRepository {
             if(profileData.user_id != user)
                 chatHeaders.push(chat);
         }
-        
+
         return { chats: chatHeaders };
     }
 
@@ -93,7 +92,7 @@ export class ChatRepository {
 
         const handle = await admin.firestore().collection(`profiles/${sender}/chats`).get();
         const chats = handle.docs.map((doc) => { return doc.data() as recip;});
-        
+
         let flag = false;
         for(let i = 0;i < chats.length; i++){
             if(chats[i].recipient == receiver)
@@ -106,10 +105,10 @@ export class ChatRepository {
         else
             await this.addChatMessage(sender, receiver, timeStamp, payload);
     }
-    
+
     //Create Chat with someone
     async createChat(sender: string, receiver: string, timeStamp: string, payload: string){
-        
+
         //Chat Needs to be created for both users
         const senderRef = admin.firestore().collection(`profiles/${sender}/chats`).doc(receiver);
         const receiverRef = admin.firestore().collection(`profiles/${receiver}/chats`).doc(sender);
@@ -123,14 +122,14 @@ export class ChatRepository {
         //Real time update use
         const senderRef2 = admin.firestore().collection(`profiles`).doc(receiver);
         const receiveRef2 = admin.firestore().collection(`profiles`).doc(sender);
-        
+
         //Pain
         await senderRef2.set({lastEdited: Timestamp.now().seconds.toString()}, {merge: true});
         await receiveRef2.set({lastEdited: Timestamp.now().seconds.toString()}, {merge: true});
         ///////////////////////
 
 
-        const message: ChatMessage = 
+        const message: ChatMessage =
         { sender    : sender,
           receiver  : receiver,
           timeStamp :  Timestamp.now().seconds.toString(),
@@ -144,7 +143,7 @@ export class ChatRepository {
         const receiver1 = receiverProfile.data() as user_profile;
 
         const notifcationsRef = admin.firestore().collection(`profiles/${receiver1.user_id}/notifications`).doc();
-        
+
         const senderRef3 = admin.firestore().collection('profiles').doc(sender);
         const senderProfile = await senderRef3.get();
         const sender1 = senderProfile.data() as user_profile;
@@ -182,7 +181,7 @@ export class ChatRepository {
 
 
 
-        const message: ChatMessage = 
+        const message: ChatMessage =
         { sender    : sender,
           receiver  : receiver,
           timeStamp : Timestamp.now().seconds.toString(),
@@ -197,7 +196,7 @@ export class ChatRepository {
         const receiver1 = receiverProfile.data() as user_profile;
 
         const notifcationsRef = admin.firestore().collection(`profiles/${receiver1.user_id}/notifications`).doc();
-        
+
         const senderRef3 = admin.firestore().collection('profiles').doc(sender);
         const senderProfile = await senderRef3.get();
         const sender1 = senderProfile.data() as user_profile;
@@ -219,7 +218,4 @@ export class ChatRepository {
         noti.notification_id = notifcationsRef.id;
         notifcationsRef.set(noti);
     }
-
-
-
 }
