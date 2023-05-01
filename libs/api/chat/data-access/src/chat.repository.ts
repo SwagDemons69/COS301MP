@@ -15,7 +15,7 @@ export interface recip {
 };
 
 
-/* eslint-disable no-duplicate-case */
+/* eslint-disable no-redeclare */
 @Injectable()
 export class ChatRepository {
 
