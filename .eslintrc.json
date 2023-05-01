@@ -1,6 +1,6 @@
 {
   "root": true,
-  "ignorePatterns": ["**/*"],
+  "ignorePatterns": ["**/*","jest.config.ts"],
   "plugins": ["@nrwl/nx"],
   "overrides": [
     {
