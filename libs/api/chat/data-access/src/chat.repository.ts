@@ -145,12 +145,17 @@ export class ChatRepository {
 
         const notifcationsRef = admin.firestore().collection(`profiles/${receiver1.user_id}/notifications`).doc();
         
+        const senderRef3 = admin.firestore().collection('profiles').doc(sender);
+        const senderProfile = await senderRef3.get();
+        const sender1 = senderProfile.data() as user_profile;
+
+
         const noti: notification = {
-          create_by_id: receiver1.user_id,
+          create_by_id: sender1.user_id,
           notification_id: "",
-          image: receiver1.profilePicturePath,
+          image: sender1.profilePicturePath,
           type: "New Message",
-          username: receiver1.username,
+          username: sender1.username,
           payload: "has sent you a message",
           timestamp: Timestamp.now(),
           timeStampOrder: Timestamp.now().seconds.toString()
@@ -193,16 +198,23 @@ export class ChatRepository {
 
         const notifcationsRef = admin.firestore().collection(`profiles/${receiver1.user_id}/notifications`).doc();
         
+        const senderRef3 = admin.firestore().collection('profiles').doc(sender);
+        const senderProfile = await senderRef3.get();
+        const sender1 = senderProfile.data() as user_profile;
+
+
         const noti: notification = {
-            create_by_id: receiver1.user_id,
-            notification_id: "",
-            image: receiver1.profilePicturePath,
-            type: "New Message",
-            username: receiver1.username,
-            payload: "has sent you a message",
-            timestamp: Timestamp.now(),
-            timeStampOrder: Timestamp.now().seconds.toString()
+          create_by_id: sender1.user_id,
+          notification_id: "",
+          image: sender1.profilePicturePath,
+          type: "New Message",
+          username: sender1.username,
+          payload: "has sent you a message",
+          timestamp: Timestamp.now(),
+          timeStampOrder: Timestamp.now().seconds.toString()
         }
+
+        console.log(noti)
 
         noti.notification_id = notifcationsRef.id;
         notifcationsRef.set(noti);
