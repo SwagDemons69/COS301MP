@@ -15,10 +15,10 @@ export interface recip {
 };
 
 
-/* eslint-disable no-redeclare */
+
 @Injectable()
 export class ChatRepository {
-
+    /* eslint-disable no-redeclare */
     async getChatHeaders(user: string): Promise<ChatHeadersResponse>{
         const chatHeaders = [];
 
@@ -219,4 +219,5 @@ export class ChatRepository {
         noti.notification_id = notifcationsRef.id;
         notifcationsRef.set(noti);
     }
+    /* eslint-disable no-redeclare */
 }
